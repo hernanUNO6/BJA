@@ -80,6 +80,9 @@
     <Compile Include="frmCorresponsabilidadMenor.xaml.cs">
       <DependentUpon>frmCorresponsabilidadMenor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmLista.xaml.cs">
+      <DependentUpon>frmLista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.xaml.cs">
       <DependentUpon>frmLogin.xaml</DependentUpon>
     </Compile>
@@ -101,9 +104,6 @@
     <Compile Include="IdentidadEventArgs.cs" />
     <Compile Include="ItemCombo.cs" />
     <Compile Include="SoporteCombo.cs" />
-    <Compile Include="WindowListaRegistros.xaml.cs">
-      <DependentUpon>WindowListaRegistros.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCorresponsabilidadMenor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmLista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,10 +151,6 @@
     <Page Include="frmTutor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowListaRegistros.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

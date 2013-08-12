@@ -22,7 +22,7 @@ namespace Bja.Registro
     public partial class frmTutor : Window
     {
         public long IdSeleccionado { get; set; }
-        public int OpcionDeVisualizacion { get; set; }
+        public TipoAccion TipoAccion { get; set; }
         private Tutor _tutor = new Tutor();
 
         public frmTutor()
@@ -59,7 +59,7 @@ namespace Bja.Registro
                     chkDefuncion.IsChecked = true;
                 txtLugarNacimiento.Text = _tutor.IdLocalidadNacimiento;
                 txtObservaciones.Text = _tutor.Observaciones;
-                if (OpcionDeVisualizacion == 2)
+                if (TipoAccion == TipoAccion.Detalle)
                 {
                     txtDocIde.IsEnabled = false;
                     cboTipoDocIde.IsEnabled = false;

@@ -81,9 +81,15 @@ namespace Bja.Modelo
             return controlmenor;
         }
 
-        public List<ControlMenor> Listar()
+        public List<ControlMenor> ListarControlesDeCorresponsabilidadDeMenor(long IdCorresponsabilidadMenor)
         {
-            return context.ControlesMenor.ToList();
+            List<ControlMenor> controlmenor = new List<ControlMenor>();
+
+            controlmenor = (from cm in context.ControlesMenor
+                            where cm.IdCorresponsabilidadMenor == IdCorresponsabilidadMenor
+                            select cm).ToList<ControlMenor>();
+
+            return controlmenor;
         }
 
     }

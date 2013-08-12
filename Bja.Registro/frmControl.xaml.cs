@@ -28,7 +28,7 @@ namespace Bja.Registro
         public long IdMadre { get; set; }
         public long IdMenor { get; set; }
         public long IdTutor { get; set; }
-        public int OpcionDeVisualizacion { get; set; }
+        public TipoAccion TipoAccion { get; set; }
 
         public frmControl()
         {
@@ -44,7 +44,7 @@ namespace Bja.Registro
                 if (Tipo == false)
                 {
                     ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-                    
+
                     _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
                     dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
                     txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);

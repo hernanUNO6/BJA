@@ -22,7 +22,7 @@ namespace Bja.Registro
     public partial class frmMenor : Window
     {
         public long IdSeleccionado { get; set; }
-        public int OpcionDeVisualizacion { get; set; }
+        public TipoAccion TipoAccion { get; set; }
         private Menor _menor = new Menor();
 
         public frmMenor()

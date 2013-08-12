@@ -81,9 +81,15 @@ namespace Bja.Modelo
             return controlmadre;
         }
 
-        public List<ControlMadre> Listar()
+        public List<ControlMadre> ListarControlesDeCorresponsabilidadDeMadre(long IdCorresponsabilidadMadre)
         {
-            return context.ControlesMadre.ToList();
+            List<ControlMadre> controlmadre = new List<ControlMadre>();
+
+            controlmadre = (from cm in context.ControlesMadre
+                            where cm.IdCorresponsabilidadMadre == IdCorresponsabilidadMadre
+                            select cm).ToList<ControlMadre>();
+
+            return controlmadre;
         }
 
     }

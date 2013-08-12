@@ -86,6 +86,24 @@ namespace Bja.Modelo
         return context.Tutores.ToList();
     }
 
+    public List<Madre> ListarMadresDependientes(long IdTutor)
+    {
+        List<Madre> madre = new List<Madre>();
+
+        //...
+
+        return madre;
+    }
+
+    public List<Menor> ListarMenoresDependientes(long IdTutor)
+    {
+        List<Menor> menor = new List<Menor>();
+
+        //...
+
+        return menor;
+    }
+
     public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
     {
         //buscar lista de registros paginados en base al criterio de búsqueda

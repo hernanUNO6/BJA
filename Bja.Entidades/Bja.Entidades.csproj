@@ -72,10 +72,10 @@
     <Compile Include="Recepcion.cs" />
     <Compile Include="RecepcionLog.cs" />
     <Compile Include="Reclamo.cs" />
-    <Compile Include="Required.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="SolicitudPago.cs" />
+    <Compile Include="TipoAccion.cs" />
     <Compile Include="TipoBeneficiario.cs" />
     <Compile Include="TipoControlMadre.cs" />
     <Compile Include="TipoDocumentoIdentidad.cs" />

@@ -25,7 +25,7 @@ namespace Bja.Registro
       long IdTutor { get; set; }
       long[] IdControlMadre = new long[6];
       public long IdSeleccionado { get; set; }
-      public int OpcionDeVisualizacion { get; set; }
+      public TipoAccion TipoAccion { get; set; }
 
       public frmCorresponsabilidadMadre()
       {
@@ -71,11 +71,11 @@ namespace Bja.Registro
       {
           this.Close();
       }
-      
+
       private void cmdBuscar_Click(object sender, RoutedEventArgs e)
       {
           this.Cursor = Cursors.Wait;
-          WindowListaRegistros formularioListaTutor = new WindowListaRegistros();
+          frmLista formularioListaTutor = new frmLista();
 
           formularioListaTutor.NuevoRegistro += formularioListaTutor_NuevoRegistro;
           formularioListaTutor.MostrarDetallesRegistro += formularioListaTutor_MostrarDetallesRegistro;
@@ -95,6 +95,8 @@ namespace Bja.Registro
       {
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
+          objTutorWindow.TipoAccion = TipoAccion.Nuevo;
+          objTutorWindow.IdSeleccionado = 0;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -106,6 +108,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
           objTutorWindow.IdSeleccionado = fe.id;
+          objTutorWindow.TipoAccion = TipoAccion.Detalle;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -117,6 +120,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
           objTutorWindow.IdSeleccionado = fe.id;
+          objTutorWindow.TipoAccion = TipoAccion.Edicion;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -146,11 +150,10 @@ namespace Bja.Registro
           IdTutor = fe.id;
       }
 
-
       private void cmdBuscarMadre_Click(object sender, RoutedEventArgs e)
       {
           this.Cursor = Cursors.Wait;
-          WindowListaRegistros formularioListaMadres = new WindowListaRegistros();
+          frmLista formularioListaMadres = new frmLista();
 
           formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
           formularioListaMadres.MostrarDetallesRegistro += formularioListaMadres_MostrarDetallesRegistro;
@@ -170,7 +173,7 @@ namespace Bja.Registro
       {
           this.Cursor = Cursors.Wait;
           frmMadre objMadreWindow = new frmMadre();
-          objMadreWindow.OpcionDeVisualizacion = 0; //Nuevo
+          objMadreWindow.TipoAccion = TipoAccion.Nuevo;
           objMadreWindow.IdSeleccionado = 0;
           objMadreWindow.Owner = this;
           objMadreWindow.ShowDialog();
@@ -183,6 +186,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmMadre objMadreWindow = new frmMadre();
           objMadreWindow.IdSeleccionado = fe.id;
+          objMadreWindow.TipoAccion = TipoAccion.Detalle;
           objMadreWindow.Owner = this;
           objMadreWindow.ShowDialog();
           objMadreWindow = null;
@@ -194,6 +198,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmMadre objMadreWindow = new frmMadre();
           objMadreWindow.IdSeleccionado = fe.id;
+          objMadreWindow.TipoAccion = TipoAccion.Edicion;
           objMadreWindow.Owner = this;
           objMadreWindow.ShowDialog();
           objMadreWindow = null;
@@ -215,7 +220,7 @@ namespace Bja.Registro
       private void cmdBuscarTutor_Click(object sender, RoutedEventArgs e)
       {
           this.Cursor = Cursors.Wait;
-          WindowListaRegistros formularioListaTutores = new WindowListaRegistros();
+          frmLista formularioListaTutores = new frmLista();
 
           formularioListaTutores.NuevoRegistro += formularioListaTutores_NuevoRegistro;
           formularioListaTutores.MostrarDetallesRegistro += formularioListaTutores_MostrarDetallesRegistro;
@@ -229,15 +234,14 @@ namespace Bja.Registro
           formularioListaTutores.titulo = "Tutores";
           formularioListaTutores.ShowDialog();
           this.Cursor = Cursors.Arrow;
-
       }
 
       void formularioListaTutores_NuevoRegistro(object sender, EventArgs e)
       {
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
-          objTutorWindow.OpcionDeVisualizacion = 0;
           objTutorWindow.IdSeleccionado = 0;
+          objTutorWindow.TipoAccion = TipoAccion.Nuevo;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -249,6 +253,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
           objTutorWindow.IdSeleccionado = fe.id;
+          objTutorWindow.TipoAccion = TipoAccion.Detalle;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -260,6 +265,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
           objTutorWindow.IdSeleccionado = fe.id;
+          objTutorWindow.TipoAccion = TipoAccion.Edicion;
           objTutorWindow.Owner = this;
           objTutorWindow.ShowDialog();
           objTutorWindow = null;
@@ -298,7 +304,7 @@ namespace Bja.Registro
               this.Cursor = Cursors.Wait;
               frmMadre objMadreWindow = new frmMadre();
               objMadreWindow.IdSeleccionado = IdMadre;
-              objMadreWindow.OpcionDeVisualizacion = 2; //Detalles
+              objMadreWindow.TipoAccion = TipoAccion.Detalle;
               objMadreWindow.Owner = this;
               objMadreWindow.ShowDialog();
               objMadreWindow = null;
@@ -314,7 +320,7 @@ namespace Bja.Registro
               this.Cursor = Cursors.Wait;
               frmMadre objMadreWindow = new frmMadre();
               objMadreWindow.IdSeleccionado = IdMadre;
-              objMadreWindow.OpcionDeVisualizacion = 1; //Edicion
+              objMadreWindow.TipoAccion = TipoAccion.Edicion;
               objMadreWindow.Owner = this;
               objMadreWindow.ShowDialog();
               objMadreWindow = null;
@@ -330,7 +336,7 @@ namespace Bja.Registro
               this.Cursor = Cursors.Wait;
               frmTutor objTutorWindow = new frmTutor();
               objTutorWindow.IdSeleccionado = IdTutor;
-              objTutorWindow.OpcionDeVisualizacion = 1; //Editar
+              objTutorWindow.TipoAccion = TipoAccion.Edicion;
               objTutorWindow.Owner = this;
               objTutorWindow.ShowDialog();
               objTutorWindow = null;
@@ -346,7 +352,7 @@ namespace Bja.Registro
               this.Cursor = Cursors.Wait;
               frmTutor objTutorWindow = new frmTutor();
               objTutorWindow.IdSeleccionado = IdTutor;
-              objTutorWindow.OpcionDeVisualizacion = 2; //Detalles
+              objTutorWindow.TipoAccion = TipoAccion.Detalle;
               objTutorWindow.Owner = this;
               objTutorWindow.ShowDialog();
               objTutorWindow = null;
@@ -462,7 +468,7 @@ namespace Bja.Registro
               objControlWindow.IdSeleccionado = IdControlMadre[0];
               objControlWindow.IdMadre = IdMadre;
               objControlWindow.IdTutor = IdTutor;
-              objControlWindow.OpcionDeVisualizacion = 1;
+              objControlWindow.TipoAccion = TipoAccion.Edicion;
               objControlWindow.Tipo = false;
               objControlWindow.Owner = this;
               objControlWindow.ShowDialog();
@@ -481,7 +487,7 @@ namespace Bja.Registro
               objControlWindow.IdSeleccionado = IdControlMadre[1];
               objControlWindow.IdMadre = IdMadre;
               objControlWindow.IdTutor = IdTutor;
-              objControlWindow.OpcionDeVisualizacion = 1;
+              objControlWindow.TipoAccion = TipoAccion.Edicion;
               objControlWindow.Tipo = false;
               objControlWindow.Owner = this;
               objControlWindow.ShowDialog();
@@ -500,7 +506,7 @@ namespace Bja.Registro
               objControlWindow.IdSeleccionado = IdControlMadre[2];
               objControlWindow.IdMadre = IdMadre;
               objControlWindow.IdTutor = IdTutor;
-              objControlWindow.OpcionDeVisualizacion = 1;
+              objControlWindow.TipoAccion = TipoAccion.Edicion;
               objControlWindow.Tipo = false;
               objControlWindow.Owner = this;
               objControlWindow.ShowDialog();
@@ -519,7 +525,7 @@ namespace Bja.Registro
               objControlWindow.IdSeleccionado = IdControlMadre[3];
               objControlWindow.IdMadre = IdMadre;
               objControlWindow.IdTutor = IdTutor;
-              objControlWindow.OpcionDeVisualizacion = 1;
+              objControlWindow.TipoAccion = TipoAccion.Edicion;
               objControlWindow.Tipo = false;
               objControlWindow.Owner = this;
               objControlWindow.ShowDialog();

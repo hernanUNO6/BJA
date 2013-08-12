@@ -36,13 +36,15 @@ namespace Bja.Registro
         private void cmdMadres_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-            WindowListaRegistros formularioListaMadres = new WindowListaRegistros();
+            frmLista formularioListaMadres = new frmLista();
 
             formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
             formularioListaMadres.MostrarDetallesRegistro += formularioListaMadres_MostrarDetallesRegistro;
             formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
             formularioListaMadres.BorrarRegistro += formularioListaMadres_BorrarRegistro;
-            //formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
+            formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
+            formularioListaMadres.CorresponsabilidadRegistro += formularioListaMadres_CorresponsabilidadRegistro;
+            formularioListaMadres.DependienteRegistro += formularioListaMadres_DependienteRegistro;
 
             ModeloMadre modelomadre = new ModeloMadre();
 
@@ -56,6 +58,8 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
+            objMadreWindow.TipoAccion = TipoAccion.Nuevo;
+            objMadreWindow.IdSeleccionado = 0;
             objMadreWindow.Owner = this;
             objMadreWindow.ShowDialog();
             objMadreWindow = null;
@@ -67,6 +71,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
             objMadreWindow.IdSeleccionado = fe.id;
+            objMadreWindow.TipoAccion = TipoAccion.Detalle;
             objMadreWindow.Owner = this;
             objMadreWindow.ShowDialog();
             objMadreWindow = null;
@@ -78,6 +83,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
             objMadreWindow.IdSeleccionado = fe.id;
+            objMadreWindow.TipoAccion = TipoAccion.Edicion;
             objMadreWindow.Owner = this;
             objMadreWindow.ShowDialog();
             objMadreWindow = null;
@@ -96,16 +102,29 @@ namespace Bja.Registro
             MessageBox.Show("Por Implementar.", "Mensaje");
         }
 
+        void formularioListaMadres_CorresponsabilidadRegistro(object sender, IdentidadEventArgs fe)
+        {
+            //throw new NotImplementedException();
+            MessageBox.Show("Por Implementar.", "Mensaje");
+        }
+
+        void formularioListaMadres_DependienteRegistro(object sender, IdentidadEventArgs fe)
+        {
+            //throw new NotImplementedException();
+            MessageBox.Show("Por Implementar.", "Mensaje");
+        }
+
         private void cmdTutores_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-            WindowListaRegistros formularioListaTutores = new WindowListaRegistros();
+            frmLista formularioListaTutores = new frmLista();
 
             formularioListaTutores.NuevoRegistro += formularioListaTutores_NuevoRegistro;
             formularioListaTutores.MostrarDetallesRegistro += formularioListaTutores_MostrarDetallesRegistro;
             formularioListaTutores.ModificarRegistro += formularioListaTutores_ModificarRegistro;
             formularioListaTutores.BorrarRegistro += formularioListaTutores_BorrarRegistro;
-            //formularioListaTutores.SeleccionarRegistro += formularioListaTutores_SeleccionarRegistro;
+            formularioListaTutores.SeleccionarRegistro += formularioListaTutores_SeleccionarRegistro;
+            formularioListaTutores.DependienteRegistro += formularioListaTutores_DependienteRegistro;
 
             ModeloTutor modelotutor = new ModeloTutor();
 
@@ -119,6 +138,8 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
+            objTutorWindow.IdSeleccionado = 0;
+            objTutorWindow.TipoAccion = TipoAccion.Nuevo;
             objTutorWindow.Owner = this;
             objTutorWindow.ShowDialog();
             objTutorWindow = null;
@@ -130,6 +151,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
             objTutorWindow.IdSeleccionado = fe.id;
+            objTutorWindow.TipoAccion = TipoAccion.Detalle;
             objTutorWindow.Owner = this;
             objTutorWindow.ShowDialog();
             objTutorWindow = null;
@@ -141,6 +163,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
             objTutorWindow.IdSeleccionado = fe.id;
+            objTutorWindow.TipoAccion = TipoAccion.Edicion;
             objTutorWindow.Owner = this;
             objTutorWindow.ShowDialog();
             objTutorWindow = null;
@@ -159,16 +182,23 @@ namespace Bja.Registro
             MessageBox.Show("Por Implementar.", "Mensaje");
         }
 
+        void formularioListaTutores_DependienteRegistro(object sender, IdentidadEventArgs fe)
+        {
+            //throw new NotImplementedException();
+            MessageBox.Show("Por Implementar.", "Mensaje");
+        }
+
         private void cmdMenores_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-            WindowListaRegistros formularioListaMenores = new WindowListaRegistros();
+            frmLista formularioListaMenores = new frmLista();
 
             formularioListaMenores.NuevoRegistro += formularioListaMenores_NuevoRegistro;
             formularioListaMenores.MostrarDetallesRegistro += formularioListaMenores_MostrarDetallesRegistro;
             formularioListaMenores.ModificarRegistro += formularioListaMenores_ModificarRegistro;
             formularioListaMenores.BorrarRegistro += formularioListaMenores_BorrarRegistro;
-            //formularioListaMenores.SeleccionarRegistro += formularioListaMenores_SeleccionarRegistro;
+            formularioListaMenores.SeleccionarRegistro += formularioListaMenores_SeleccionarRegistro;
+            formularioListaMenores.CorresponsabilidadRegistro += formularioListaMenores_CorresponsabilidadRegistro;
 
             ModeloMenor modelomenor = new ModeloMenor();
 
@@ -182,6 +212,8 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
+            objMenorWindow.IdSeleccionado = 0;
+            objMenorWindow.TipoAccion = TipoAccion.Nuevo;
             objMenorWindow.Owner = this;
             objMenorWindow.ShowDialog();
             objMenorWindow = null;
@@ -193,6 +225,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
             objMenorWindow.IdSeleccionado = fe.id;
+            objMenorWindow.TipoAccion = TipoAccion.Detalle;
             objMenorWindow.Owner = this;
             objMenorWindow.ShowDialog();
             objMenorWindow = null;
@@ -204,6 +237,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
             objMenorWindow.IdSeleccionado = fe.id;
+            objMenorWindow.TipoAccion = TipoAccion.Edicion;
             objMenorWindow.Owner = this;
             objMenorWindow.ShowDialog();
             objMenorWindow = null;
@@ -217,6 +251,12 @@ namespace Bja.Registro
         }
 
         void formularioListaMenores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
+        {
+            //throw new NotImplementedException();
+            MessageBox.Show("Por Implementar.", "Mensaje");
+        }
+
+        void formularioListaMenores_CorresponsabilidadRegistro(object sender, IdentidadEventArgs fe)
         {
             //throw new NotImplementedException();
             MessageBox.Show("Por Implementar.", "Mensaje");

@@ -14,11 +14,10 @@ using System.Windows.Shapes;
 
 namespace Bja.Registro
 {
-
     /// <summary>
-    /// Interaction logic for WindowListaRegistros.xaml
+    /// Lógica de interacción para frmLista.xaml
     /// </summary>
-    public partial class WindowListaRegistros : Window
+    public partial class frmLista : Window
     {
         //entrada
         const int ITEMS_POR_PAGINA = 10;
@@ -32,7 +31,6 @@ namespace Bja.Registro
         private Paginacion _paginacion;
 
         //private Visibility  mostrarBotonDetalles { get; set; }
-
 
         #region Definicion EventoNuevoRegistro
 
@@ -48,7 +46,7 @@ namespace Bja.Registro
             }
         }
         #endregion
-        
+
         #region Definicion EventoDetallesRegistro
 
         // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
@@ -133,17 +131,61 @@ namespace Bja.Registro
         }
         #endregion
 
-        public WindowListaRegistros()
+        #region Definicion EventoCorresponsabilidadRegistro
+
+        // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
+        public event IdentidadEventHandler CorresponsabilidadRegistro;
+
+        // This will be the starting point of our event-- it will create FireEventArgs
+        // and then raise the event, passing FireEventArgs. 
+        private void OnCorresponsabilidadRegistro(Int64 id)
         {
+            if (CorresponsabilidadRegistro != null)
+            {
+                IdentidadEventArgs IdentidadArgs = new IdentidadEventArgs(id);
+
+                // Now, raise the event by invoking the delegate. Pass in 
+                // the object that initated the event (this) as well as FireEventArgs. 
+                // The call must match the signature of FireEventHandler.
+                CorresponsabilidadRegistro(this, IdentidadArgs);
+            }
+        }
+        #endregion
+
+        #region Definicion EventoDependienteRegistro
+
+        // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
+        public event IdentidadEventHandler DependienteRegistro;
+
+        // This will be the starting point of our event-- it will create FireEventArgs
+        // and then raise the event, passing FireEventArgs. 
+        private void OnDependienteRegistro(Int64 id)
+        {
+            if (DependienteRegistro != null)
+            {
+                IdentidadEventArgs IdentidadArgs = new IdentidadEventArgs(id);
+
+                // Now, raise the event by invoking the delegate. Pass in 
+                // the object that initated the event (this) as well as FireEventArgs. 
+                // The call must match the signature of FireEventHandler.
+                DependienteRegistro(this, IdentidadArgs);
+            }
+        }
+        #endregion
+
+        public frmLista()
+        {
+            this.Cursor = Cursors.Wait;
             InitializeComponent();
+            this.Cursor = Cursors.Arrow;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            textBoxCriterioBusqueda.Focus();
+            txtCriterioBusqueda.Focus();
 
             //inicializa datos
-            labelTitulo.Content = titulo;
+            lblTitulo.Content = titulo;
 
             Int64 totalCount = proveedorDatos.totalRegistros();
             _paginacion = new Paginacion();
@@ -157,7 +199,7 @@ namespace Bja.Registro
             _paginacion.InitPagination(_resultadoBusquedaPaginacion.totalRegistros,
                                             _resultadoBusquedaPaginacion.totalEncontrados, ITEMS_POR_PAGINA);
 
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
 
             //if (modoListaRegistros == EnumModoListaRegistros.seleccion)
             //{
@@ -169,9 +211,7 @@ namespace Bja.Registro
             //    dataGridRegistros.Columns[3].Visibility = System.Windows.Visibility.Hidden;
             //    //seleccionar
             //    dataGridRegistros.Columns[4].Visibility = System.Windows.Visibility.Visible;
-
             //}
-
 
             //verifica que eventos de botones se registraron para mostrar los botones
             if (NuevoRegistro == null)
@@ -200,6 +240,16 @@ namespace Bja.Registro
                 dataGridRegistros.Columns[4].Visibility = System.Windows.Visibility.Hidden;
             }
 
+            if (CorresponsabilidadRegistro == null)
+            {
+                dataGridRegistros.Columns[5].Visibility = System.Windows.Visibility.Hidden;
+            }
+
+            if (DependienteRegistro == null)
+            {
+                dataGridRegistros.Columns[6].Visibility = System.Windows.Visibility.Hidden;
+            }
+
         }
 
         private void buttonNuevo_Click(object sender, RoutedEventArgs e)
@@ -211,15 +261,15 @@ namespace Bja.Registro
             //determinar página
             _paginacion.MoveToFirstPage();
             //volver a llamar a fuente de datos
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void textBoxCriterioBusqueda_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtCriterioBusqueda_TextChanged(object sender, TextChangedEventArgs e)
         {
             //buscar datos en lista paginada
-            //if (textBoxCriterioBusqueda.Text.Count() <= 3)
+            //if (txtCriterioBusqueda.Text.Count() <= 3)
             //{
             //    return;
             //}
@@ -228,52 +278,74 @@ namespace Bja.Registro
             //_paginacion.InitPagination();
             //se debe resetear la página
             _paginacion.MoveToFirstPage();
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             _paginacion.totalEncontrados = _resultadoBusquedaPaginacion.totalEncontrados;
             _paginacion.TotalRecords = _resultadoBusquedaPaginacion.totalRegistros;
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void buttonPrimero_Click(object sender, RoutedEventArgs e)
+        private void cmdPrimero_Click(object sender, RoutedEventArgs e)
         {
             //determinar página
             _paginacion.MoveToFirstPage();
             //volver a llamar a fuente de datos
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void buttonPrevio_Click(object sender, RoutedEventArgs e)
+        private void cmdPrevio_Click(object sender, RoutedEventArgs e)
         {
             _paginacion.MoveToPreviousPage();
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void buttonSiguiente_Click(object sender, RoutedEventArgs e)
+        private void cmdSiguiente_Click(object sender, RoutedEventArgs e)
         {
             _paginacion.MoveToNextPage();
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void buttonUltimo_Click(object sender, RoutedEventArgs e)
+        private void cmdUltimo_Click(object sender, RoutedEventArgs e)
         {
             //determinar página
             _paginacion.MoveToLastPage();
             //volver a llamar a fuente de datos
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
-        private void buttonCerrar_Click(object sender, RoutedEventArgs e)
+        private void cmdCerrar_Click(object sender, RoutedEventArgs e)
         {
             formularioItemSeleccionado = false;
+            this.Close();
+        }
+
+        private void Button_Click_Corresponsabilidad(object sender, RoutedEventArgs e)
+        {
+            Button img = (Button)sender;
+            Int64 id = (Int64)img.Tag;
+
+            OnCorresponsabilidadRegistro(id);
+
+            formularioItemSeleccionado = true;
+            this.Close();
+        }
+
+        private void Button_Click_Dependiente(object sender, RoutedEventArgs e)
+        {
+            Button img = (Button)sender;
+            Int64 id = (Int64)img.Tag;
+
+            OnDependienteRegistro(id);
+
+            formularioItemSeleccionado = true;
             this.Close();
         }
 
@@ -283,7 +355,6 @@ namespace Bja.Registro
             Int64 id = (Int64)img.Tag;
 
             OnMostrarDetallesRegistro(id);
-
         }
 
         private void Button_Click_Modificar(object sender, RoutedEventArgs e)
@@ -295,9 +366,9 @@ namespace Bja.Registro
 
             //vuelve a cargar los datos
             //volver a llamar a fuente de datos
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
         private void Button_Click_Borrar(object sender, RoutedEventArgs e)
@@ -310,9 +381,9 @@ namespace Bja.Registro
             //vuelve a cargar los datos
             _paginacion.MoveToFirstPage();
             //volver a llamar a fuente de datos
-            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, textBoxCriterioBusqueda.Text);
+            _resultadoBusquedaPaginacion = proveedorDatos.listaPaginada(_paginacion.StartIndex, _paginacion.itemsPorPagina, txtCriterioBusqueda.Text);
             dataGridRegistros.ItemsSource = _resultadoBusquedaPaginacion.resultados;
-            labelPagina.Content = _paginacion.getPaginationText();
+            lblPagina.Content = _paginacion.getPaginationText();
         }
 
         private void Button_Click_Seleccionar(object sender, RoutedEventArgs e)
@@ -325,7 +396,6 @@ namespace Bja.Registro
             formularioItemSeleccionado = true;
             this.Close();
         }
-
 
     }
 }

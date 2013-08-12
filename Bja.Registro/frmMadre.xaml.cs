@@ -22,7 +22,7 @@ namespace Bja.Registro
     public partial class frmMadre : Window
     {
         public long IdSeleccionado { get; set; }
-        public int OpcionDeVisualizacion { get; set; }
+        public TipoAccion TipoAccion { get; set; }
         private Madre _madre = new Madre();
 
         public frmMadre()
@@ -54,7 +54,7 @@ namespace Bja.Registro
                     chkDefuncion.IsChecked = true;
                 txtLugarNacimiento.Text = _madre.IdLocalidadNacimiento;
                 txtObservaciones.Text = _madre.Observaciones;
-                if (OpcionDeVisualizacion == 2)
+                if (TipoAccion == TipoAccion.Detalle)
                 {
                     txtDocIde.IsEnabled = false;
                     cboTipoDocIde.IsEnabled = false;
@@ -90,8 +90,6 @@ namespace Bja.Registro
                 modelomadre.Editar(IdSeleccionado, _madre);
             else
                 modelomadre.Crear(_madre);
-
-            //Logger.log(madre);
 
             this.Close();
         }
