@@ -82,7 +82,7 @@
                 <RadioButton x:Name="rdbCumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cumplimiento" IsEnabled="False"/>
                 <RadioButton x:Name="rdbTransferenciaSalida" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia" IsEnabled="False"/>
                 <RadioButton x:Name="rdbAborto" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Aborto" IsEnabled="False"/>
-                <RadioButton x:Name="rdbObitoFetal" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Obito fetal" IsEnabled="False"/>
+                <RadioButton x:Name="rdbObitoFetal" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Obito Fetal" IsEnabled="False"/>
                 <RadioButton x:Name="rdbFallecimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Fallecimiento" IsEnabled="False"/>
                 <RadioButton x:Name="rdbIncumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Incumplimiento" IsEnabled="False"/>
             </StackPanel>

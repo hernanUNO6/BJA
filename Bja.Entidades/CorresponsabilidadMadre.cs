@@ -19,10 +19,10 @@ namespace Bja.Entidades
         public DateTime FechaInscripcion { get; set; }
         public long IdMadre { get; set; }
         public Madre Madre { get; set; }
-        public String DireccionMadre { get; set; }
+        public String DireccionMadre { get; set; } //Parece ser que no serán aplicables en lo futuro
         public long IdTutor { get; set; }
         public Tutor Tutor { get; set; }
-        public String DireccionTutor { get; set; }
+        public String DireccionTutor { get; set; } //Parece ser que no serán aplicables en lo futuro
         public String CodigoFormulario { get; set; }
         public DateTime FechaUltimaMenstruacion { get; set; }
         public DateTime FechaUltimoParto { get; set; }

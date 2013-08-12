@@ -25,6 +25,6 @@ namespace Bja.Entidades
         public String IdLocalidadNacimiento { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
-        public String Sexo { get; set; } //char(1)
+        public String Sexo { get; set; }
     }
 }

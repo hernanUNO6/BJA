@@ -8,7 +8,7 @@ namespace Bja.Entidades
 {
     public enum TipoAccion
     {
-        // Para fines de acción en los formularios
+        // Para fines de efectuar alguna acción en un formulario determinado
         Nuevo,
         Edicion,
         Detalle,
