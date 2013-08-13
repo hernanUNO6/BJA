@@ -1,11 +1,11 @@
 ﻿@model Bja.Central.Web.Models.RegisterModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Registro";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h2>Crear cuenta de usuario.</h2>
 </hgroup>
 
 @using (Html.BeginForm()) {
@@ -16,19 +16,22 @@
         <legend>Registration Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
+                @*@Html.LabelFor(m => m.UserName)*@
+                <label>Usuario</label>
                 @Html.TextBoxFor(m => m.UserName)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                @*@Html.LabelFor(m => m.Password)*@
+                <label>Contraseña</label>
                 @Html.PasswordFor(m => m.Password)
             </li>
             <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
+                @*@Html.LabelFor(m => m.ConfirmPassword)*@
+                <label>Confirmar Contraseña</label>
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Registrar" class="btn btn-primary" />
     </fieldset>
 }
 

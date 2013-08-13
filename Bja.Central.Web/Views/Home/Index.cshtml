@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "BJA";
 }
 @section featured {
     <section class="featured">
@@ -8,28 +8,26 @@
                 <h1>@ViewBag.Title.</h1>
                 <h2>@ViewBag.Message</h2>
             </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+            @*<p>
+                -
+            </p>*@
         </div>
     </section>
 }
 
-@Html.ActionLink("Medicos", "../Medicos")<br />
-@Html.ActionLink("Reclamos", "../Reclamos")<br />
-@Html.ActionLink("Encargados", "../Encargados")<br />
+@Html.ActionLink("Medicos", "../Medicos", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("Reclamos", "../Reclamos", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("Encargados", "../Encargados", null, null, new { @class="btn" })<br /><br />
 <br />
-@Html.ActionLink("Departamentos", "../Departamentos")<br />
-@Html.ActionLink("Provincias", "../Provincias")<br />
-@Html.ActionLink("Municipios", "../Municipios")<br />
-@Html.ActionLink("EstablecimientosMedico", "../EstablecimientosMedico")<br />
-@Html.ActionLink("AsignacionesMedico", "../AsignacionesMedico")<br />
+<hr />
+@Html.ActionLink("Departamentos", "../Departamentos", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("Provincias", "../Provincias", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("Municipios", "../Municipios", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("EstablecimientosMedico", "../EstablecimientosMedico", null, null, new { @class="btn" })<br /><br />
+@Html.ActionLink("AsignacionesMedico", "../AsignacionesMedico", null, null, new { @class="btn" })<br /><br />
 
-<h3>We suggest the following:</h3>
+
+@*<h3>We suggest the following:</h3>
 <br />
 <ol class="round">
     <li class="one">
@@ -54,4 +52,4 @@
         and price for your applications.
         <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
     </li>
-</ol>
+</ol>*@

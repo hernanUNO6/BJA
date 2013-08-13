@@ -1,7 +1,7 @@
 ﻿@model Bja.Central.Web.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Ingresar al Sistema";
 }
 
 <hgroup class="title">
@@ -9,7 +9,7 @@
 </hgroup>
 
 <section id="loginForm">
-<h2>Use a local account to log in.</h2>
+<h2>Use su cuenta de usuario para ingresar.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -18,31 +18,34 @@
         <legend>Log in Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
+                @*@Html.LabelFor(m => m.UserName)*@
+                <label>Usuario</label>
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                @*@Html.LabelFor(m => m.Password)*@
+                <label>Contraseña</label>
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
             <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                @*@Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })*@
+                <span>Recordar contraseña</span>
             </li>
         </ol>
-        <input type="submit" value="Log in" />
+        <input type="submit" value="Ingresar" class="btn btn-primary" />
     </fieldset>
     <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
+        @Html.ActionLink("Registrese", "Register") Si usted no tiene un usuario.
     </p>
 }
 </section>
 
 <section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    @*<h2>Debe ingresar el usuario y su contraseña.</h2>*@
+    @*@Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })*@
 </section>
 
 @section Scripts {

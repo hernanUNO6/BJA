@@ -131,7 +131,8 @@ namespace Bja.Central.Web.Controllers
         [ActionName("ProvinciasPorDepartamento")]
         public ActionResult GetPaisesPorContinente(string id)
         {
-            List<Provincia> myData = modMunicipio.GetProvinciasPorDepartamento(id);
+            List<Provincia> Datos = modMunicipio.GetProvinciasPorDepartamento(id);
+            var myData = (from d in Datos select new { d.Id, d.Descripcion });            
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
     }

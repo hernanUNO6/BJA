@@ -128,9 +128,9 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Su contraseña a sido cambiado."
+                : message == ManageMessageId.SetPasswordSuccess ? "Su contraseña a sido asignada." // Your password has been set
+                : message == ManageMessageId.RemoveLoginSuccess ? "El login ha sido eliminado." // The external login was removed
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -168,7 +168,8 @@ namespace Bja.Central.Web.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                        // The current password is incorrect or the new password is invalid
+                        ModelState.AddModelError("", "La contraseña es invalida o la nueva no es valida.");
                     }
                 }
             }
