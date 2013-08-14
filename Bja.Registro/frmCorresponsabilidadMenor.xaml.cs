@@ -124,7 +124,6 @@ namespace Bja.Registro
       void formularioListaMenores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
       {
           IdMenor = fe.id;
-          IdSeleccionado = IdMenor;
           RecuperarMenor();
           //RecuperarUltimaCorresponsabilidad();
       }

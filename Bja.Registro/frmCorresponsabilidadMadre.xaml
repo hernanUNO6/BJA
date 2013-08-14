@@ -61,14 +61,14 @@
         <Label x:Name="lblDocIde_Copy15" Content="Número de Embarazo:" Height="28" HorizontalAlignment="Left" Margin="570,252,0,0" VerticalAlignment="Top" Width="129" Grid.Row="1" />
         <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Right" Margin="0,252,201,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
         <Label x:Name="lblLugarGeografico_Copy5" Content="Control de Responsabilidades de la Mujer Gestante" Height="28" HorizontalAlignment="Left" Margin="17,223,0,0" VerticalAlignment="Top" Width="365" FontWeight="Bold" Grid.Row="1" />
-        <Button x:Name="cmdBuscarMadre" Content="Sel. Madre" HorizontalAlignment="Left" Margin="328,172,0,0" VerticalAlignment="Top" Width="85" Click="cmdBuscarMadre_Click" Height="22" Grid.Row="1"/>
+        <Button x:Name="cmdBuscarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="328,172,0,0" VerticalAlignment="Top" Width="85" Click="cmdBuscarMadre_Click" Height="22" Grid.Row="1"/>
         <Label x:Name="lblFechaNacimiento_Copy2" Content="Fecha de Inscripcion" Height="28" HorizontalAlignment="Left" Margin="16,109,0,0" VerticalAlignment="Top" Width="122" Grid.Row="1" />
         <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="143,109,0,0" VerticalAlignment="Top" Width="91" Height="24" Grid.Row="1"/>
         <Label x:Name="lblDocIde_Copy19" Content="Codigo Formulario" Height="28" HorizontalAlignment="Left" Margin="25,69,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1" />
         <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="143,72,0,0" VerticalAlignment="Top" Width="83" Grid.Row="1" />
         <CheckBox x:Name="chkSalida" Content="Salida de la beneficiaria" HorizontalAlignment="Left" Margin="27,435,0,0" Grid.Row="1" VerticalAlignment="Top" IsEnabled="False"/>
         <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="80,458,0,0" VerticalAlignment="Top" Width="91" Height="24" Grid.Row="1" IsEnabled="False"/>
-        <Button x:Name="cmdBuscarTutor" Content="Sel. Tutor" HorizontalAlignment="Left" Margin="655,172,0,0" VerticalAlignment="Top" Width="83" Click="cmdBuscarTutor_Click" Height="22" Grid.Row="1" />
+        <Button x:Name="cmdBuscarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="655,172,0,0" VerticalAlignment="Top" Width="83" Click="cmdBuscarTutor_Click" Height="22" Grid.Row="1" />
         <CheckBox x:Name="chkARO" Content="A.R.O." HorizontalAlignment="Left" Margin="784,256,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,-1.75" Grid.Row="1"/>
         <DataGrid Name="grdControl" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="137" Margin="26,284,0,0" Grid.Row="1" VerticalAlignment="Top" Width="889">
             <DataGrid.Columns>

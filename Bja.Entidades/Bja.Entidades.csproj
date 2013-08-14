@@ -67,7 +67,6 @@
     <Compile Include="Municipio.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="PermissionLog.cs" />
-    <Compile Include="Parentesco.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Recepcion.cs" />
     <Compile Include="RecepcionLog.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="TipoEstadoRegistro.cs" />
     <Compile Include="TipoEstadoSincronizacion.cs" />
     <Compile Include="TipoInscripcion.cs" />
+    <Compile Include="TipoParentesco.cs" />
     <Compile Include="TipoReclamo.cs" />
     <Compile Include="TipoSalidaMadre.cs" />
     <Compile Include="TipoSalidaMenor.cs" />

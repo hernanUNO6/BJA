@@ -46,6 +46,7 @@ namespace Bja.Registro
                 this.dtpFechaUltimoParto.SelectedDate = DateTime.Today;
                 this.dtpFechaSalida.SelectedDate = DateTime.Today;
                 rdbNueva.IsChecked = true;
+                txtNumeroEmbarazo.Text = "0";
             }
         }
 

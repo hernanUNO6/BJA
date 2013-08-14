@@ -27,16 +27,16 @@
         <Label x:Name="lblNombresMenor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="394,48,0,0" VerticalAlignment="Top" Width="220" />
         <Label x:Name="lblNacimientoMenor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblFechaNacimientoMenor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="391,75,0,0" VerticalAlignment="Top" Width="226" />
-        <Button x:Name="cmdSeleccionarMenor" Content="Sel. Menor" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMenor_Click"/>
+        <Button x:Name="cmdSeleccionarMenor" Content="Seleccionar" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMenor_Click"/>
         <Button x:Name="cmdModificarMenor" Content="Modificar" HorizontalAlignment="Left" Margin="460,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMenor_Click" RenderTransformOrigin="0.493,-0.35"/>
         <Label x:Name="lblTitular" Content="Titular de Pago" Height="28" HorizontalAlignment="Left" Margin="640,16,0,0" VerticalAlignment="Top" Width="98" FontWeight="Bold" />
         <Label x:Name="lblMadre" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="644,44,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.5,0.5" />
         <Label x:Name="lblNombreMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="730,44,0,0" VerticalAlignment="Top" Width="197" />
         <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="644,69,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="730,69,0,0" VerticalAlignment="Top" Width="197" />
-        <Button x:Name="cmdSeleccionarMadre" Content="Sel. Madre" HorizontalAlignment="Left" Margin="642,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
+        <Button x:Name="cmdSeleccionarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="642,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
         <Button x:Name="cmdModificarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="802,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMadre_Click"/>
-        <Button x:Name="cmdSeleccionarTutor" Content="Sel. Tutor" HorizontalAlignment="Left" Margin="642,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
+        <Button x:Name="cmdSeleccionarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="642,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
         <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="802,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarTutor_Click"/>
         <Label x:Name="lblBeneficiario" Content="Datos del beneficiario" Height="28" HorizontalAlignment="Left" Margin="16,237,0,0" VerticalAlignment="Top" Width="135" FontWeight="Bold" />
         <DataGrid Name="grdControl" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="272" Margin="31,270,0,0" VerticalAlignment="Top" Width="846">
