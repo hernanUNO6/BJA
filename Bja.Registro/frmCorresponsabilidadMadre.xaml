@@ -49,12 +49,6 @@
         <Label x:Name="lblDocumentoIdentidadTutor" Content="DocIde" Height="28" HorizontalAlignment="Left" Margin="744,111,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
         <Label x:Name="lblCentro_Copy9" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="645,139,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
         <Label x:Name="lblFechaNacimientoTutor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="744,139,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblLugarParto" Content="Parto" Height="28" HorizontalAlignment="Left" Margin="688,294,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold" Grid.Row="1" />
-        <Label x:Name="lblFechaParto" Content="Fecha" Height="28" HorizontalAlignment="Left" Margin="704,318,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar15" Content="Modificar" HorizontalAlignment="Left" Margin="805,321,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Row="1"/>
-        <Label x:Name="lblPostParto" Content="Post Parto" Height="28" HorizontalAlignment="Left" Margin="688,346,0,0" VerticalAlignment="Top" Width="87" FontWeight="Bold" Grid.Row="1" />
-        <Label x:Name="lblFechaPostParto" Content="Fecha" Height="28" HorizontalAlignment="Left" Margin="704,370,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar16" Content="Modificar" HorizontalAlignment="Left" Margin="805,376,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Row="1"/>
         <Label x:Name="lblFechaNacimiento" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="25,455,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
         <Label x:Name="lblPaterno" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="26,487,0,0" VerticalAlignment="Top" Width="96" Grid.Row="1" />
         <TextBox x:Name="txtAutorizado" Height="23" HorizontalAlignment="Left" Margin="122,492,0,0" VerticalAlignment="Top" Width="249" Grid.Row="1" IsEnabled="False" />
@@ -76,6 +70,33 @@
         <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="80,458,0,0" VerticalAlignment="Top" Width="91" Height="24" Grid.Row="1" IsEnabled="False"/>
         <Button x:Name="cmdBuscarTutor" Content="Sel. Tutor" HorizontalAlignment="Left" Margin="655,172,0,0" VerticalAlignment="Top" Width="83" Click="cmdBuscarTutor_Click" Height="22" Grid.Row="1" />
         <CheckBox x:Name="chkARO" Content="A.R.O." HorizontalAlignment="Left" Margin="784,256,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,-1.75" Grid.Row="1"/>
+        <DataGrid Name="grdControl" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="137" Margin="26,284,0,0" Grid.Row="1" VerticalAlignment="Top" Width="889">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Path=Id}" />
+                <DataGridTextColumn Header="Número" Binding="{Binding Path=NumeroControl}" />
+                <DataGridTextColumn Header="Programada" Binding="{Binding Path=FechaProgramada}" />
+                <DataGridTextColumn Header="Talla" Binding="{Binding Path=TallaCm}" />
+                <DataGridTextColumn Header="Peso" Binding="{Binding Path=PesoKg}" />
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Path=FechaControl}" />
+                <DataGridTextColumn Header="Tipo" Binding="{Binding Path=TipoControlMadre}" />
+                <DataGridTextColumn Header="Beneficiario" Binding="{Binding Path=TipoBeneficiario}" />
+                <DataGridTextColumn Header="Medico" Binding="{Binding Path=IdMedico}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="cmdEditarControl_Click" Tag="{Binding Path=Id}">Editar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="cmdDetalleControl_Click" Tag="{Binding Path=Id}">Detalle</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label x:Name="lblCargo" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="400,489,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
         <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="192,435,212,66" Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="0,0,-2,-12">
@@ -93,46 +114,6 @@
                 <RadioButton x:Name="rdbTransferencia" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia"/>
             </StackPanel>
         </GroupBox>
-        <Label x:Name="lblControl_11" Content="1" Height="64" HorizontalAlignment="Left" Margin="22,285,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" Grid.Row="1" />
-        <Label x:Name="lblPrevisto_11" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="52,286,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblTalla_11" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="52,314,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPeso_11" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="52,342,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblFecha_11" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="52,370,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPrevisto11" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="95,286,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblTalla11" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="95,314,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblPeso11" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="95,342,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblFecha11" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="95,370,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar11" Content="Modificar" HorizontalAlignment="Left" Margin="92,398,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Click="cmdModificar11_Click"/>
-        <Label x:Name="lblControl_12" Content="2" Height="64" HorizontalAlignment="Left" Margin="176,285,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" Grid.Row="1" />
-        <Label x:Name="lblPrevisto_12" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="206,286,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblTalla_12" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="206,314,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPeso_12" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="206,342,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblFecha_12" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="206,370,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPrevisto12" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="249,286,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblTalla12" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="249,314,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblPeso12" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="249,342,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblFecha12" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="249,370,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar12" Content="Modificar" HorizontalAlignment="Left" Margin="246,398,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Click="cmdModificar12_Click"/>
-        <Label x:Name="lblControl_13" Content="3" Height="64" HorizontalAlignment="Left" Margin="328,285,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" Grid.Row="1" />
-        <Label x:Name="lblPrevisto_13" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="358,286,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblTalla_13" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="358,314,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPeso_13" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="358,342,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblFecha_13" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="358,370,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPrevisto13" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="401,286,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblTalla13" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="401,314,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblPeso13" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="401,342,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblFecha13" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="401,370,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar13" Content="Modificar" HorizontalAlignment="Left" Margin="398,398,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Click="cmdModificar13_Click"/>
-        <Label x:Name="lblControl_14" Content="4" Height="64" HorizontalAlignment="Left" Margin="482,285,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" Grid.Row="1" />
-        <Label x:Name="lblPrevisto_14" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="512,286,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblTalla_14" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="512,314,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPeso_14" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="512,342,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblFecha_14" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="512,370,0,0" VerticalAlignment="Top" Width="43" Grid.Row="1" />
-        <Label x:Name="lblPrevisto14" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="555,286,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblTalla14" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="555,314,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblPeso14" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="555,342,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Label x:Name="lblFecha14" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="555,370,0,0" VerticalAlignment="Top" Width="72" Grid.Row="1" />
-        <Button x:Name="cmdModificar14" Content="Modificar" HorizontalAlignment="Left" Margin="552,398,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Click="cmdModificar14_Click"/>
         <Button x:Name="cmdModifcarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="508,172,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85" Click="cmdModifcarMadre_Click" Height="22"/>
         <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="832,172,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Click="cmdModificarTutor_Click" Height="22"/>
         <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="773,487,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="21" Click="cmdGuardar_Click"/>

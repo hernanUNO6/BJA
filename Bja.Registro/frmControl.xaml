@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Bja.Registro.frmControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Control" Height="300" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Control" Height="400" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFFDFCFB" Offset="0"/>
@@ -20,14 +20,16 @@
         <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
         <DatePicker x:Name="dtpFechaControl" HorizontalAlignment="Left" Margin="126,98,0,0" VerticalAlignment="Top" Width="114"/>
         <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="68,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
-        <ComboBox x:Name="cboTipoDocIde"  HorizontalAlignment="Left" Margin="126,127,0,0" VerticalAlignment="Top" Width="245"/>
-        <GroupBox x:Name="gbxTitular" Header="Titular de Pago" BorderBrush="Black" Margin="125,164,132,54">
+        <ComboBox x:Name="cboMedico"  HorizontalAlignment="Left" Margin="126,127,0,0" VerticalAlignment="Top" Width="245"/>
+        <GroupBox x:Name="gbxTitular" Header="Titular de Pago" BorderBrush="Black" Margin="125,154,132,172">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,-12">
                 <RadioButton x:Name="rdbMadre" Margin="3,3,0,3" GroupName="Titular" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Madre" IsEnabled="False"/>
                 <RadioButton x:Name="rdbTutor" Margin="3,3,0,0" GroupName="Titular" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Tutor" IsEnabled="False"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="204,233,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
-        <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="296,233,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
+        <Label x:Name="lblObservaciones" Content="Observaciones" HorizontalAlignment="Left" Margin="33,204,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtObservaciones" HorizontalAlignment="Left" Height="113" Margin="126,204,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" Width="245" VerticalScrollBarVisibility="Visible"/>
+        <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="204,332,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
+        <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="296,332,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
     </Grid>
 </Window>

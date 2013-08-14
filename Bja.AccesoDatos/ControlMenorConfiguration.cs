@@ -20,8 +20,9 @@ namespace Bja.AccesoDatos
 
             Property(c => c.IdCorresponsabilidadMenor).IsRequired();
             Property(c => c.IdMedico).IsRequired();
-            Property(c => c.IdTutor).IsRequired();
-            Property(c => c.IdMadre).IsRequired();
+            Property(c => c.IdMenor).IsRequired();
+            Property(c => c.IdMadre).IsOptional();
+            Property(c => c.IdTutor).IsOptional();
             Property(c => c.FechaProgramada).IsRequired();
             Property(c => c.FechaControl).IsRequired();
             Property(c => c.TallaCm).IsRequired();

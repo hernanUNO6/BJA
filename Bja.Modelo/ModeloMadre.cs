@@ -86,14 +86,14 @@ namespace Bja.Modelo
           return context.Madres.ToList();
       }
 
-      public List<Menor> ListarMenoresDependientes(long IdTutor)
-      {
-          List<Menor> menor = new List<Menor>();
+      //public List<Menor> ListarMenoresDependientes(long IdTutor)
+      //{
+      //    List<Menor> menor = new List<Menor>();
 
-          //...
+      //    //...
 
-          return menor;
-      }
+      //    return menor;
+      //}
 
       public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
       {

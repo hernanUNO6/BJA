@@ -87,10 +87,22 @@ namespace Bja.Modelo
 
             controlmadre = (from cm in context.ControlesMadre
                             where cm.IdCorresponsabilidadMadre == IdCorresponsabilidadMadre
+                            orderby cm.NumeroControl 
                             select cm).ToList<ControlMadre>();
 
             return controlmadre;
         }
+
+        ////se esta adicionando esta parte RENAN
+        //public List<ControlMadre> ListarControlMadre(long IdMadre)
+        //{
+        //    List<ControlMadre> corresponsabilidadmadre = new List<ControlMadre>();
+
+        //    corresponsabilidadmadre = (from cm in context.ControlesMadre
+        //                               where cm.Id == IdMadre
+        //                               select cm).ToList<ControlMadre>();
+        //    return corresponsabilidadmadre;
+        //}
 
     }
 }

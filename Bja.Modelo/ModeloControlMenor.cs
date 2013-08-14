@@ -85,9 +85,10 @@ namespace Bja.Modelo
         {
             List<ControlMenor> controlmenor = new List<ControlMenor>();
 
-            controlmenor = (from cm in context.ControlesMenor
-                            where cm.IdCorresponsabilidadMenor == IdCorresponsabilidadMenor
-                            select cm).ToList<ControlMenor>();
+            controlmenor = (from nc in context.ControlesMenor
+                            where nc.IdCorresponsabilidadMenor == IdCorresponsabilidadMenor
+                            orderby nc.NumeroControl
+                            select nc).ToList<ControlMenor>();
 
             return controlmenor;
         }

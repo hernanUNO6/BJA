@@ -77,6 +77,7 @@
     <Compile Include="SolicitudPago.cs" />
     <Compile Include="TipoAccion.cs" />
     <Compile Include="TipoBeneficiario.cs" />
+    <Compile Include="TipoControl.cs" />
     <Compile Include="TipoControlMadre.cs" />
     <Compile Include="TipoDocumentoIdentidad.cs" />
     <Compile Include="TipoEncargado.cs" />

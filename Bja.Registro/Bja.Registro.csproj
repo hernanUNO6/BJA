@@ -74,6 +74,12 @@
     <Compile Include="frmControl.xaml.cs">
       <DependentUpon>frmControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmControlParto.xaml.cs">
+      <DependentUpon>frmControlParto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmControlPostParto.xaml.cs">
+      <DependentUpon>frmControlPostParto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmCorresponsabilidadMadre.xaml.cs">
       <DependentUpon>frmCorresponsabilidadMadre.xaml</DependentUpon>
     </Compile>
@@ -113,6 +119,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmControlParto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmControlPostParto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
