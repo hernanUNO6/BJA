@@ -12,6 +12,6 @@ namespace Bja.Entidades
         NoPagado,
         Observado,
         NoAplicable, //Cuando se trata de parto, pues se crea el registro de control respectivo
-        NoAsignable  //Cuando la madre o niño pierde el derecho de cobrar por la no asistencia a un control
+        NoAsignable  //Cuando la madre o menor pierde el derecho de cobrar por la no asistencia a un control
     }
 }

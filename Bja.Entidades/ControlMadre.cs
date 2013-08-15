@@ -18,8 +18,11 @@ namespace Bja.Entidades
         public CorresponsabilidadMadre CorresponsabilidadMadre { get; set; }
         public long IdMedico { get; set; }
         public Medico Medico { get; set; }
+        public long IdMadre { get; set; }
+        public Madre Madre { get; set; }
         public long IdTutor { get; set; }
         public Tutor Tutor { get; set; }
+        public TipoParentesco TipoParentesco { get; set; }
         public long IdEstablecimientoSalud { get; set; }
         public DateTime FechaProgramada { get; set; }
         public DateTime FechaControl { get; set; }

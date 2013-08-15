@@ -29,7 +29,7 @@
                 <RadioButton x:Name="rdbMasculino" Margin="3,3,0,0" GroupName="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Masculino"/>
             </StackPanel>
         </GroupBox>
-        <CheckBox x:Name="chkDefuncion"  Content="Fallecido/a" HorizontalAlignment="Left" Margin="186,253,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDefuncion"  Content="Fallecido/a" HorizontalAlignment="Left" Margin="186,253,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Label x:Name="lblLugarNacimiento" Content="Lugar de Nacimiento" HorizontalAlignment="Left" Margin="53,275,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtLugarNacimiento" HorizontalAlignment="Left" Height="23" Margin="187,278,0,0" VerticalAlignment="Top" Width="486"/>
         <Label x:Name="lblObservaciones" Content="Observaciones" HorizontalAlignment="Left" Margin="87,306,0,0" VerticalAlignment="Top"/>

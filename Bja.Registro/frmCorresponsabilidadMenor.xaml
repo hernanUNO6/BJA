@@ -27,140 +27,46 @@
         <Label x:Name="lblNombresMenor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="394,48,0,0" VerticalAlignment="Top" Width="220" />
         <Label x:Name="lblNacimientoMenor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblFechaNacimientoMenor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="391,75,0,0" VerticalAlignment="Top" Width="226" />
-        <Button x:Name="cmdSeleccionarMenor" Content="Sel. Menor" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMenor_Click"/>
+        <Button x:Name="cmdSeleccionarMenor" Content="Seleccionar" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMenor_Click"/>
         <Button x:Name="cmdModificarMenor" Content="Modificar" HorizontalAlignment="Left" Margin="460,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMenor_Click" RenderTransformOrigin="0.493,-0.35"/>
         <Label x:Name="lblTitular" Content="Titular de Pago" Height="28" HorizontalAlignment="Left" Margin="640,16,0,0" VerticalAlignment="Top" Width="98" FontWeight="Bold" />
         <Label x:Name="lblMadre" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="644,44,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.5,0.5" />
         <Label x:Name="lblNombreMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="730,44,0,0" VerticalAlignment="Top" Width="197" />
         <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="644,69,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="730,69,0,0" VerticalAlignment="Top" Width="197" />
-        <Button x:Name="cmdSeleccionarMadre" Content="Sel. Madre" HorizontalAlignment="Left" Margin="642,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
+        <Button x:Name="cmdSeleccionarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="642,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
         <Button x:Name="cmdModificarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="802,97,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMadre_Click"/>
-        <Button x:Name="cmdSeleccionarTutor" Content="Sel. Tutor" HorizontalAlignment="Left" Margin="642,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
+        <Button x:Name="cmdSeleccionarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="642,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
         <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="802,174,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarTutor_Click"/>
         <Label x:Name="lblBeneficiario" Content="Datos del beneficiario" Height="28" HorizontalAlignment="Left" Margin="16,237,0,0" VerticalAlignment="Top" Width="135" FontWeight="Bold" />
+        <DataGrid Name="grdControl" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="272" Margin="31,270,0,0" VerticalAlignment="Top" Width="846">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Path=Id}" />
+                <DataGridTextColumn Header="Número" Binding="{Binding Path=NumeroControl}" />
+                <DataGridTextColumn Header="Programada" Binding="{Binding Path=FechaProgramada}" />
+                <DataGridTextColumn Header="Talla" Binding="{Binding Path=TallaCm}" />
+                <DataGridTextColumn Header="Peso" Binding="{Binding Path=PesoKg}" />
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Path=FechaControl}" />
+                <DataGridTextColumn Header="Beneficiario" Binding="{Binding Path=TipoBeneficiario}" />
+                <DataGridTextColumn Header="Medico" Binding="{Binding Path=IdMedico}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="cmdEditarControl_Click" Tag="{Binding Path=Id}">Editar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="cmdDetalleControl_Click" Tag="{Binding Path=Id}">Detalle</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label x:Name="lblFechaInscripcion" Content="F. Inscripción:" Height="28" HorizontalAlignment="Left" Margin="24,143,0,0" VerticalAlignment="Top" Width="86" />
         <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="110,147,0,0" VerticalAlignment="Top" Width="114" Text="8/6/2013"/>
-        <Label x:Name="lblControl_11" Content="1" Height="64" HorizontalAlignment="Left" Margin="9,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_11" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="39,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_11" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="39,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_11" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="39,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_11" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="39,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto11" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="82,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla11" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="82,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso11" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="82,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha11" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="82,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar11" Content="Modificar" HorizontalAlignment="Left" Margin="79,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar11_Click"/>
-        <Label x:Name="lblControl_12" Content="2" Height="64" HorizontalAlignment="Left" Margin="163,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_12" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="193,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_12" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="193,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_12" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="193,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_12" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="193,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto12" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="236,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla12" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="236,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso12" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="236,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha12" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="236,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar12" Content="Modificar" HorizontalAlignment="Left" Margin="233,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar12_Click"/>
-        <Label x:Name="lblControl_13" Content="3" Height="64" HorizontalAlignment="Left" Margin="315,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_13" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="345,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_13" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="345,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_13" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="345,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_13" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="345,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto13" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="388,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla13" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="388,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso13" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="388,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha13" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="388,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar13" Content="Modificar" HorizontalAlignment="Left" Margin="385,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar13_Click"/>
-        <Label x:Name="lblControl_14" Content="4" Height="64" HorizontalAlignment="Left" Margin="469,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_14" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="499,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_14" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="499,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_14" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="499,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_14" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="499,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto14" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="542,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla14" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="542,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso14" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="542,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha14" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="542,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar14" Content="Modificar" HorizontalAlignment="Left" Margin="539,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar14_Click"/>
-        <Label x:Name="lblControl_15" Content="5" Height="64" HorizontalAlignment="Left" Margin="622,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_15" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="652,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_15" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="652,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_15" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="652,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_15" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="652,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto15" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="695,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla15" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="695,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso15" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="695,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha15" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="695,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar15" Content="Modificar" HorizontalAlignment="Left" Margin="692,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar15_Click"/>
-        <Label x:Name="lblControl_16" Content="6" Height="64" HorizontalAlignment="Left" Margin="777,263,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_16" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="807,264,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_16" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="807,292,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_16" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="807,320,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_16" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="807,348,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto16" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="850,264,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla16" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="850,292,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso16" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="850,320,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha16" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="850,348,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar16" Content="Modificar" HorizontalAlignment="Left" Margin="847,376,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar16_Click"/>
-        <Label x:Name="lblControl_21" Content="7" Height="64" HorizontalAlignment="Left" Margin="12,403,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_21" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="42,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_21" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="42,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_21" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="42,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_21" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="42,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto21" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="85,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla21" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="85,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso21" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="85,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha21" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="85,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar21" Content="Modificar" HorizontalAlignment="Left" Margin="82,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar21_Click"/>
-        <Label x:Name="lblControl_22" Content="8" Height="64" HorizontalAlignment="Left" Margin="166,403,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_22" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="196,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_22" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="196,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_22" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="196,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_22" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="196,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto22" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="239,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla22" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="239,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso22" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="239,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha22" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="239,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar22" Content="Modificar" HorizontalAlignment="Left" Margin="236,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar22_Click"/>
-        <Label x:Name="lblControl_23" Content="9" Height="64" HorizontalAlignment="Left" Margin="318,403,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_23" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="348,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_23" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="348,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_23" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="348,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_23" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="348,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto23" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="391,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla23" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="391,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso23" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="391,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha23" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="391,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar23" Content="Modificar" HorizontalAlignment="Left" Margin="388,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar23_Click"/>
-        <Label x:Name="lblControl_24" Content="10" Height="64" HorizontalAlignment="Left" Margin="460,403,0,0" VerticalAlignment="Top" Width="48" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_24" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="502,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_24" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="502,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_24" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="502,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_24" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="502,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto24" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="545,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla24" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="545,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso24" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="545,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha24" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="545,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar24" Content="Modificar" HorizontalAlignment="Left" Margin="542,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar24_Click"/>
-        <Label x:Name="lblControl_25" Content="11" Height="64" HorizontalAlignment="Left" Margin="617,403,0,0" VerticalAlignment="Top" Width="44" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_25" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="655,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_25" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="655,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_25" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="655,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_25" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="655,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto25" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="698,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla25" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="698,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso25" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="698,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha25" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="698,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar25" Content="Modificar" HorizontalAlignment="Left" Margin="695,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar25_Click"/>
-        <Label x:Name="lblControl_26" Content="12" Height="64" HorizontalAlignment="Left" Margin="770,403,0,0" VerticalAlignment="Top" Width="46" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblPrevisto_26" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="810,404,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblTalla_26" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="810,432,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPeso_26" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="810,460,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblFecha_26" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="810,488,0,0" VerticalAlignment="Top" Width="43" />
-        <Label x:Name="lblPrevisto26" Content="Prog.:" Height="28" HorizontalAlignment="Left" Margin="853,404,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblTalla26" Content="Talla:" Height="28" HorizontalAlignment="Left" Margin="858,432,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblPeso26" Content="Peso:" Height="28" HorizontalAlignment="Left" Margin="853,460,0,0" VerticalAlignment="Top" Width="72" />
-        <Label x:Name="lblFecha26" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="853,488,0,0" VerticalAlignment="Top" Width="72" />
-        <Button x:Name="cmdModificar26" Content="Modificar" HorizontalAlignment="Left" Margin="850,516,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificar26_Click"/>
         <CheckBox x:Name="chkSalida" Content="Salida del beneficiario/a" HorizontalAlignment="Left" Margin="31,556,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Label x:Name="lblFechaSalida" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="33,576,0,0" VerticalAlignment="Top" Width="45" />
         <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="83,580,0,0" VerticalAlignment="Top" Width="92" Text="8/6/2013" IsEnabled="False"/>

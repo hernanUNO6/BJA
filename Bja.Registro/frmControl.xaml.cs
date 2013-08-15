@@ -22,13 +22,14 @@ namespace Bja.Registro
     public partial class frmControl : Window
     {
         public long IdSeleccionado { get; set; }
-        public bool Tipo { get; set; }
+        public TipoControl TipoControl { get; set; }
         private ControlMadre _controlmadre = new ControlMadre();
         private ControlMenor _controlmenor = new ControlMenor();
         public long IdMadre { get; set; }
         public long IdMenor { get; set; }
         public long IdTutor { get; set; }
-        public int OpcionDeVisualizacion { get; set; }
+        public TipoAccion TipoAccion { get; set; }
+        public bool Resultado { get; set; }
 
         public frmControl()
         {
@@ -39,44 +40,52 @@ namespace Bja.Registro
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (IdSeleccionado > 0)
+            if (TipoControl == TipoControl.Madre)
             {
-                if (Tipo == false)
-                {
-                    ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-                    
-                    _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
-                    dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
-                    txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);
-                    txtTalla.Text = Convert.ToString(_controlmadre.TallaCm);
-                    dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
-                    lblNumeroControl.Content = _controlmadre.NumeroControl;
-                    if (_controlmadre.IdTutor > 0)
-                        rdbTutor.IsChecked = true;
-                    else
-                        rdbMadre.IsChecked = true;
-                }
-                else
-                {
-                    ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
+                ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-                    _controlmenor = modelocontrolmenor.Recuperar(IdSeleccionado);
-                    dtpFechaProgramada.SelectedDate = _controlmenor.FechaProgramada;
-                    txtPeso.Text = Convert.ToString(_controlmenor.PesoKg);
-                    txtTalla.Text = Convert.ToString(_controlmenor.TallaCm);
-                    dtpFechaControl.SelectedDate = _controlmenor.FechaControl;
-                    lblNumeroControl.Content = _controlmenor.NumeroControl;
-                    if (_controlmenor.IdTutor > 0)
-                        rdbTutor.IsChecked = true;
-                    else
-                        rdbMadre.IsChecked = true;
-                }
+                _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
+                dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
+                txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);
+                txtTalla.Text = Convert.ToString(_controlmadre.TallaCm);
+                dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+                lblNumeroControl.Content = _controlmadre.NumeroControl;
+                txtObservaciones.Text = _controlmadre.Observaciones;
+                if (_controlmadre.IdTutor > 0)
+                    rdbTutor.IsChecked = true;
+                else
+                    rdbMadre.IsChecked = true;
+            }
+            else
+            {
+                ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
+
+                _controlmenor = modelocontrolmenor.Recuperar(IdSeleccionado);
+                dtpFechaProgramada.SelectedDate = _controlmenor.FechaProgramada;
+                txtPeso.Text = Convert.ToString(_controlmenor.PesoKg);
+                txtTalla.Text = Convert.ToString(_controlmenor.TallaCm);
+                dtpFechaControl.SelectedDate = _controlmenor.FechaControl;
+                lblNumeroControl.Content = _controlmenor.NumeroControl;
+                txtObservaciones.Text = _controlmenor.Observaciones;
+                if (_controlmenor.IdTutor > 0)
+                    rdbTutor.IsChecked = true;
+                else
+                    rdbMadre.IsChecked = true;
+            }
+            if (TipoAccion == TipoAccion.Detalle)
+            {
+                dtpFechaProgramada.IsEnabled = false;
+                txtTalla.IsEnabled = false;
+                txtPeso.IsEnabled = false;
+                dtpFechaControl.IsEnabled = false;
+                txtObservaciones.IsEnabled = false;
+                cmdAceptar.IsEnabled = false;
             }
         }
 
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
         {
-            if (Tipo == false)
+            if (TipoControl == TipoControl.Madre)
             {
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
@@ -85,6 +94,7 @@ namespace Bja.Registro
                 _controlmadre.PesoKg = Convert.ToSingle(txtPeso.Text);
                 _controlmadre.TallaCm = Convert.ToInt32(txtTalla.Text);
                 _controlmadre.FechaControl = dtpFechaControl.SelectedDate.Value;
+                _controlmadre.Observaciones = txtObservaciones.Text;
 
                 modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
             }
@@ -98,15 +108,20 @@ namespace Bja.Registro
                 _controlmenor.PesoKg = Convert.ToSingle(txtPeso.Text);
                 _controlmenor.TallaCm = Convert.ToInt32(txtTalla.Text);
                 _controlmenor.FechaControl = dtpFechaControl.SelectedDate.Value;
+                _controlmenor.Observaciones = txtObservaciones.Text;
 
                 modelocontrolmenor.Editar(IdSeleccionado, _controlmenor);
             }
+
+            Resultado = true;
 
             this.Close();
         }
 
         private void cmdCancelar_Click(object sender, RoutedEventArgs e)
         {
+            Resultado = false;
+
             this.Close();
         }
 

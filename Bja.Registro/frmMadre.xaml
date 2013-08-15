@@ -25,7 +25,7 @@
         <DatePicker x:Name="dtpFechaNacimiento" HorizontalAlignment="Left" Margin="186,177,0,0" VerticalAlignment="Top" Width="114"/>
         <Label x:Name="lblLugarNacimiento" Content="Lugar de Nacimiento" HorizontalAlignment="Left" Margin="52,203,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtLugarNacimiento" HorizontalAlignment="Left" Height="23" Margin="186,206,0,0" VerticalAlignment="Top" Width="486"/>
-        <CheckBox x:Name="chkDefuncion"  Content="Fallecida" HorizontalAlignment="Left" Margin="186,234,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDefuncion"  Content="Fallecida" HorizontalAlignment="Left" Margin="186,234,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Label x:Name="lblObservaciones" Content="Observaciones" HorizontalAlignment="Left" Margin="86,252,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtObservaciones" HorizontalAlignment="Left" Height="90" Margin="186,255,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" Width="486" VerticalScrollBarVisibility="Visible"/>
         <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="500,368,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
