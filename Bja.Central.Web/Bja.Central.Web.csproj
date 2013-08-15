@@ -165,7 +165,7 @@
     <Compile Include="Controllers\AsignacionesMedicoController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EncargadosController.cs" />
-    <Compile Include="Controllers\EstablecimientosMedicoController.cs" />
+    <Compile Include="Controllers\EstablecimientosSaludController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Controllers\MunicipiosController.cs" />
@@ -326,11 +326,11 @@
     <Content Include="Views\Municipios\Create.cshtml" />
     <Content Include="Views\Municipios\Edit.cshtml" />
     <Content Include="Views\Municipios\Delete.cshtml" />
-    <Content Include="Views\EstablecimientosMedico\Index.cshtml" />
-    <Content Include="Views\EstablecimientosMedico\Details.cshtml" />
-    <Content Include="Views\EstablecimientosMedico\Create.cshtml" />
-    <Content Include="Views\EstablecimientosMedico\Edit.cshtml" />
-    <Content Include="Views\EstablecimientosMedico\Delete.cshtml" />
+    <Content Include="Views\EstablecimientosSalud\Index.cshtml" />
+    <Content Include="Views\EstablecimientosSalud\Details.cshtml" />
+    <Content Include="Views\EstablecimientosSalud\Create.cshtml" />
+    <Content Include="Views\EstablecimientosSalud\Edit.cshtml" />
+    <Content Include="Views\EstablecimientosSalud\Delete.cshtml" />
     <Content Include="Views\AsignacionesMedico\Index.cshtml" />
     <Content Include="Views\AsignacionesMedico\Details.cshtml" />
     <Content Include="Views\AsignacionesMedico\Create.cshtml" />

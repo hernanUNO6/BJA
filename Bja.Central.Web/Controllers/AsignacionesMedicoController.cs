@@ -42,7 +42,7 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres");
-            ViewBag.IdEstablecimientoMedico = new SelectList(db.EstablecimientosMedico, "Id", "Codigo");
+            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo");
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Bja.Central.Web.Controllers
             }
 
             ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoMedico = new SelectList(db.EstablecimientosMedico, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
+            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
             return View(asignacionmedico);
         }
 
@@ -75,7 +75,7 @@ namespace Bja.Central.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoMedico = new SelectList(db.EstablecimientosMedico, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
+            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
             return View(asignacionmedico);
         }
 
@@ -92,7 +92,7 @@ namespace Bja.Central.Web.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoMedico = new SelectList(db.EstablecimientosMedico, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
+            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
             return View(asignacionmedico);
         }
 
