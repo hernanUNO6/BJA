@@ -14,16 +14,6 @@ namespace Bja.Modelo
     {
         private BjaContext db = new BjaContext();
 
-        public List<Provincia> GetProvinciasPorDepartamento(string idDepto)
-        {
-            Int64 Identificador = Convert.ToInt64(idDepto);
-
-            List<Provincia> abcd = (from p in db.Provincias
-                                    where p.IdDepartamento == Identificador
-                                    select p).ToList();
-            return abcd;
-        }
-
         public List<Municipio> Listar()
         {
             var municipio = db.Municipios.Include(m => m.Provincia);
@@ -57,6 +47,16 @@ namespace Bja.Modelo
             Municipio municipio = this.Buscar(id);
             db.Municipios.Remove(municipio);
             db.SaveChanges();
+        }
+
+        public List<Provincia> GetProvinciasPorDepartamento(string idDepto)
+        {
+            Int64 Identificador = Convert.ToInt64(idDepto);
+
+            List<Provincia> provs = (from p in db.Provincias
+                                    where p.IdDepartamento == Identificador
+                                    select p).ToList();
+            return provs;
         }
     }
 }

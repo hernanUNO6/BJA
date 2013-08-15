@@ -16,42 +16,11 @@
     <input type="submit" value="Buscar" id="Buscar" class="btn btn-primary" />
 </form>
 <br />
-@{
-    if (ViewBag.paginaActual == null)
-    {
-        ViewBag.paginaActual = 1;
-    }
-    
-    if (ViewBag.criterioBusqueda == null)
-    {
-        ViewBag.criterioBusqueda = "";
-    }    
-    
-    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Primero" })
-    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Anterior" })
-    @Html.Name("página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name("  ")
-    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Siguiente" })
-    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Último" })
-    @Html.Name("Total registros ") @ViewBag.totalRegistros
-}
-
-
-
-
 
 <div class="datagrid">
 <table class="table table-striped">
     <thead>
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.IdSesion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaUltimaTransaccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Nombres)
         </th>
@@ -91,15 +60,6 @@
 @foreach (var item in Model) {
     <tbody>
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.IdSesion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaUltimaTransaccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaRegistro)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Nombres)
         </td>
@@ -146,6 +106,26 @@
     </tr>
     </tbody>
 }
-
 </table>
+</div>
+
+<div class="pagina">
+@{
+    if (ViewBag.paginaActual == null)
+    {
+        ViewBag.paginaActual = 1;
+    }
+    
+    if (ViewBag.criterioBusqueda == null)
+    {
+        ViewBag.criterioBusqueda = "";
+    }
+    
+    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Primero" })
+    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Anterior" })
+    @Html.Name("página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name("  ")
+    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Siguiente" })
+    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Último" })
+    @Html.Name("Total registros ") @ViewBag.totalRegistros
+}
 </div>

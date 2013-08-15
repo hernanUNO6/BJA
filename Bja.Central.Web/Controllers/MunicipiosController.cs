@@ -63,7 +63,7 @@ namespace Bja.Central.Web.Controllers
                 modMunicipio.Crear(municipio);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdDepartamento = new SelectList(modProvincia.Listar(), "Id", "Codigo", municipio.IdProvincia);
+            ViewBag.IdDepartamento = new SelectList(modProvincia.Listar(), "Id", "Descripcion", municipio.IdProvincia);
             return View(municipio);
         }
 
@@ -77,7 +77,7 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdDepartamento = new SelectList(modProvincia.Listar(), "Id", "Codigo", municipio.IdProvincia);
+            ViewBag.IdProvincia = new SelectList(modProvincia.Listar(), "Id", "Descripcion", municipio.IdProvincia);
             return View(municipio);
         }
 
@@ -96,7 +96,7 @@ namespace Bja.Central.Web.Controllers
                 modMunicipio.Editar(municipio);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdDepartamento = new SelectList(modProvincia.Listar(), "Id", "Codigo", municipio.IdProvincia);
+            ViewBag.IdProvincia = new SelectList(modProvincia.Listar(), "Id", "Descripcion", municipio.IdProvincia);
             return View(municipio);
         }
 

@@ -12,19 +12,25 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#IdDepartamento").change(function () {
-            fillCombo("IdProvincia", $("#IdDepartamento").val());
+            fillCombo("cboIdProvincia", $("#IdDepartamento").val());
         });
 
         function fillCombo(updateId, value) {
             $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>--Selecione Provincia--</option>");
+                    $('#IdProvincia').val("");
                     $.each(myData, function (i, item) {
                         //alert(item.Descripcion);
-                        $("#" + updateId).append("<option id='" + item.Id + "'>" + item.Descripcion + "</option>");
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
                     })
                 });
         }
+
+        $("#cboIdProvincia").change(function () {
+            $('#IdProvincia').val($('#cboIdProvincia').val());
+        })
     });
 </script>    
 }
@@ -61,7 +67,9 @@
             @Html.LabelFor(model => model.IdProvincia, "Provincia")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdProvincia", String.Empty)
+            @*@Html.DropDownList("IdProvincia", String.Empty)*@
+            <select id="cboIdProvincia"></select>
+            @Html.EditorFor(model => model.IdProvincia)
             @Html.ValidationMessageFor(model => model.IdProvincia)
         </div>
 
