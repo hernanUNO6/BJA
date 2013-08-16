@@ -6,21 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bja.Entidades;
-using Bja.AccesoDatos;
+using Bja.Modelo;
 
 namespace Bja.Central.Web.Controllers
 {
     public class AsignacionesMedicoController : Controller
-    {
-        private BjaContext db = new BjaContext();
+    {        
+        private ModeloEstablecimientoSalud modEstableSalud = new ModeloEstablecimientoSalud();
+        private ModeloMedico modMedico = new ModeloMedico();
+        private ModeloAsignacionMedico modAsignacionMedico = new ModeloAsignacionMedico();
 
         //
         // GET: /AsignacionesMedico/
 
         public ActionResult Index()
         {
-            var asignacionesmedico = db.AsignacionesMedico.Include(a => a.Medico).Include(a => a.EstablecimientoSalud);
-            return View(asignacionesmedico.ToList());
+            return View(modAsignacionMedico.Listar());
         }
 
         //
@@ -28,7 +29,7 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            AsignacionMedico asignacionmedico = db.AsignacionesMedico.Find(id);
+            AsignacionMedico asignacionmedico = modAsignacionMedico.Buscar(id);
             if (asignacionmedico == null)
             {
                 return HttpNotFound();
@@ -41,8 +42,11 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres");
-            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo");
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion");
+            
+            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo");
+            ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres");
             return View();
         }
 
@@ -50,18 +54,21 @@ namespace Bja.Central.Web.Controllers
         // POST: /AsignacionesMedico/Create
 
         [HttpPost]
-        public ActionResult Create(AsignacionMedico asignacionmedico)
+        public ActionResult Create(AsignacionMedico asignacionMedico)
         {
+            asignacionMedico.IdSesion = 1;
+            asignacionMedico.FechaUltimaTransaccion = System.DateTime.Now;
+            asignacionMedico.FechaRegistro = System.DateTime.Now;
+
             if (ModelState.IsValid)
             {
-                db.AsignacionesMedico.Add(asignacionmedico);
-                db.SaveChanges();
+                modAsignacionMedico.Crear(asignacionMedico);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
-            return View(asignacionmedico);
+            ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres", asignacionMedico.IdMedico);
+            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
+            return View(asignacionMedico);
         }
 
         //
@@ -69,31 +76,34 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Edit(long id = 0)
         {
-            AsignacionMedico asignacionmedico = db.AsignacionesMedico.Find(id);
-            if (asignacionmedico == null)
+            AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
+            if (asignacionMedico == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
-            return View(asignacionmedico);
+            ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres", asignacionMedico.IdMedico);
+            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
+            return View(asignacionMedico);
         }
 
         //
         // POST: /AsignacionesMedico/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(AsignacionMedico asignacionmedico)
+        public ActionResult Edit(AsignacionMedico asignacionMedico)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(asignacionmedico).State = EntityState.Modified;
-                db.SaveChanges();
+                asignacionMedico.IdSesion = 1;
+                asignacionMedico.FechaUltimaTransaccion = System.DateTime.Now;
+                asignacionMedico.FechaRegistro = System.DateTime.Now;
+
+                modAsignacionMedico.Editar(asignacionMedico);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMedico = new SelectList(db.Medicos, "Id", "Nombres", asignacionmedico.IdMedico);
-            ViewBag.IdEstablecimientoSalud = new SelectList(db.EstablecimientosSalud, "Id", "Codigo", asignacionmedico.IdEstablecimientoSalud);
-            return View(asignacionmedico);
+            ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres", asignacionMedico.IdMedico);
+            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
+            return View(asignacionMedico);
         }
 
         //
@@ -101,12 +111,12 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Delete(long id = 0)
         {
-            AsignacionMedico asignacionmedico = db.AsignacionesMedico.Find(id);
-            if (asignacionmedico == null)
+            AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
+            if (asignacionMedico == null)
             {
                 return HttpNotFound();
             }
-            return View(asignacionmedico);
+            return View(asignacionMedico);
         }
 
         //
@@ -115,16 +125,42 @@ namespace Bja.Central.Web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(long id)
         {
-            AsignacionMedico asignacionmedico = db.AsignacionesMedico.Find(id);
-            db.AsignacionesMedico.Remove(asignacionmedico);
-            db.SaveChanges();
+            modAsignacionMedico.Eliminar(id);
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
-            base.Dispose(disposing);
+            
         }
+
+        [ActionName("ProvinciasPorDepartamento")]
+        public ActionResult GetProvinciasPorDepartamento(string id)
+        {
+            ModeloProvincia modProvincia = new ModeloProvincia();
+
+            List<Provincia> Datos = modProvincia.GetProvinciasPorDepartamento(id);
+            var myData = (from d in Datos select new { d.Id, d.Descripcion });
+            return Json(myData, JsonRequestBehavior.AllowGet);
+        }
+
+        [ActionName("MunicipiosPorProvincia")]
+        public ActionResult GetMunicipiosPorProvincias(string id)
+        {
+            ModeloMunicipio modMunicipio = new ModeloMunicipio();
+
+            List<Municipio> Datos = modMunicipio.GetMunicipiosPorProvincias(id);
+            var myData = (from d in Datos select new { d.Id, d.Descripcion });
+            return Json(myData, JsonRequestBehavior.AllowGet);
+        }
+
+        [ActionName("EstablecimientosSaludPorMunicipio")]
+        public ActionResult GetEstablecimientosSaludPorMunicipio(string id)
+        {
+            List<EstablecimientoSalud> Datos = modEstableSalud.GetEstablecimientosSaludPorMunicipio(id);
+            var myData = (from d in Datos select new { d.Id, d.Nombre });
+            return Json(myData, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

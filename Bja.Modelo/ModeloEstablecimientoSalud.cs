@@ -49,14 +49,14 @@ namespace Bja.Modelo
             db.SaveChanges();
         }
 
-        public List<Municipio> GetMunicipiosPorProvincias(string idProvincia)
+        public List<EstablecimientoSalud> GetEstablecimientosSaludPorMunicipio(string idMunicipio)
         {
-            Int64 Identificador = Convert.ToInt64(idProvincia);
+            Int64 Identificador = Convert.ToInt64(idMunicipio);
 
-            List<Municipio> provs = (from m in db.Municipios
-                                     where m.IdProvincia == Identificador
-                                     select m).ToList();
-            return provs;
+            List<EstablecimientoSalud> estSalud = (from es in db.EstablecimientosSalud
+                                                   where es.IdMunicipio == Identificador
+                                                   select es).ToList();
+            return estSalud;
         }
     }
 }

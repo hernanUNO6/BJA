@@ -16,8 +16,8 @@ namespace Bja.Modelo
 
         public List<Medico> Listar()
         {
-            //return db.Medicos.ToList();
-            return db.Medicos.OrderBy(p => p.Id).Skip(2).Take(5).ToList();
+            return db.Medicos.ToList();
+            //return db.Medicos.OrderBy(p => p.Id).Skip(2).Take(5).ToList();
         }
 
         public List<Medico> Listar(string criterio)

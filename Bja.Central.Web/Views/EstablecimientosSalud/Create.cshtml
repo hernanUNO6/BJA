@@ -12,14 +12,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#IdDepartamento").change(function () {
-            fillCombo("cboIdProvincia", $("#IdDepartamento").val());
+            fillComboDepto("cboIdProvincia", $("#IdDepartamento").val());
         });
 
         $("#cboIdProvincia").change(function () {
-            fillCombo2("cboIdMunicipio", $("#cboIdProvincia").val());
+            fillComboProvincia("cboIdMunicipio", $("#cboIdProvincia").val());
         });
 
-        function fillCombo(updateId, value) {
+        function fillComboDepto(updateId, value) {
             $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
@@ -32,7 +32,7 @@
                 });
         }
 
-        function fillCombo2(updateId, value) {
+        function fillComboProvincia(updateId, value) {
             $.getJSON('@Url.Action("MunicipiosPorProvincia")' + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
@@ -49,11 +49,9 @@
             $('#IdProvincia').val($('#cboIdProvincia').val());
         })
 
-
         $("#cboIdMunicipio").change(function () {
             $('#IdMunicipio').val($('#cboIdMunicipio').val());
         })
-
     });
 </script>    
 }
@@ -102,7 +100,7 @@
         <label for="Departamento">Departamento</label>
             @Html.DropDownList("IdDepartamento", String.Empty)
 
-        <label for="Provincia">Provincia</label>
+        <label>Provincia</label>
             <select id="cboIdProvincia"></select>
 
         <div class="editor-label">
@@ -116,14 +114,11 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
