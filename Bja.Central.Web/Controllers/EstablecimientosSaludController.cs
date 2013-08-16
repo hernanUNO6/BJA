@@ -16,7 +16,7 @@ namespace Bja.Central.Web.Controllers
         private ModeloMunicipio modMunicipio = new ModeloMunicipio();
 
         //
-        // GET: /EstablecimientosMedico/
+        // GET: /EstablecimientosSalud/
 
         public ActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // GET: /EstablecimientosMedico/Details/5
+        // GET: /EstablecimientosSalud/Details/5
 
         public ActionResult Details(long id = 0)
         {
@@ -37,7 +37,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // GET: /EstablecimientosMedico/Create
+        // GET: /EstablecimientosSalud/Create
 
         public ActionResult Create()
         {
@@ -49,7 +49,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // POST: /EstablecimientosMedico/Create
+        // POST: /EstablecimientosSalud/Create
 
         [HttpPost]
         public ActionResult Create(EstablecimientoSalud estableSalud)
@@ -69,7 +69,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // GET: /EstablecimientosMedico/Edit/5
+        // GET: /EstablecimientosSalud/Edit/5
 
         public ActionResult Edit(long id = 0)
         {
@@ -83,7 +83,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // POST: /EstablecimientosMedico/Edit/5
+        // POST: /EstablecimientosSalud/Edit/5
 
         [HttpPost]
         public ActionResult Edit(EstablecimientoSalud estableSalud)
@@ -102,7 +102,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // GET: /EstablecimientosMedico/Delete/5
+        // GET: /EstablecimientosSalud/Delete/5
 
         public ActionResult Delete(long id = 0)
         {
@@ -115,7 +115,7 @@ namespace Bja.Central.Web.Controllers
         }
 
         //
-        // POST: /EstablecimientosMedico/Delete/5
+        // POST: /EstablecimientosSalud/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(long id)
@@ -132,7 +132,9 @@ namespace Bja.Central.Web.Controllers
         [ActionName("ProvinciasPorDepartamento")]
         public ActionResult GetProvinciasPorDepartamento(string id)
         {
-            List<Provincia> Datos = modMunicipio.GetProvinciasPorDepartamento(id);
+            ModeloProvincia modProvincia = new ModeloProvincia();
+
+            List<Provincia> Datos = modProvincia.GetProvinciasPorDepartamento(id);
             var myData = (from d in Datos select new { d.Id, d.Descripcion });
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
@@ -140,7 +142,7 @@ namespace Bja.Central.Web.Controllers
         [ActionName("MunicipiosPorProvincia")]
         public ActionResult GetMunicipiosPorProvincias(string id)
         {
-            List<Municipio> Datos = modEstableSalud.GetMunicipiosPorProvincias(id);
+            List<Municipio> Datos = modMunicipio.GetMunicipiosPorProvincias(id);
             var myData = (from d in Datos select new { d.Id, d.Descripcion });
             return Json(myData, JsonRequestBehavior.AllowGet);
         }

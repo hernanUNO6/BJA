@@ -48,5 +48,15 @@ namespace Bja.Modelo
             db.Provincias.Remove(provincia);
             db.SaveChanges();
         }
+
+        public List<Provincia> GetProvinciasPorDepartamento(string idDepto)
+        {
+            Int64 Identificador = Convert.ToInt64(idDepto);
+
+            List<Provincia> provs = (from p in db.Provincias
+                                     where p.IdDepartamento == Identificador
+                                     select p).ToList();
+            return provs;
+        }
     }
 }

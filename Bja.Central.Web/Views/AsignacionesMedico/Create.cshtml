@@ -5,6 +5,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section PageScripts{
+<script src="/Scripts/jquery-ui-1.8.20.js"></script>
+<script src="/Scripts/jquery.ui.datepicker-es.js"></script>
+<script src="/Scripts/jquery.maskedinput.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#IdDepartamento").change(function () {
+            fillComboProvincia("cboIdProvincia", $("#IdDepartamento").val());
+            $("#cboIdMunicipio").empty();
+            $("#cboIdEstablecimientoSalud").empty();
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        $("#cboIdProvincia").change(function () {
+            fillComboMunicipio("cboIdMunicipio", $("#cboIdProvincia").val());
+            $("#cboIdEstablecimientoSalud").empty();
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        $("#cboIdMunicipio").change(function () {
+            fillComboEstablecimientoSalud("cboIdEstablecimientoSalud", $("#cboIdMunicipio").val());
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        function fillComboProvincia(updateId, value) {
+            $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>--Selecione Provincia--</option>");
+                    $('#IdProvincia').val("");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        function fillComboMunicipio(updateId, value) {
+            $.getJSON('@Url.Action("MunicipiosPorProvincia")' + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>--Selecione Municipio--</option>");
+                    $('#IdMunicipio').val("");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        function fillComboEstablecimientoSalud(updateId, value) {
+            $.getJSON('@Url.Action("EstablecimientosSaludPorMunicipio")' + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>--Selecione Establecimiento de Salud--</option>");
+                    $('#IdProvincia').val("");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Nombre + "</option>");
+                    })
+                });
+        }
+
+        $("#cboIdEstablecimientoSalud").change(function () {
+            $('#IdEstablecimientoSalud').val($('#cboIdEstablecimientoSalud').val());
+        })
+    });
+</script>    
+}
+
 <h2>Create</h2>
 
 @using (Html.BeginForm()) {
@@ -13,28 +80,31 @@
     <fieldset>
         <legend>AsignacionMedico</legend>
 
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", String.Empty)
+
+        <label>Provincia</label>
+            <select id="cboIdProvincia"></select>
+
+        <label>Municipio</label>
+            <select id="cboIdMunicipio"></select>
+
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
+            @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
+            @*@Html.DropDownList("IdEstablecimientoSalud", String.Empty)*@
+            <select id="cboIdEstablecimientoSalud"></select>
+            @Html.EditorFor(model => model.IdEstablecimientoSalud)
+            @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
+            @Html.LabelFor(model => model.IdMedico, "Medico")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaRegistro)
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
+            @Html.DropDownList("IdMedico", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdMedico)
         </div>
 
         <div class="editor-label">
@@ -61,31 +131,12 @@
             @Html.ValidationMessageFor(model => model.Observaciones)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdMedico, "Medico")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdMedico", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdMedico)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdEstablecimientoSalud", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
-        </div>
-
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
