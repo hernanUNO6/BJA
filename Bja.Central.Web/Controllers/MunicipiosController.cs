@@ -73,6 +73,13 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Edit(long id = 0)
         {
             Municipio municipio = modMunicipio.Buscar(id);
+
+            ModeloProvincia modProvincia = new ModeloProvincia();
+            municipio.Provincia = modProvincia.Buscar(municipio.IdProvincia);
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion", municipio.Provincia.IdDepartamento);
+
             if (municipio == null)
             {
                 return HttpNotFound();
@@ -106,6 +113,10 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Delete(long id = 0)
         {
             Municipio municipio = modMunicipio.Buscar(id);
+
+            ModeloProvincia modProvincia = new ModeloProvincia();
+            municipio.Provincia = modProvincia.Buscar(municipio.IdProvincia);
+
             if (municipio == null)
             {
                 return HttpNotFound();

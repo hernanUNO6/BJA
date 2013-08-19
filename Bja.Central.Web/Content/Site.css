@@ -1019,15 +1019,15 @@ input[type="text"]:focus, input[type="textarea"]:focus, select:focus {
 
 /* line 909, ../sass/Site.scss */
 table {
-  max-width: 100%;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* line 916, ../sass/Site.scss */
+/* line 917, ../sass/Site.scss */
 .table {
-  width: 100%;
   margin-bottom: 20px;
   font-size: 11px;
 }
@@ -1058,6 +1058,7 @@ table {
 .pagina {
   background-color: #eee;
   padding: 5px;
+  font-weight: bold;
   border: 1px solid #ccc;
   border-right: none;
   border-left: none;

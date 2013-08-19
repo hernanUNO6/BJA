@@ -27,12 +27,16 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            Provincia proovincia = modProvincia.Buscar(id);
-            if (proovincia == null)
+            Provincia provincia = modProvincia.Buscar(id);
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            provincia.Departamento = modDepto.Buscar(provincia.IdDepartamento);
+
+            if (provincia == null)
             {
                 return HttpNotFound();
             }
-            return View(proovincia);
+            return View(provincia);
         }
 
         //
@@ -109,6 +113,10 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Delete(long id = 0)
         {
             Provincia provincia = modProvincia.Buscar(id);
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            provincia.Departamento = modDepto.Buscar(provincia.IdDepartamento);
+
             if (provincia == null)
             {
                 return HttpNotFound();

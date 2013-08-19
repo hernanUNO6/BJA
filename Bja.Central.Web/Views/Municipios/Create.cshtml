@@ -19,7 +19,7 @@
             $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Provincia--</option>");
+                    $("#" + updateId).append("<option value=''>... Seleccione Provincia ...</option>");
                     $('#IdProvincia').val("");
                     $.each(myData, function (i, item) {
                         //alert(item.Descripcion);
@@ -36,7 +36,7 @@
 }
 
 
-<h2>Create</h2>
+<h2>Registro de Municipio</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -45,7 +45,14 @@
         <legend>Municipio</legend>
 
         <label>Departamento</label>
-            @Html.DropDownList("IdDepartamento", String.Empty)
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
+
+        <div class="editor-field">
+            @*@Html.DropDownList("IdProvincia", String.Empty)*@
+            <select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>
+            @Html.TextBoxFor(model => model.IdProvincia, new {style="width: 1px; visibility:hidden" })
+            @Html.ValidationMessageFor(model => model.IdProvincia)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Codigo)
@@ -65,12 +72,6 @@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.IdProvincia, "Provincia")
-        </div>
-        <div class="editor-field">
-            @*@Html.DropDownList("IdProvincia", String.Empty)*@
-            <select id="cboIdProvincia"></select>
-            @Html.EditorFor(model => model.IdProvincia)
-            @Html.ValidationMessageFor(model => model.IdProvincia)
         </div>
 
         <p>

@@ -8,59 +8,36 @@
 @section PageScripts{
 <script src="/Scripts/jquery-ui-1.8.20.js"></script>
 <script src="/Scripts/jquery.ui.datepicker-es.js"></script>
-<script src="/Scripts/jquery.maskedinput.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#IdDepartamento").change(function () {
-            fillComboProvincia("cboIdProvincia", $("#IdDepartamento").val());
+            fillCombo("cboIdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
             $("#cboIdMunicipio").empty();
+            $("#cboIdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
             $("#cboIdEstablecimientoSalud").empty();
+            $("#cboIdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
             $('#IdEstablecimientoSalud').val("");
         });
 
         $("#cboIdProvincia").change(function () {
-            fillComboMunicipio("cboIdMunicipio", $("#cboIdProvincia").val());
+            fillCombo("cboIdMunicipio", $("#cboIdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
             $("#cboIdEstablecimientoSalud").empty();
+            $("#cboIdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
             $('#IdEstablecimientoSalud').val("");
         });
 
         $("#cboIdMunicipio").change(function () {
-            fillComboEstablecimientoSalud("cboIdEstablecimientoSalud", $("#cboIdMunicipio").val());
+            fillCombo("cboIdEstablecimientoSalud", $("#cboIdMunicipio").val(), '@Url.Action("EstablecimientosSaludPorMunicipio")', "... Seleccione Establecimiento de Salud ...");
             $('#IdEstablecimientoSalud').val("");
-        });
+        });        
 
-        function fillComboProvincia(updateId, value) {
-            $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
+        function fillCombo(updateId, value, urlPath, msgSeleccion) {
+            $.getJSON(urlPath + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Provincia--</option>");
-                    $('#IdProvincia').val("");
+                    $("#" + updateId).append("<option value=''>" + msgSeleccion + "</option>");
                     $.each(myData, function (i, item) {
                         $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
-                    })
-                });
-        }
-
-        function fillComboMunicipio(updateId, value) {
-            $.getJSON('@Url.Action("MunicipiosPorProvincia")' + "/" + value, {},
-                function (myData) {
-                    $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Municipio--</option>");
-                    $('#IdMunicipio').val("");
-                    $.each(myData, function (i, item) {
-                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
-                    })
-                });
-        }
-
-        function fillComboEstablecimientoSalud(updateId, value) {
-            $.getJSON('@Url.Action("EstablecimientosSaludPorMunicipio")' + "/" + value, {},
-                function (myData) {
-                    $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Establecimiento de Salud--</option>");
-                    $('#IdProvincia').val("");
-                    $.each(myData, function (i, item) {
-                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Nombre + "</option>");
                     })
                 });
         }
@@ -68,11 +45,16 @@
         $("#cboIdEstablecimientoSalud").change(function () {
             $('#IdEstablecimientoSalud').val($('#cboIdEstablecimientoSalud').val());
         })
+
+        $(function () {
+            $("#FechaInicio").datepicker($.datepicker.regional["es"]);
+            $("#FechaFin").datepicker($.datepicker.regional["es"]);
+        });
     });
 </script>    
 }
 
-<h2>Create</h2>
+<h2>Asiganción de Médicos</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -81,21 +63,21 @@
         <legend>AsignacionMedico</legend>
 
         <label for="Departamento">Departamento</label>
-            @Html.DropDownList("IdDepartamento", String.Empty)
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ...")
 
         <label>Provincia</label>
-            <select id="cboIdProvincia"></select>
+            <select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>
 
         <label>Municipio</label>
-            <select id="cboIdMunicipio"></select>
+            <select id="cboIdMunicipio"><option>... Seleccione Municipio ...</option></select>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
         </div>
         <div class="editor-field">
             @*@Html.DropDownList("IdEstablecimientoSalud", String.Empty)*@
-            <select id="cboIdEstablecimientoSalud"></select>
-            @Html.EditorFor(model => model.IdEstablecimientoSalud)
+            <select id="cboIdEstablecimientoSalud"><option>... Seleccione Establecimiento de Salud ...</option></select>
+            @Html.TextBoxFor(model => model.IdEstablecimientoSalud, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 
@@ -111,7 +93,7 @@
             @Html.LabelFor(model => model.FechaInicio)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FechaInicio)
+            @Html.TextBoxFor(model => model.FechaInicio, new {style="width:120px;", @readonly = "readonly", maxlength=10})
             @Html.ValidationMessageFor(model => model.FechaInicio)
         </div>
 
@@ -119,7 +101,7 @@
             @Html.LabelFor(model => model.FechaFin)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FechaFin)
+            @Html.TextBoxFor(model => model.FechaFin, new {style="width:120px;", @readonly = "readonly", maxlength=10})
             @Html.ValidationMessageFor(model => model.FechaFin)
         </div>
 
@@ -127,7 +109,7 @@
             @Html.LabelFor(model => model.Observaciones)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Observaciones)
+            @Html.TextAreaFor(model => model.Observaciones)
             @Html.ValidationMessageFor(model => model.Observaciones)
         </div>
 

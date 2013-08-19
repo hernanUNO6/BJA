@@ -11,7 +11,7 @@
 <fieldset>
     <legend>Municipio</legend>
 
-    <div class="display-label">
+    @*<div class="display-label">
          @Html.DisplayNameFor(model => model.IdSesion)
     </div>
     <div class="display-field">
@@ -30,6 +30,13 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.FechaRegistro)
+    </div>*@
+
+    <div class="display-label">
+         Provincia
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Provincia.Descripcion)
     </div>
 
     <div class="display-label">
@@ -46,12 +53,6 @@
         @Html.DisplayFor(model => model.Descripcion)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Provincia.Codigo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Provincia.Codigo)
-    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

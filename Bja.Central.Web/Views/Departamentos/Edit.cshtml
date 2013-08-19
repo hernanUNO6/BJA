@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Editar Departamento</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -14,30 +14,6 @@
         <legend>Departamento</legend>
 
         @Html.HiddenFor(model => model.Id)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaRegistro)
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Codigo)

@@ -907,14 +907,14 @@ input[type="text"]:focus, input[type="textarea"]:focus, select:focus {
 
 
 table {
-  max-width: 100%;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-left: auto; 
+  margin-right: auto;
 }
 
 .table {
-  width: 100%;
   margin-bottom: 20px;
   font-size: 11px;
 }
@@ -941,6 +941,7 @@ table {
 .pagina {
   background-color: #eee;
   padding: 5px;
+  font-weight: bold;
   border: 1px solid #ccc;
   border-right: none;
   border-left: none;

@@ -5,7 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+@section PageScripts{
+<script src="/Scripts/jquery-ui-1.8.20.js"></script>
+<script src="/Scripts/jquery.ui.datepicker-es.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#IdDepartamento").change(function () {
+            fillCombo("IdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
+            $("#IdMunicipio").empty();
+            $("#IdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
+            $("#IdEstablecimientoSalud").empty();
+            $("#IdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        $("#IdProvincia").change(function () {
+            fillCombo("IdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            $("#IdEstablecimientoSalud").empty();
+            $("#IdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        $("#IdMunicipio").change(function () {
+            fillCombo("IdEstablecimientoSalud", $("#IdMunicipio").val(), '@Url.Action("EstablecimientosSaludPorMunicipio")', "... Seleccione Establecimiento de Salud ...");
+            $('#IdEstablecimientoSalud').val("");
+        });        
+
+        function fillCombo(updateId, value, urlPath, msgSeleccion) {
+            $.getJSON(urlPath + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>" + msgSeleccion + "</option>");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        $("#cboIdEstablecimientoSalud").change(function () {
+            $('#IdEstablecimientoSalud').val($('#cboIdEstablecimientoSalud').val());
+        })
+
+        $(function () {
+            $("#FechaInicio").datepicker($.datepicker.regional["es"]);
+            $("#FechaFin").datepicker($.datepicker.regional["es"]);
+        });
+    });
+</script>    
+}
+
+<h2>Editar Asignación</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -16,34 +65,10 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaRegistro)
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.FechaInicio)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FechaInicio)
+            @Html.TextBoxFor(model => model.FechaInicio, new {style="width:120px;", @readonly = "readonly", maxlength=10,  @Value = Model.FechaInicio.ToString("dd/MM/yyyy")})
             @Html.ValidationMessageFor(model => model.FechaInicio)
         </div>
 
@@ -51,7 +76,8 @@
             @Html.LabelFor(model => model.FechaFin)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FechaFin)
+            @Html.TextBoxFor(model => model.FechaFin, new {style="width:120px;", @readonly = "readonly", maxlength=10,  @Value = Model.FechaFin.ToString("dd/MM/yyyy")})
+                                                   
             @Html.ValidationMessageFor(model => model.FechaFin)
         </div>
 
@@ -59,8 +85,25 @@
             @Html.LabelFor(model => model.Observaciones)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Observaciones)
+            @Html.TextAreaFor(model => model.Observaciones)
             @Html.ValidationMessageFor(model => model.Observaciones)
+        </div>
+
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ...")
+
+        <label>Provincia</label>
+            @Html.DropDownList("IdProvincia", "... Seleccione Provincia ....")
+
+        <label>Municipio</label>
+            @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdEstablecimientoSalud", "... Seleccione Establecimiento de Salud ...")
+            @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 
         <div class="editor-label">
@@ -69,14 +112,6 @@
         <div class="editor-field">
             @Html.DropDownList("IdMedico", String.Empty)
             @Html.ValidationMessageFor(model => model.IdMedico)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdEstablecimientoSalud", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 
         <p>

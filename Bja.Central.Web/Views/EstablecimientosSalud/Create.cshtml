@@ -7,47 +7,31 @@
 
 @section PageScripts{
 <script src="/Scripts/jquery-ui-1.8.20.js"></script>
-<script src="/Scripts/jquery.ui.datepicker-es.js"></script>
-<script src="/Scripts/jquery.maskedinput.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+
         $("#IdDepartamento").change(function () {
-            fillComboDepto("cboIdProvincia", $("#IdDepartamento").val());
+            fillCombo("cboIdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
+            $("#cboIdMunicipio").empty();
+            $("#cboIdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
+            $('#IdMunicipio').val("");
         });
 
         $("#cboIdProvincia").change(function () {
-            fillComboProvincia("cboIdMunicipio", $("#cboIdProvincia").val());
+            fillCombo("cboIdMunicipio", $("#cboIdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            $('#IdMunicipio').val("");
         });
 
-        function fillComboDepto(updateId, value) {
-            $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
+        function fillCombo(updateId, value, urlPath, msgSeleccion) {
+            $.getJSON(urlPath + "/" + value, {},
                 function (myData) {
                     $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Provincia--</option>");
-                    $('#IdProvincia').val("");
+                    $("#" + updateId).append("<option value=''>" + msgSeleccion + "</option>");
                     $.each(myData, function (i, item) {
-                        //alert(item.Descripcion);
                         $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
                     })
                 });
         }
-
-        function fillComboProvincia(updateId, value) {
-            $.getJSON('@Url.Action("MunicipiosPorProvincia")' + "/" + value, {},
-                function (myData) {
-                    $("#" + updateId).empty();
-                    $("#" + updateId).append("<option value=''>--Selecione Municipio--</option>");
-                    $('#IdMunicipio').val("");
-                    $.each(myData, function (i, item) {
-                        //alert(item.Descripcion);
-                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
-                    })
-                });
-        }
-
-        $("#cboIdProvincia").change(function () {
-            $('#IdProvincia').val($('#cboIdProvincia').val());
-        })
 
         $("#cboIdMunicipio").change(function () {
             $('#IdMunicipio').val($('#cboIdMunicipio').val());
@@ -57,13 +41,30 @@
 }
 
 
-<h2>Create</h2>
+<h2>Registro de Establecimiento de Salud</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>EstablecimientoSalud</legend>
+
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
+
+        <label>Provincia</label>
+            <select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdMunicipio, "Municipio")
+        </div>
+        <div class="editor-field">
+            @*@Html.DropDownList("IdMunicipio", String.Empty)*@
+            <select id="cboIdMunicipio"><option>... Seleccione Municipio ...</option></select>
+            @Html.TextBoxFor(model => model.IdMunicipio, new {style="width: 10px; visibility:hidden0" })
+            @Html.ValidationMessageFor(model => model.IdMunicipio)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Codigo)
@@ -97,25 +98,9 @@
             @Html.ValidationMessageFor(model => model.Telefono)
         </div>
 
-        <label for="Departamento">Departamento</label>
-            @Html.DropDownList("IdDepartamento", String.Empty)
-
-        <label>Provincia</label>
-            <select id="cboIdProvincia"></select>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdMunicipio, "Municipio")
-        </div>
-        <div class="editor-field">
-            @*@Html.DropDownList("IdMunicipio", String.Empty)*@
-            <select id="cboIdMunicipio"></select>
-            @Html.EditorFor(model => model.IdMunicipio)
-            @Html.ValidationMessageFor(model => model.IdMunicipio)
-        </div>
-
         <p>
             <input type="submit" value="Guardar" class="btn btn-primary" />
-            @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class = "btn" })
         </p>
     </fieldset>
 }

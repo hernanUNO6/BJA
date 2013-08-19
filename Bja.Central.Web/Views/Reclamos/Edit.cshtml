@@ -43,30 +43,6 @@
 
         @Html.HiddenFor(model => model.Id)
 
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.FechaRegistro)
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
-        </div>*@
-
         <div class="editor-label">
             @Html.LabelFor(model => model.FechaReclamo)
         </div>
@@ -101,14 +77,11 @@
         </div>
 
         <p>
-            <input type="submit" value="Guardar" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Retornar al listado", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

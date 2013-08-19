@@ -81,8 +81,10 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.cboTipoDI = (from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
-            //                     select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
+            ViewBag.cboTipoEncargado = (from TipoEncargado e in Enum.GetValues(typeof(TipoEncargado))
+                                        select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
+            ViewBag.cboTipoDI = (from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
+                                 select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
             return View(encargado);
         }
 

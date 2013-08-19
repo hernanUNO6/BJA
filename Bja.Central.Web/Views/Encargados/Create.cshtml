@@ -142,9 +142,9 @@
             @Html.ValidationMessageFor(model => model.Observaciones)
         </div>
 
-        <div class="editor-label">
+        @*<div class="editor-label">
             @Html.LabelFor(model => model.IdTipoEstadoRegistro)
-        </div>
+        </div>*@
 
         @*<div class="editor-field">
             @Html.TextBoxFor(model => model.IdTipoEstadoRegistro)
@@ -155,14 +155,11 @@
         </div>*@
 
         <p>
-            <input type="submit" value="Guardar" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class = "btn" })
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Retornar al listado", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

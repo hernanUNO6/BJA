@@ -8,19 +8,10 @@
 <h2>Reclamos</h2>
 
 <p>
-    @Html.ActionLink("Crear Reclamo", "Create")
+    @Html.ActionLink("Registrar Reclamo", "Create", null, new {@class="btn btn-primary"})
 </p>
-<table>
+<table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.IdSesion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaUltimaTransaccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.FechaReclamo)
         </th>
@@ -38,15 +29,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.IdSesion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaUltimaTransaccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaRegistro)
-        </td>*@
         <td>
             @*@Html.DisplayFor(modelItem => item.FechaReclamo)*@
             @item.FechaReclamo.ToString("dd/MM/yyyy")
@@ -62,9 +44,10 @@
             @Html.DisplayFor(modelItem => item.DetalleReclamo)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
+            @{ string nombreControlador = "Reclamos"; }
+            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
+            <a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
         </td>
     </tr>
 }
