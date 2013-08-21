@@ -96,14 +96,11 @@
         </div>
 
         <p>
-            <input type="submit" value="Guardar" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class = "btn" })
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Retornar al listado", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

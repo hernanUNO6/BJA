@@ -62,6 +62,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Retornar a la lista", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class="btn" })
+    @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
 </p>

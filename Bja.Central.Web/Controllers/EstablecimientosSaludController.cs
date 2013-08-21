@@ -74,11 +74,22 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Edit(long id = 0)
         {
             EstablecimientoSalud estableSalud = modEstableSalud.Buscar(id);
+
+            estableSalud.Municipio = modMunicipio.Buscar(estableSalud.IdMunicipio);
+
+            ModeloProvincia modProvincia = new ModeloProvincia();
+            estableSalud.Municipio.Provincia = modProvincia.Buscar(estableSalud.Municipio.IdProvincia);
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            estableSalud.Municipio.Provincia.Departamento = modDepto.Buscar(estableSalud.Municipio.Provincia.IdDepartamento);
+
             if (estableSalud == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", estableSalud.IdMunicipio);
+            ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion", estableSalud.Municipio.Provincia.IdDepartamento);
+            ViewBag.IdProvincia = new SelectList(modProvincia.Listar().Where(p => p.IdDepartamento == estableSalud.Municipio.Provincia.IdDepartamento), "Id", "Descripcion", estableSalud.Municipio.IdProvincia);
+            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar().Where(p => p.IdProvincia == estableSalud.Municipio.IdProvincia), "Id", "Descripcion", estableSalud.IdMunicipio);
             return View(estableSalud);
         }
 

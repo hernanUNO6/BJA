@@ -10,17 +10,8 @@
 <p>
     @Html.ActionLink("Registrar Establecimiento de Salud", "Create", null, new {@class="btn btn-primary"})
 </p>
-<table>
+<table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdSesion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaUltimaTransaccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Codigo)
         </th>
@@ -34,22 +25,14 @@
             @Html.DisplayNameFor(model => model.Telefono)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Municipio.Codigo)
+            @*@Html.DisplayNameFor(model => model.Municipio.Codigo)*@
+            Municipio
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSesion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaUltimaTransaccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaRegistro)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Codigo)
         </td>
@@ -63,12 +46,13 @@
             @Html.DisplayFor(modelItem => item.Telefono)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Municipio.Codigo)
+            @Html.DisplayFor(modelItem => item.Municipio.Descripcion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @{ string nombreControlador = "EstablecimientosSalud"; }
+            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
+            <a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
         </td>
     </tr>
 }

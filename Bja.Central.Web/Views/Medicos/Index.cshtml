@@ -17,9 +17,7 @@
 </form>
 <br />
 
-<div class="datagrid">
-<table class="table table-striped">
-    <thead>
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombres)
@@ -56,9 +54,7 @@
         </th>*@
         <th></th>
     </tr>
-    </thead>
 @foreach (var item in Model) {
-    <tbody>
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nombres)
@@ -95,21 +91,19 @@
             @Html.DisplayFor(modelItem => item.Observaciones)
         </td>*@
         <td>
-            <a href="@Url.Action("Edit/"+ item.Id,"Medicos")" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
-            <a href="@Url.Action("Details/"+ item.Id,"Medicos")" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
-            <a href="@Url.Action("Delete/"+ item.Id,"Medicos")" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
+            @{ string nombreControlador = "Medicos"; }
+            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
+            <a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
 
             @*@Html.ActionLink(" ", "Edit", new { id=item.Id }, new { @title="Editar", style = "background: url('" + Url.Content("~/images/edit16.png") + "') no-repeat; margin:16px; height:16px; width:16px;" })
             @Html.ActionLink(" ", "Details", new { id=item.Id }, new { @title="Detalles", style = "background: url('" + Url.Content("~/images/edit16.png") + "') no-repeat; height:16px; width:16px;" })
             @Html.ActionLink(" ", "Delete", new { id=item.Id }, new { @title="Eliminar", style = "background: url('" + Url.Content("~/images/edit16.png") + "') no-repeat; height:16px; width:16px;" })*@
         </td>
     </tr>
-    </tbody>
 }
-</table>
-</div>
-
-<div class="pagina">
+    <tr>
+        <td colspan="8" class="pagina">
 @{
     if (ViewBag.paginaActual == null)
     {
@@ -123,9 +117,13 @@
     
     @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Primero" })
     @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Anterior" })
-    @Html.Name("página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name("  ")
+    @Html.Name(" Página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name(" ")
     @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Siguiente" })
     @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Último" })
-    @Html.Name("Total registros ") @ViewBag.totalRegistros
+    @Html.Name("Total registros : ") @ViewBag.totalRegistros
 }
-</div>
+        </td>
+    </tr>
+</table>
+
+

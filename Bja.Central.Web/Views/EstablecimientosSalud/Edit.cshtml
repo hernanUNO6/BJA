@@ -5,7 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+
+@section PageScripts{
+<script src="/Scripts/jquery-ui-1.8.20.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#IdDepartamento").change(function () {
+            fillCombo("IdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
+            $("#IdMunicipio").empty();
+            $("#IdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
+            $('#IdMunicipio').val("");
+        });
+
+        $("#IdProvincia").change(function () {
+            fillCombo("IdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            $('#IdMunicipio').val("");
+        });
+
+        function fillCombo(updateId, value, urlPath, msgSeleccion) {
+            $.getJSON(urlPath + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>" + msgSeleccion + "</option>");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        
+
+        //$("#cboIdMunicipio").change(function () {
+        //    $('#IdMunicipio').val($('#cboIdMunicipio').val());
+        //})
+    });
+</script>    
+}
+
+<h2>Edita Establecimiento de Salud</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -14,30 +52,6 @@
         <legend>EstablecimientoSalud</legend>
 
         @Html.HiddenFor(model => model.Id)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaRegistro)
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Codigo)
@@ -71,11 +85,18 @@
             @Html.ValidationMessageFor(model => model.Telefono)
         </div>
 
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
+
+        <label>Provincia</label>
+            @*<select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>*@
+            @Html.DropDownList("IdProvincia", "... Seleccione Provincia ....")
+
         <div class="editor-label">
             @Html.LabelFor(model => model.IdMunicipio, "Municipio")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdMunicipio", String.Empty)
+            @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
             @Html.ValidationMessageFor(model => model.IdMunicipio)
         </div>
 

@@ -77,12 +77,31 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Edit(long id = 0)
         {
             AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
+
+            ModeloEstablecimientoSalud modEstableMedico = new ModeloEstablecimientoSalud();
+            asignacionMedico.EstablecimientoSalud = modEstableMedico.Buscar(asignacionMedico.IdEstablecimientoSalud);
+
+            ModeloMunicipio modMunicipio = new ModeloMunicipio();
+            asignacionMedico.EstablecimientoSalud.Municipio = modMunicipio.Buscar(asignacionMedico.EstablecimientoSalud.IdMunicipio);
+
+            ModeloProvincia modProvincia = new ModeloProvincia();
+            asignacionMedico.EstablecimientoSalud.Municipio.Provincia = modProvincia.Buscar(asignacionMedico.EstablecimientoSalud.Municipio.IdProvincia);
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            asignacionMedico.EstablecimientoSalud.Municipio.Provincia.Departamento = modDepto.Buscar(asignacionMedico.EstablecimientoSalud.Municipio.Provincia.IdDepartamento);
+            
             if (asignacionMedico == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.Municipio.Provincia.IdDepartamento);
+            ViewBag.IdProvincia = new SelectList(modProvincia.Listar().Where(p => p.IdDepartamento == asignacionMedico.EstablecimientoSalud.Municipio.Provincia.IdDepartamento), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.Municipio.IdProvincia);
+            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar().Where(p => p.IdProvincia == asignacionMedico.EstablecimientoSalud.Municipio.IdProvincia), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.IdMunicipio);
+            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar().Where(p=>p.IdMunicipio == asignacionMedico.EstablecimientoSalud.IdMunicipio), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
+
             ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres", asignacionMedico.IdMedico);
-            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
+
             return View(asignacionMedico);
         }
 
@@ -158,7 +177,7 @@ namespace Bja.Central.Web.Controllers
         public ActionResult GetEstablecimientosSaludPorMunicipio(string id)
         {
             List<EstablecimientoSalud> Datos = modEstableSalud.GetEstablecimientosSaludPorMunicipio(id);
-            var myData = (from d in Datos select new { d.Id, d.Nombre });
+            var myData = (from d in Datos select new { d.Id, Descripcion = d.Nombre });
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
         

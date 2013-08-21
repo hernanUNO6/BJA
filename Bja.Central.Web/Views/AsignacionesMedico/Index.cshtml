@@ -10,17 +10,8 @@
 <p>
     @Html.ActionLink("Asignar Médico a Establecimiento de Salud", "Create", null, new {@class="btn btn-primary"})
 </p>
-<table>
+<table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdSesion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaUltimaTransaccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaInicio)
         </th>
@@ -28,13 +19,14 @@
             @Html.DisplayNameFor(model => model.FechaFin)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Observaciones)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Medico.Nombres)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstablecimientoSalud.Codigo)
+            @*@Html.DisplayNameFor(model => model.EstablecimientoSalud.Codigo)*@
+            Establecimiento de Salud
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
         </th>
         <th></th>
     </tr>
@@ -42,33 +34,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IdSesion)
+            @item.FechaInicio.ToString("dd/MM/yyyy")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaUltimaTransaccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaRegistro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Observaciones)
+            @item.FechaFin.ToString("dd/MM/yyyy")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Medico.Nombres)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstablecimientoSalud.Codigo)
+            @Html.DisplayFor(modelItem => item.EstablecimientoSalud.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @{ string nombreControlador = "AsignacionesMedico"; }
+            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
+            <a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
         </td>
     </tr>
 }

@@ -64,7 +64,7 @@
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
-        <input type="submit" value="Eliminar" /> |
-        @Html.ActionLink("Retornar a la lista", "Index")
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        @Html.ActionLink("Retornar al listado", "Index", null, new { @class="btn" })
     </p>
 }
