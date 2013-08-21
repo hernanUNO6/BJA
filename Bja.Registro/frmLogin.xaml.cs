@@ -31,29 +31,48 @@ namespace Bja.Registro
 
     private void cmdAceptar_Click(object sender, RoutedEventArgs e)
     {
-      //authenticar usuario
-      var rbac = new Rbac();
-      User user = rbac.authenticate(txtUsuario.Text, pasContrasena.Password);
-      if (user != null)
-      {
-        //MessageBox.Show("Acceso concedido.","Mensaje");
-        //inicia session
-        SessionManager.initSession(user);
-        //rrscgyov
-        this.Hide();
-
-        frmPrincipal objPrincipal = new frmPrincipal();
-        bool? Resultado = objPrincipal.ShowDialog();
-        if (Resultado == false)
+        bool ok = false;
+        if (!(txtUsuario.Text.Length > 0))
         {
-          objPrincipal.Close();
-          Application.Current.Shutdown();
+            ok = true;
+            MessageBox.Show("Se requiere especificar cuenta de usuario.", "Error");
         }
-      }
-      else
-      {
-        MessageBox.Show("Usuario o clave no válido.", "Error");
-      }
+        else if (!(pasContrasena.Password.Length > 0))
+        {
+            ok = true;
+            MessageBox.Show("Se requiere especificar contraseña.", "Error");
+        }
+        else if (!(pasContrasena.Password.Length >= 3))
+        {
+            ok = true;
+            MessageBox.Show("Se requiere especificar contraseña válida.", "Error");
+        }
+        if (ok == false)
+        {
+            //authenticar usuario
+            var rbac = new Rbac();
+            User user = rbac.authenticate(txtUsuario.Text, pasContrasena.Password);
+            if (user != null)
+            {
+                //MessageBox.Show("Acceso concedido.","Mensaje");
+                //inicia session
+                SessionManager.initSession(user);
+                //rrscgyov
+                this.Hide();
+
+                frmPrincipal objPrincipal = new frmPrincipal();
+                bool? Resultado = objPrincipal.ShowDialog();
+                if (Resultado == false)
+                {
+                    objPrincipal.Close();
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña no válidos.", "Error");
+            }
+        }
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)

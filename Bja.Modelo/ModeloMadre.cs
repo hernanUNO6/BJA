@@ -41,6 +41,7 @@ namespace Bja.Modelo
           _madre.EstadoRegistro = TipoEstadoRegistro.Vigente;
 
           _madre.Nombres = madre.Nombres;
+          _madre.NombreCompleto = madre.NombreCompleto;
           _madre.PrimerApellido = madre.PrimerApellido;
           _madre.SegundoApellido = madre.SegundoApellido;
           _madre.TercerApellido = madre.TercerApellido;
@@ -48,6 +49,9 @@ namespace Bja.Modelo
           _madre.TipoDocumentoIdentidad = madre.TipoDocumentoIdentidad;
           _madre.FechaNacimiento = madre.FechaNacimiento;
           _madre.IdLocalidadNacimiento = madre.IdLocalidadNacimiento;
+          _madre.IdDepartamento = madre.IdDepartamento;
+          _madre.IdProvincia = madre.IdProvincia;
+          _madre.IdMunicipio = madre.IdMunicipio;
           _madre.Defuncion = madre.Defuncion;
           _madre.Observaciones = madre.Observaciones;
 
