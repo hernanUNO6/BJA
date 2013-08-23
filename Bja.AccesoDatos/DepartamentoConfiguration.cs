@@ -22,7 +22,7 @@ namespace Bja.AccesoDatos
             Property(d => d.FechaUltimaTransaccion).IsRequired();
 
             Property(d => d.Codigo).IsRequired().HasMaxLength(4);
-            Property(d => d.Descripcion).IsRequired().HasMaxLength(30);
+            Property(d => d.Descripcion).IsRequired().HasMaxLength(100);
         }
     }
 }

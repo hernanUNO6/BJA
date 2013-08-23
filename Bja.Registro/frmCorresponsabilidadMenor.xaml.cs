@@ -24,7 +24,6 @@ namespace Bja.Registro
       long IdMenor { get; set; }
       long IdMadre { get; set; }
       long IdTutor { get; set; }
-      long[] IdControlMenor = new long[12];    //A ser controlado posteriromwente por la variable CantidadDeControles
       public long IdSeleccionado { get; set; }
       public TipoAccion TipoAccion { get; set; }
       int CantidadDeControles { get; set; }  //debe definirse en la tabla parámetros.
@@ -39,6 +38,15 @@ namespace Bja.Registro
       private void Window_Loaded(object sender, RoutedEventArgs e)
       {
           CantidadDeControles = 12;
+
+          lblDepartamento.Content = "|";
+          lblEstablecimiento.Content = "|";
+          lblNombresMenor.Content = "|";
+          lblFechaNacimientoMenor.Content = "|";
+          lblNombreMadre.Content = "|";
+          lblFechaNacimientoMadre.Content = "|";
+          lblNombreTutor.Content = "|";
+          lblFechaNacimientoTutor.Content = "|";
 
           if (IdSeleccionado == 0)
           {
@@ -453,7 +461,6 @@ namespace Bja.Registro
                       else
                           controlmenor.TipoBeneficiario = TipoBeneficiario.Madre;
                       modelocontrolmenor.Crear(controlmenor);
-                      IdControlMenor[i] = controlmenor.Id;
                   }
                   txtCodigoFormulario.IsEnabled = false;
                   dtpFechaInscripcion.IsEnabled = false;

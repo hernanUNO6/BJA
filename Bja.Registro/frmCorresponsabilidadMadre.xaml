@@ -1,83 +1,37 @@
 ﻿<Window x:Class="Bja.Registro.frmCorresponsabilidadMadre"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Corresponsabilidad de Madre" Height="624" Width="956" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFFDFCFB" Offset="0"/>
-            <GradientStop Color="#FFE0982E" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
-    <Grid Name="CorresponsabilidadMadre" Margin="3,0,-3,6">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="39*"/>
-            <RowDefinition Height="551*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label x:Name="lblLugarGeografico" Content="Lugar Geográfico" Height="28" HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top" Width="113" FontWeight="Bold" />
-        <Label x:Name="lblDepartamento" Content="Departamento:" Height="28" HorizontalAlignment="Left" Margin="15,38,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="2" />
-        <Label x:Name="lblDepto" Content="Departamento" Height="28" HorizontalAlignment="Left" Margin="114,38,0,0" VerticalAlignment="Top" Width="55" Grid.RowSpan="2" />
-        <Label x:Name="lblCentro" Content="Establecimiento:" Height="28" HorizontalAlignment="Left" Margin="16,27,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblEstablecimiento" Content="Establecimiento" Height="28" HorizontalAlignment="Left" Margin="115,27,0,0" VerticalAlignment="Top" Width="176" Grid.Row="1" />
-        <Label x:Name="lblLugarGeografico_Copy" Content="Mujer Gestante - Beneficiaria" Height="28" HorizontalAlignment="Left" Margin="327,8,0,0" VerticalAlignment="Top" Width="176" FontWeight="Bold" />
-        <Label x:Name="lblDepartamento_Copy" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="327,36,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="2" />
-        <Label x:Name="lblNomnbreMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Label x:Name="lblMunicipio_Copy" Content="Primér apellido:" Height="28" HorizontalAlignment="Left" Margin="327,25,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblPrimerApellido" Content="Paterno" Height="28" HorizontalAlignment="Left" Margin="422,28,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Label x:Name="lblRedDeSalud_Copy" Content="Segundo apellido:" Height="28" HorizontalAlignment="Left" Margin="327,53,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblSegundoApellido" Content="Materno" Height="28" HorizontalAlignment="Left" Margin="422,56,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy" Content="Tercér apellido:" Height="28" HorizontalAlignment="Left" Margin="327,81,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblTercerApellido" Content="Conyuge" Height="28" HorizontalAlignment="Left" Margin="422,84,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Button x:Name="cmdDetallesMadre" Content="Detalles" HorizontalAlignment="Left" Margin="418,172,0,0" VerticalAlignment="Top" Width="85" Height="22" Click="cmdDetallesMadre_Click" Grid.Row="1" />
-        <Label x:Name="lblLugarGeografico_Copy1" Content="Titular de Pago" Height="28" HorizontalAlignment="Left" Margin="646,10,0,0" VerticalAlignment="Top" Width="98" FontWeight="Bold" />
-        <Button x:Name="cmdDetallesTutor" Content="Detalles" HorizontalAlignment="Left" Margin="744,172,0,0" VerticalAlignment="Top" Width="83" Height="22" Click="cmdDetallesTutor_Click" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy2" Content="Doc. Ide." Height="28" HorizontalAlignment="Left" Margin="327,109,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblDocumentoIdentidad" Content="DocIde" Height="28" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy5" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="327,137,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="422,137,0,0" VerticalAlignment="Top" Width="205" Grid.Row="1" />
-        <Label x:Name="lblDepartamento_Copy1" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="645,38,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="2" />
-        <Label x:Name="lblNombreTutor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="744,38,0,0" VerticalAlignment="Top" Width="171" Grid.RowSpan="2" />
-        <Label x:Name="lblMunicipio_Copy1" Content="Primér apellido:" Height="28" HorizontalAlignment="Left" Margin="645,27,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblPrimerApellidoTutor" Content="Paterno" Height="28" HorizontalAlignment="Left" Margin="744,27,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblRedDeSalud_Copy1" Content="Segundo apellido:" Height="28" HorizontalAlignment="Left" Margin="645,55,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblSegundoApellidoTutor" Content="Materno" Height="28" HorizontalAlignment="Left" Margin="744,55,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy1" Content="Tercér apellido:" Height="28" HorizontalAlignment="Left" Margin="645,83,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblTercerApellidoTutor" Content="Conyuge" Height="28" HorizontalAlignment="Left" Margin="744,83,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy6" Content="Doc. Ide." Height="28" HorizontalAlignment="Left" Margin="645,111,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblDocumentoIdentidadTutor" Content="DocIde" Height="28" HorizontalAlignment="Left" Margin="744,111,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblCentro_Copy9" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="645,139,0,0" VerticalAlignment="Top" Width="94" Grid.Row="1" />
-        <Label x:Name="lblFechaNacimientoTutor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="744,139,0,0" VerticalAlignment="Top" Width="171" Grid.Row="1" />
-        <Label x:Name="lblFechaNacimiento" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="25,455,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
-        <Label x:Name="lblPaterno" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="26,487,0,0" VerticalAlignment="Top" Width="96" Grid.Row="1" />
-        <TextBox x:Name="txtAutorizado" Height="23" HorizontalAlignment="Left" Margin="122,492,0,0" VerticalAlignment="Top" Width="249" Grid.Row="1" IsEnabled="False" />
-        <Label x:Name="lblMaterno" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="523,492,0,0" VerticalAlignment="Top" Width="47" Grid.Row="1" />
-        <TextBox x:Name="txtCargo" Height="23" HorizontalAlignment="Left" Margin="450,492,0,0" VerticalAlignment="Top" Width="249" Grid.Row="1" IsEnabled="False" />
-        <Label x:Name="lblFechaNacimiento_Copy" Content="Fecha de Ultima Menstruación:" Height="28" HorizontalAlignment="Left" Margin="26,251,0,0" VerticalAlignment="Top" Width="177" Grid.Row="1" />
-        <DatePicker x:Name="dtpFechaFUM" HorizontalAlignment="Left" Margin="208,251,0,0" VerticalAlignment="Top" Width="92" Height="24" Grid.Row="1"/>
-        <Label x:Name="lblFechaNacimiento_Copy1" Content="Fecha de Ultimo Parto:" Height="28" HorizontalAlignment="Left" Margin="316,247,0,0" VerticalAlignment="Top" Width="129" Grid.Row="1" />
-        <DatePicker x:Name="dtpFechaUltimoParto" HorizontalAlignment="Left" Margin="450,252,0,0" VerticalAlignment="Top" Width="92" Height="24" Grid.Row="1"/>
-        <Label x:Name="lblDocIde_Copy15" Content="Número de Embarazo:" Height="28" HorizontalAlignment="Left" Margin="570,252,0,0" VerticalAlignment="Top" Width="129" Grid.Row="1" />
-        <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Right" Margin="0,252,201,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
-        <Label x:Name="lblLugarGeografico_Copy5" Content="Control de Responsabilidades de la Mujer Gestante" Height="28" HorizontalAlignment="Left" Margin="17,223,0,0" VerticalAlignment="Top" Width="365" FontWeight="Bold" Grid.Row="1" />
-        <Button x:Name="cmdBuscarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="328,172,0,0" VerticalAlignment="Top" Width="85" Click="cmdBuscarMadre_Click" Height="22" Grid.Row="1"/>
-        <Label x:Name="lblFechaNacimiento_Copy2" Content="Fecha de Inscripcion" Height="28" HorizontalAlignment="Left" Margin="16,109,0,0" VerticalAlignment="Top" Width="122" Grid.Row="1" />
-        <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="143,109,0,0" VerticalAlignment="Top" Width="91" Height="24" Grid.Row="1"/>
-        <Label x:Name="lblDocIde_Copy19" Content="Codigo Formulario" Height="28" HorizontalAlignment="Left" Margin="25,69,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1" />
-        <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="143,72,0,0" VerticalAlignment="Top" Width="83" Grid.Row="1" />
-        <CheckBox x:Name="chkSalida" Content="Salida de la beneficiaria" HorizontalAlignment="Left" Margin="27,435,0,0" Grid.Row="1" VerticalAlignment="Top" IsEnabled="False"/>
-        <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="80,458,0,0" VerticalAlignment="Top" Width="91" Height="24" Grid.Row="1" IsEnabled="False"/>
-        <Button x:Name="cmdBuscarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="655,172,0,0" VerticalAlignment="Top" Width="83" Click="cmdBuscarTutor_Click" Height="22" Grid.Row="1" />
-        <CheckBox x:Name="chkARO" Content="A.R.O." HorizontalAlignment="Left" Margin="784,256,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,-1.75" Grid.Row="1"/>
-        <DataGrid Name="grdControl" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="137" Margin="26,284,0,0" Grid.Row="1" VerticalAlignment="Top" Width="889">
+        Title="Corresponsabilidad de Madre" ShowInTaskbar="False" Height="624" Width="956" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Label x:Name="lblFormulario" Content="No Formulario:" Height="28" HorizontalAlignment="Left" Margin="20,165,0,0" VerticalAlignment="Top" Width="88" />
+        <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="110,170,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblLugarGeografico" Content="Lugar Geográfico" Height="28" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="113" FontWeight="Bold" />
+        <Label x:Name="lblDepto" Content="Departamento:" Height="28" HorizontalAlignment="Left" Margin="20,44,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblDepartamento" Content="Departamento" Height="28" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblEstSal" Content="Establecimiento:" Height="28" HorizontalAlignment="Left" Margin="20,69,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblEstablecimiento" Content="Establecimiento" Height="28" HorizontalAlignment="Left" Margin="119,69,0,0" VerticalAlignment="Top" Width="94" />
+        <GroupBox x:Name="gbxTipo" Header="Tipo" BorderBrush="Black" Margin="20,97,749,445">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,-12">
+                <RadioButton x:Name="rdbNueva" Margin="3,3,0,3" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Nueva"/>
+                <RadioButton x:Name="rdbTransferencia" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia"/>
+            </StackPanel>
+        </GroupBox>
+        <Label x:Name="lblMadre" Content="Madre - Beneficiaria" Height="28" HorizontalAlignment="Left" Margin="300,19,0,0" VerticalAlignment="Top" Width="132" FontWeight="Bold" />
+        <Label x:Name="lblNombreMadre" Content="Nombre" Height="28" HorizontalAlignment="Left" Margin="300,48,0,0" VerticalAlignment="Top" Width="56" />
+        <Label x:Name="lblNombresMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="391,48,0,0" VerticalAlignment="Top" Width="220" />
+        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento" Height="28" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Width="86" />
+        <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="391,75,0,0" VerticalAlignment="Top" Width="85" />
+        <Button x:Name="cmdSeleccionarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
+        <Button x:Name="cmdModificarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="460,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMadre_Click" RenderTransformOrigin="0.493,-0.35"/>
+        <Label x:Name="lblBeneficiario" Content="Controles de la beneficiaria" Height="28" HorizontalAlignment="Left" Margin="16,231,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" />
+        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="186" Margin="31,264,0,0" VerticalAlignment="Top" Width="846">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Path=Id}" />
                 <DataGridTextColumn Header="Número" Binding="{Binding Path=NumeroControl}" />
-                <DataGridTextColumn Header="Programada" Binding="{Binding Path=FechaProgramada}" />
-                <DataGridTextColumn Header="Talla" Binding="{Binding Path=TallaCm}" />
-                <DataGridTextColumn Header="Peso" Binding="{Binding Path=PesoKg}" />
-                <DataGridTextColumn Header="Fecha" Binding="{Binding Path=FechaControl}" />
+                <DataGridTextColumn Header="Programada" Binding="{Binding Path=FechaProgramada, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Talla (Cm)" Binding="{Binding Path=TallaCm}" />
+                <DataGridTextColumn Header="Peso (Kg)" Binding="{Binding Path=PesoKg, StringFormat=\{0:n2\}}" />
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Path=FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Path=TipoControlMadre}" />
                 <DataGridTextColumn Header="Beneficiario" Binding="{Binding Path=TipoBeneficiario}" />
                 <DataGridTextColumn Header="Medico" Binding="{Binding Path=IdMedico}" />
@@ -97,9 +51,20 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lblCargo" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="400,489,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" />
-        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="192,435,212,66" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="0,0,-2,-12">
+        <Label x:Name="lblFechaInscripcion" Content="F. Inscripción:" Height="28" HorizontalAlignment="Left" Margin="24,197,0,0" VerticalAlignment="Top" Width="86" />
+        <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="110,201,0,0" VerticalAlignment="Top" Width="100"/>
+        <CheckBox x:Name="chkSalida" Content="Salida del beneficiario/a" HorizontalAlignment="Left" Margin="34,461,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label x:Name="lblFechaSalida" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="36,481,0,0" VerticalAlignment="Top" Width="45" />
+        <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="86,485,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <Label x:Name="lblAutorizado" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="36,521,0,0" VerticalAlignment="Top" Width="96" />
+        <TextBox x:Name="txtAutorizado" Height="23" HorizontalAlignment="Left" Margin="132,526,0,0" VerticalAlignment="Top" Width="249" IsEnabled="False" />
+        <Label x:Name="lblCargo" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="402,521,0,0" VerticalAlignment="Top" Width="47" />
+        <TextBox x:Name="txtCargo" Height="23" HorizontalAlignment="Left" Margin="449,526,0,0" VerticalAlignment="Top" Width="249" IsEnabled="False" />
+        <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="759,526,0,0" VerticalAlignment="Top" Width="75" Click="cmdGuardar_Click"/>
+        <Button x:Name="cmdSalir" Content="Salir" HorizontalAlignment="Left" Margin="850,526,0,0" VerticalAlignment="Top" Width="75" Click="cmdSalir_Click"/>
+        <Button x:Name="cmdDetallesMadre" Content="Detalles" HorizontalAlignment="Left" Margin="380,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesMadre_Click"/>
+        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="196,465,203,80" RenderTransformOrigin="0.501,1">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,-3" RenderTransformOrigin="0.499,1.147">
                 <RadioButton x:Name="rdbCumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cumplimiento" IsEnabled="False"/>
                 <RadioButton x:Name="rdbTransferenciaSalida" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia" IsEnabled="False"/>
                 <RadioButton x:Name="rdbAborto" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Aborto" IsEnabled="False"/>
@@ -108,15 +73,20 @@
                 <RadioButton x:Name="rdbIncumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Incumplimiento" IsEnabled="False"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="gbxTipo" Header="Tipo" BorderBrush="Black" Margin="17,143,716,359" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,-11">
-                <RadioButton x:Name="rdbNueva" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Nueva"/>
-                <RadioButton x:Name="rdbTransferencia" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia"/>
-            </StackPanel>
-        </GroupBox>
-        <Button x:Name="cmdModifcarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="508,172,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85" Click="cmdModifcarMadre_Click" Height="22"/>
-        <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="832,172,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Click="cmdModificarTutor_Click" Height="22"/>
-        <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="773,487,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="21" Click="cmdGuardar_Click"/>
-        <Button x:Name="cmdSalir" Content="Salir" HorizontalAlignment="Left" Margin="853,487,0,0" VerticalAlignment="Top" Width="75" Click="cmdSalir_Click" Height="22" Grid.Row="1"/>
+        <Button x:Name="cmdSeleccionarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="630,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
+        <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="790,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarTutor_Click"/>
+        <Button x:Name="cmdDetallesTutor" Content="Detalles" HorizontalAlignment="Left" Margin="710,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesTutor_Click"/>
+        <Label x:Name="lblTutor" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="635,51,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.5,0.5" />
+        <Label x:Name="lblNombreTutor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="721,51,0,0" VerticalAlignment="Top" Width="197" />
+        <Label x:Name="lblNacimientoTutor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="635,76,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblFechaNacimientoTutor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="721,76,0,0" VerticalAlignment="Top" Width="89" />
+        <Label x:Name="lblFechaFUM" Content="F. Ultima Menstruación:" Height="28" HorizontalAlignment="Left" Margin="229,197,0,0" VerticalAlignment="Top" Width="136" />
+        <DatePicker x:Name="dtpFechaFUM" HorizontalAlignment="Left" Margin="370,201,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblFechaUltimoParto" Content="F. Ultimo Parto:" Height="28" HorizontalAlignment="Left" Margin="489,197,0,0" VerticalAlignment="Top" Width="94" />
+        <DatePicker x:Name="dtpFechaUltimoParto" HorizontalAlignment="Left" Margin="589,201,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblNumeroEmbarazo" Content="N° Embarazo:" Height="28" HorizontalAlignment="Left" Margin="693,197,0,0" VerticalAlignment="Top" Width="88" />
+        <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Left" Margin="781,202,0,0" VerticalAlignment="Top" Width="41" />
+        <CheckBox x:Name="chkARO" Content="A. R. O." HorizontalAlignment="Left" Margin="850,205,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkTutor" Content="Tutor para efectos de pago" HorizontalAlignment="Left" Margin="630,29,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

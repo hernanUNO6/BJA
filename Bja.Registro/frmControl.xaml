@@ -1,13 +1,7 @@
 ﻿<Window x:Class="Bja.Registro.frmControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Control" Height="500" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFFDFCFB" Offset="0"/>
-            <GradientStop Color="#FFE0982E" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="Control" ShowInTaskbar="False" Height="500" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Name="InicioDeSesion">
         <Label x:Name="lblFechaProgramada" Content="Fecha Programada:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
         <DatePicker x:Name="dtpFechaProgramada" HorizontalAlignment="Left" Margin="126,13,0,0" VerticalAlignment="Top" Width="114"/>
@@ -18,7 +12,7 @@
         <Label x:Name="lblPeso" Content="Peso:" HorizontalAlignment="Left" Margin="83,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
         <TextBox x:Name="txtPeso" HorizontalAlignment="Left" Height="23" Margin="125,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
         <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
-        <DatePicker x:Name="dtpFechaControl" HorizontalAlignment="Left" Margin="126,98,0,0" VerticalAlignment="Top" Width="114"/>
+        <DatePicker x:Name="dtpFechaControl" HorizontalAlignment="Left" Margin="126,98,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="68,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
         <ComboBox x:Name="cboMedico" HorizontalAlignment="Left" Margin="126,127,0,0" VerticalAlignment="Top" Width="245"/>
         <GroupBox x:Name="gbxTitular" Header="Titular de Pago" BorderBrush="Black" HorizontalAlignment="Left" Height="131" Margin="125,153,0,0" VerticalAlignment="Top" Width="246">

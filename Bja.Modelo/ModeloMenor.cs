@@ -45,8 +45,15 @@ namespace Bja.Modelo
       _menor.SegundoApellido = menor.SegundoApellido;
       _menor.DocumentoIdentidad = menor.DocumentoIdentidad;
       _menor.IdTipoDocumentoIdentidad = menor.IdTipoDocumentoIdentidad;
+      _menor.Oficialia = menor.Oficialia;
+      _menor.Libro = menor.Libro;
+      _menor.Partida = menor.Partida;
+      _menor.Folio = menor.Folio;
       _menor.TipoDocumentoIdentidad = menor.TipoDocumentoIdentidad;
       _menor.IdLocalidadNacimiento = menor.IdLocalidadNacimiento;
+      _menor.IdDepartamento = menor.IdDepartamento;
+      _menor.IdProvincia = menor.IdProvincia;
+      _menor.IdMunicipio = menor.IdMunicipio;
       _menor.FechaNacimiento = menor.FechaNacimiento;
       _menor.Sexo = menor.Sexo;
       _menor.Defuncion = menor.Defuncion;
