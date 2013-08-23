@@ -39,6 +39,7 @@ namespace Bja.Modelo
         _tutor.FechaRegistro = DateTime.Now;
         _tutor.EstadoRegistro = TipoEstadoRegistro.Vigente;
         _tutor.Nombres = tutor.Nombres;
+        _tutor.NombreCompleto = tutor.NombreCompleto;
         _tutor.PrimerApellido = tutor.PrimerApellido;
         _tutor.SegundoApellido = tutor.SegundoApellido;
         _tutor.TercerApellido = tutor.TercerApellido;
@@ -47,6 +48,9 @@ namespace Bja.Modelo
         _tutor.TipoDocumentoIdentidad = tutor.TipoDocumentoIdentidad;
         _tutor.FechaNacimiento = tutor.FechaNacimiento;
         _tutor.IdLocalidadNacimiento = tutor.IdLocalidadNacimiento;
+        _tutor.IdDepartamento = tutor.IdDepartamento;
+        _tutor.IdProvincia = tutor.IdProvincia;
+        _tutor.IdMunicipio = tutor.IdMunicipio;
         _tutor.Defuncion = tutor.Defuncion;
         _tutor.Observaciones = tutor.Observaciones;
         _tutor.Sexo = tutor.Sexo;

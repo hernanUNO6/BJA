@@ -18,11 +18,17 @@ namespace Bja.Entidades
         public String PrimerApellido { get; set; }
         public String SegundoApellido { get; set; }
         public String TercerApellido { get; set; }
+        public String NombreCompleto { get; set; }
         public String DocumentoIdentidad { get; set; }
         public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
+
         public String IdLocalidadNacimiento { get; set; }
+        public long IdDepartamento { get; set; }
+        public long IdProvincia { get; set; }
+        public long IdMunicipio { get; set; }
+
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
     }

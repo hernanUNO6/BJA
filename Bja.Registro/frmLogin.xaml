@@ -2,18 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Inicio de sesión" Height="170" Width="270" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-  <Window.Background>
-    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-      <GradientStop Color="#FFFDFCFB" Offset="0"/>
-      <GradientStop Color="#FFE0982E" Offset="1"/>
-    </LinearGradientBrush>
-  </Window.Background>
   <Grid Name="InicioDeSesion">
     <Label x:Name="lblUsuario" Content="Usuario:" HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
     <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="23" Margin="65,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167"/>
     <Label x:Name="lblClave" Content="Clave:" HorizontalAlignment="Left" Margin="7,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
     <PasswordBox x:Name="pasContrasena" HorizontalAlignment="Left" Margin="65,48,0,0" VerticalAlignment="Top" Width="167" Height="23"/>
-    <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="65,96,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
-    <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="157,96,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
+    <Button x:Name="cmdAceptar" IsDefault="True" Content="Aceptar" HorizontalAlignment="Left" Margin="65,96,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
+    <Button x:Name="cmdCancelar" IsCancel="True" Content="Cancelar" HorizontalAlignment="Left" Margin="157,96,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
     </Grid>
 </Window>

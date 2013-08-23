@@ -22,9 +22,16 @@ namespace Bja.AccesoDatos
             Property(m => m.PrimerApellido).IsRequired().HasMaxLength(100);
             Property(m => m.SegundoApellido).HasMaxLength(100);
             Property(m => m.DocumentoIdentidad).IsRequired().HasMaxLength(15);
+            Property(m => m.Oficialia).IsOptional().HasMaxLength(15);
+            Property(m => m.Libro).IsOptional().HasMaxLength(15);
+            Property(m => m.Partida).IsOptional().HasMaxLength(15);
+            Property(m => m.Folio).IsOptional().HasMaxLength(15);
             Property(m => m.TipoDocumentoIdentidad).IsRequired();
             Property(m => m.FechaNacimiento).IsRequired();
             Property(m => m.IdLocalidadNacimiento).IsRequired().HasMaxLength(32);
+            Property(m => m.IdDepartamento).IsRequired();
+            Property(m => m.IdProvincia).IsRequired();
+            Property(m => m.IdMunicipio).IsRequired();
             Property(m => m.Defuncion).IsRequired();
             Property(m => m.Sexo).HasMaxLength(1).IsRequired();
             Property(m => m.Observaciones).HasMaxLength(1024);
