@@ -9,6 +9,8 @@ namespace Bja.Entidades
     public class MenorLog : Menor
     {
         public long IdLog { get; set; }
-        public bool Enviado { get; set; }
+        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
+        public String DescripcionEstado { get; set; }
+        public bool UltimoRegistro { get; set; }
     }
 }

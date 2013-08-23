@@ -15,6 +15,10 @@ namespace Bja.AccesoDatos
         {
             ToTable("MadresLog");
             HasKey(m => m.IdLog);
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstado).IsRequired().HasMaxLength(512);
+            Property(m => m.UltimoRegistro).IsRequired();
+
             Property(m => m.Id).IsRequired();
             Property(m => m.IdSesion).IsRequired();
             Property(m => m.FechaRegistro).IsRequired();
@@ -30,6 +34,7 @@ namespace Bja.AccesoDatos
             Property(m => m.IdLocalidadNacimiento).IsRequired();
             Property(m => m.Defuncion).IsRequired();
             Property(m => m.Observaciones).HasMaxLength(1024);
+
         }
     }
 }

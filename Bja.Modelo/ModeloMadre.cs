@@ -25,6 +25,8 @@ namespace Bja.Modelo
           context.Madres.Add(madre);
 
           context.SaveChanges();
+
+          Logger.log(madre);
       }
 
       public void Editar(long Id, Madre madre)
@@ -52,6 +54,8 @@ namespace Bja.Modelo
           _madre.Observaciones = madre.Observaciones;
 
           context.SaveChanges();
+
+          Logger.log(_madre);
       }
 
       public void Eliminar(long Id)

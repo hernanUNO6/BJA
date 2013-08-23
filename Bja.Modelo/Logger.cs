@@ -15,10 +15,11 @@ namespace Bja.Modelo
             BjaContext context = new BjaContext();
 
             Type tipoClase = clase.GetType();
-
+            /*
             String nombreTipoClaseDestino = tipoClase.FullName + "Log"; //Bja.Entidades.MadreLog
 
             Type tipoClaseDestino = Type.GetType(nombreTipoClaseDestino);
+
             object claseDestino = System.Activator.CreateInstance(tipoClaseDestino);
 
             SoporteObjetos.CopiarDatosObjetos(clase, ref claseDestino);
@@ -38,24 +39,30 @@ namespace Bja.Modelo
             classLogAddMethod.Invoke(classLog, new object[] { claseDestino });
             context.SaveChanges();
 
-
-            /*
+            */
+            
             switch (tipoClase.Name)
             {
                 case "Madre":
                     MadreLog madreLog = new MadreLog();
                     
                     object madrelogobj = (object)madreLog;
+
                     SoporteObjetos.CopiarDatosObjetos(clase, ref madrelogobj);
                     
                     madreLog.IdLog = IdentifierGenerator.NewId();
-                    madreLog.Enviado = false;
+                    madreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    madreLog.DescripcionEstado = "Pendiente";
+                    madreLog.UltimoRegistro = true;
 
                     context.MadreLog.Add(madreLog);
                     context.SaveChanges();
 
                     break;
-            }*/
+                case "Tutor":
+
+                    break;
+            }
 
             /*
             object claseDestino = System.Activator.CreateInstance(Type.GetType(tipoClase.FullName + "Log"));

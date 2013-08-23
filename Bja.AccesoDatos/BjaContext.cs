@@ -42,6 +42,8 @@ namespace Bja.AccesoDatos
         public DbSet<EstablecimientoSalud> EstablecimientosSalud { get; set; }
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
 
+        public DbSet<ControlMadreLog> ControlMadreLog { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new PermissionConfiguration());

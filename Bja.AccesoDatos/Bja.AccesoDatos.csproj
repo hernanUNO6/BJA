@@ -48,6 +48,7 @@
     <Compile Include="BjaContext.cs" />
     <Compile Include="ControlMadreConfiguration.cs" />
     <Compile Include="ControlMenorConfiguration.cs" />
+    <Compile Include="ControlMadreLogConfiguration.cs" />
     <Compile Include="CorresponsabilidadMadreConfiguration.cs" />
     <Compile Include="CorresponsabilidadMenorConfiguration.cs" />
     <Compile Include="DepartamentoConfiguration.cs" />
