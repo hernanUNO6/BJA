@@ -16,6 +16,39 @@ namespace Bja.Central.Web.Controllers
         private ModeloMedico modMedico = new ModeloMedico();
         private ModeloAsignacionMedico modAsignacionMedico = new ModeloAsignacionMedico();
 
+
+        //[ActionName("MedicosPorIdentificador")]
+        //public ActionResult GetMedico(string identificadorBusqueda)
+        //{
+        //    ModeloMedico modMedico = new ModeloMedico();
+        //    Medico myDataXX = modMedico.Buscar(Convert.ToInt64(identificadorBusqueda));
+        //    return Json(myDataXX, JsonRequestBehavior.AllowGet);
+        //}
+
+        [ActionName("MedicosPorCriterioBusqueda")]
+        public ActionResult GetMedicos(string criterioBusqueda)
+        {
+            ModeloMedico modMedico = new ModeloMedico();
+
+            List<Medico> myData = modMedico.Listar(criterioBusqueda);
+            return Json(myData, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult BuscarMedico()
+        {
+            ModeloMedico med = new ModeloMedico();
+            return PartialView("BusquedaMedico", med.Listar());
+        }
+
+        //[HttpPost]
+        //public ActionResult ContactUs(string identificador)
+        //{    /*Your other processing logic will go here*/
+        //    return Json(new
+        //    {
+        //        Id = identificador
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
+
         //
         // GET: /AsignacionesMedico/
 
@@ -65,6 +98,9 @@ namespace Bja.Central.Web.Controllers
                 modAsignacionMedico.Crear(asignacionMedico);
                 return RedirectToAction("Index");
             }
+
+            ModeloDepartamento modDepto = new ModeloDepartamento();
+            ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion");
 
             ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Nombres", asignacionMedico.IdMedico);
             ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar(), "Id", "Codigo", asignacionMedico.IdEstablecimientoSalud);
