@@ -336,6 +336,7 @@
     <Content Include="Views\AsignacionesMedico\Create.cshtml" />
     <Content Include="Views\AsignacionesMedico\Edit.cshtml" />
     <Content Include="Views\AsignacionesMedico\Delete.cshtml" />
+    <Content Include="Views\AsignacionesMedico\BusquedaMedico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
