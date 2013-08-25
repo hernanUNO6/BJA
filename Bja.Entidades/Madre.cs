@@ -32,10 +32,10 @@ namespace Bja.Entidades
         public virtual Departamento Departamento { get; set; }
 
         public long IdProvincia { get; set; }
-        public virtual Provincia Provincia { get; set; }
+        //public virtual Provincia Provincia { get; set; }
 
         public long IdMunicipio { get; set; }
-        public virtual Municipio Municipio { get; set; }
+        //public virtual Municipio Municipio { get; set; }
 
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }

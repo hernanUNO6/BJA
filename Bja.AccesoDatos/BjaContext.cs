@@ -68,6 +68,7 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new DepartamentoConfiguration());
             modelBuilder.Configurations.Add(new ProvinciaConfiguration());
             modelBuilder.Configurations.Add(new MunicipioConfiguration());
+            modelBuilder.Configurations.Add(new RedSaludConfiguration());
             modelBuilder.Configurations.Add(new EstablecimientoSaludConfiguration());
             modelBuilder.Configurations.Add(new AsignacionMedicoConfiguration());
 

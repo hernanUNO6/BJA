@@ -189,9 +189,9 @@ namespace Bja.Entidades
         [Required]
         public string Direccion { get; set; }
 
-        [Display(Name = "Municipio")]
-        [Required]
-        public long IdMunicipio { get; set; }
+        //[Display(Name = "Municipio")]
+        //[Required]
+        //public long IdMunicipio { get; set; }
     }
 
 
