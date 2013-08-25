@@ -40,7 +40,7 @@ namespace Bja.Entidades
         public long IdTipoDocumentoIdentidad { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.DateTime, ErrorMessage="El campo debe ser del tipo fecha")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaNacimiento { get; set; }
 
@@ -55,6 +55,23 @@ namespace Bja.Entidades
         [Display(Name = "Email")]
         [EmailAddress]
         public String CorreoElectronico { get; set; }
+
+
+        // [RegularExpression(@"(\S)+", ErrorMessage = "White space is not allowed")]
+        // [Range(0.01, 100.00, ErrorMessage = "Price must be between 0.01 and 100.00")]
+        // [Required(ErrorMessage = "An Album Title is required")]
+        // [Required, StringLength(50)]
+        // [ScaffoldColumn(false)]
+        // [StringLength(50,MinimumLength=3,ErrorMessage="First Name must be between 3 and 50 characters!")]
+        // [EmailAddress(ErrorMessage="Invalid Email")]
+        // [Url(ErrorMessage = "Invalid URL!")]
+        
+        // Required – Indicates that the property is a required field
+        // DisplayName – Defines the text we want used on form fields and validation messages
+        // StringLength – Defines a maximum length for a string field
+        // Range – Gives a maximum and minimum value for a numeric field
+        // Bind – Lists fields to exclude or include when binding parameter or form values to model properties
+        // ScaffoldColumn – Allows hiding fields from editor forms
     }
 
     public class ReclamoMetaData
@@ -117,4 +134,88 @@ namespace Bja.Entidades
         [Required]
         public long IdTipoEstadoRegistro { get; set; }
     }
+
+    public class DepartamentoMetaData
+    {
+        [Required]
+        [StringLength(2)]
+        public string Codigo { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        public string Descripcion { get; set; }
+    }
+
+    public class ProvinciaMetaData
+    {
+        [Required]
+        [StringLength(2)]
+        public string Codigo { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Departamento")]
+        [Required]
+        public long IdDepartamento { get; set; }
+    }
+
+    public class MunicipioMetaData
+    {
+        [Required]
+        [StringLength(2)]
+        public string Codigo { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Provincia")]
+        [Required]
+        public long IdProvincia { get; set; }
+    }
+
+    public class EstablecimientoSaludMetaData
+    {
+        [Required]
+        [StringLength(2)]
+        public string Codigo { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Nombre { get; set; }
+
+        [Required]
+        public string Direccion { get; set; }
+
+        [Display(Name = "Municipio")]
+        [Required]
+        public long IdMunicipio { get; set; }
+    }
+
+
+
+    public class AsignacionMedicoMetaData
+    {
+        [Display(Name = "Fecha de Inicio")]
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime FechaInicio { get; set; }
+
+        [Display(Name = "Fecha de culminaciòn")]
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime FechaFin { get; set; }
+
+        [Display(Name = "Médico")]
+        [Required]
+        public long IdMedico { get; set; }
+
+        [Display(Name = "Establecimiento de Salud")]
+        [Required]
+        public long IdEstablecimientoSalud { get; set; }
+    }
+
+    
 }
