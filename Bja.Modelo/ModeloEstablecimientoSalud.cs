@@ -16,7 +16,7 @@ namespace Bja.Modelo
 
         public List<EstablecimientoSalud> Listar()
         {
-            var establecimientosSalud = db.EstablecimientosSalud.Include(e => e.Municipio);
+            var establecimientosSalud = db.EstablecimientosSalud.Include(e => e.RedSalud);
             return establecimientosSalud.ToList();
         }
 
@@ -49,12 +49,21 @@ namespace Bja.Modelo
             db.SaveChanges();
         }
 
+/*
         public List<EstablecimientoSalud> GetEstablecimientosSaludPorMunicipio(string idMunicipio)
         {
             Int64 Identificador = Convert.ToInt64(idMunicipio);
 
             List<EstablecimientoSalud> estSalud = (from es in db.EstablecimientosSalud
                                                    where es.IdMunicipio == Identificador
+                                                   select es).ToList();
+            return estSalud;
+        }*/
+
+        public List<EstablecimientoSalud> GetEstablecimientosSaludPorRedSalud(long idRedSalud)
+        {
+            List<EstablecimientoSalud> estSalud = (from es in db.EstablecimientosSalud
+                                                   where es.IdRedSalud == idRedSalud
                                                    select es).ToList();
             return estSalud;
         }

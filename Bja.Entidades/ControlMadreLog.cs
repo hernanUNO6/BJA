@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public class ControlMadreLog : ControlMadre
+    public class ControlMadreLog //: ControlMadre
     {
         public long IdLog { get; set; }
         public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
         public String DescripcionEstado { get; set; }
         public bool UltimoRegistro { get; set; }
 
-        /*
+        
         public long Id { get; set; }
         public long IdSesion { get; set; }
         public DateTime FechaUltimaTransaccion { get; set; }
@@ -38,6 +38,6 @@ namespace Bja.Entidades
         public int NumeroControl { get; set; }
         public String Observaciones { get; set; }
         public TipoEstadoPago EstadoPago { get; set; }
-        public TipoBeneficiario TipoBeneficiario { get; set; } */
+        public TipoBeneficiario TipoBeneficiario { get; set; } 
     }
 }

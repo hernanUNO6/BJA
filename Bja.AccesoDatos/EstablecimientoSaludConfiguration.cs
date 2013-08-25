@@ -13,7 +13,7 @@ namespace Bja.AccesoDatos
     {
         public EstablecimientoSaludConfiguration()
         {
-            ToTable("EstablecimientoMedico");
+            ToTable("EstablecimientosSalud");
 
             HasKey(em => em.Id);
             Property(em => em.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -27,7 +27,7 @@ namespace Bja.AccesoDatos
             Property(em => em.Direccion).IsRequired().HasMaxLength(30);
             Property(em => em.Telefono).HasMaxLength(10);
 
-            HasRequired(em => em.Municipio).WithMany(em => em.EstablecimientosMedico).HasForeignKey(em => em.IdMunicipio);
+            HasRequired(em => em.RedSalud).WithMany(em => em.EstablecimientosSalud).HasForeignKey(em => em.IdRedSalud);
         }
     }
 }

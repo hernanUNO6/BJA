@@ -70,6 +70,7 @@
     <Compile Include="Recepcion.cs" />
     <Compile Include="RecepcionLog.cs" />
     <Compile Include="Reclamo.cs" />
+    <Compile Include="RedSalud.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="SolicitudPago.cs" />

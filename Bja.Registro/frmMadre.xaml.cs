@@ -53,7 +53,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
                 _madre = modelomadre.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _madre.DocumentoIdentidad;
-                cboTipoDocumentoIdentidad.SelectedValue = _madre.IdTipoDocumentoIdentidad;
+                cboTipoDocumentoIdentidad.SelectedValue = _madre.TipoDocumentoIdentidad;
                 cboProvincia.SelectedValue = _madre.IdProvincia;
                 cboMunicipio.SelectedValue = _madre.IdMunicipio;
                 txtPaterno.Text = _madre.PrimerApellido;
@@ -149,7 +149,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
 
                 _madre.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                _madre.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                _madre.TipoDocumentoIdentidad = (TipoDocumentoIdentidad)cboTipoDocumentoIdentidad.SelectedValue; //Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
                 _madre.PrimerApellido = txtPaterno.Text;
                 _madre.SegundoApellido = txtMaterno.Text;
                 _madre.TercerApellido = txtConyuge.Text;

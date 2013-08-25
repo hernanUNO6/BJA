@@ -47,7 +47,7 @@ namespace Bja.Modelo
           _madre.PrimerApellido = madre.PrimerApellido;
           _madre.SegundoApellido = madre.SegundoApellido;
           _madre.TercerApellido = madre.TercerApellido;
-          _madre.IdTipoDocumentoIdentidad = madre.IdTipoDocumentoIdentidad;
+          //_madre.IdTipoDocumentoIdentidad = madre.IdTipoDocumentoIdentidad;
           _madre.TipoDocumentoIdentidad = madre.TipoDocumentoIdentidad;
           _madre.FechaNacimiento = madre.FechaNacimiento;
           _madre.IdLocalidadNacimiento = madre.IdLocalidadNacimiento;

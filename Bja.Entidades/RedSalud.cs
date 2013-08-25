@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public class EstablecimientoSalud
+    public class RedSalud
     {
         public long Id { get; set; }
         public long IdSesion { get; set; }
@@ -16,12 +16,10 @@ namespace Bja.Entidades
 
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
 
-        public long IdRedSalud { get; set; }
-        public virtual RedSalud RedSalud { get; set; }
+        public long IdMunicipio { get; set; }
+        public virtual Municipio Municipio { get; set; }
 
-        public virtual ICollection<AsignacionMedico> AsignacionesMedico { get; set; }
+        public virtual ICollection<EstablecimientoSalud> EstablecimientosSalud { get; set; }
     }
 }
