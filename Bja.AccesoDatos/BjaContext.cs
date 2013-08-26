@@ -37,6 +37,7 @@ namespace Bja.AccesoDatos
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Provincia> Provincias { get; set; }
         public DbSet<Municipio> Municipios { get; set; }
+        public DbSet<RedSalud> RedesSalud { get; set; }
         public DbSet<EstablecimientoSalud> EstablecimientosSalud { get; set; }
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
 
