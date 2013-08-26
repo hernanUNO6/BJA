@@ -1,0 +1,93 @@
+﻿@model Bja.Entidades.RedSalud
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageScripts{
+<script src="/Scripts/jquery-ui-1.8.20.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#IdDepartamento").change(function () {
+            fillCombo("cboIdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
+            $("#cboIdMunicipio").empty();
+            $("#cboIdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
+            $('#IdMunicipio').val("");
+        });
+
+        $("#cboIdProvincia").change(function () {
+            fillCombo("cboIdMunicipio", $("#cboIdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            $('#IdMunicipio').val("");
+        });
+
+        function fillCombo(updateId, value, urlPath, msgSeleccion) {
+            $.getJSON(urlPath + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>" + msgSeleccion + "</option>");
+                    $.each(myData, function (i, item) {
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        $("#cboIdMunicipio").change(function () {
+            $('#IdMunicipio').val($('#cboIdMunicipio').val());
+        })
+    });
+</script>    
+}
+
+<h2>Registro de Red de Salud</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>RedSalud</legend>
+
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
+
+        <label>Provincia</label>
+            <select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdMunicipio, "Municipio")
+        </div>
+        <div class="editor-field">
+            @*@Html.DropDownList("IdMunicipio", String.Empty)*@
+            <select id="cboIdMunicipio"><option>... Seleccione Municipio ...</option></select>
+            @Html.TextBoxFor(model => model.IdMunicipio, new {style="width: 10px; visibility:hidden0" })
+            @Html.ValidationMessageFor(model => model.IdMunicipio)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Codigo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Codigo)
+            @Html.ValidationMessageFor(model => model.Codigo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <p>
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            @Html.ActionLink("Retornar al listado", "Index", null, new { @class = "btn" })
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

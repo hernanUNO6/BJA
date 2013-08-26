@@ -62,10 +62,10 @@ namespace Bja.Modelo
 
         public List<EstablecimientoSalud> GetEstablecimientosSaludPorRedSalud(long idRedSalud)
         {
-            List<EstablecimientoSalud> estSalud = (from es in db.EstablecimientosSalud
-                                                   where es.IdRedSalud == idRedSalud
-                                                   select es).ToList();
-            return estSalud;
+            List<EstablecimientoSalud> estabsSalud = (from es in db.EstablecimientosSalud
+                                                      where es.IdRedSalud == idRedSalud
+                                                      select es).ToList();
+            return estabsSalud;
         }
     }
 }

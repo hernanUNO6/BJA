@@ -162,15 +162,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AsignacionesMedicoController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EncargadosController.cs" />
-    <Compile Include="Controllers\EstablecimientosSaludController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Controllers\MunicipiosController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\ReclamosController.cs" />
+    <Compile Include="Controllers\RedesSaludController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -326,17 +325,11 @@
     <Content Include="Views\Municipios\Create.cshtml" />
     <Content Include="Views\Municipios\Edit.cshtml" />
     <Content Include="Views\Municipios\Delete.cshtml" />
-    <Content Include="Views\EstablecimientosSalud\Index.cshtml" />
-    <Content Include="Views\EstablecimientosSalud\Details.cshtml" />
-    <Content Include="Views\EstablecimientosSalud\Create.cshtml" />
-    <Content Include="Views\EstablecimientosSalud\Edit.cshtml" />
-    <Content Include="Views\EstablecimientosSalud\Delete.cshtml" />
-    <Content Include="Views\AsignacionesMedico\Index.cshtml" />
-    <Content Include="Views\AsignacionesMedico\Details.cshtml" />
-    <Content Include="Views\AsignacionesMedico\Create.cshtml" />
-    <Content Include="Views\AsignacionesMedico\Edit.cshtml" />
-    <Content Include="Views\AsignacionesMedico\Delete.cshtml" />
-    <Content Include="Views\AsignacionesMedico\BusquedaMedico.cshtml" />
+    <Content Include="Views\RedesSalud\Index.cshtml" />
+    <Content Include="Views\RedesSalud\Details.cshtml" />
+    <Content Include="Views\RedesSalud\Create.cshtml" />
+    <Content Include="Views\RedesSalud\Edit.cshtml" />
+    <Content Include="Views\RedesSalud\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
