@@ -31,10 +31,12 @@ namespace Bja.AccesoDatos
             Property(m => m.DocumentoIdentidad).IsRequired().HasMaxLength(15);
             Property(m => m.TipoDocumentoIdentidad).IsRequired();
             Property(m => m.FechaNacimiento).IsRequired();
-            Property(m => m.IdLocalidadNacimiento).IsRequired();
+            Property(m => m.IdDepartamento).IsRequired();
+            Property(m => m.IdProvincia).IsRequired();
+            Property(m => m.IdMunicipio).IsRequired();
+            Property(m => m.LocalidadNacimiento).IsRequired();
             Property(m => m.Defuncion).IsRequired();
-            Property(m => m.Observaciones).HasMaxLength(1024);
-
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
         }
     }
 }

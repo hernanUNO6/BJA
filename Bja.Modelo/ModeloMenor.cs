@@ -49,11 +49,10 @@ namespace Bja.Modelo
       _menor.Libro = menor.Libro;
       _menor.Partida = menor.Partida;
       _menor.Folio = menor.Folio;
-      _menor.TipoDocumentoIdentidad = menor.TipoDocumentoIdentidad;
-      _menor.IdLocalidadNacimiento = menor.IdLocalidadNacimiento;
       _menor.IdDepartamento = menor.IdDepartamento;
       _menor.IdProvincia = menor.IdProvincia;
       _menor.IdMunicipio = menor.IdMunicipio;
+      _menor.LocalidadNacimiento = menor.LocalidadNacimiento;
       _menor.FechaNacimiento = menor.FechaNacimiento;
       _menor.Sexo = menor.Sexo;
       _menor.Defuncion = menor.Defuncion;
@@ -93,7 +92,48 @@ namespace Bja.Modelo
     {
         return context.Menores.ToList();
     }
-    
+
+    public List<Menor> ListarHijosDeMadreATravesDeCorresponsabilidadDeMenor(long IdMadre)
+    {
+        List<Menor> menor = new List<Menor>();
+
+        menor = (from cn in context.CorresponsabilidadesMenor
+                 where cn.IdMadre == IdMadre
+                 from n in context.Menores
+                 where cn.IdMenor == n.Id
+                 select n).Distinct().ToList<Menor>();
+
+        return menor;
+    }
+
+    public List<Menor> ListarMenoresPorCriterio(string Criterio)
+    {
+        List<Menor> menor = new List<Menor>();
+
+        menor = (from n in context.Menores
+                 where n.Nombres.Contains(Criterio) ||
+                 n.PrimerApellido.Contains(Criterio) ||
+                 n.SegundoApellido.Contains(Criterio) ||
+                 n.DocumentoIdentidad.Contains(Criterio)
+                 orderby n.PrimerApellido, n.SegundoApellido, n.Nombres
+                 select n).ToList<Menor>();
+
+        return menor;
+    }
+
+    public List<Menor> ListarMenoresBajoTuicionDeTutor(long IdTutor)
+    {
+        List<Menor> menor = new List<Menor>();
+
+        menor = (from cn in context.CorresponsabilidadesMenor
+                 where cn.IdTutor == IdTutor
+                 from n in context.Menores
+                 where cn.IdMenor == n.Id
+                 select n).Distinct().ToList<Menor>();
+
+        return menor;
+    }
+
     public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
     {
         //buscar lista de registros paginados en base al criterio de búsqueda

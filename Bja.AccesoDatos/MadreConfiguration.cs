@@ -26,19 +26,12 @@ namespace Bja.AccesoDatos
             Property(m => m.DocumentoIdentidad).IsRequired().HasMaxLength(15);
             Property(m => m.TipoDocumentoIdentidad).IsRequired();
             Property(m => m.FechaNacimiento).IsRequired();
-
-            Property(m => m.IdLocalidadNacimiento).IsRequired().HasMaxLength(100);
             Property(m => m.IdDepartamento).IsRequired();
             Property(m => m.IdProvincia).IsRequired();
             Property(m => m.IdMunicipio).IsRequired();
-
+            Property(m => m.LocalidadNacimiento).IsRequired().HasMaxLength(100);
             Property(m => m.Defuncion).IsRequired();
-            Property(m => m.Observaciones).HasMaxLength(1024);
-
-            //relaciones
-            HasRequired(m => m.Departamento).WithMany().HasForeignKey(m => m.IdDepartamento).WillCascadeOnDelete(false);
-            HasRequired(m => m.Provincia).WithMany().HasForeignKey(m => m.IdProvincia).WillCascadeOnDelete(false);
-            HasRequired(m => m.Municipio).WithMany().HasForeignKey(m => m.IdMunicipio).WillCascadeOnDelete(false);
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
         }
     }
 }

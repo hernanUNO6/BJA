@@ -3,67 +3,79 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Corresponsabilidad de Madre" ShowInTaskbar="False" Height="624" Width="956" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        <Label x:Name="lblFormulario" Content="No Formulario:" Height="28" HorizontalAlignment="Left" Margin="20,165,0,0" VerticalAlignment="Top" Width="88" />
-        <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="110,170,0,0" VerticalAlignment="Top" Width="94" />
+        <Rectangle x:Name="recTutor" HorizontalAlignment="Left" Height="144" Margin="616,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
+        <Label x:Name="lblFormulario" Content="Número de Formulario" Height="28" HorizontalAlignment="Left" Margin="20,103,0,0" VerticalAlignment="Top" Width="135" />
+        <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="160,108,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblLugarGeografico" Content="Lugar Geográfico" Height="28" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="113" FontWeight="Bold" />
         <Label x:Name="lblDepto" Content="Departamento:" Height="28" HorizontalAlignment="Left" Margin="20,44,0,0" VerticalAlignment="Top" Width="94" />
-        <Label x:Name="lblDepartamento" Content="Departamento" Height="28" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="94" />
+        <Label x:Name="lblDepartamento" Content="La Paz" Height="28" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblEstSal" Content="Establecimiento:" Height="28" HorizontalAlignment="Left" Margin="20,69,0,0" VerticalAlignment="Top" Width="94" />
-        <Label x:Name="lblEstablecimiento" Content="Establecimiento" Height="28" HorizontalAlignment="Left" Margin="119,69,0,0" VerticalAlignment="Top" Width="94" />
-        <GroupBox x:Name="gbxTipo" Header="Tipo" BorderBrush="Black" Margin="20,97,749,445">
+        <Label x:Name="lblEstablecimiento" Content="Centro de Salud de Viloco" Height="28" HorizontalAlignment="Left" Margin="119,69,0,0" VerticalAlignment="Top" Width="156" />
+        <GroupBox x:Name="gbxTipo" Header="Tipo" BorderBrush="Black" Margin="30,168,753,374">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,-12">
                 <RadioButton x:Name="rdbNueva" Margin="3,3,0,3" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Nueva"/>
                 <RadioButton x:Name="rdbTransferencia" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia"/>
             </StackPanel>
         </GroupBox>
         <Label x:Name="lblMadre" Content="Madre - Beneficiaria" Height="28" HorizontalAlignment="Left" Margin="300,19,0,0" VerticalAlignment="Top" Width="132" FontWeight="Bold" />
-        <Label x:Name="lblNombreMadre" Content="Nombre" Height="28" HorizontalAlignment="Left" Margin="300,48,0,0" VerticalAlignment="Top" Width="56" />
+        <Label x:Name="lblNombreMadre" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="321,47,0,0" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.723,3.893" />
         <Label x:Name="lblNombresMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="391,48,0,0" VerticalAlignment="Top" Width="220" />
-        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento" Height="28" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Width="86" />
+        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="295,75,0,0" VerticalAlignment="Top" Width="86" />
         <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="391,75,0,0" VerticalAlignment="Top" Width="85" />
         <Button x:Name="cmdSeleccionarMadre" Content="Seleccionar" HorizontalAlignment="Left" Margin="300,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarMadre_Click"/>
+        <Button x:Name="cmdDetallesMadre" Content="Detalles" HorizontalAlignment="Left" Margin="380,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesMadre_Click"/>
         <Button x:Name="cmdModificarMadre" Content="Modificar" HorizontalAlignment="Left" Margin="460,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarMadre_Click" RenderTransformOrigin="0.493,-0.35"/>
-        <Label x:Name="lblBeneficiario" Content="Controles de la beneficiaria" Height="28" HorizontalAlignment="Left" Margin="16,231,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" />
-        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="186" Margin="31,264,0,0" VerticalAlignment="Top" Width="846">
+        <CheckBox x:Name="chkTutor" Content="Tutor para efectos de pago" HorizontalAlignment="Left" Margin="624,24,0,0" VerticalAlignment="Top" Checked="chkTutor_Checked" Unchecked="chkTutor_Unchecked"/>
+        <Label x:Name="lblTutor" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="651,46,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0.5,0.5" />
+        <Label x:Name="lblNombreTutor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="719,46,0,0" VerticalAlignment="Top" Width="197" />
+        <Label x:Name="lblNacimientoTutor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="628,71,0,0" VerticalAlignment="Top" Width="86" />
+        <Label x:Name="lblFechaNacimientoTutor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="719,71,0,0" VerticalAlignment="Top" Width="89" />
+        <Label x:Name="lblTipoParentesco" Content="Parentesco:" HorizontalAlignment="Left" Margin="643,99,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cboTipoParentesco"  HorizontalAlignment="Left" Margin="723,103,0,0" VerticalAlignment="Top" Width="187" />
+        <Button x:Name="cmdSeleccionarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="624,135,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
+        <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="784,135,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarTutor_Click"/>
+        <Button x:Name="cmdDetallesTutor" Content="Detalles" HorizontalAlignment="Left" Margin="704,135,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesTutor_Click"/>
+        <Label x:Name="lblFechaInscripcion" Content="Fecha de Inscripción" Height="28" HorizontalAlignment="Left" Margin="33,135,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.664,0.571" />
+        <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="160,139,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblFechaFUM" Content="Fecha Ultima Menstruación" Height="28" HorizontalAlignment="Left" Margin="203,194,0,0" VerticalAlignment="Top" Width="154" />
+        <DatePicker x:Name="dtpFechaFUM" HorizontalAlignment="Left" Margin="357,198,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblFechaUltimoParto" Content="Fecha Ultimo Parto" Height="28" HorizontalAlignment="Left" Margin="461,194,0,0" VerticalAlignment="Top" Width="110" />
+        <DatePicker x:Name="dtpFechaUltimoParto" HorizontalAlignment="Left" Margin="576,199,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblNumeroEmbarazo" Content="Número de Embarazo" Height="28" HorizontalAlignment="Left" Margin="680,194,0,0" VerticalAlignment="Top" Width="127" />
+        <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Left" Margin="807,199,0,0" VerticalAlignment="Top" Width="41" />
+        <CheckBox x:Name="chkARO" Content="A. R. O." HorizontalAlignment="Left" Margin="860,204,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblBeneficiaria" Content="Controles de la beneficiaria" Height="28" HorizontalAlignment="Left" Margin="16,231,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" />
+        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="186" Margin="31,264,0,0" VerticalAlignment="Top" Width="887">
             <DataGrid.Columns>
-                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Path=Id}" />
-                <DataGridTextColumn Header="Número" Binding="{Binding Path=NumeroControl}" />
-                <DataGridTextColumn Header="Programada" Binding="{Binding Path=FechaProgramada, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTextColumn Header="Talla (Cm)" Binding="{Binding Path=TallaCm}" />
-                <DataGridTextColumn Header="Peso (Kg)" Binding="{Binding Path=PesoKg, StringFormat=\{0:n2\}}" />
-                <DataGridTextColumn Header="Fecha" Binding="{Binding Path=FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTextColumn Header="Tipo" Binding="{Binding Path=TipoControlMadre}" />
-                <DataGridTextColumn Header="Beneficiario" Binding="{Binding Path=TipoBeneficiario}" />
-                <DataGridTextColumn Header="Medico" Binding="{Binding Path=IdMedico}" />
+                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Número" Binding="{Binding NumeroControl}" />
+                <DataGridTextColumn Header="Programada" Binding="{Binding FechaProgramada, StringFormat=\{0:dd/MM/yyyy\}}" />
+                <DataGridTextColumn Header="Talla (Cm)" Binding="{Binding TallaCm}" />
+                <DataGridTextColumn Header="Peso (Kg)" Binding="{Binding PesoKg, StringFormat=\{0:n2\}}" />
+                <DataGridTextColumn Header="Fecha" Binding="{Binding FechaControl, StringFormat=\{0:dd/MM/yyyy\}}" />
+                <DataGridTextColumn Header="Tipo" Binding="{Binding TipoControlMadre}" />
+                <DataGridTextColumn Header="Beneficiario" Binding="{Binding TipoBeneficiario}" />
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPago}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="cmdEditarControl_Click" Tag="{Binding Path=Id}">Editar</Button>
+                            <Button Click="cmdEditarControl_Click" Tag="{Binding Id}" Content="Editar"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="cmdDetalleControl_Click" Tag="{Binding Path=Id}">Detalle</Button>
+                            <Button Click="cmdDetalleControl_Click" Tag="{Binding Id}" Content="Detalle"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lblFechaInscripcion" Content="F. Inscripción:" Height="28" HorizontalAlignment="Left" Margin="24,197,0,0" VerticalAlignment="Top" Width="86" />
-        <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="110,201,0,0" VerticalAlignment="Top" Width="100"/>
-        <CheckBox x:Name="chkSalida" Content="Salida del beneficiario/a" HorizontalAlignment="Left" Margin="34,461,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-        <Label x:Name="lblFechaSalida" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="36,481,0,0" VerticalAlignment="Top" Width="45" />
-        <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="86,485,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
-        <Label x:Name="lblAutorizado" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="36,521,0,0" VerticalAlignment="Top" Width="96" />
-        <TextBox x:Name="txtAutorizado" Height="23" HorizontalAlignment="Left" Margin="132,526,0,0" VerticalAlignment="Top" Width="249" IsEnabled="False" />
-        <Label x:Name="lblCargo" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="402,521,0,0" VerticalAlignment="Top" Width="47" />
-        <TextBox x:Name="txtCargo" Height="23" HorizontalAlignment="Left" Margin="449,526,0,0" VerticalAlignment="Top" Width="249" IsEnabled="False" />
-        <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="759,526,0,0" VerticalAlignment="Top" Width="75" Click="cmdGuardar_Click"/>
-        <Button x:Name="cmdSalir" Content="Salir" HorizontalAlignment="Left" Margin="850,526,0,0" VerticalAlignment="Top" Width="75" Click="cmdSalir_Click"/>
-        <Button x:Name="cmdDetallesMadre" Content="Detalles" HorizontalAlignment="Left" Margin="380,108,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesMadre_Click"/>
-        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="196,465,203,80" RenderTransformOrigin="0.501,1">
+        <CheckBox x:Name="chkSalida" Content="Salida del beneficiario/a" HorizontalAlignment="Left" Margin="31,464,0,0" VerticalAlignment="Top" IsEnabled="False" Checked="chkSalida_Checked" Unchecked="chkSalida_Unchecked"/>
+        <Label x:Name="lblFechaSalida" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="30,493,0,0" VerticalAlignment="Top" Width="45" />
+        <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="80,497,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="195,483,195,62" RenderTransformOrigin="0.501,1">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,-3" RenderTransformOrigin="0.499,1.147">
                 <RadioButton x:Name="rdbCumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cumplimiento" IsEnabled="False"/>
                 <RadioButton x:Name="rdbTransferenciaSalida" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia" IsEnabled="False"/>
@@ -73,20 +85,12 @@
                 <RadioButton x:Name="rdbIncumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Incumplimiento" IsEnabled="False"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="cmdSeleccionarTutor" Content="Seleccionar" HorizontalAlignment="Left" Margin="630,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdSeleccionarTutor_Click"/>
-        <Button x:Name="cmdModificarTutor" Content="Modificar" HorizontalAlignment="Left" Margin="790,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdModificarTutor_Click"/>
-        <Button x:Name="cmdDetallesTutor" Content="Detalles" HorizontalAlignment="Left" Margin="710,109,0,0" VerticalAlignment="Top" Width="75" Click="cmdDetallesTutor_Click"/>
-        <Label x:Name="lblTutor" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="635,51,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.5,0.5" />
-        <Label x:Name="lblNombreTutor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="721,51,0,0" VerticalAlignment="Top" Width="197" />
-        <Label x:Name="lblNacimientoTutor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="635,76,0,0" VerticalAlignment="Top" Width="94" />
-        <Label x:Name="lblFechaNacimientoTutor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="721,76,0,0" VerticalAlignment="Top" Width="89" />
-        <Label x:Name="lblFechaFUM" Content="F. Ultima Menstruación:" Height="28" HorizontalAlignment="Left" Margin="229,197,0,0" VerticalAlignment="Top" Width="136" />
-        <DatePicker x:Name="dtpFechaFUM" HorizontalAlignment="Left" Margin="370,201,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblFechaUltimoParto" Content="F. Ultimo Parto:" Height="28" HorizontalAlignment="Left" Margin="489,197,0,0" VerticalAlignment="Top" Width="94" />
-        <DatePicker x:Name="dtpFechaUltimoParto" HorizontalAlignment="Left" Margin="589,201,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblNumeroEmbarazo" Content="N° Embarazo:" Height="28" HorizontalAlignment="Left" Margin="693,197,0,0" VerticalAlignment="Top" Width="88" />
-        <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Left" Margin="781,202,0,0" VerticalAlignment="Top" Width="41" />
-        <CheckBox x:Name="chkARO" Content="A. R. O." HorizontalAlignment="Left" Margin="850,205,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chkTutor" Content="Tutor para efectos de pago" HorizontalAlignment="Left" Margin="630,29,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAutorizado" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="30,533,0,0" VerticalAlignment="Top" Width="96" />
+        <TextBox x:Name="txtAutorizado" Height="23" HorizontalAlignment="Left" Margin="126,538,0,0" VerticalAlignment="Top" Width="257" IsEnabled="False" />
+        <Label x:Name="lblCargo" Content="Cargo:" Height="28" HorizontalAlignment="Left" Margin="426,533,0,0" VerticalAlignment="Top" Width="47" />
+        <TextBox x:Name="txtCargo" Height="23" HorizontalAlignment="Left" Margin="483,538,0,0" VerticalAlignment="Top" Width="257" IsEnabled="False" />
+        <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="807,501,0,0" VerticalAlignment="Top" Width="111" Click="cmdGuardar_Click"/>
+        <Rectangle x:Name="recMadre" HorizontalAlignment="Left" Height="121" Margin="280,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
+        <Button x:Name="cmdSalir" Content="Cerrar" HorizontalAlignment="Left" Margin="807,541,0,0" VerticalAlignment="Top" Width="111" Click="cmdSalir_Click"/>
     </Grid>
 </Window>

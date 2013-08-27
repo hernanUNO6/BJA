@@ -45,41 +45,43 @@ namespace Bja.Registro
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
                 _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
-                dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
-                txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);
-                txtTalla.Text = Convert.ToString(_controlmadre.TallaCm);
-                dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
-                lblNumeroControl.Content = _controlmadre.NumeroControl;
-                txtObservaciones.Text = _controlmadre.Observaciones;
-                if (_controlmadre.IdTutor > 0)
-                    rdbTutor.IsChecked = true;
+
+                this.dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
+                if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+                {
+                    this.chkDescartar.IsChecked = true; 
+                    this.txtPeso.Text = "0";
+                    this.txtTalla.Text = "0";
+                    this.dtpFechaControl.SelectedDate = DateTime.Now;
+                }
                 else
-                    rdbMadre.IsChecked = true;
+                {
+                    this.chkDescartar.IsChecked = true;
+                    this.txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);
+                    this.txtTalla.Text = Convert.ToString(_controlmadre.TallaCm);
+                    this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+                }
+                this.lblNumeroControl.Content = _controlmadre.NumeroControl;
             }
             else
             {
                 ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
 
                 _controlmenor = modelocontrolmenor.Recuperar(IdSeleccionado);
-                dtpFechaProgramada.SelectedDate = _controlmenor.FechaProgramada;
-                txtPeso.Text = Convert.ToString(_controlmenor.PesoKg);
-                txtTalla.Text = Convert.ToString(_controlmenor.TallaCm);
-                dtpFechaControl.SelectedDate = _controlmenor.FechaControl;
-                lblNumeroControl.Content = _controlmenor.NumeroControl;
-                txtObservaciones.Text = _controlmenor.Observaciones;
-                if (_controlmenor.IdTutor > 0)
-                    rdbTutor.IsChecked = true;
-                else
-                    rdbMadre.IsChecked = true;
+                this.dtpFechaProgramada.SelectedDate = _controlmenor.FechaProgramada;
+                this.txtPeso.Text = Convert.ToString(_controlmenor.PesoKg);
+                this.txtTalla.Text = Convert.ToString(_controlmenor.TallaCm);
+                this.dtpFechaControl.SelectedDate = _controlmenor.FechaControl;
+                this.lblNumeroControl.Content = _controlmenor.NumeroControl;
             }
             if (TipoAccion == TipoAccion.Detalle)
             {
-                dtpFechaProgramada.IsEnabled = false;
-                txtTalla.IsEnabled = false;
-                txtPeso.IsEnabled = false;
-                dtpFechaControl.IsEnabled = false;
-                txtObservaciones.IsEnabled = false;
-                cmdAceptar.IsEnabled = false;
+                this.chkDescartar.IsEnabled = false;
+                this.dtpFechaProgramada.IsEnabled = false;
+                this.txtTalla.IsEnabled = false;
+                this.txtPeso.IsEnabled = false;
+                this.dtpFechaControl.IsEnabled = false;
+                this.cmdAceptar.IsEnabled = false;
             }
         }
 
@@ -90,11 +92,22 @@ namespace Bja.Registro
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
                 _controlmadre.IdTutor = IdTutor;
-                _controlmadre.FechaProgramada = dtpFechaProgramada.SelectedDate.Value;
-                _controlmadre.PesoKg = Convert.ToSingle(txtPeso.Text);
-                _controlmadre.TallaCm = Convert.ToInt32(txtTalla.Text);
-                _controlmadre.FechaControl = dtpFechaControl.SelectedDate.Value;
-                _controlmadre.Observaciones = txtObservaciones.Text;
+
+                if (this.chkDescartar.IsChecked == true)
+                {
+                    _controlmadre.PesoKg = 0;
+                    _controlmadre.TallaCm = 0;
+                    _controlmadre.FechaControl = DateTime.Now;
+                    _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+                }
+                else
+                {
+                    _controlmadre.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
+                    _controlmadre.PesoKg = Convert.ToSingle(this.txtPeso.Text);
+                    _controlmadre.TallaCm = Convert.ToInt32(this.txtTalla.Text);
+                    _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                    _controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
+                }
 
                 modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
             }
@@ -104,11 +117,10 @@ namespace Bja.Registro
 
                 _controlmenor.IdMadre = IdMadre;
                 _controlmenor.IdTutor = IdTutor;
-                _controlmenor.FechaProgramada = dtpFechaProgramada.SelectedDate.Value;
-                _controlmenor.PesoKg = Convert.ToSingle(txtPeso.Text);
-                _controlmenor.TallaCm = Convert.ToInt32(txtTalla.Text);
-                _controlmenor.FechaControl = dtpFechaControl.SelectedDate.Value;
-                _controlmenor.Observaciones = txtObservaciones.Text;
+                _controlmenor.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
+                _controlmenor.PesoKg = Convert.ToSingle(this.txtPeso.Text);
+                _controlmenor.TallaCm = Convert.ToInt32(this.txtTalla.Text);
+                _controlmenor.FechaControl = this.dtpFechaControl.SelectedDate.Value;
 
                 modelocontrolmenor.Editar(IdSeleccionado, _controlmenor);
             }

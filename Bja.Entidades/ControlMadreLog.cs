@@ -30,6 +30,7 @@ namespace Bja.Entidades
         public Tutor Tutor { get; set; }
         public TipoParentesco TipoParentesco { get; set; }
         public long IdEstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
         public DateTime FechaProgramada { get; set; }
         public DateTime FechaControl { get; set; }
         public int TallaCm { get; set; }

@@ -41,18 +41,20 @@ namespace Bja.Registro
 
             _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
             dtpFechaPrevista.SelectedDate = _controlmadre.FechaProgramada;
-            dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
-            txtObservaciones.Text = _controlmadre.Observaciones;
-            if (_controlmadre.IdTutor > 0)
-                rdbTutor.IsChecked = true;
+            if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+            {
+                this.chkDescartar.IsChecked = true;
+                this.dtpFechaControl.SelectedDate = DateTime.Now;
+            }
             else
-                rdbMadre.IsChecked = true;
+            {
+                this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+            }
             if (TipoAccion == TipoAccion.Detalle)
             {
-                dtpFechaPrevista.IsEnabled = false;
-                dtpFechaControl.IsEnabled = false;
-                txtObservaciones.IsEnabled = false;
-                cmdAceptar.IsEnabled = false;
+                this.dtpFechaPrevista.IsEnabled = false;
+                this.dtpFechaControl.IsEnabled = false;
+                this.cmdAceptar.IsEnabled = false;
             }
         }
 
@@ -61,9 +63,17 @@ namespace Bja.Registro
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
             _controlmadre.IdTutor = IdTutor;
-            _controlmadre.FechaProgramada = dtpFechaPrevista.SelectedDate.Value;
-            _controlmadre.FechaControl = dtpFechaControl.SelectedDate.Value;
-            _controlmadre.Observaciones = txtObservaciones.Text;
+            if (this.chkDescartar.IsChecked == true)
+            {
+                _controlmadre.FechaControl = DateTime.Now;
+                _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+            }
+            else
+            {
+                _controlmadre.FechaProgramada = this.dtpFechaPrevista.SelectedDate.Value;
+                _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                _controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
+            }
 
             modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
 

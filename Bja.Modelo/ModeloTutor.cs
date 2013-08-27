@@ -45,12 +45,11 @@ namespace Bja.Modelo
         _tutor.TercerApellido = tutor.TercerApellido;
         _tutor.DocumentoIdentidad = tutor.DocumentoIdentidad;
         _tutor.IdTipoDocumentoIdentidad = tutor.IdTipoDocumentoIdentidad;
-        _tutor.TipoDocumentoIdentidad = tutor.TipoDocumentoIdentidad;
         _tutor.FechaNacimiento = tutor.FechaNacimiento;
-        _tutor.IdLocalidadNacimiento = tutor.IdLocalidadNacimiento;
         _tutor.IdDepartamento = tutor.IdDepartamento;
         _tutor.IdProvincia = tutor.IdProvincia;
         _tutor.IdMunicipio = tutor.IdMunicipio;
+        _tutor.LocalidadNacimiento = tutor.LocalidadNacimiento;
         _tutor.Defuncion = tutor.Defuncion;
         _tutor.Observaciones = tutor.Observaciones;
         _tutor.Sexo = tutor.Sexo;
@@ -85,28 +84,53 @@ namespace Bja.Modelo
         return tutor;
     }
 
+    public List<Tutor> RecuperarTutor(long Id)
+    {
+        List<Tutor> tutor = new List<Tutor>();
+        tutor = (from t in context.Tutores
+                 where t.Id == Id
+                 select t).ToList<Tutor>();
+        return tutor;
+    }
+
     public List<Tutor> Listar()
     {
         return context.Tutores.ToList();
     }
 
-    //public List<Madre> ListarMadresDependientes(long IdTutor)
-    //{
-    //    List<Madre> madre = new List<Madre>();
+    public List<Tutor> ListarTutoresDeMadresPorCriterio(string Criterio)
+    {
+        List<Tutor> tutor = new List<Tutor>();
 
-    //    //...
+        tutor = (from t in context.Tutores
+                 where t.Nombres.Contains(Criterio) ||
+                 t.PrimerApellido.Contains(Criterio) ||
+                 t.SegundoApellido.Contains(Criterio) ||
+                 t.DocumentoIdentidad.Contains(Criterio)
+                 from cm in context.CorresponsabilidadesMadre
+                 where cm.IdTutor == t.Id
+                 orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
+                 select t).Distinct().ToList<Tutor>();
 
-    //    return madre;
-    //}
+        return tutor;
+    }
 
-    //public List<Menor> ListarMenoresDependientes(long IdTutor)
-    //{
-    //    List<Menor> menor = new List<Menor>();
+    public List<Tutor> ListarTutoresDeMenoresPorCriterio(string Criterio)
+    {
+        List<Tutor> tutor = new List<Tutor>();
 
-    //    //...
+        tutor = (from t in context.Tutores
+                 where t.Nombres.Contains(Criterio) ||
+                 t.PrimerApellido.Contains(Criterio) ||
+                 t.SegundoApellido.Contains(Criterio) ||
+                 t.DocumentoIdentidad.Contains(Criterio)
+                 from cn in context.CorresponsabilidadesMenor
+                 where cn.IdTutor == t.Id
+                 orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
+                 select t).Distinct().ToList<Tutor>();
 
-    //    return menor;
-    //}
+        return tutor;
+    }
 
     public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
     {

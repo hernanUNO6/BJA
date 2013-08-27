@@ -40,13 +40,19 @@ namespace Bja.Registro
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
             _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
-            dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
-            txtObservaciones.Text = _controlmadre.Observaciones;
+            if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+            {
+                this.chkDescartar.IsChecked = true;
+                this.dtpFechaControl.SelectedDate = DateTime.Now;
+            }
+            else
+            {
+                this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+            }
             if (TipoAccion == TipoAccion.Detalle)
             {
-                dtpFechaControl.IsEnabled = false;
-                txtObservaciones.IsEnabled = false;
-                cmdAceptar.IsEnabled = false;
+                this.dtpFechaControl.IsEnabled = false;
+                this.cmdAceptar.IsEnabled = false;
             }
         }
 
@@ -55,8 +61,16 @@ namespace Bja.Registro
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
             _controlmadre.IdTutor = IdTutor;
-            _controlmadre.FechaControl = dtpFechaControl.SelectedDate.Value;
-            _controlmadre.Observaciones = txtObservaciones.Text;
+            if (this.chkDescartar.IsChecked == true)
+            {
+                _controlmadre.FechaControl = DateTime.Now;
+                _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+            }
+            else 
+            {
+                _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                _controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
+            }
 
             modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
 

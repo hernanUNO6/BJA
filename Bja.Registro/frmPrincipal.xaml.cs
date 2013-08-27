@@ -73,5 +73,15 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
+        private void cmdAvanzado_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmInformacionAvanzada objInformacionAvanzadaWindow = new frmInformacionAvanzada();
+            objInformacionAvanzadaWindow.Owner = this;
+            objInformacionAvanzadaWindow.ShowDialog();
+            objInformacionAvanzadaWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
     }
 }

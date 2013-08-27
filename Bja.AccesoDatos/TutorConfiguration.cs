@@ -26,13 +26,13 @@ namespace Bja.AccesoDatos
             Property(t => t.DocumentoIdentidad).IsRequired().HasMaxLength(15);
             Property(t => t.TipoDocumentoIdentidad).IsRequired();
             Property(t => t.FechaNacimiento).IsRequired();
-            Property(t => t.IdLocalidadNacimiento).IsRequired();
+            Property(t => t.LocalidadNacimiento).IsRequired();
             Property(m => m.IdDepartamento).IsRequired();
             Property(m => m.IdProvincia).IsRequired();
             Property(m => m.IdMunicipio).IsRequired();
             Property(t => t.Defuncion).IsRequired();
             Property(t => t.Sexo).HasMaxLength(1).IsRequired();
-            Property(t => t.Observaciones).HasMaxLength(1024);
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
         }
     }
 }

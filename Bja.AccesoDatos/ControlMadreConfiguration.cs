@@ -22,8 +22,8 @@ namespace Bja.AccesoDatos
             Property(c => c.IdMedico).IsRequired();
             Property(c => c.IdMadre).IsRequired();
             Property(c => c.IdTutor).IsOptional();
-            Property(c => c.IdEstablecimientoSalud).IsRequired();
             Property(c => c.TipoParentesco).IsOptional();
+            Property(c => c.IdEstablecimientoSalud).IsRequired();
             Property(c => c.FechaProgramada).IsRequired();
             Property(c => c.FechaControl).IsRequired();
             Property(c => c.TallaCm).IsRequired();
@@ -31,7 +31,7 @@ namespace Bja.AccesoDatos
             Property(c => c.TipoControlMadre).IsRequired();
             Property(c => c.NumeroControl).IsRequired();
             Property(c => c.EstadoPago).IsRequired();
-            Property(c => c.Observaciones).HasMaxLength(1024);
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
             Property(c => c.TipoBeneficiario).IsRequired();
 
             //relaciones
