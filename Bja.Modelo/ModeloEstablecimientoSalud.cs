@@ -49,17 +49,6 @@ namespace Bja.Modelo
             db.SaveChanges();
         }
 
-/*
-        public List<EstablecimientoSalud> GetEstablecimientosSaludPorMunicipio(string idMunicipio)
-        {
-            Int64 Identificador = Convert.ToInt64(idMunicipio);
-
-            List<EstablecimientoSalud> estSalud = (from es in db.EstablecimientosSalud
-                                                   where es.IdMunicipio == Identificador
-                                                   select es).ToList();
-            return estSalud;
-        }*/
-
         public List<EstablecimientoSalud> GetEstablecimientosSaludPorRedSalud(long idRedSalud)
         {
             List<EstablecimientoSalud> estabsSalud = (from es in db.EstablecimientosSalud

@@ -49,10 +49,12 @@ namespace Bja.Modelo
             db.SaveChanges();
         }
 
-        public List<RedSalud> GetRedesSaludPorMunicipio(long idMunicipio)
+        public List<RedSalud> GetRedesSaludPorMunicipio(string idMunicipio)
         {
+            Int64 Identificador = Convert.ToInt64(idMunicipio);
+
             List<RedSalud> redesSalud = (from rs in db.RedesSalud
-                                         where rs.IdMunicipio == idMunicipio
+                                         where rs.IdMunicipio == Identificador
                                          select rs).ToList();
             return redesSalud;
         }

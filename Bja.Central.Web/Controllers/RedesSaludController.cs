@@ -90,7 +90,7 @@ namespace Bja.Central.Web.Controllers
             }
             ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion", redsalud.Municipio.Provincia.IdDepartamento);
             ViewBag.IdProvincia = new SelectList(modProvincia.Listar().Where(p => p.IdDepartamento == redsalud.Municipio.Provincia.IdDepartamento), "Id", "Descripcion", redsalud.Municipio.IdProvincia);
-            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar().Where(p => p.IdProvincia == redsalud.Municipio.IdProvincia), "Id", "Descripcion", redsalud.IdMunicipio);
+            ViewBag.cboIdMunicipio = new SelectList(modMunicipio.Listar().Where(p => p.IdProvincia == redsalud.Municipio.IdProvincia), "Id", "Descripcion", redsalud.IdMunicipio);
             return View(redsalud);
         }
 

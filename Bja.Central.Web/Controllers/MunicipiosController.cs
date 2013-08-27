@@ -84,7 +84,7 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdProvincia = new SelectList(modProvincia.Listar(), "Id", "Descripcion", municipio.IdProvincia);
+            ViewBag.cboIdProvincia = new SelectList(modProvincia.Listar().Where(p => p.IdDepartamento == municipio.Provincia.IdDepartamento), "Id", "Descripcion", municipio.IdProvincia);
             return View(municipio);
         }
 

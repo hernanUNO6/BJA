@@ -7,8 +7,6 @@
 
 @section PageScripts{
 <script src="/Scripts/jquery-ui-1.8.20.js"></script>
-<script src="/Scripts/jquery.ui.datepicker-es.js"></script>
-<script src="/Scripts/jquery.maskedinput.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#IdDepartamento").change(function () {
@@ -51,7 +49,7 @@
         <div class="editor-field">
             @*@Html.DropDownList("IdProvincia", String.Empty)*@
             <select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>
-            @Html.TextBoxFor(model => model.IdProvincia, new {style="width: 1px; visibility:hidden" })
+            @Html.TextBoxFor(model => model.IdProvincia, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdProvincia)
         </div>
 
