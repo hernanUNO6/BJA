@@ -14,12 +14,21 @@
             fillCombo("IdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
             $("#IdMunicipio").empty();
             $("#IdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
-            $('#IdMunicipio').val("");
+            $("#cboIdRedSalud").empty();
+            $("#cboIdRedSalud").append("<option value=''>... Seleccione Red de Salud ...</option>");
+            $('#IdRedSalud').val("");
         });
 
         $("#IdProvincia").change(function () {
             fillCombo("IdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
-            $('#IdMunicipio').val("");
+            $("#cboIdRedSalud").empty();
+            $("#cboIdRedSalud").append("<option value=''>... Seleccione Red de Salud ...</option>");
+            $('#IdRedSalud').val("");
+        });
+
+        $("#IdMunicipio").change(function () {
+            fillCombo("cboIdRedSalud", $("#IdMunicipio").val(), '@Url.Action("RedesSaludPorMunicipio")', "... Seleccione Red de Salud ...");
+            $('#IdRedSalud').val("");
         });
 
         function fillCombo(updateId, value, urlPath, msgSeleccion) {
@@ -33,16 +42,14 @@
                 });
         }
 
-        
-
-        //$("#cboIdMunicipio").change(function () {
-        //    $('#IdMunicipio').val($('#cboIdMunicipio').val());
-        //})
+        $("#cboIdRedSalud").change(function () {
+            $('#IdRedSalud').val($('#cboIdRedSalud').val());
+        })
     });
 </script>    
 }
 
-<h2>Edita Establecimiento de Salud</h2>
+<h2>Editar Establecimiento de Salud</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -51,6 +58,24 @@
         <legend>EstablecimientoSalud</legend>
 
         @Html.HiddenFor(model => model.Id)
+
+        <label for="Departamento">Departamento</label>
+            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
+
+        <label>Provincia</label>
+            @Html.DropDownList("IdProvincia", "... Seleccione Provincia ....")
+
+        <label>Municipio</label>
+            @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdRedSalud, "RedSalud")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("cboIdRedSalud", "... Seleccione Red de Salud ....")
+            @Html.TextBoxFor(model => model.IdRedSalud, new {style="width: 10px; visibility:hidden0" })
+            @Html.ValidationMessageFor(model => model.IdRedSalud)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Codigo)
@@ -82,21 +107,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Telefono)
             @Html.ValidationMessageFor(model => model.Telefono)
-        </div>
-
-        <label for="Departamento">Departamento</label>
-            @Html.DropDownList("IdDepartamento", "... Seleccione Departamento ....")
-
-        <label>Provincia</label>
-            @*<select id="cboIdProvincia"><option>... Seleccione Provincia ...</option></select>*@
-            @Html.DropDownList("IdProvincia", "... Seleccione Provincia ....")
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdMunicipio, "Municipio")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
-            @Html.ValidationMessageFor(model => model.IdMunicipio)
         </div>
 
         <p>

@@ -12,13 +12,13 @@
 
         $("#IdDepartamento").change(function () {
             fillCombo("IdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
-            $("#IdMunicipio").empty();
-            $("#IdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
+            $("#cboIdMunicipio").empty();
+            $("#cboIdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
             $('#IdMunicipio').val("");
         });
 
         $("#IdProvincia").change(function () {
-            fillCombo("IdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            fillCombo("cboIdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
             $('#IdMunicipio').val("");
         });
 
@@ -32,11 +32,15 @@
                     })
                 });
         }
+
+        $("#cboIdMunicipio").change(function () {
+            $('#IdMunicipio').val($('#cboIdMunicipio').val());
+        })
     });
 </script>    
 }
 
-<h2>Edita Establecimiento de Salud</h2>
+<h2>Edita Red de Salud</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -57,7 +61,8 @@
             @Html.LabelFor(model => model.IdMunicipio, "Municipio")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
+            @Html.DropDownList("cboIdMunicipio", "... Seleccione Municipio ....")
+            @Html.TextBoxFor(model => model.IdMunicipio, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdMunicipio)
         </div>
 

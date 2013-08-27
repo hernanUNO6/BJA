@@ -5,6 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section PageScripts{
+<script src="/Scripts/jquery-ui-1.8.20.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#IdDepartamento").change(function () {
+            fillCombo("cboIdProvincia", $("#IdDepartamento").val());
+        });
+
+        function fillCombo(updateId, value) {
+            $.getJSON('@Url.Action("ProvinciasPorDepartamento")' + "/" + value, {},
+                function (myData) {
+                    $("#" + updateId).empty();
+                    $("#" + updateId).append("<option value=''>... Seleccione Provincia ...</option>");
+                    $('#IdProvincia').val("");
+                    $.each(myData, function (i, item) {
+                        //alert(item.Descripcion);
+                        $("#" + updateId).append("<option value='" + item.Id + "'>" + item.Descripcion + "</option>");
+                    })
+                });
+        }
+
+        $("#cboIdProvincia").change(function () {
+            $('#IdProvincia').val($('#cboIdProvincia').val());
+        })
+    });
+</script>    
+}
+
 <h2>Editar Municipio</h2>
 
 @using (Html.BeginForm()) {
@@ -22,7 +50,8 @@
             @Html.LabelFor(model => model.IdProvincia, "Provincia")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdProvincia", "... Seleccione Provincia ...")
+            @Html.DropDownList("cboIdProvincia", "... Seleccione Provincia ...")
+            @Html.TextBoxFor(model => model.IdProvincia, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdProvincia)
         </div>
 
