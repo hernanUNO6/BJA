@@ -20,12 +20,13 @@ namespace Bja.Entidades
         public Medico Medico { get; set; }
         public long IdMenor { get; set; }
         public Menor Menor { get; set; }
-        public long IdMadre { get; set; }
+        public long? IdMadre { get; set; }
         public Madre Madre { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdTutor { get; set; }
         public Tutor Tutor { get; set; }
         public TipoParentesco TipoParentesco { get; set; }
         public long IdEstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
         public DateTime FechaProgramada { get; set; }
         public DateTime FechaControl { get; set; }
         public int TallaCm { get; set; }

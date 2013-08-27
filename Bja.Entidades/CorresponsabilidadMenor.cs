@@ -33,5 +33,7 @@ namespace Bja.Entidades
         public String Observaciones { get; set; }
         public String AutorizadoPor { get; set; }
         public String CargoAutorizador { get; set; }
+
+        public virtual ICollection<ControlMenor> ControlesMenor { get; set; }
     }
 }
