@@ -8,7 +8,7 @@ namespace Bja.Entidades
 {
     public enum TipoSalidaMadre
     {
-        Cumplimiento,
+        Cumplimiento = 1,
         Transferencia,
         Aborto,
         ObitoFetal,

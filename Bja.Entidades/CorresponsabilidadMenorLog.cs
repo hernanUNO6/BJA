@@ -20,6 +20,7 @@ namespace Bja.Entidades
         public TipoEstadoRegistro EstadoRegistro { get; set; }
 
         public long IdEstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
         public TipoInscripcion TipoInscripcionMenor { get; set; }
         public DateTime FechaInscripcion { get; set; }
         public long IdMenor { get; set; }
@@ -30,8 +31,8 @@ namespace Bja.Entidades
         public String DireccionMadre { get; set; }
         public long IdTutor { get; set; }
         public Tutor Tutor { get; set; }
-        public TipoParentesco TipoParentesco { get; set; }
         public String DireccionTutor { get; set; }
+        public TipoParentesco TipoParentesco { get; set; }
         public String CodigoFormulario { get; set; }
         public DateTime FechaSalidaPrograma { get; set; }
         public TipoSalidaMenor TipoSalidaMenor { get; set; }

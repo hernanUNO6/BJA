@@ -86,6 +86,9 @@
     <Compile Include="frmCorresponsabilidadMenor.xaml.cs">
       <DependentUpon>frmCorresponsabilidadMenor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmInformacionAvanzada.xaml.cs">
+      <DependentUpon>frmInformacionAvanzada.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmLista.xaml.cs">
       <DependentUpon>frmLista.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCorresponsabilidadMenor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmInformacionAvanzada.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

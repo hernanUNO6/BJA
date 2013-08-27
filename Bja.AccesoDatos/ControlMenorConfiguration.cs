@@ -30,7 +30,7 @@ namespace Bja.AccesoDatos
             Property(c => c.PesoKg).IsRequired();
             Property(c => c.NumeroControl).IsRequired();
             Property(c => c.EstadoPago).IsRequired();
-            Property(c => c.Observaciones).HasMaxLength(1024);
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
             Property(c => c.TipoBeneficiario).IsRequired();
 
             //relaciones
@@ -40,7 +40,6 @@ namespace Bja.AccesoDatos
             HasOptional(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
             HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
             HasRequired(c => c.EstablecimientoSalud).WithMany().HasForeignKey(c => c.IdEstablecimientoSalud).WillCascadeOnDelete(false);
-
         }
     }
 }

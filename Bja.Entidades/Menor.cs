@@ -25,10 +25,10 @@ namespace Bja.Entidades
         public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public String IdLocalidadNacimiento { get; set; }
-        public long IdDepartamento { get; set; }
-        public long IdProvincia { get; set; }
-        public long IdMunicipio { get; set; }
+        public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
+        public long IdProvincia { get; set; } //solo referencial con la tabla Provincia
+        public long IdMunicipio { get; set; } //solo referencial con la tabla Municipio
+        public String LocalidadNacimiento { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
         public String Sexo { get; set; }

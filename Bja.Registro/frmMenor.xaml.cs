@@ -25,6 +25,7 @@ namespace Bja.Registro
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Menor _menor = new Menor();
+        public bool Resultado { get; set; }
 
         public frmMenor()
         {
@@ -72,14 +73,13 @@ namespace Bja.Registro
                 dtpFechaNacimiento.SelectedDate = _menor.FechaNacimiento;
                 if (_menor.Defuncion == true)
                     chkDefuncion.IsChecked = true;
-                txtObservaciones.Text = _menor.Observaciones;
-                txtLugarNacimiento.Text = _menor.IdLocalidadNacimiento;
+                txtLugarNacimiento.Text = _menor.LocalidadNacimiento;
                 cboDepartamento.SelectedValue = _menor.IdDepartamento;
                 RecuperarProvincias(_menor.IdDepartamento.ToString());
                 cboProvincia.SelectedValue = _menor.IdProvincia;
                 RecuperarMunicipios(_menor.IdProvincia.ToString());
                 cboMunicipio.SelectedValue = _menor.IdMunicipio;
-                if ((TipoAccion == TipoAccion.Edicion) || (TipoAccion == TipoAccion.Detalle))
+                if (TipoAccion == TipoAccion.Detalle)
                 {
                     txtDocumentoIdentidad.IsEnabled = false;
                     cboTipoDocumentoIdentidad.IsEnabled = false;
@@ -87,9 +87,6 @@ namespace Bja.Registro
                     txtLibro.IsEnabled = false;
                     txtPartida.IsEnabled = false;
                     txtFolio.IsEnabled = false;
-                }
-                if (TipoAccion == TipoAccion.Detalle)
-                {
                     txtPaterno.IsEnabled = false;
                     txtMaterno.IsEnabled = false;
                     txtNombres.IsEnabled = false;
@@ -101,11 +98,12 @@ namespace Bja.Registro
                     cboDepartamento.IsEnabled = false;
                     cboProvincia.IsEnabled = false;
                     cboMunicipio.IsEnabled = false;
-                    txtObservaciones.IsEnabled = false;
                     cmdAceptar.IsEnabled = false;
                 }
             }
             ControlPreliminar = true;
+            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+                this.txtDocumentoIdentidad.Focus();
         }
 
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
@@ -190,11 +188,11 @@ namespace Bja.Registro
                 _menor.Nombres = txtNombres.Text;
                 _menor.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
                 _menor.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
-                _menor.Observaciones = txtObservaciones.Text;
+                _menor.Observaciones = "";
                 _menor.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
                 _menor.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
                 _menor.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _menor.IdLocalidadNacimiento = txtLugarNacimiento.Text;
+                _menor.LocalidadNacimiento = txtLugarNacimiento.Text;
                 if (rdbFemenino.IsChecked == true)
                     _menor.Sexo = "F";
                 else if (rdbFemenino.IsChecked == false)
@@ -206,13 +204,17 @@ namespace Bja.Registro
                     modelomenor.Editar(IdSeleccionado, _menor);
                 else
                     modelomenor.Crear(_menor);
-            }
 
-            this.Close();
+                Resultado = true;
+
+                this.Close();
+            }
         }
 
         private void cmdCancelar_Click(object sender, RoutedEventArgs e)
         {
+            Resultado = false;
+
             this.Close();
         }
 

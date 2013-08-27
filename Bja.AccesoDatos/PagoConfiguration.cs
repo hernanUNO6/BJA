@@ -27,7 +27,6 @@ namespace Bja.AccesoDatos
             Property(m => m.FechaNacimientoTitular).IsRequired();
             Property(m => m.Monto).IsRequired();
             Property(m => m.Control).IsRequired().HasMaxLength(32);
-
         }
     }
 }

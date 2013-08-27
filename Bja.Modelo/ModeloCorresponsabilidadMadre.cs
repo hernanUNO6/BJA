@@ -25,7 +25,7 @@ namespace Bja.Modelo
           context.SaveChanges();
       }
 
-      public void Editar(int Id, CorresponsabilidadMadre corresponsabilidadmadre)
+      public void Editar(long Id, CorresponsabilidadMadre corresponsabilidadmadre)
       {
           CorresponsabilidadMadre _corresponsabilidadmadre = null;
 
@@ -45,6 +45,7 @@ namespace Bja.Modelo
           _corresponsabilidadmadre.DireccionMadre = corresponsabilidadmadre.DireccionMadre;
           _corresponsabilidadmadre.IdTutor = corresponsabilidadmadre.IdTutor;
           _corresponsabilidadmadre.DireccionTutor = corresponsabilidadmadre.DireccionTutor;
+          _corresponsabilidadmadre.TipoParentesco = corresponsabilidadmadre.TipoParentesco;
           _corresponsabilidadmadre.CodigoFormulario = corresponsabilidadmadre.CodigoFormulario;
           _corresponsabilidadmadre.FechaUltimaMenstruacion = corresponsabilidadmadre.FechaUltimaMenstruacion;
           _corresponsabilidadmadre.FechaUltimoParto = corresponsabilidadmadre.FechaUltimoParto;
@@ -59,7 +60,7 @@ namespace Bja.Modelo
           context.SaveChanges();
       }
 
-      public void Eliminar(int Id)
+      public void Eliminar(long Id)
       {
           CorresponsabilidadMadre corresponsabilidadmadre = null;
 
@@ -81,6 +82,18 @@ namespace Bja.Modelo
 
           corresponsabilidadmadre = (from cm in context.CorresponsabilidadesMadre 
                                      where cm.Id == Id
+                                     select cm).FirstOrDefault();
+
+          return corresponsabilidadmadre;
+      }
+
+      public CorresponsabilidadMadre RecuperarElUltimoValido(long IdMadre)
+      {
+          CorresponsabilidadMadre corresponsabilidadmadre = null;
+
+          corresponsabilidadmadre = (from cm in context.CorresponsabilidadesMadre.Take(1)
+                                     where cm.IdMadre == IdMadre
+                                     orderby cm.FechaInscripcion descending
                                      select cm).FirstOrDefault();
 
           return corresponsabilidadmadre;

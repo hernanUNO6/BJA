@@ -25,7 +25,7 @@ namespace Bja.Modelo
             context.SaveChanges();
         }
 
-        public void Editar(int Id, CorresponsabilidadMenor corresponsabilidadmenor)
+        public void Editar(long Id, CorresponsabilidadMenor corresponsabilidadmenor)
         {
             CorresponsabilidadMenor _corresponsabilidadmenor = null;
 
@@ -47,6 +47,7 @@ namespace Bja.Modelo
             _corresponsabilidadmenor.DireccionMadre = corresponsabilidadmenor.DireccionMadre;
             _corresponsabilidadmenor.IdTutor = corresponsabilidadmenor.IdTutor;
             _corresponsabilidadmenor.DireccionTutor = corresponsabilidadmenor.DireccionTutor;
+            _corresponsabilidadmenor.TipoParentesco = corresponsabilidadmenor.TipoParentesco;
             _corresponsabilidadmenor.CodigoFormulario = corresponsabilidadmenor.CodigoFormulario;
             _corresponsabilidadmenor.FechaSalidaPrograma = corresponsabilidadmenor.FechaSalidaPrograma;
             _corresponsabilidadmenor.TipoSalidaMenor = corresponsabilidadmenor.TipoSalidaMenor;
@@ -57,7 +58,7 @@ namespace Bja.Modelo
             context.SaveChanges();
         }
 
-        public void Eliminar(int Id)
+        public void Eliminar(long Id)
         {
             CorresponsabilidadMenor corresponsabilidadmenor = null;
 

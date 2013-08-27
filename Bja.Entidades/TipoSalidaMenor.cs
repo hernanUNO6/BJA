@@ -8,7 +8,7 @@ namespace Bja.Entidades
 {
     public enum TipoSalidaMenor
     {
-        Cumplimiento,
+        Cumplimiento = 1,
         Transferencia,
         Fallecimiento,
         Incumplimiento

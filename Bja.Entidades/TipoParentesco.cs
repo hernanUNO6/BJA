@@ -8,7 +8,7 @@ namespace Bja.Entidades
 {
     public enum TipoParentesco
     {
-        Padre,
+        Padre = 1,      //Padre
         Abuelo,         //Abuela
         Tio,            //Tia
         Hermano,        //Hermana

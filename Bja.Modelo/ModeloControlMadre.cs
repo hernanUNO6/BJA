@@ -40,7 +40,9 @@ namespace Bja.Modelo
 
             _controlmadre.IdCorresponsabilidadMadre = controlmadre.IdCorresponsabilidadMadre;
             _controlmadre.IdMedico = controlmadre.IdMedico;
+            _controlmadre.IdMadre = controlmadre.IdMadre;
             _controlmadre.IdTutor = controlmadre.IdTutor;
+            _controlmadre.TipoParentesco = controlmadre.TipoParentesco;
             _controlmadre.FechaProgramada = controlmadre.FechaProgramada;
             _controlmadre.FechaControl = controlmadre.FechaControl;
             _controlmadre.TallaCm = controlmadre.TallaCm;
@@ -92,17 +94,6 @@ namespace Bja.Modelo
 
             return controlmadre;
         }
-
-        ////se esta adicionando esta parte RENAN
-        //public List<ControlMadre> ListarControlMadre(long IdMadre)
-        //{
-        //    List<ControlMadre> corresponsabilidadmadre = new List<ControlMadre>();
-
-        //    corresponsabilidadmadre = (from cm in context.ControlesMadre
-        //                               where cm.Id == IdMadre
-        //                               select cm).ToList<ControlMadre>();
-        //    return corresponsabilidadmadre;
-        //}
 
     }
 }

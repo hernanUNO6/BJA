@@ -39,12 +39,9 @@ namespace Bja.Registro
             frmLista formularioListaMadres = new frmLista();
 
             formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
-            formularioListaMadres.MostrarDetallesRegistro += formularioListaMadres_MostrarDetallesRegistro;
+            formularioListaMadres.DetallesRegistro += formularioListaMadres_DetallesRegistro;
             formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
             formularioListaMadres.BorrarRegistro += formularioListaMadres_BorrarRegistro;
-            formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
-            formularioListaMadres.CorresponsabilidadRegistro += formularioListaMadres_CorresponsabilidadRegistro;
-            formularioListaMadres.DependienteRegistro += formularioListaMadres_DependienteRegistro;
 
             ModeloMadre modelomadre = new ModeloMadre();
 
@@ -66,7 +63,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
-        void formularioListaMadres_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+        void formularioListaMadres_DetallesRegistro(object sender, IdentidadEventArgs fe)
         {
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
@@ -96,35 +93,15 @@ namespace Bja.Registro
             MessageBox.Show("Por Implementar.", "Mensaje");
         }
 
-        void formularioListaMadres_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
-        void formularioListaMadres_CorresponsabilidadRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
-        void formularioListaMadres_DependienteRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
         private void cmdTutores_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
             frmLista formularioListaTutores = new frmLista();
 
             formularioListaTutores.NuevoRegistro += formularioListaTutores_NuevoRegistro;
-            formularioListaTutores.MostrarDetallesRegistro += formularioListaTutores_MostrarDetallesRegistro;
+            formularioListaTutores.DetallesRegistro += formularioListaTutores_DetallesRegistro;
             formularioListaTutores.ModificarRegistro += formularioListaTutores_ModificarRegistro;
             formularioListaTutores.BorrarRegistro += formularioListaTutores_BorrarRegistro;
-            formularioListaTutores.SeleccionarRegistro += formularioListaTutores_SeleccionarRegistro;
-            formularioListaTutores.DependienteRegistro += formularioListaTutores_DependienteRegistro;
 
             ModeloTutor modelotutor = new ModeloTutor();
 
@@ -146,7 +123,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
-        void formularioListaTutores_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+        void formularioListaTutores_DetallesRegistro(object sender, IdentidadEventArgs fe)
         {
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
@@ -176,29 +153,15 @@ namespace Bja.Registro
             MessageBox.Show("Por Implementar.", "Mensaje");
         }
 
-        void formularioListaTutores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
-        void formularioListaTutores_DependienteRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
         private void cmdMenores_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
             frmLista formularioListaMenores = new frmLista();
 
             formularioListaMenores.NuevoRegistro += formularioListaMenores_NuevoRegistro;
-            formularioListaMenores.MostrarDetallesRegistro += formularioListaMenores_MostrarDetallesRegistro;
+            formularioListaMenores.DetallesRegistro += formularioListaMenores_DetallesRegistro;
             formularioListaMenores.ModificarRegistro += formularioListaMenores_ModificarRegistro;
             formularioListaMenores.BorrarRegistro += formularioListaMenores_BorrarRegistro;
-            formularioListaMenores.SeleccionarRegistro += formularioListaMenores_SeleccionarRegistro;
-            formularioListaMenores.CorresponsabilidadRegistro += formularioListaMenores_CorresponsabilidadRegistro;
 
             ModeloMenor modelomenor = new ModeloMenor();
 
@@ -220,7 +183,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
-        void formularioListaMenores_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+        void formularioListaMenores_DetallesRegistro(object sender, IdentidadEventArgs fe)
         {
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
@@ -245,18 +208,6 @@ namespace Bja.Registro
         }
 
         void formularioListaMenores_BorrarRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
-        void formularioListaMenores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        {
-            //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
-        }
-
-        void formularioListaMenores_CorresponsabilidadRegistro(object sender, IdentidadEventArgs fe)
         {
             //throw new NotImplementedException();
             MessageBox.Show("Por Implementar.", "Mensaje");

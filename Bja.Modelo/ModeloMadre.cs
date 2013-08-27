@@ -47,13 +47,12 @@ namespace Bja.Modelo
           _madre.PrimerApellido = madre.PrimerApellido;
           _madre.SegundoApellido = madre.SegundoApellido;
           _madre.TercerApellido = madre.TercerApellido;
-          //_madre.IdTipoDocumentoIdentidad = madre.IdTipoDocumentoIdentidad;
-          _madre.TipoDocumentoIdentidad = madre.TipoDocumentoIdentidad;
+          _madre.IdTipoDocumentoIdentidad = madre.IdTipoDocumentoIdentidad;
           _madre.FechaNacimiento = madre.FechaNacimiento;
-          _madre.IdLocalidadNacimiento = madre.IdLocalidadNacimiento;
           _madre.IdDepartamento = madre.IdDepartamento;
           _madre.IdProvincia = madre.IdProvincia;
           _madre.IdMunicipio = madre.IdMunicipio;
+          _madre.LocalidadNacimiento = madre.LocalidadNacimiento;
           _madre.Defuncion = madre.Defuncion;
           _madre.Observaciones = madre.Observaciones;
 
@@ -94,14 +93,46 @@ namespace Bja.Modelo
           return context.Madres.ToList();
       }
 
-      //public List<Menor> ListarMenoresDependientes(long IdTutor)
-      //{
-      //    List<Menor> menor = new List<Menor>();
+      public List<Madre> ListarMadresPorCriterio(string Criterio)
+      {
+          List<Madre> madre = new List<Madre>();
 
-      //    //...
+          madre = (from m in context.Madres
+                   where m.Nombres.Contains(Criterio) ||
+                   m.PrimerApellido.Contains(Criterio) ||
+                   m.SegundoApellido.Contains(Criterio) ||
+                   m.DocumentoIdentidad.Contains(Criterio)
+                   orderby m.PrimerApellido, m.SegundoApellido, m.Nombres
+                   select m).ToList<Madre>();
 
-      //    return menor;
-      //}
+          return madre;
+      }
+
+      public List<Madre> ListarMadresDeMenorATravesDeCorresponsabilidadDeMenor(long IdMenor)
+      {
+          List<Madre> madre = new List<Madre>();
+
+          madre = (from cn in context.CorresponsabilidadesMenor
+                   where cn.IdMenor == IdMenor
+                   from m in context.Madres
+                   where cn.IdMadre == m.Id
+                   select m).Distinct().ToList<Madre>();
+
+          return madre;
+      }
+
+      public List<Madre> ListarMadresBajoTuicionDeTutor(long IdTutor)
+      {
+          List<Madre> madre = new List<Madre>();
+
+          madre = (from cm in context.CorresponsabilidadesMadre
+                   where cm.IdTutor == IdTutor
+                   from m in context.Madres
+                   where cm.IdMadre == m.Id
+                   select m).Distinct().ToList<Madre>();
+
+          return madre;
+      }
 
       public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
       {

@@ -34,32 +34,18 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Visibility="Visible" CanUserResize="False">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="Button_Click_Corresponsabilidad" Tag="{Binding Path=id}">Corresponsabilidad</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Visibility="Visible" CanUserResize="False">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="Button_Click_Dependiente" Tag="{Binding Path=id}">Dependiente</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Titulo" Height="40" HorizontalAlignment="Left" Margin="0,12,0,0" Name="lblTitulo" VerticalAlignment="Top" Width="578" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" />
-        <Button Content="Salir" Height="24" HorizontalAlignment="Left" Margin="471,468,0,0" Name="cmdCerrar" VerticalAlignment="Top" Width="107" Click="cmdCerrar_Click" />
-        <Button Content="Nuevo" Height="23" HorizontalAlignment="Left" Margin="484,104,0,0" Name="buttonNuevo" VerticalAlignment="Top" Width="94" Click="buttonNuevo_Click" RenderTransformOrigin="0.936,0.739" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="70,65,0,0" Name="txtCriterioBusqueda" VerticalAlignment="Top" Width="388" TextChanged="txtCriterioBusqueda_TextChanged" />
-        <Label Content="Buscar:" Height="28" HorizontalAlignment="Left" Margin="17,60,0,0" Name="label1" VerticalAlignment="Top" Width="56" />
-        <StackPanel Height="28" HorizontalAlignment="Left" Margin="14,422,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="554" Orientation="Horizontal">
-            <Button Content="|&lt;" Height="23" Name="cmdPrimero" Width="23" Click="cmdPrimero_Click" />
-            <Button Content="&lt;" Height="23" Name="cmdPrevio" Width="23" Click="cmdPrevio_Click" />
-            <Button Content="&gt;" Height="23" Name="cmdSiguiente" Width="23" Click="cmdSiguiente_Click" />
-            <Button Content="&gt;|" Height="23" Name="cmdUltimo" Width="23" Click="cmdUltimo_Click" >
+        <Label Content="Titulo" Height="40" HorizontalAlignment="Left" Margin="0,12,0,0" x:Name="lblTitulo" VerticalAlignment="Top" Width="578" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" />
+        <Button Content="Cerrar" Height="24" HorizontalAlignment="Left" Margin="471,468,0,0" x:Name="cmdCerrar" VerticalAlignment="Top" Width="107" Click="cmdCerrar_Click" />
+        <Button Content="Nuevo" Height="23" HorizontalAlignment="Left" Margin="484,104,0,0" x:Name="buttonNuevo" VerticalAlignment="Top" Width="94" Click="buttonNuevo_Click" RenderTransformOrigin="0.936,0.739" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="70,65,0,0" x:Name="txtCriterioBusqueda" VerticalAlignment="Top" Width="388" TextChanged="txtCriterioBusqueda_TextChanged" />
+        <Label Content="Buscar:" Height="28" HorizontalAlignment="Left" Margin="17,60,0,0" x:Name="label1" VerticalAlignment="Top" Width="56" />
+        <StackPanel Height="28" HorizontalAlignment="Left" Margin="14,422,0,0" x:Name="stackPanel1" VerticalAlignment="Top" Width="554" Orientation="Horizontal">
+            <Button Content="|&lt;" Height="23" x:Name="cmdPrimero" Width="23" Click="cmdPrimero_Click" />
+            <Button Content="&lt;" Height="23" x:Name="cmdPrevio" Width="23" Click="cmdPrevio_Click" />
+            <Button Content="&gt;" Height="23" x:Name="cmdSiguiente" Width="23" Click="cmdSiguiente_Click" />
+            <Button Content="&gt;|" Height="23" x:Name="cmdUltimo" Width="23" Click="cmdUltimo_Click" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -69,7 +55,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Label Content="   1   " Height="28" Name="lblPagina" Width="230" FontWeight="Bold" />
+            <Label Content="   1   " Height="28" x:Name="lblPagina" Width="230" FontWeight="Bold" />
         </StackPanel>
     </Grid>
 </Window>

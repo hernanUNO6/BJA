@@ -40,8 +40,10 @@ namespace Bja.Modelo
 
             _controlmenor.IdCorresponsabilidadMenor = controlmenor.IdCorresponsabilidadMenor;
             _controlmenor.IdMedico = controlmenor.IdMedico;
-            _controlmenor.IdTutor = controlmenor.IdTutor;
+            _controlmenor.IdMenor = controlmenor.IdMenor;
             _controlmenor.IdMadre = controlmenor.IdMadre;
+            _controlmenor.IdTutor = controlmenor.IdTutor;
+            _controlmenor.TipoParentesco = controlmenor.TipoParentesco;
             _controlmenor.FechaProgramada = controlmenor.FechaProgramada;
             _controlmenor.FechaControl = controlmenor.FechaControl;
             _controlmenor.TallaCm = controlmenor.TallaCm;

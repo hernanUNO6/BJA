@@ -25,6 +25,7 @@ namespace Bja.Registro
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Madre _madre = new Madre();
+        public bool Resultado { get; set; }
 
         public frmMadre()
         {
@@ -53,7 +54,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
                 _madre = modelomadre.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _madre.DocumentoIdentidad;
-                cboTipoDocumentoIdentidad.SelectedValue = _madre.TipoDocumentoIdentidad;
+                cboTipoDocumentoIdentidad.SelectedValue = _madre.IdTipoDocumentoIdentidad;
                 cboProvincia.SelectedValue = _madre.IdProvincia;
                 cboMunicipio.SelectedValue = _madre.IdMunicipio;
                 txtPaterno.Text = _madre.PrimerApellido;
@@ -63,20 +64,16 @@ namespace Bja.Registro
                 dtpFechaNacimiento.SelectedDate = _madre.FechaNacimiento;
                 if (_madre.Defuncion == true)
                     chkDefuncion.IsChecked = true;
-                txtObservaciones.Text = _madre.Observaciones;
-                txtLugarNacimiento.Text = _madre.IdLocalidadNacimiento;
+                txtLugarNacimiento.Text = _madre.LocalidadNacimiento;
                 cboDepartamento.SelectedValue = _madre.IdDepartamento;
                 RecuperarProvincias(_madre.IdDepartamento.ToString());
                 cboProvincia.SelectedValue = _madre.IdProvincia;
                 RecuperarMunicipios(_madre.IdProvincia.ToString());
                 cboMunicipio.SelectedValue = _madre.IdMunicipio;
-                if ((TipoAccion == TipoAccion.Edicion) || (TipoAccion == TipoAccion.Detalle))
+                if (TipoAccion == TipoAccion.Detalle)
                 {
                     txtDocumentoIdentidad.IsEnabled = false;
                     cboTipoDocumentoIdentidad.IsEnabled = false;
-                }
-                if (TipoAccion == TipoAccion.Detalle)
-                {
                     txtPaterno.IsEnabled = false;
                     txtMaterno.IsEnabled = false;
                     txtConyuge.IsEnabled = false;
@@ -88,11 +85,12 @@ namespace Bja.Registro
                     cboDepartamento.IsEnabled = false;
                     cboProvincia.IsEnabled = false;
                     cboMunicipio.IsEnabled = false;
-                    txtObservaciones.IsEnabled = false;
                     cmdAceptar.IsEnabled = false;
                 }
             }
             ControlPreliminar = true;
+            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+                this.txtDocumentoIdentidad.Focus();
         }
 
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
@@ -149,7 +147,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
 
                 _madre.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                _madre.TipoDocumentoIdentidad = (TipoDocumentoIdentidad)cboTipoDocumentoIdentidad.SelectedValue; //Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                _madre.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
                 _madre.PrimerApellido = txtPaterno.Text;
                 _madre.SegundoApellido = txtMaterno.Text;
                 _madre.TercerApellido = txtConyuge.Text;
@@ -157,22 +155,27 @@ namespace Bja.Registro
                 _madre.NombreCompleto = txtNombreCompleto.Text;
                 _madre.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
                 _madre.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
-                _madre.Observaciones = txtObservaciones.Text;
+                _madre.Observaciones = "";
                 _madre.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
                 _madre.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
                 _madre.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _madre.IdLocalidadNacimiento = txtLugarNacimiento.Text;
+                _madre.LocalidadNacimiento = txtLugarNacimiento.Text;
 
                 if (IdSeleccionado > 0)
                     modelomadre.Editar(IdSeleccionado, _madre);
                 else
                     modelomadre.Crear(_madre);
+
+                Resultado = true;
+
+                this.Close();
             }
-            this.Close();
         }
 
         private void cmdCancelar_Click(object sender, RoutedEventArgs e)
         {
+            Resultado = false;
+
             this.Close();
         }
 

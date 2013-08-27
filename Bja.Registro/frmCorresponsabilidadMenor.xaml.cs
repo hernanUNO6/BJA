@@ -39,20 +39,22 @@ namespace Bja.Registro
       {
           CantidadDeControles = 12;
 
-          lblDepartamento.Content = "|";
-          lblEstablecimiento.Content = "|";
-          lblNombresMenor.Content = "|";
-          lblFechaNacimientoMenor.Content = "|";
-          lblNombreMadre.Content = "|";
-          lblFechaNacimientoMadre.Content = "|";
-          lblNombreTutor.Content = "|";
-          lblFechaNacimientoTutor.Content = "|";
+          SoporteCombo.cargarEnumerador(this.cboTipoParentesco, typeof(TipoParentesco));
+
+          //this.lblDepartamento.Content = "|";
+          //this.lblEstablecimiento.Content = "|";
+          this.lblNombresMenor.Content = "";
+          this.lblFechaNacimientoMenor.Content = "";
+          this.lblNombreMadre.Content = "";
+          this.lblFechaNacimientoMadre.Content = "";
+          this.lblNombreTutor.Content = "";
+          this.lblFechaNacimientoTutor.Content = "";
 
           if (IdSeleccionado == 0)
           {
               this.dtpFechaInscripcion.SelectedDate = DateTime.Today;
               this.dtpFechaSalida.SelectedDate = DateTime.Today;
-              rdbNueva.IsChecked = true;
+              this.rdbNueva.IsChecked = true;
           }
       }
 
@@ -67,7 +69,7 @@ namespace Bja.Registro
           frmLista formularioListaMenores = new frmLista();
 
           formularioListaMenores.NuevoRegistro += formularioListaMenores_NuevoRegistro;
-          formularioListaMenores.MostrarDetallesRegistro += formularioListaMenores_MostrarDetallesRegistro;
+          formularioListaMenores.DetallesRegistro += formularioListaMenores_DetallesRegistro;
           formularioListaMenores.ModificarRegistro += formularioListaMenores_ModificarRegistro;
           formularioListaMenores.BorrarRegistro += formularioListaMenores_BorrarRegistro;
           formularioListaMenores.SeleccionarRegistro += formularioListaMenores_SeleccionarRegistro;
@@ -92,7 +94,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Arrow;
       }
 
-      void formularioListaMenores_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+      void formularioListaMenores_DetallesRegistro(object sender, IdentidadEventArgs fe)
       {
           this.Cursor = Cursors.Wait;
           frmMenor objMenorWindow = new frmMenor();
@@ -158,7 +160,7 @@ namespace Bja.Registro
           frmLista formularioListaMadres = new frmLista();
 
           formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
-          formularioListaMadres.MostrarDetallesRegistro += formularioListaMadres_MostrarDetallesRegistro;
+          formularioListaMadres.DetallesRegistro += formularioListaMadres_DetallesRegistro;
           formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
           formularioListaMadres.BorrarRegistro += formularioListaMadres_BorrarRegistro;
           formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
@@ -183,7 +185,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Arrow;
       }
 
-      void formularioListaMadres_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+      void formularioListaMadres_DetallesRegistro(object sender, IdentidadEventArgs fe)
       {
           this.Cursor = Cursors.Wait;
           frmMadre objMadreWindow = new frmMadre();
@@ -266,7 +268,7 @@ namespace Bja.Registro
           frmLista formularioListaTutores = new frmLista();
 
           formularioListaTutores.NuevoRegistro += formularioListaTutores_NuevoRegistro;
-          formularioListaTutores.MostrarDetallesRegistro += formularioListaTutores_MostrarDetallesRegistro;
+          formularioListaTutores.DetallesRegistro += formularioListaTutores_DetallesRegistro;
           formularioListaTutores.ModificarRegistro += formularioListaTutores_ModificarRegistro;
           formularioListaTutores.BorrarRegistro += formularioListaTutores_BorrarRegistro;
           formularioListaTutores.SeleccionarRegistro += formularioListaTutores_SeleccionarRegistro;
@@ -291,7 +293,7 @@ namespace Bja.Registro
           this.Cursor = Cursors.Arrow;
       }
 
-      void formularioListaTutores_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+      void formularioListaTutores_DetallesRegistro(object sender, IdentidadEventArgs fe)
       {
           this.Cursor = Cursors.Wait;
           frmTutor objTutorWindow = new frmTutor();
@@ -530,6 +532,36 @@ namespace Bja.Registro
                   this.Cursor = Cursors.Arrow;
               }
           }
+      }
+
+      private void chkSalida_Checked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void chkSalida_Unchecked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void chkMadre_Checked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void chkMadre_Unchecked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void chkTutor_Checked(object sender, RoutedEventArgs e)
+      {
+
+      }
+
+      private void chkTutor_Unchecked(object sender, RoutedEventArgs e)
+      {
+
       }
 
   }

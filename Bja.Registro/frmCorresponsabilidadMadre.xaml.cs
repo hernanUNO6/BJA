@@ -38,12 +38,14 @@ namespace Bja.Registro
         {
             CantidadDeControles = 4;
 
-            lblDepartamento.Content ="|";
-            lblEstablecimiento.Content = "|";
-            lblNombresMadre.Content = "|";
-            lblFechaNacimientoMadre.Content = "|";
-            lblNombreTutor.Content = "|";
-            lblFechaNacimientoTutor.Content = "|";
+            SoporteCombo.cargarEnumerador(this.cboTipoParentesco, typeof(TipoParentesco));
+
+            //this.lblDepartamento.Content = "";
+            //this.lblEstablecimiento.Content = "";
+            this.lblNombresMadre.Content = "";
+            this.lblFechaNacimientoMadre.Content = "";
+            this.lblNombreTutor.Content = "";
+            this.lblFechaNacimientoTutor.Content = "";
 
             if (IdSeleccionado == 0)
             {
@@ -51,8 +53,16 @@ namespace Bja.Registro
                 this.dtpFechaFUM.SelectedDate = DateTime.Today;
                 this.dtpFechaUltimoParto.SelectedDate = DateTime.Today;
                 this.dtpFechaSalida.SelectedDate = DateTime.Today;
-                rdbNueva.IsChecked = true;
-                txtNumeroEmbarazo.Text = "0";
+                this.rdbNueva.IsChecked = true;
+                this.txtNumeroEmbarazo.Text = "0";
+                this.cmdDetallesMadre.IsEnabled = false;
+                this.cmdModificarMadre.IsEnabled = false;
+                this.chkTutor.IsEnabled = false;
+                this.cboTipoParentesco.SelectedIndex = -1;
+                this.cboTipoParentesco.IsEnabled = false;
+                this.cmdSeleccionarTutor.IsEnabled = false;
+                this.cmdDetallesTutor.IsEnabled = false;
+                this.cmdModificarTutor.IsEnabled = false;
             }
         }
 
@@ -66,8 +76,8 @@ namespace Bja.Registro
             ModeloMadre modelomadre = new ModeloMadre();
             Madre madre = new Madre();
             madre = modelomadre.Recuperar(IdMadre);
-            lblNombresMadre.Content = madre.NombreCompleto;
-            lblFechaNacimientoMadre.Content = string.Format("{0:dd/MM/yyyy}", madre.FechaNacimiento);
+            this.lblNombresMadre.Content = madre.NombreCompleto;
+            this.lblFechaNacimientoMadre.Content = string.Format("{0:dd/MM/yyyy}", madre.FechaNacimiento);
         }
 
         void RecuperarTutor()
@@ -75,119 +85,201 @@ namespace Bja.Registro
             ModeloTutor modelotutor = new ModeloTutor();
             Tutor tutor = new Tutor();
             tutor = modelotutor.Recuperar(IdTutor);
-            lblNombreTutor.Content = tutor.NombreCompleto;
-            lblFechaNacimientoTutor.Content = string.Format("{0:dd/MM/yyyy}", tutor.FechaNacimiento);
+            this.lblNombreTutor.Content = tutor.NombreCompleto;
+            this.lblFechaNacimientoTutor.Content = string.Format("{0:dd/MM/yyyy}", tutor.FechaNacimiento);
         }
 
         private void cmdGuardar_Click(object sender, RoutedEventArgs e)
         {
-            if (IdSeleccionado == 0)
+            bool ok = false;
+
+            ModeloCorresponsabilidadMadre modelocorresponsabilidadmadre = new ModeloCorresponsabilidadMadre();
+            CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
+
+            if (this.chkTutor.IsChecked ==true)
             {
-                if (IdMadre > 0)
+                if (!(IdTutor > 0))
                 {
-                    ModeloCorresponsabilidadMadre modelocorresponsabilidadmadre = new ModeloCorresponsabilidadMadre();
-                    CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
-
-                    corresponsabilidadmadre.IdEstablecimientoSalud = 1;
-                    if (rdbNueva.IsChecked == true)
-                        corresponsabilidadmadre.TipoInscripcionMadre = TipoInscripcion.Nueva;
-                    else if (rdbTransferencia.IsChecked == true)
-                        corresponsabilidadmadre.TipoInscripcionMadre = TipoInscripcion.Transferencia;
-
-                    corresponsabilidadmadre.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
-                    corresponsabilidadmadre.IdMadre = IdMadre;
-                    corresponsabilidadmadre.IdTutor = IdTutor;
-                    corresponsabilidadmadre.CodigoFormulario = txtCodigoFormulario.Text;
-                    corresponsabilidadmadre.FechaUltimaMenstruacion = dtpFechaFUM.SelectedDate.Value; ;
-                    corresponsabilidadmadre.FechaUltimoParto = dtpFechaUltimoParto.SelectedDate.Value; ;
-                    corresponsabilidadmadre.NumeroEmbarazo = Convert.ToInt32(txtNumeroEmbarazo.Text);
-                    corresponsabilidadmadre.ARO = (bool)chkARO.IsChecked;
-                    corresponsabilidadmadre.FechaSalidaPrograma = dtpFechaSalida.SelectedDate.Value;
-                    corresponsabilidadmadre.TipoSalidaMadre = 0;
-                    corresponsabilidadmadre.Observaciones = "";
-                    corresponsabilidadmadre.AutorizadoPor = txtAutorizado.Text;
-                    corresponsabilidadmadre.CargoAutorizador = txtCargo.Text;
-                    corresponsabilidadmadre.DireccionMadre = "";
-                    corresponsabilidadmadre.DireccionTutor = "";
-
-                    modelocorresponsabilidadmadre.Crear(corresponsabilidadmadre);
-                    IdSeleccionado = corresponsabilidadmadre.Id;
-
-                    //generamos los 4 registros de controles
-
-                    ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-                    DateTime fechitaControles;
-
-                    fechitaControles = dtpFechaFUM.SelectedDate.Value;
-                    fechitaControles = fechitaControles.AddMonths(-1);
-
-                    for (int i = 0; i < CantidadDeControles; i++)
+                    MessageBox.Show("Se requiere especificar tutor.", "Error");
+                    ok = true;
+                }
+                else if (Convert.ToInt64(cboTipoParentesco.SelectedValue) <= 0)
+                {
+                    MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
+                    ok = true;
+                }
+            }
+            if (ok == false)
+            {
+                if (IdSeleccionado == 0)
+                {
+                    if (IdMadre > 0)
                     {
-                        fechitaControles = fechitaControles.AddMonths(2);
+                        corresponsabilidadmadre.IdEstablecimientoSalud = 1;
+                        if (rdbNueva.IsChecked == true)
+                            corresponsabilidadmadre.TipoInscripcionMadre = TipoInscripcion.Nueva;
+                        else if (rdbTransferencia.IsChecked == true)
+                            corresponsabilidadmadre.TipoInscripcionMadre = TipoInscripcion.Transferencia;
 
-                        ControlMadre controlmadre = new ControlMadre();
-                        controlmadre.IdCorresponsabilidadMadre = IdSeleccionado;
-                        controlmadre.IdMedico = 1;
-                        controlmadre.IdTutor = IdTutor;
-                        controlmadre.FechaProgramada = fechitaControles;
-                        controlmadre.FechaControl = DateTime.Now;
-                        controlmadre.TallaCm = 0;
-                        controlmadre.PesoKg = 0;
-                        controlmadre.NumeroControl = i + 1;
-                        controlmadre.Observaciones = "";
-                        controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
-                        controlmadre.TipoControlMadre = TipoControlMadre.Control;
-                        if (IdTutor > 0)
-                            controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
-                        else
-                            controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
-                        modelocontrolmadre.Crear(controlmadre);
-                    }
-
-                    for (int i = 0; i < 2; i++)
-                    {
-                        ControlMadre controlmadre = new ControlMadre();
-                        controlmadre.IdCorresponsabilidadMadre = IdSeleccionado;
-                        controlmadre.IdMedico = 1;
-                        controlmadre.IdTutor = IdTutor;
-                        controlmadre.FechaProgramada = DateTime.Now;
-                        controlmadre.FechaControl = DateTime.Now;
-                        controlmadre.TallaCm = 0;
-                        controlmadre.PesoKg = 0;
-                        controlmadre.NumeroControl = CantidadDeControles + i + 1;
-                        controlmadre.Observaciones = "";
-                        if (i == 0)
+                        corresponsabilidadmadre.FechaInscripcion = this.dtpFechaInscripcion.SelectedDate.Value;
+                        corresponsabilidadmadre.IdMadre = IdMadre;
+                        if (this.chkTutor.IsChecked == true)
                         {
-                            controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
-                            controlmadre.TipoControlMadre = TipoControlMadre.Parto;
+                            corresponsabilidadmadre.IdTutor = IdTutor;
+                            if (Convert.ToInt64(cboTipoParentesco.SelectedValue) > 0)
+                                corresponsabilidadmadre.TipoParentesco = (TipoParentesco)cboTipoParentesco.SelectedValue;
                         }
-                        else
+                        corresponsabilidadmadre.CodigoFormulario = this.txtCodigoFormulario.Text;
+                        corresponsabilidadmadre.FechaUltimaMenstruacion = this.dtpFechaFUM.SelectedDate.Value; ;
+                        corresponsabilidadmadre.FechaUltimoParto = this.dtpFechaUltimoParto.SelectedDate.Value; ;
+                        corresponsabilidadmadre.NumeroEmbarazo = Convert.ToInt32(this.txtNumeroEmbarazo.Text);
+                        corresponsabilidadmadre.ARO = (bool)this.chkARO.IsChecked;
+                        corresponsabilidadmadre.FechaSalidaPrograma = DateTime.Now;
+                        corresponsabilidadmadre.TipoSalidaMadre = 0;
+                        corresponsabilidadmadre.Observaciones = "";
+                        corresponsabilidadmadre.AutorizadoPor = "";
+                        corresponsabilidadmadre.CargoAutorizador = "";
+                        corresponsabilidadmadre.DireccionMadre = "";
+                        corresponsabilidadmadre.DireccionTutor = "";
+
+                        modelocorresponsabilidadmadre.Crear(corresponsabilidadmadre);
+                        IdSeleccionado = corresponsabilidadmadre.Id;
+
+                        //generamos los 4 registros de controles
+
+                        ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
+                        DateTime fechitaControles;
+
+                        fechitaControles = dtpFechaFUM.SelectedDate.Value;
+                        fechitaControles = fechitaControles.AddMonths(-1);
+
+                        for (int i = 0; i < CantidadDeControles; i++)
                         {
+                            fechitaControles = fechitaControles.AddMonths(2);
+
+                            ControlMadre controlmadre = new ControlMadre();
+                            controlmadre.IdCorresponsabilidadMadre = IdSeleccionado;
+                            controlmadre.IdMedico = 1;
+                            controlmadre.IdMadre = IdMadre;
+                            controlmadre.IdTutor = IdTutor;
+                            controlmadre.FechaProgramada = fechitaControles;
+                            controlmadre.FechaControl = DateTime.Now;
+                            controlmadre.TallaCm = 0;
+                            controlmadre.PesoKg = 0;
+                            controlmadre.NumeroControl = i + 1;
+                            controlmadre.Observaciones = "";
                             controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
-                            controlmadre.TipoControlMadre = TipoControlMadre.PostParto;
+                            controlmadre.TipoControlMadre = TipoControlMadre.Control;
+                            if (IdTutor > 0)
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
+                            else
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
+                            modelocontrolmadre.Crear(controlmadre);
                         }
-                        if (IdTutor > 0)
-                            controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
-                        else
-                            controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
-                        modelocontrolmadre.Crear(controlmadre);
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            fechitaControles = fechitaControles.AddMonths(2);
+
+                            ControlMadre controlmadre = new ControlMadre();
+                            controlmadre.IdCorresponsabilidadMadre = IdSeleccionado;
+                            controlmadre.IdMedico = 1;
+                            controlmadre.IdMadre = IdMadre;
+                            controlmadre.IdTutor = IdTutor;
+                            controlmadre.FechaProgramada = fechitaControles;
+                            controlmadre.FechaControl = DateTime.Now;
+                            controlmadre.TallaCm = 0;
+                            controlmadre.PesoKg = 0;
+                            controlmadre.NumeroControl = CantidadDeControles + i + 1;
+                            controlmadre.Observaciones = "";
+                            if (i == 0)
+                            {
+                                controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
+                                controlmadre.TipoControlMadre = TipoControlMadre.Parto;
+                            }
+                            else
+                            {
+                                controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
+                                controlmadre.TipoControlMadre = TipoControlMadre.PostParto;
+                            }
+                            if (IdTutor > 0)
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
+                            else
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
+                            modelocontrolmadre.Crear(controlmadre);
+                        }
+
+                        this.txtCodigoFormulario.IsEnabled = false;
+                        this.dtpFechaInscripcion.IsEnabled = false;
+                        this.rdbNueva.IsEnabled = false;
+                        this.rdbTransferencia.IsEnabled = false;
+                        this.dtpFechaFUM.IsEnabled = false;
+                        this.dtpFechaUltimoParto.IsEnabled = false;
+                        this.txtNumeroEmbarazo.IsEnabled = false;
+                        this.chkARO.IsEnabled = false;
+                        this.cmdGuardar.IsEnabled = false;
+                        RecuperarControlMadre();
+                    }
+                }
+                else
+                {
+                    ok = false;
+
+                    if (chkSalida.IsChecked == true)
+                    {
+                        if ((this.rdbTransferenciaSalida.IsChecked == false) && (this.rdbObitoFetal.IsChecked == false) && (this.rdbIncumplimiento.IsChecked == false) && (this.rdbFallecimiento.IsChecked == false) && (this.rdbCumplimiento.IsChecked == false) && (this.rdbAborto.IsChecked == false))
+                        {
+                            MessageBox.Show("Se requiere especificar causa.", "Error");
+                            ok = true;
+                        }
+                        else if (!(txtAutorizado.Text.Length > 0))
+                        {
+                            MessageBox.Show("Se requiere especificar autorizador.", "Error");
+                            ok = true;
+                        }
+                        else if (!(txtCargo.Text.Length > 0))
+                        {
+                            MessageBox.Show("Se requiere especificar cargo.", "Error");
+                            ok = true;
+                        }
                     }
 
-                    txtCodigoFormulario.IsEnabled = false;
-                    dtpFechaInscripcion.IsEnabled = false;
-                    rdbNueva.IsEnabled = false;
-                    rdbTransferencia.IsEnabled = false;
-                    dtpFechaFUM.IsEnabled = false;
-                    dtpFechaUltimoParto.IsEnabled = false;
-                    txtNumeroEmbarazo.IsEnabled = false;
-                    chkARO.IsEnabled = false;
-                    cmdGuardar.IsEnabled = false;
-                    this.grdControl.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(IdSeleccionado);
+                    if (ok == false)
+                    {
+                        corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(IdSeleccionado);
+                        corresponsabilidadmadre.IdMadre = IdMadre;
+                        if (this.chkTutor.IsChecked == true)
+                        {
+                            corresponsabilidadmadre.IdTutor = IdTutor;
+                            if (Convert.ToInt64(cboTipoParentesco.SelectedValue) > 0)
+                                corresponsabilidadmadre.TipoParentesco = (TipoParentesco)cboTipoParentesco.SelectedValue;
+                        }
+                        if (this.chkSalida.IsChecked == true)
+                        {
+                            corresponsabilidadmadre.FechaSalidaPrograma = this.dtpFechaSalida.SelectedDate.Value;
+                            if (this.rdbAborto.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.Aborto;
+                            else if (this.rdbCumplimiento.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.Cumplimiento;
+                            else if (this.rdbFallecimiento.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.Fallecimiento;
+                            else if (this.rdbIncumplimiento.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.Incumplimiento;
+                            else if (this.rdbObitoFetal.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.ObitoFetal;
+                            else if (this.rdbTransferenciaSalida.IsChecked == true)
+                                corresponsabilidadmadre.TipoSalidaMadre = TipoSalidaMadre.Transferencia;
+                            corresponsabilidadmadre.AutorizadoPor = this.txtAutorizado.Text;
+                            corresponsabilidadmadre.CargoAutorizador = this.txtCargo.Text;
+                        }
+                        corresponsabilidadmadre.Observaciones = "";
+                        modelocorresponsabilidadmadre.Editar(IdSeleccionado, corresponsabilidadmadre);
+                    }
                 }
             }
         }
 
-        void RecuperarControlMadre(long id, int opcion)
+        void RecuperarControlMadre()
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
             this.grdControl.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(IdSeleccionado);
@@ -217,7 +309,7 @@ namespace Bja.Registro
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
                         if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
+                            RecuperarControlMadre();
                         objControlWindow = null;
                     }
                     else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
@@ -232,7 +324,7 @@ namespace Bja.Registro
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
                         if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
+                            RecuperarControlMadre();
                         objControlWindow = null;
                     }
                     else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
@@ -248,7 +340,7 @@ namespace Bja.Registro
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
                         if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
+                            RecuperarControlMadre();
                         objControlWindow = null;
                     }
                 }
@@ -278,8 +370,6 @@ namespace Bja.Registro
                         objControlWindow.Owner = this;
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
-                        if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
                         objControlWindow = null;
                     }
                     else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
@@ -293,8 +383,6 @@ namespace Bja.Registro
                         objControlWindow.Owner = this;
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
-                        if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
                         objControlWindow = null;
                     }
                     else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
@@ -309,8 +397,6 @@ namespace Bja.Registro
                         objControlWindow.Owner = this;
                         objControlWindow.ShowDialog();
                         this.Cursor = Cursors.Arrow;
-                        if (objControlWindow.Resultado == true)
-                            RecuperarControlMadre(1, 1);
                         objControlWindow = null;
                     }
                 }
@@ -323,7 +409,7 @@ namespace Bja.Registro
             frmLista formularioListaMadres = new frmLista();
 
             formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
-            formularioListaMadres.MostrarDetallesRegistro += formularioListaMadres_MostrarDetallesRegistro;
+            formularioListaMadres.DetallesRegistro += formularioListaMadres_DetallesRegistro;
             formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
             formularioListaMadres.BorrarRegistro += formularioListaMadres_BorrarRegistro;
             formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
@@ -348,7 +434,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
-        void formularioListaMadres_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+        void formularioListaMadres_DetallesRegistro(object sender, IdentidadEventArgs fe)
         {
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
@@ -375,13 +461,97 @@ namespace Bja.Registro
         void formularioListaMadres_BorrarRegistro(object sender, IdentidadEventArgs fe)
         {
             //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
+            MessageBox.Show("En proceso para validación.", "Mensaje");
         }
 
         void formularioListaMadres_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
         {
             IdMadre = fe.id;
             RecuperarMadre();
+            RecuperarCorresponsabilidadMadre();
+            this.cmdSeleccionarMadre.IsEnabled = false;
+            this.cmdModificarMadre.IsEnabled = true;
+            this.cmdDetallesMadre.IsEnabled = true;
+            this.chkTutor.IsEnabled = true;
+        }
+
+        void RecuperarCorresponsabilidadMadre()
+        {
+            ModeloCorresponsabilidadMadre modelocorresponsabilidadmadre = new ModeloCorresponsabilidadMadre();
+            CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
+
+            corresponsabilidadmadre = modelocorresponsabilidadmadre.RecuperarElUltimoValido(IdMadre);
+            if (corresponsabilidadmadre != null)
+            {
+                IdSeleccionado = corresponsabilidadmadre.Id;
+                if (corresponsabilidadmadre.IdTutor > 0)
+                {
+                    IdTutor = corresponsabilidadmadre.IdTutor;
+                    cboTipoParentesco.SelectedValue = corresponsabilidadmadre.TipoParentesco;
+                    RecuperarTutor();
+                    this.chkTutor.IsChecked = true;
+                    this.cmdDetallesTutor.IsEnabled = true;
+                    this.cmdModificarTutor.IsEnabled = true;
+                }
+                this.rdbNueva.IsEnabled = false;
+                this.rdbTransferencia.IsEnabled = false;
+                if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Nueva)
+                    this.rdbNueva.IsChecked = true;
+                else if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Transferencia)
+                    this.rdbTransferencia.IsChecked = true;
+                this.txtCodigoFormulario.Text = corresponsabilidadmadre.CodigoFormulario;
+                this.txtCodigoFormulario.IsEnabled = false;
+                this.dtpFechaInscripcion.SelectedDate = corresponsabilidadmadre.FechaInscripcion;
+                this.dtpFechaInscripcion.IsEnabled = false;
+                this.dtpFechaFUM.SelectedDate = corresponsabilidadmadre.FechaUltimaMenstruacion;
+                this.dtpFechaFUM.IsEnabled = false;
+                this.dtpFechaUltimoParto.SelectedDate = corresponsabilidadmadre.FechaUltimoParto;
+                this.dtpFechaUltimoParto.IsEnabled = false;
+                this.txtNumeroEmbarazo.Text = corresponsabilidadmadre.NumeroEmbarazo.ToString();
+                this.txtNumeroEmbarazo.IsEnabled = false;
+                this.chkARO.IsChecked = corresponsabilidadmadre.ARO;
+                this.chkARO.IsEnabled = false;
+                RecuperarControlMadre();
+                if (corresponsabilidadmadre.TipoSalidaMadre > 0)
+                {
+                    this.chkSalida.IsChecked = true;
+                    this.dtpFechaSalida.SelectedDate = corresponsabilidadmadre.FechaSalidaPrograma;
+                    this.dtpFechaSalida.IsEnabled = true;
+                    this.rdbAborto.IsEnabled = true;
+                    this.rdbCumplimiento.IsEnabled = true;
+                    this.rdbFallecimiento.IsEnabled = true;
+                    this.rdbIncumplimiento.IsEnabled = true;
+                    this.rdbObitoFetal.IsEnabled = true;
+                    this.rdbTransferenciaSalida.IsEnabled = true;
+                    switch (corresponsabilidadmadre.TipoSalidaMadre)
+                    {
+                        case TipoSalidaMadre.Aborto:
+                            this.rdbAborto.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Cumplimiento:
+                            this.rdbCumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Fallecimiento:
+                            this.rdbFallecimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Incumplimiento:
+                            this.rdbIncumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.ObitoFetal:
+                            this.rdbObitoFetal.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Transferencia:
+                            this.rdbTransferenciaSalida.IsChecked = true;
+                            break;
+                    }
+                    this.txtAutorizado.Text = corresponsabilidadmadre.AutorizadoPor;
+                    this.txtAutorizado.IsEnabled = true;
+                    this.txtCargo.Text = corresponsabilidadmadre.CargoAutorizador;
+                    this.txtCargo.IsEnabled = true;
+                }
+                else
+                    this.dtpFechaSalida.SelectedDate = DateTime.Now;
+            }
         }
 
         private void cmdSeleccionarTutor_Click(object sender, RoutedEventArgs e)
@@ -390,7 +560,7 @@ namespace Bja.Registro
             frmLista formularioListaTutor = new frmLista();
 
             formularioListaTutor.NuevoRegistro += formularioListaTutor_NuevoRegistro;
-            formularioListaTutor.MostrarDetallesRegistro += formularioListaTutor_MostrarDetallesRegistro;
+            formularioListaTutor.DetallesRegistro += formularioListaTutor_DetallesRegistro;
             formularioListaTutor.ModificarRegistro += formularioListaTutor_ModificarRegistro;
             formularioListaTutor.BorrarRegistro += formularioListaTutor_BorrarRegistro;
             formularioListaTutor.SeleccionarRegistro += formularioListaTutor_SeleccionarRegistro;
@@ -398,7 +568,7 @@ namespace Bja.Registro
             ModeloTutor modelomadre = new ModeloTutor();
 
             formularioListaTutor.proveedorDatos = modelomadre;
-            formularioListaTutor.titulo = "Madres";
+            formularioListaTutor.titulo = "Tutores";
             formularioListaTutor.ShowDialog();
             this.Cursor = Cursors.Arrow;
         }
@@ -415,7 +585,7 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
-        void formularioListaTutor_MostrarDetallesRegistro(object sender, IdentidadEventArgs fe)
+        void formularioListaTutor_DetallesRegistro(object sender, IdentidadEventArgs fe)
         {
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
@@ -442,7 +612,7 @@ namespace Bja.Registro
         void formularioListaTutor_BorrarRegistro(object sender, IdentidadEventArgs fe)
         {
             //throw new NotImplementedException();
-            MessageBox.Show("Por Implementar.", "Mensaje");
+            MessageBox.Show("En proceso para validación.", "Mensaje");
         }
 
         void formularioListaTutor_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
@@ -463,7 +633,6 @@ namespace Bja.Registro
                 objMadreWindow.ShowDialog();
                 objMadreWindow = null;
                 this.Cursor = Cursors.Arrow;
-                RecuperarMadre();
             }
         }
 
@@ -495,7 +664,6 @@ namespace Bja.Registro
                 objTutorWindow.ShowDialog();
                 objTutorWindow = null;
                 this.Cursor = Cursors.Arrow;
-                RecuperarTutor();
             }
         }
 
@@ -513,6 +681,67 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
                 RecuperarTutor();
             }
+        }
+
+        private void chkTutor_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IdMadre > 0)
+            {
+                this.cboTipoParentesco.IsEnabled = true;
+                this.cmdSeleccionarTutor.IsEnabled = true;
+                this.cmdDetallesTutor.IsEnabled = true;
+                this.cmdModificarTutor.IsEnabled = true;
+            }
+        }
+
+        private void chkTutor_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (IdMadre > 0)
+            {
+                this.cboTipoParentesco.IsEnabled = false;
+                this.cmdSeleccionarTutor.IsEnabled = false;
+                this.cmdDetallesTutor.IsEnabled = false;
+                this.cmdModificarTutor.IsEnabled = false;
+                IdTutor = 0;
+                this.lblNombreTutor.Content = "";
+                this.lblFechaNacimientoTutor.Content = "";
+                this.cboTipoParentesco.SelectedIndex = -1;
+            }
+        }
+
+        private void chkSalida_Checked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaSalida.IsEnabled = true;
+            this.rdbAborto.IsEnabled = true;
+            this.rdbCumplimiento.IsEnabled = true;
+            this.rdbFallecimiento.IsEnabled = true;
+            this.rdbIncumplimiento.IsEnabled = true;
+            this.rdbObitoFetal.IsEnabled = true;
+            this.rdbTransferenciaSalida.IsEnabled = true;
+            this.txtAutorizado.IsEnabled = true;
+            this.txtCargo.IsEnabled = true;
+        }
+
+        private void chkSalida_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaSalida.IsEnabled = false;
+            this.rdbAborto.IsEnabled = false;
+            this.rdbCumplimiento.IsEnabled = false;
+            this.rdbFallecimiento.IsEnabled = false;
+            this.rdbIncumplimiento.IsEnabled = false;
+            this.rdbObitoFetal.IsEnabled = false;
+            this.rdbTransferenciaSalida.IsEnabled = false;
+            this.txtAutorizado.IsEnabled = false;
+            this.txtCargo.IsEnabled = false;
+            this.dtpFechaSalida.SelectedDate = DateTime.Today;
+            this.rdbAborto.IsChecked = false;
+            this.rdbCumplimiento.IsChecked = false;
+            this.rdbFallecimiento.IsChecked = false;
+            this.rdbIncumplimiento.IsChecked = false;
+            this.rdbObitoFetal.IsChecked = false;
+            this.rdbTransferenciaSalida.IsChecked = false;
+            this.txtAutorizado.Text = "";
+            this.txtCargo.Text = "";
         }
 
         ////se esta adicionando esta parte RENAN

@@ -50,20 +50,20 @@ namespace Bja.Registro
         #region Definicion EventoDetallesRegistro
 
         // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
-        public event IdentidadEventHandler MostrarDetallesRegistro;
+        public event IdentidadEventHandler DetallesRegistro;
 
         // This will be the starting point of our event-- it will create FireEventArgs
         // and then raise the event, passing FireEventArgs. 
-        private void OnMostrarDetallesRegistro(Int64 id)
+        private void OnDetallesRegistro(Int64 id)
         {
-            if (MostrarDetallesRegistro != null)
+            if (DetallesRegistro != null)
             {
                 IdentidadEventArgs IdentidadArgs = new IdentidadEventArgs(id);
 
                 // Now, raise the event by invoking the delegate. Pass in 
                 // the object that initated the event (this) as well as FireEventArgs. 
                 // The call must match the signature of FireEventHandler.
-                MostrarDetallesRegistro(this, IdentidadArgs);
+                DetallesRegistro(this, IdentidadArgs);
             }
         }
         #endregion
@@ -131,48 +131,6 @@ namespace Bja.Registro
         }
         #endregion
 
-        #region Definicion EventoCorresponsabilidadRegistro
-
-        // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
-        public event IdentidadEventHandler CorresponsabilidadRegistro;
-
-        // This will be the starting point of our event-- it will create FireEventArgs
-        // and then raise the event, passing FireEventArgs. 
-        private void OnCorresponsabilidadRegistro(Int64 id)
-        {
-            if (CorresponsabilidadRegistro != null)
-            {
-                IdentidadEventArgs IdentidadArgs = new IdentidadEventArgs(id);
-
-                // Now, raise the event by invoking the delegate. Pass in 
-                // the object that initated the event (this) as well as FireEventArgs. 
-                // The call must match the signature of FireEventHandler.
-                CorresponsabilidadRegistro(this, IdentidadArgs);
-            }
-        }
-        #endregion
-
-        #region Definicion EventoDependienteRegistro
-
-        // Now, create a public event "FireEvent" whose type is our FireEventHandler delegate. 
-        public event IdentidadEventHandler DependienteRegistro;
-
-        // This will be the starting point of our event-- it will create FireEventArgs
-        // and then raise the event, passing FireEventArgs. 
-        private void OnDependienteRegistro(Int64 id)
-        {
-            if (DependienteRegistro != null)
-            {
-                IdentidadEventArgs IdentidadArgs = new IdentidadEventArgs(id);
-
-                // Now, raise the event by invoking the delegate. Pass in 
-                // the object that initated the event (this) as well as FireEventArgs. 
-                // The call must match the signature of FireEventHandler.
-                DependienteRegistro(this, IdentidadArgs);
-            }
-        }
-        #endregion
-
         public frmLista()
         {
             this.Cursor = Cursors.Wait;
@@ -219,7 +177,7 @@ namespace Bja.Registro
                 buttonNuevo.Visibility = System.Windows.Visibility.Hidden;
             }
 
-            if (MostrarDetallesRegistro == null)
+            if (DetallesRegistro == null)
             {
                 //mostrarBotonDetalles = System.Windows.Visibility.Hidden;
                 dataGridRegistros.Columns[1].Visibility = System.Windows.Visibility.Hidden;
@@ -238,16 +196,6 @@ namespace Bja.Registro
             if (SeleccionarRegistro == null)
             {
                 dataGridRegistros.Columns[4].Visibility = System.Windows.Visibility.Hidden;
-            }
-
-            if (CorresponsabilidadRegistro == null)
-            {
-                dataGridRegistros.Columns[5].Visibility = System.Windows.Visibility.Hidden;
-            }
-
-            if (DependienteRegistro == null)
-            {
-                dataGridRegistros.Columns[6].Visibility = System.Windows.Visibility.Hidden;
             }
 
         }
@@ -327,34 +275,12 @@ namespace Bja.Registro
             this.Close();
         }
 
-        private void Button_Click_Corresponsabilidad(object sender, RoutedEventArgs e)
-        {
-            Button img = (Button)sender;
-            Int64 id = (Int64)img.Tag;
-
-            OnCorresponsabilidadRegistro(id);
-
-            formularioItemSeleccionado = true;
-            this.Close();
-        }
-
-        private void Button_Click_Dependiente(object sender, RoutedEventArgs e)
-        {
-            Button img = (Button)sender;
-            Int64 id = (Int64)img.Tag;
-
-            OnDependienteRegistro(id);
-
-            formularioItemSeleccionado = true;
-            this.Close();
-        }
-
         private void Button_Click_Detalles(object sender, RoutedEventArgs e)
         {
             Button img = (Button)sender;
             Int64 id = (Int64)img.Tag;
 
-            OnMostrarDetallesRegistro(id);
+            OnDetallesRegistro(id);
         }
 
         private void Button_Click_Modificar(object sender, RoutedEventArgs e)

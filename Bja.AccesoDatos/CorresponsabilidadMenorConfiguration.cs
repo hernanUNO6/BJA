@@ -33,7 +33,7 @@ namespace Bja.AccesoDatos
             Property(c => c.TipoSalidaMenor).IsOptional();
             Property(c => c.AutorizadoPor).HasMaxLength(256);
             Property(c => c.CargoAutorizador).HasMaxLength(256);
-            Property(c => c.Observaciones).HasMaxLength(1024);
+            Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
         }
     }
 }
