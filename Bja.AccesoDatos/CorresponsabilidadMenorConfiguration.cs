@@ -34,6 +34,12 @@ namespace Bja.AccesoDatos
             Property(c => c.AutorizadoPor).HasMaxLength(256);
             Property(c => c.CargoAutorizador).HasMaxLength(256);
             Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
+
+            //relaciones
+            HasRequired(c => c.EstablecimientoSalud).WithMany().HasForeignKey(c => c.IdEstablecimientoSalud).WillCascadeOnDelete(false);
+            HasRequired(c => c.Menor).WithMany().HasForeignKey(c => c.IdMenor).WillCascadeOnDelete(false);
+            HasOptional(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
+            HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
         }
     }
 }

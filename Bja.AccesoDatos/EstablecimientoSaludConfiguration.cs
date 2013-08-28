@@ -26,6 +26,7 @@ namespace Bja.AccesoDatos
             Property(em => em.Nombre).IsRequired().HasMaxLength(100);
             Property(em => em.Direccion).IsRequired().HasMaxLength(30);
             Property(em => em.Telefono).HasMaxLength(10);
+            Property(em => em.IdRedSalud).IsRequired();
 
             HasRequired(em => em.RedSalud).WithMany(em => em.EstablecimientosSalud).HasForeignKey(em => em.IdRedSalud);
         }

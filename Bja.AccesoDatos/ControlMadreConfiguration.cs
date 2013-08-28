@@ -35,7 +35,7 @@ namespace Bja.AccesoDatos
             Property(c => c.TipoBeneficiario).IsRequired();
 
             //relaciones
-            HasRequired(c => c.CorresponsabilidadMadre).WithMany().HasForeignKey(c => c.IdCorresponsabilidadMadre);
+            HasRequired(c => c.CorresponsabilidadMadre).WithMany(cm => cm.ControlesMadre).HasForeignKey(c => c.IdCorresponsabilidadMadre);
             HasRequired(c => c.Medico).WithMany().HasForeignKey(c => c.IdMedico).WillCascadeOnDelete(false);
             HasRequired(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
             HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);

@@ -24,10 +24,15 @@ namespace Bja.Entidades
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
+        public Departamento Departamento { get; set; }
         public long IdProvincia { get; set; } //solo referencial con la tabla Provincia
+        public Provincia Provincia { get; set; }
         public long IdMunicipio { get; set; } //solo referencial con la tabla Municipio
+        public Municipio Municipio { get; set; }
         public String LocalidadNacimiento { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
+
+        public virtual ICollection<CorresponsabilidadMadre> CorresponsabilidadesMadre { get; set; }
     }
 }

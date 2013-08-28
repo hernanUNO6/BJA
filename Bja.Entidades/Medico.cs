@@ -24,6 +24,12 @@ namespace Bja.Entidades
         public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public long IdDepartamento { get; set; } 
+        public Departamento Departamento { get; set; }
+        public long IdProvincia { get; set; } 
+        public Provincia Provincia { get; set; }
+        public long IdMunicipio { get; set; } 
+        public Municipio Municipio { get; set; }
         public String IdLocalidadNacimiento { get; set; }
         public String MatriculaColegioMedico { get; set; }
         public String CorreoElectronico { get; set; }
