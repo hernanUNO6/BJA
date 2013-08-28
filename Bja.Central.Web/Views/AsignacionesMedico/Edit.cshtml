@@ -110,7 +110,14 @@
             @Html.LabelFor(model => model.IdMedico, "Medico")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdMedico", String.Empty)
+            @*@Html.DropDownList("IdMedico", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdMedico)*@
+            
+            @{ string nombreCompleto = ViewBag.NombreCompleto; }
+            @Html.TextBox("txtIdMedico", nombreCompleto, new {style="width: 500px"})
+            @Html.ActionLink("Buscar Médico","BuscarMedico","AsignacionesMedico",null,
+            new {@class="openDialog btn",data_dialog_id="emailDialog",data_dialog_title="Ingrese criterio de busqueda"})
+            @Html.TextBoxFor(model => model.IdMedico, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdMedico)
         </div>
 
