@@ -22,6 +22,12 @@
             @Html.DisplayNameFor(model => model.Medico.Nombres)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Medico.PrimerApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medico.SegundoApellido)
+        </th>
+        <th>
             @*@Html.DisplayNameFor(model => model.EstablecimientoSalud.Codigo)*@
             Establecimiento de Salud
         </th>
@@ -41,6 +47,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Medico.Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medico.PrimerApellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medico.SegundoApellido)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EstablecimientoSalud.Nombre)

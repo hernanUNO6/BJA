@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsignacionesMedicoController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EncargadosController.cs" />
     <Compile Include="Controllers\EstablecimientosSaludController.cs" />
@@ -336,6 +337,12 @@
     <Content Include="Views\EstablecimientosSalud\Details.cshtml" />
     <Content Include="Views\EstablecimientosSalud\Edit.cshtml" />
     <Content Include="Views\EstablecimientosSalud\Index.cshtml" />
+    <Content Include="Views\AsignacionesMedico\BusquedaMedico.cshtml" />
+    <Content Include="Views\AsignacionesMedico\Create.cshtml" />
+    <Content Include="Views\AsignacionesMedico\Delete.cshtml" />
+    <Content Include="Views\AsignacionesMedico\Details.cshtml" />
+    <Content Include="Views\AsignacionesMedico\Edit.cshtml" />
+    <Content Include="Views\AsignacionesMedico\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
