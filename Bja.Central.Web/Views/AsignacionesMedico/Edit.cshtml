@@ -14,22 +14,33 @@
             fillCombo("IdProvincia", $("#IdDepartamento").val(), '@Url.Action("ProvinciasPorDepartamento")', "... Seleccione Provincia ...");
             $("#IdMunicipio").empty();
             $("#IdMunicipio").append("<option value=''>... Seleccione Municipio ...</option>");
-            $("#IdEstablecimientoSalud").empty();
-            $("#IdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
+            $("#IdRedSalud").empty();
+            $("#IdRedSalud").append("<option value=''>... Seleccione Red de Salud ...</option>");
+            $("#cboIdEstablecimientoSalud").empty();
+            $("#cboIdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
             $('#IdEstablecimientoSalud').val("");
         });
 
         $("#IdProvincia").change(function () {
             fillCombo("IdMunicipio", $("#IdProvincia").val(), '@Url.Action("MunicipiosPorProvincia")', "... Seleccione Municipio ...");
+            $("#IdRedSalud").empty();
+            $("#IdRedSalud").append("<option value=''>... Seleccione Red de Salud ...</option>");
+            $("#cboIdEstablecimientoSalud").empty();
+            $("#cboIdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
+            $('#IdEstablecimientoSalud').val("");
+        });
+
+        $("#IdMunicipio").change(function () {
+            fillCombo("IdRedSalud", $("#IdMunicipio").val(), '@Url.Action("RedesSaludPorMunicipio")', "... Seleccione Establecimiento de Salud ...");
             $("#IdEstablecimientoSalud").empty();
             $("#IdEstablecimientoSalud").append("<option value=''>... Seleccione Establecimiento de Salud ...</option>");
             $('#IdEstablecimientoSalud').val("");
         });
 
-        $("#IdMunicipio").change(function () {
-            fillCombo("IdEstablecimientoSalud", $("#IdMunicipio").val(), '@Url.Action("EstablecimientosSaludPorMunicipio")', "... Seleccione Establecimiento de Salud ...");
+        $("#IdRedSalud").change(function () {
+            fillCombo("cboIdEstablecimientoSalud", $("#IdRedSalud").val(), '@Url.Action("EstablecimientosSaludPorRedSalud")', "... Seleccione Establecimiento de Salud ...");
             $('#IdEstablecimientoSalud').val("");
-        });        
+        });
 
         function fillCombo(updateId, value, urlPath, msgSeleccion) {
             $.getJSON(urlPath + "/" + value, {},
@@ -52,6 +63,116 @@
         });
     });
 </script>    
+
+<script type="text/javascript">
+    //Below code will clear cache
+    $.ajaxSetup({ cache: false });
+    //Below code will run the JQuery when document is ready. 
+    $(document).ready(function () {
+        //Below code will append a click event to the class openDialog 
+        //which we assigned to the anchor previously
+        $(".openDialog").live("click", function (e) {
+            //Below code will prevent default action from occuring
+            //when openDialog anchor is clicked
+            e.preventDefault();
+            //This is the actual implementation of the dailog
+            $("<div></div>")
+            //To the div created for dialog we will add class named dialog
+            //this is done so that we can refer to the dialog later
+            //we will see this in a short while why it is important
+            .addClass("dialog")
+            //add attribute add id attribute
+            //note id attribute is assigned the same value as data-dialog-id
+            //attribute in openDialog anchor
+            .attr("id", $(this).attr("data-dialog-id"))
+            //below code appends this div to body
+            .appendTo("body")
+            //below code describes the attribute for the dialog
+            .dialog({
+                //below code assigns title to the dialog
+                //here we use same title as data-dialog-title attribute
+                //in openDialog anchor tag
+                title: $(this).attr("data-dialog-title"),
+                //this will append code to close the dialog
+                //and also put close cross(x) in dialog
+                //we press ESC key in keyboard will also close dialog
+                close: function () { $(this).remove() },
+                //below code defines that the dialog is modal dialog
+                modal: true,
+                width: 700
+            })
+            //below code says take href from openDialog anchor
+            //which is /Home/ContactUs and load it to the modal dialog
+            .load(this.href);
+        });
+
+
+
+
+        //if you see that code in the partial view our submit button
+        //is defined as .close class, so below code says on document ready
+        //append click event to this button
+        $(".close").live("click", function (e) {
+            //prevent default action on the button click
+            e.preventDefault();
+            //get value of name textbox id=Namecontact
+            //put in variable name
+            var name = $("#Namecontact").val();
+            //get value of email textbox id=emailcontact
+            //put in variable email
+            var email = $("#emailcontact").val();
+            //get value of message textarea id=messagecontact
+            //put it in variable message
+            //note since messagecontact is a textarea
+            //we need to use .text() rather than .val()
+            var message = $("#messagecontact").text();
+            //Start ajax call
+            $.ajax({
+                //define method for sending data to controller
+                type: "POST",
+                //define controller URL
+                url: "/AsignacionesMedico/BuscarMedico",
+                //define data to send to controller
+                //if you remember our controller accepts
+                //3 parameters name, email and message
+                data: { "name": name, "email": email, "message": message },
+                //create a success function
+                //this method is executed if controller
+                //defined by the URL is found
+                //and it accepts the data sent
+                //control comes to this point if the controller
+                //is executed. So data in function(data)
+                //contains the Json data we sent
+                //from the controller
+                success: function (data) {
+                    //Now in the div with id result defined in
+                    //index page previously we will put in the
+                    //data. As you can see Json data is very 
+                    //easy way of returning to ajax call because
+                    //now you can simply say data(dot)variable sent
+                    //and you will get the returned value.
+                    $("#result").html("<ul><li>Name: " + data.nameret + "</li><li>Email: " + data.emailret + "</li><li>Message: " + data.messageret + "</li></ul>");
+                    //now close the modal dialog we opened
+                    $(".dialog").dialog("close");
+                },
+                //control comes to this function if ajax doesn't
+                //find the controller or controller doesn't accepts
+                //the data sent or controller throws exception
+
+                error: function (data) {
+                    //If it happens alert user of the error
+                    alert("There was error processing this");
+                    //close the modal dialog
+                    $(this).closest(".dialog").dialog("close");
+                }
+            });
+
+        });
+
+
+    });
+</script>
+
 }
 
 <h2>Editar Asignación</h2>
@@ -98,11 +219,15 @@
         <label>Municipio</label>
             @Html.DropDownList("IdMunicipio", "... Seleccione Municipio ....")
 
+        <label>Red de Salud</label>
+            @Html.DropDownList("IdRedSalud", "... Seleccione Red de Salud ....")
+
         <div class="editor-label">
             @Html.LabelFor(model => model.IdEstablecimientoSalud, "EstablecimientoSalud")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("IdEstablecimientoSalud", "... Seleccione Establecimiento de Salud ...")
+            @Html.DropDownList("cboIdEstablecimientoSalud", "... Seleccione Establecimiento de Salud ....")
+            @Html.TextBoxFor(model => model.IdEstablecimientoSalud, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 

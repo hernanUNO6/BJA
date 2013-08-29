@@ -60,15 +60,22 @@ namespace Bja.Central.Web.Controllers
         //
         // GET: /AsignacionesMedico/Details/5
 
-        //public ActionResult Details(long id = 0)
-        //{
-        //    AsignacionMedico asignacionmedico = modAsignacionMedico.Buscar(id);
-        //    if (asignacionmedico == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(asignacionmedico);
-        //}
+        public ActionResult Details(long id = 0)
+        {
+            AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
+
+            ModeloEstablecimientoSalud modEstabSalud = new ModeloEstablecimientoSalud();
+            asignacionMedico.EstablecimientoSalud = modEstableSalud.Buscar(asignacionMedico.IdEstablecimientoSalud);
+
+            ModeloMedico modMedico = new ModeloMedico();
+            asignacionMedico.Medico = modMedico.Buscar(asignacionMedico.IdMedico);
+
+            if (asignacionMedico == null)
+            {
+                return HttpNotFound();
+            }
+            return View(asignacionMedico);
+        }
 
         //
         // GET: /AsignacionesMedico/Create
@@ -138,8 +145,8 @@ namespace Bja.Central.Web.Controllers
             ViewBag.IdDepartamento = new SelectList(modDepto.Listar(), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.RedSalud.Municipio.Provincia.IdDepartamento);
             ViewBag.IdProvincia = new SelectList(modProvincia.Listar().Where(p => p.IdDepartamento == asignacionMedico.EstablecimientoSalud.RedSalud.Municipio.Provincia.IdDepartamento), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.RedSalud.Municipio.IdProvincia);
             ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar().Where(p => p.IdProvincia == asignacionMedico.EstablecimientoSalud.RedSalud.Municipio.IdProvincia), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.RedSalud.IdMunicipio);
-            ViewBag.IdRedSalud= new SelectList(modRedSalud.Listar().Where(p => p.IdMunicipio == asignacionMedico.EstablecimientoSalud.RedSalud.IdMunicipio), "Id", "Descripcion", asignacionMedico.EstablecimientoSalud.RedSalud.IdMunicipio);
-            ViewBag.IdEstablecimientoSalud = new SelectList(modEstableSalud.Listar().Where(p => p.IdRedSalud == asignacionMedico.EstablecimientoSalud.IdRedSalud), "Id", "Nombre", asignacionMedico.IdEstablecimientoSalud);
+            ViewBag.IdRedSalud = new SelectList(modRedSalud.Listar().Where(p => p.IdMunicipio == asignacionMedico.EstablecimientoSalud.RedSalud.IdMunicipio), "Id", "Nombre", asignacionMedico.EstablecimientoSalud.IdRedSalud);
+            ViewBag.cboIdEstablecimientoSalud = new SelectList(modEstableSalud.Listar().Where(p => p.IdRedSalud == asignacionMedico.EstablecimientoSalud.IdRedSalud), "Id", "Nombre", asignacionMedico.IdEstablecimientoSalud);
             ViewBag.IdMedico = new SelectList(modMedico.Listar(), "Id", "Id", asignacionMedico.IdMedico);
 
             Medico med = modMedico.Buscar(asignacionMedico.IdMedico);
@@ -170,28 +177,35 @@ namespace Bja.Central.Web.Controllers
             return View(asignacionMedico);
         }
 
-        ////
-        //// GET: /AsignacionesMedico/Delete/5
+        //
+        // GET: /AsignacionesMedico/Delete/5
 
-        //public ActionResult Delete(long id = 0)
-        //{
-        //    AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
-        //    if (asignacionMedico == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(asignacionMedico);
-        //}
+        public ActionResult Delete(long id = 0)
+        {
+            AsignacionMedico asignacionMedico = modAsignacionMedico.Buscar(id);
 
-        ////
-        //// POST: /AsignacionesMedico/Delete/5
+            ModeloEstablecimientoSalud modEstabSalud = new ModeloEstablecimientoSalud();
+            asignacionMedico.EstablecimientoSalud = modEstableSalud.Buscar(asignacionMedico.IdEstablecimientoSalud);
 
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(long id)
-        //{
-        //    modAsignacionMedico.Eliminar(id);
-        //    return RedirectToAction("Index");
-        //}
+            ModeloMedico modMedico = new ModeloMedico();
+            asignacionMedico.Medico = modMedico.Buscar(asignacionMedico.IdMedico);
+
+            if (asignacionMedico == null)
+            {
+                return HttpNotFound();
+            }
+            return View(asignacionMedico);
+        }
+
+        //
+        // POST: /AsignacionesMedico/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(long id)
+        {
+            modAsignacionMedico.Eliminar(id);
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

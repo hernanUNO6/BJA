@@ -36,14 +36,14 @@
          @Html.DisplayNameFor(model => model.FechaInicio)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.FechaInicio)
+        @Model.FechaInicio.ToString("dd/MM/yyyy")
     </div>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.FechaFin)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.FechaFin)
+        @Model.FechaFin.ToString("dd/MM/yyyy")
     </div>
 
     <div class="display-label">
@@ -61,10 +61,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.EstablecimientoSalud.Codigo)
+         @Html.DisplayNameFor(model => model.EstablecimientoSalud.Nombre)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.EstablecimientoSalud.Codigo)
+        @Html.DisplayFor(model => model.EstablecimientoSalud.Nombre)
     </div>
 </fieldset>
 @using (Html.BeginForm()) {
