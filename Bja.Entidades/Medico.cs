@@ -21,7 +21,7 @@ namespace Bja.Entidades
         public String SegundoApellido { get; set; }
         public String TercerApellido { get; set; }
         public String DocumentoIdentidad { get; set; }
-        public long IdTipoDocumentoIdentidad { get; set; }
+        //public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } 
@@ -30,7 +30,7 @@ namespace Bja.Entidades
         public Provincia Provincia { get; set; }
         public long IdMunicipio { get; set; } 
         public Municipio Municipio { get; set; }
-        public String IdLocalidadNacimiento { get; set; }
+        public String LocalidadNacimiento { get; set; }
         public String MatriculaColegioMedico { get; set; }
         public String CorreoElectronico { get; set; }
         public String Observaciones { get; set; }

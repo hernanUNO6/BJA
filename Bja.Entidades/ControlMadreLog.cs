@@ -13,7 +13,7 @@ namespace Bja.Entidades
         public String DescripcionEstado { get; set; }
         public bool UltimoRegistro { get; set; }
 
-        
+
         public long Id { get; set; }
         public long IdSesion { get; set; }
         public DateTime FechaUltimaTransaccion { get; set; }

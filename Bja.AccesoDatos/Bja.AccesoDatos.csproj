@@ -50,9 +50,14 @@
     <Compile Include="ControlMenorConfiguration.cs" />
     <Compile Include="ControlMadreLogConfiguration.cs" />
     <Compile Include="ControlMenorLogConfiguration.cs" />
+    <Compile Include="TutorLogConfiguration.cs" />
+    <Compile Include="MenorLogConfiguration.cs" />
+    <Compile Include="MedicoLogConfiguration.cs" />
+    <Compile Include="EncargadoLogConfiguration.cs" />
     <Compile Include="CorresponsabilidadMadreLogConfiguration.cs" />
     <Compile Include="CorresponsabilidadMadreConfiguration.cs" />
     <Compile Include="CorresponsabilidadMenorConfiguration.cs" />
+    <Compile Include="CorresponsabilidadMenorLogConfiguration.cs" />
     <Compile Include="DepartamentoConfiguration.cs" />
     <Compile Include="EncargadoConfiguration.cs" />
     <Compile Include="EnvioConfiguration.cs" />

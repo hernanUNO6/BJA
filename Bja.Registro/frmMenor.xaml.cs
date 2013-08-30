@@ -55,7 +55,7 @@ namespace Bja.Registro
 
                 _menor = modelomenor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _menor.DocumentoIdentidad;
-                cboTipoDocumentoIdentidad.SelectedValue = _menor.IdTipoDocumentoIdentidad;
+                //cboTipoDocumentoIdentidad.SelectedValue = _menor.IdTipoDocumentoIdentidad;
                 cboDepartamento.SelectedValue = _menor.IdDepartamento;
                 cboProvincia.SelectedValue = _menor.IdProvincia;
                 cboMunicipio.SelectedValue = _menor.IdMunicipio;
@@ -178,7 +178,7 @@ namespace Bja.Registro
                 ModeloMenor modelomenor = new ModeloMenor();
 
                 _menor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                _menor.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                //_menor.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
                 _menor.Oficialia = txtOficialia.Text;
                 _menor.Libro = txtLibro.Text;
                 _menor.Partida = txtPartida.Text;

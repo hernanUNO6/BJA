@@ -36,7 +36,8 @@ namespace Bja.Central.Web.Controllers
             }
             ViewBag.TipoEncargado = TipoEncargado.GetNames(typeof(TipoEncargado))[encargado.IdTipoEncargado];
             ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
-            ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
+            //Ojo
+            //ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
             return View(encargado);
         }
 
@@ -61,7 +62,7 @@ namespace Bja.Central.Web.Controllers
             encargado.IdSesion = 1;
             encargado.FechaUltimaTransaccion = System.DateTime.Now;
             encargado.FechaRegistro = System.DateTime.Now;
-            encargado.IdTipoEstadoRegistro = (long)TipoEstadoRegistro.Vigente;
+            //encargado.IdTipoEstadoRegistro = (long)TipoEstadoRegistro.Vigente;
 
             if (ModelState.IsValid)
             {
@@ -118,7 +119,8 @@ namespace Bja.Central.Web.Controllers
             }
             ViewBag.TipoEncargado = TipoEncargado.GetNames(typeof(TipoEncargado))[encargado.IdTipoEncargado];
             ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
-            ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
+            //ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
+            //Ojo
 
             return View(encargado);
         }

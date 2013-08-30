@@ -44,7 +44,8 @@ namespace Bja.Modelo
         _tutor.SegundoApellido = tutor.SegundoApellido;
         _tutor.TercerApellido = tutor.TercerApellido;
         _tutor.DocumentoIdentidad = tutor.DocumentoIdentidad;
-        _tutor.IdTipoDocumentoIdentidad = tutor.IdTipoDocumentoIdentidad;
+        //_tutor.IdTipoDocumentoIdentidad = tutor.IdTipoDocumentoIdentidad;
+        _tutor.TipoDocumentoIdentidad = tutor.TipoDocumentoIdentidad;
         _tutor.FechaNacimiento = tutor.FechaNacimiento;
         _tutor.IdDepartamento = tutor.IdDepartamento;
         _tutor.IdProvincia = tutor.IdProvincia;

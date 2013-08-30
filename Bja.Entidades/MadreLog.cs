@@ -24,7 +24,7 @@ namespace Bja.Entidades
         public String SegundoApellido { get; set; }
         public String TercerApellido { get; set; }
         public String DocumentoIdentidad { get; set; }
-        public long IdTipoDocumentoIdentidad { get; set; }
+        //public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento

@@ -14,6 +14,7 @@ namespace Bja.Entidades
         public long IdSesion { get; set; }
         public DateTime FechaUltimaTransaccion { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public TipoEstadoRegistro EstadoRegistro { get; set; }
 
         public long IdTipoEncargado { get; set; }
         public TipoEncargado TipoEncargado { get; set; }
@@ -28,7 +29,7 @@ namespace Bja.Entidades
         public String Sexo { get; set; } //char(1)
         public String IdLocalidadNacimiento { get; set; }
         public String Observaciones { get; set; }
-        public long IdTipoEstadoRegistro { get; set; }
-        public TipoEstadoRegistro EstadoRegistro { get; set; }
+        //public long IdTipoEstadoRegistro { get; set; }
+        
     }
 }

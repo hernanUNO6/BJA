@@ -44,7 +44,7 @@ namespace Bja.Modelo
       _menor.PrimerApellido = menor.PrimerApellido;
       _menor.SegundoApellido = menor.SegundoApellido;
       _menor.DocumentoIdentidad = menor.DocumentoIdentidad;
-      _menor.IdTipoDocumentoIdentidad = menor.IdTipoDocumentoIdentidad;
+      //_menor.IdTipoDocumentoIdentidad = menor.IdTipoDocumentoIdentidad;
       _menor.Oficialia = menor.Oficialia;
       _menor.Libro = menor.Libro;
       _menor.Partida = menor.Partida;

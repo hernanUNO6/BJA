@@ -59,9 +59,100 @@ namespace Bja.Modelo
                     context.SaveChanges();
 
                     break;
-                case "Tutor":
+                case "CorresponsabilidadMadre":
+                    CorresponsabilidadMadreLog corresponsabilidadMadreLog = new CorresponsabilidadMadreLog();
+                    
+                    object corresponsabilidadmadrelogobj = (object)corresponsabilidadMadreLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref corresponsabilidadmadrelogobj);
+                    
+                    corresponsabilidadMadreLog.IdLog = IdentifierGenerator.NewId();
+                    corresponsabilidadMadreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    corresponsabilidadMadreLog.DescripcionEstado = "Pendiente";
+                    corresponsabilidadMadreLog.UltimoRegistro = true;
+
+                    context.CorresponsabilidadMadreLog.Add(corresponsabilidadMadreLog);
+                    context.SaveChanges();
+                    break;
+                case "ControlMadre":
+                    ControlMadreLog controlMadreLog = new ControlMadreLog();
+
+                    object controlmadrelogobj = (object)controlMadreLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref controlmadrelogobj);
+
+                    controlMadreLog.IdLog = IdentifierGenerator.NewId();
+                    controlMadreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    controlMadreLog.DescripcionEstado = "Pendiente";
+                    controlMadreLog.UltimoRegistro = true;
+
+                    context.ControlMadreLog.Add(controlMadreLog);
+                    context.SaveChanges();
+                    break;
+
+                case "Menor":
+                    MenorLog menorLog = new MenorLog();
+
+                    object menorLogObj = (object)menorLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref menorLogObj);
+
+                    menorLog.IdLog = IdentifierGenerator.NewId();
+                    menorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    menorLog.DescripcionEstado = "Pendiente";
+                    menorLog.UltimoRegistro = true;
+
+                    context.MenorLog.Add(menorLog);
+                    context.SaveChanges();
 
                     break;
+                case "CorresponsabilidadMenor":
+                    CorresponsabilidadMenorLog corresponsabilidadMenorLog = new CorresponsabilidadMenorLog();
+
+                    object corresponsabilidadMenorLogObj = (object)corresponsabilidadMenorLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref corresponsabilidadMenorLogObj);
+
+                    corresponsabilidadMenorLog.IdLog = IdentifierGenerator.NewId();
+                    corresponsabilidadMenorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    corresponsabilidadMenorLog.DescripcionEstado = "Pendiente";
+                    corresponsabilidadMenorLog.UltimoRegistro = true;
+
+                    context.CorresponsabilidadMenorLog.Add(corresponsabilidadMenorLog);
+                    context.SaveChanges();
+                    break;
+                case "ControlMenor":
+                    ControlMenorLog controlMenorLog = new ControlMenorLog();
+
+                    object controlMenorLogObj = (object)controlMenorLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref controlMenorLogObj);
+
+                    controlMenorLog.IdLog = IdentifierGenerator.NewId();
+                    controlMenorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    controlMenorLog.DescripcionEstado = "Pendiente";
+                    controlMenorLog.UltimoRegistro = true;
+
+                    context.ControlMenorLog.Add(controlMenorLog);
+                    context.SaveChanges();
+                    break;
+
+                case "Tutor":
+                    TutorLog tutorLog = new TutorLog();
+
+                    object tutorLogObj = (object)tutorLog;
+
+                    SoporteObjetos.CopiarDatosObjetos(clase, ref tutorLogObj);
+
+                    tutorLog.IdLog = IdentifierGenerator.NewId();
+                    tutorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                    tutorLog.DescripcionEstado = "Pendiente";
+                    tutorLog.UltimoRegistro = true;
+
+                    context.TutorLog.Add(tutorLog);
+                    context.SaveChanges();
+
+                    break;            
             }
 
             /*

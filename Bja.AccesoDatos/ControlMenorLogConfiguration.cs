@@ -28,7 +28,7 @@ namespace Bja.AccesoDatos
             Property(c => c.IdMenor).IsRequired();
             Property(c => c.IdMadre).IsOptional();
             Property(c => c.IdTutor).IsOptional();
-            Property(c => c.TipoParentesco).IsOptional();
+            Property(c => c.IdTipoParentesco).IsOptional();
             Property(c => c.FechaProgramada).IsRequired();
             Property(c => c.FechaControl).IsRequired();
             Property(c => c.TallaCm).IsRequired();

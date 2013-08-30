@@ -59,7 +59,8 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[medico.IdTipoDocumentoIdentidad];
+            //ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[medico.IdTipoDocumentoIdentidad];
+            //Ojo
             return View(medico);
         }
 
@@ -133,7 +134,8 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[medico.IdTipoDocumentoIdentidad];
+            //Ojo
+            //ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[medico.IdTipoDocumentoIdentidad];
 
             return View(medico);
         }

@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 
 namespace Bja.AccesoDatos
 {
-    public class CorresponsabilidadMenorConfiguration : EntityTypeConfiguration<CorresponsabilidadMenor>
+    public class CorresponsabilidadMenorLogConfiguration : EntityTypeConfiguration<CorresponsabilidadMenorLog>
     {
-        public CorresponsabilidadMenorConfiguration()
+        public CorresponsabilidadMenorLogConfiguration()
         {
-            ToTable("CorresponsabilidadMenores");
-            HasKey(c => c.Id);
+            ToTable("CorresponsabilidadMenoresLog");
+            HasKey(m => m.IdLog);
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstado).IsRequired().HasMaxLength(512);
+            Property(m => m.UltimoRegistro).IsRequired();
+
+            Property(c => c.Id).IsRequired();
             Property(c => c.IdSesion).IsRequired();
             Property(c => c.FechaRegistro).IsRequired();
             Property(c => c.FechaUltimaTransaccion).IsRequired();
@@ -21,12 +26,12 @@ namespace Bja.AccesoDatos
             Property(c => c.IdEstablecimientoSalud).IsRequired();
             Property(c => c.TipoInscripcionMenor).IsRequired();
             Property(c => c.FechaInscripcion).IsRequired();
-            Property(c => c.IdMenor).IsRequired();            
+            Property(c => c.IdMenor).IsRequired();
+            Property(c => c.IdTipoParentesco).IsOptional();
             Property(c => c.DireccionMenor).IsOptional().HasMaxLength(512);
             Property(c => c.IdMadre).IsOptional();
             Property(c => c.DireccionMadre).IsOptional().HasMaxLength(512);
             Property(c => c.IdTutor).IsOptional();
-            Property(c => c.IdTipoParentesco).IsOptional();
             Property(c => c.DireccionTutor).IsOptional().HasMaxLength(512);
             Property(c => c.CodigoFormulario).IsRequired().HasMaxLength(16);
             Property(c => c.FechaSalidaPrograma).IsOptional();
@@ -34,12 +39,6 @@ namespace Bja.AccesoDatos
             Property(c => c.AutorizadoPor).HasMaxLength(256);
             Property(c => c.CargoAutorizador).HasMaxLength(256);
             Property(c => c.Observaciones).IsOptional().HasMaxLength(1024);
-
-            //relaciones
-            HasRequired(c => c.EstablecimientoSalud).WithMany().HasForeignKey(c => c.IdEstablecimientoSalud).WillCascadeOnDelete(false);
-            HasRequired(c => c.Menor).WithMany().HasForeignKey(c => c.IdMenor).WillCascadeOnDelete(false);
-            HasOptional(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
-            HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
         }
     }
 }

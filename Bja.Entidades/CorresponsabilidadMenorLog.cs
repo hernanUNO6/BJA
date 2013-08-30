@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public class CorresponsabilidadMenorLog : CorresponsabilidadMenor
+    public class CorresponsabilidadMenorLog
     {
         public long IdLog { get; set; }
         public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
@@ -32,6 +32,7 @@ namespace Bja.Entidades
         public long IdTutor { get; set; }
         public Tutor Tutor { get; set; }
         public String DireccionTutor { get; set; }
+        public long IdTipoParentesco { get; set; }
         public TipoParentesco TipoParentesco { get; set; }
         public String CodigoFormulario { get; set; }
         public DateTime FechaSalidaPrograma { get; set; }

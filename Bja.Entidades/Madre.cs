@@ -20,7 +20,7 @@ namespace Bja.Entidades
         public String TercerApellido { get; set; }
         public String NombreCompleto { get; set; }
         public String DocumentoIdentidad { get; set; }
-        public long IdTipoDocumentoIdentidad { get; set; }
+        //public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
@@ -30,6 +30,8 @@ namespace Bja.Entidades
         public long IdMunicipio { get; set; } //solo referencial con la tabla Municipio
         public Municipio Municipio { get; set; }
         public String LocalidadNacimiento { get; set; }
+        //public long IdFamilia { get; set; }
+        //public Familia Familia { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
 

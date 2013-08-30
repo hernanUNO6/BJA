@@ -65,8 +65,10 @@
     <Compile Include="ModeloTutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rbac.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="SoporteObjetos.cs" />
+    <Compile Include="Transportador.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bja.Entidades\Bja.Entidades.csproj">

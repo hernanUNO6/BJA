@@ -27,7 +27,7 @@ namespace Bja.AccesoDatos
             Property(m => m.MatriculaColegioMedico).IsRequired().HasMaxLength(32);
             Property(m => m.CorreoElectronico).HasMaxLength(64);
             Property(m => m.FechaNacimiento).IsRequired();
-            Property(m => m.IdLocalidadNacimiento).IsRequired();
+            Property(m => m.LocalidadNacimiento).IsRequired();
             Property(m => m.Observaciones).HasMaxLength(1024);
 
             //relations

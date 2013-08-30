@@ -18,7 +18,7 @@ namespace Bja.AccesoDatos
             Property(c => c.FechaRegistro).IsRequired();
             Property(c => c.FechaUltimaTransaccion).IsRequired();
 
-            Property(c => c.IdEstablecimientoMedico).IsRequired();
+            Property(c => c.IdEstablecimientoSalud).IsRequired();
             Property(c => c.IdMedico).IsRequired();
             Property(c => c.FechaEnvio).IsRequired();
             Property(c => c.CodigoVerificacion).IsRequired().HasMaxLength(128);

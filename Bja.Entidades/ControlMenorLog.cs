@@ -29,6 +29,7 @@ namespace Bja.Entidades
         public Madre Madre { get; set; }
         public long IdTutor { get; set; }
         public Tutor Tutor { get; set; }
+        public long IdTipoParentesco { get; set; }
         public TipoParentesco TipoParentesco { get; set; }
         public long IdEstablecimientoSalud { get; set; }
         public EstablecimientoSalud EstablecimientoSalud { get; set; }

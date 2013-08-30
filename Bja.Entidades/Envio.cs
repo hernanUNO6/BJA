@@ -14,7 +14,8 @@ namespace Bja.Entidades
         public DateTime FechaRegistro { get; set; }
         public TipoEstadoRegistro EstadoRegistro { get; set; }
 
-        public long IdEstablecimientoMedico { get; set; }
+        public long IdEstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
         public long IdMedico { get; set; }
         public Medico Medico { get; set; }
         public DateTime FechaEnvio { get; set; }

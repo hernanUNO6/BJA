@@ -22,7 +22,7 @@ namespace Bja.Entidades
         public String Libro { get; set; }
         public String Partida { get; set; }
         public String Folio { get; set; }
-        public long IdTipoDocumentoIdentidad { get; set; }
+        //public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
