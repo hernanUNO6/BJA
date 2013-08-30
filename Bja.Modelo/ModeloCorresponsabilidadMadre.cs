@@ -18,7 +18,7 @@ namespace Bja.Modelo
           corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
           corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           corresponsabilidadmadre.FechaRegistro = DateTime.Now;
-          corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+          corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
           context.CorresponsabilidadesMadre.Add(corresponsabilidadmadre);
 
@@ -36,7 +36,7 @@ namespace Bja.Modelo
           _corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
           _corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           _corresponsabilidadmadre.FechaRegistro = DateTime.Now;
-          _corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+          _corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
           _corresponsabilidadmadre.IdEstablecimientoSalud = corresponsabilidadmadre.IdEstablecimientoSalud;
           _corresponsabilidadmadre.TipoInscripcionMadre = corresponsabilidadmadre.TipoInscripcionMadre;

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradorConfiguracion.cs" />
     <Compile Include="IdentifierGenerator.cs" />
     <Compile Include="InitializationBD.cs" />
     <Compile Include="ModeloAsignacionMedico.cs" />

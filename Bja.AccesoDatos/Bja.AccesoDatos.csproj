@@ -50,6 +50,7 @@
     <Compile Include="ControlMenorConfiguration.cs" />
     <Compile Include="ControlMadreLogConfiguration.cs" />
     <Compile Include="ControlMenorLogConfiguration.cs" />
+    <Compile Include="ConfiguracionConfiguration.cs" />
     <Compile Include="TutorLogConfiguration.cs" />
     <Compile Include="MenorLogConfiguration.cs" />
     <Compile Include="MedicoLogConfiguration.cs" />

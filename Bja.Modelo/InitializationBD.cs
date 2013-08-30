@@ -23,6 +23,11 @@ namespace Bja.Modelo
                 long session = 1;
                 rbac.insertUser("admin", "Admin", "admin", 1, session);
             }
+
+            //adiciona registros de configuración
+            AdministradorConfiguracion.Crear("idMedicoAsignado", "general", "123", Entidades.TipoDato.enterolargo);
+            AdministradorConfiguracion.Crear("idEstablecimientoSalud", "general", "123", Entidades.TipoDato.enterolargo);
+
         }
     }
 }

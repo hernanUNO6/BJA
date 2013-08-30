@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsignacionMedico.cs" />
+    <Compile Include="Configuracion.cs" />
     <Compile Include="ControlMadre.cs" />
     <Compile Include="ControlMadreLog.cs" />
     <Compile Include="ControlMenor.cs" />
@@ -76,9 +77,11 @@
     <Compile Include="Sexo.cs" />
     <Compile Include="SolicitudPago.cs" />
     <Compile Include="TipoAccion.cs" />
+    <Compile Include="TipoAccionLog.cs" />
     <Compile Include="TipoBeneficiario.cs" />
     <Compile Include="TipoControl.cs" />
     <Compile Include="TipoControlMadre.cs" />
+    <Compile Include="TipoDato.cs" />
     <Compile Include="TipoDocumentoIdentidad.cs" />
     <Compile Include="TipoEncargado.cs" />
     <Compile Include="TipoEstadoPago.cs" />

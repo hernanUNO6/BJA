@@ -19,6 +19,7 @@ namespace Bja.AccesoDatos
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<Configuracion> Configuraciones { get; set; }
 
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Encargado> Encargados { get; set; }
@@ -57,6 +58,7 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new RoleConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new SessionConfiguration());
+            modelBuilder.Configurations.Add(new ConfiguracionConfiguration());
 
             modelBuilder.Configurations.Add(new MedicoConfiguration());
             modelBuilder.Configurations.Add(new EncargadoConfiguration());

@@ -20,7 +20,7 @@ namespace Bja.Modelo
       menor.IdSesion = SessionManager.getCurrentSession().Id;
       menor.FechaUltimaTransaccion = DateTime.Now;
       menor.FechaRegistro = DateTime.Now;
-      menor.EstadoRegistro = TipoEstadoRegistro.Vigente;
+      menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
       context.Menores.Add(menor);
 
@@ -38,7 +38,7 @@ namespace Bja.Modelo
       _menor.IdSesion = SessionManager.getCurrentSession().Id;
       _menor.FechaUltimaTransaccion = DateTime.Now;
       _menor.FechaRegistro = DateTime.Now;
-      _menor.EstadoRegistro = TipoEstadoRegistro.Vigente;
+      _menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
       _menor.Nombres = menor.Nombres;
       _menor.PrimerApellido = menor.PrimerApellido;

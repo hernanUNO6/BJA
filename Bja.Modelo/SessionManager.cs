@@ -68,6 +68,11 @@ namespace Bja.Modelo
             instance = null;
         }
 
+        public static long getSessionIdentifier()
+        {
+            return session.Id;
+        }
+
 
     }
 }

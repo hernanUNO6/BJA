@@ -49,7 +49,16 @@ namespace Bja.Modelo
                     object madrelogobj = (object)madreLog;
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref madrelogobj);
-                    
+
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroMadre = (from m in context.MadreLog
+                                             where m.Id == madreLog.Id
+                                             && m.UltimoRegistro == true
+                                             select m).FirstOrDefault();
+
+                    ultimoRegistroMadre.UltimoRegistro = false;
+
+                    //insertar nuevo registro
                     madreLog.IdLog = IdentifierGenerator.NewId();
                     madreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
                     madreLog.DescripcionEstado = "Pendiente";

@@ -20,7 +20,7 @@ namespace Bja.Modelo
           madre.IdSesion = SessionManager.getCurrentSession().Id;
           madre.FechaUltimaTransaccion = DateTime.Now;
           madre.FechaRegistro = DateTime.Now;
-          madre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+          madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
           context.Madres.Add(madre);
 
@@ -40,7 +40,7 @@ namespace Bja.Modelo
           _madre.IdSesion = SessionManager.getCurrentSession().Id;
           _madre.FechaUltimaTransaccion = DateTime.Now;
           _madre.FechaRegistro = DateTime.Now;
-          _madre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+          _madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
           _madre.Nombres = madre.Nombres;
           _madre.NombreCompleto = madre.NombreCompleto;

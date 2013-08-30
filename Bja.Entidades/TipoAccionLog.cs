@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public enum TipoEncargado
+    public enum TipoAccionLog
     {
-        Nacional,
-        Departamental,
-        Municipal
+        CrearRegistro,
+        ModificarRegistro,
+        BorrarRegistro
     }
 }

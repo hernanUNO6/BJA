@@ -18,7 +18,7 @@ namespace Bja.Modelo
             controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
             controlmadre.FechaUltimaTransaccion = DateTime.Now;
             controlmadre.FechaRegistro = DateTime.Now;
-            controlmadre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+            controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
             context.ControlesMadre.Add(controlmadre);
 
@@ -36,7 +36,7 @@ namespace Bja.Modelo
             _controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
             _controlmadre.FechaUltimaTransaccion = DateTime.Now;
             _controlmadre.FechaRegistro = DateTime.Now;
-            _controlmadre.EstadoRegistro = TipoEstadoRegistro.Vigente;
+            _controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
             _controlmadre.IdCorresponsabilidadMadre = controlmadre.IdCorresponsabilidadMadre;
             _controlmadre.IdMedico = controlmadre.IdMedico;

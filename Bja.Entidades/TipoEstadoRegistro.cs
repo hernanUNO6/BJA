@@ -8,7 +8,8 @@ namespace Bja.Entidades
 {
     public enum TipoEstadoRegistro
     {
-        Vigente,
+        VigenteNuevoRegistro,
+        VigenteRegistroModificado,
         BorradoLogico
     }
 }

@@ -62,7 +62,7 @@ namespace Bja.Central.Web.Controllers
             estableSalud.IdSesion = 1;
             estableSalud.FechaUltimaTransaccion = DateTime.Now;
             estableSalud.FechaRegistro = DateTime.Now;
-            estableSalud.EstadoRegistro = TipoEstadoRegistro.Vigente;
+            estableSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
 
             if (ModelState.IsValid)
             {
