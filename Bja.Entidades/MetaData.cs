@@ -37,7 +37,7 @@ namespace Bja.Entidades
 
         [Display(Name = "Tipo de Documento de Identidad")]
         [Required]
-        public long IdTipoDocumentoIdentidad { get; set; }
+        public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.DateTime, ErrorMessage="El campo debe ser del tipo fecha")]
@@ -46,7 +46,7 @@ namespace Bja.Entidades
 
         [Display(Name = "Localidad de Nacimiento")]
         [Required]
-        public String IdLocalidadNacimiento { get; set; }
+        public String LocalidadNacimiento { get; set; }
 
         [Display(Name = "Matricula")]
         [Required]
@@ -119,7 +119,7 @@ namespace Bja.Entidades
 
         [Display(Name = "Tipo Documento de Identidad")]
         [Required]
-        public long IdTipoDocumentoIdentidad { get; set; }
+        public long TipoDocumentoIdentidad { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.DateTime)]
@@ -130,9 +130,11 @@ namespace Bja.Entidades
         [Required]
         public String Sexo { get; set; } //char(1)
 
+        //ojo
+        /*
         [Display(Name = "Estado Registro")]
         [Required]
-        public long IdTipoEstadoRegistro { get; set; }
+        public long TipoEstadoRegistro { get; set; }*/
     }
 
     public class DepartamentoMetaData

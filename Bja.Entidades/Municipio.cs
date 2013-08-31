@@ -24,6 +24,6 @@ namespace Bja.Entidades
         public long IdProvincia { get; set; }
         public virtual Provincia Provincia { get; set; }
 
-        public virtual ICollection<RedSalud> RedesSalud { get; set; }
+        public virtual List<RedSalud> RedesSalud { get; set; }
     }
 }

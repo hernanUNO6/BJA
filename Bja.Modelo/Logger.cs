@@ -10,6 +10,7 @@ namespace Bja.Modelo
 {
     public class Logger
     {
+        /*
         public static void log(object clase)
         {
             BjaContext context = new BjaContext();
@@ -228,6 +229,6 @@ namespace Bja.Modelo
              * */
 
 
-        }
+       // }*/
     }
 }

@@ -42,6 +42,9 @@ namespace Bja.Registro
         private void cmdCorresponsabilidadesDeMadres_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
+
+            //Transportador.generarArchivoEnvio("envio.xml");
+
             frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
             objCorresponsabilidadMadreWindow.IdSeleccionado = 0;
             objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion.Nuevo;

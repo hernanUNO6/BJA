@@ -42,12 +42,13 @@ namespace Bja.AccesoDatos
         public DbSet<EstablecimientoSalud> EstablecimientosSalud { get; set; }
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
 
-        public DbSet<MadreTemporal> MadreLog { get; set; }
-        public DbSet<CorresponsabilidadMadreTemporal> CorresponsabilidadMadreLog { get; set; }
-        public DbSet<ControlMenorTemporal> ControlMenorLog { get; set; }
-        public DbSet<CorresponsabilidadMenorTemporal> CorresponsabilidadMenorLog { get; set; }
-        public DbSet<MenorTemporal> MenorLog { get; set; }
-        public DbSet<TutorTemporal> TutorLog { get; set; }
+        public DbSet<MadreTemporal> MadresTemporal { get; set; }
+        public DbSet<ControlMadreTemporal> ControlMadresTemporal { get; set; }
+        public DbSet<CorresponsabilidadMadreTemporal> CorresponsabilidadMadresTemporal { get; set; }
+        public DbSet<ControlMenorTemporal> ControlMenoresTemporal { get; set; }
+        public DbSet<CorresponsabilidadMenorTemporal> CorresponsabilidadMenoresTemporal { get; set; }
+        public DbSet<MenorTemporal> MenoresTemporal { get; set; }
+        public DbSet<TutorTemporal> TutoresTemporal { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

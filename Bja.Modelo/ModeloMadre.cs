@@ -21,12 +21,13 @@ namespace Bja.Modelo
           madre.FechaUltimaTransaccion = DateTime.Now;
           madre.FechaRegistro = DateTime.Now;
           madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+          madre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
           context.Madres.Add(madre);
 
           context.SaveChanges();
 
-          Logger.log(madre);
+          
       }
 
       public void Editar(long Id, Madre madre)
@@ -40,7 +41,8 @@ namespace Bja.Modelo
           _madre.IdSesion = SessionManager.getCurrentSession().Id;
           _madre.FechaUltimaTransaccion = DateTime.Now;
           _madre.FechaRegistro = DateTime.Now;
-          _madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+          _madre.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+          _madre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
           _madre.Nombres = madre.Nombres;
           _madre.NombreCompleto = madre.NombreCompleto;
@@ -58,7 +60,7 @@ namespace Bja.Modelo
 
           context.SaveChanges();
 
-          Logger.log(_madre);
+          
       }
 
       public void Eliminar(long Id)
@@ -90,11 +92,12 @@ namespace Bja.Modelo
 
       public List<Madre> Listar()
       {
+          //ojo filtrar los no borrados
           return context.Madres.ToList();
       }
 
       public List<Madre> ListarMadresPorCriterio(string Criterio)
-      {
+      {//ojo filtrar los no borrados
           List<Madre> madre = new List<Madre>();
 
           madre = (from m in context.Madres
@@ -109,7 +112,7 @@ namespace Bja.Modelo
       }
 
       public List<Madre> ListarMadresDeMenorATravesDeCorresponsabilidadDeMenor(long IdMenor)
-      {
+      {//ojo filtrar los no borrados
           List<Madre> madre = new List<Madre>();
 
           madre = (from cn in context.CorresponsabilidadesMenor
@@ -122,7 +125,7 @@ namespace Bja.Modelo
       }
 
       public List<Madre> ListarMadresBajoTuicionDeTutor(long IdTutor)
-      {
+      {//ojo filtrar los no borrados
           List<Madre> madre = new List<Madre>();
 
           madre = (from cm in context.CorresponsabilidadesMadre

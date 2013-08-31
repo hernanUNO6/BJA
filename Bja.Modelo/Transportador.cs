@@ -34,9 +34,25 @@ namespace Bja.Modelo
             nuevoEnvio.NuevosTutores = (from t in context.Tutores
                                        where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
                                        select t).ToList();
-
+            nuevoEnvio.NuevosMenores = (from t in context.Menores
+                                        where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+                                        select t).ToList();
+            nuevoEnvio.NuevosControlesMadre = (from m in context.ControlesMadre
+                                       where m.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+                                       select m).ToList();
+            nuevoEnvio.NuevosControlesMenor = (from t in context.ControlesMenor
+                                        where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+                                        select t).ToList();
 
             return nuevoEnvio;
         }
+
+        public static void generarArchivoEnvio(String path)
+        {
+            Envio datosEnvio = generarEnvio();
+
+            Serializer.serializar(datosEnvio, path);
+        }
+
     }
 }

@@ -24,7 +24,7 @@ namespace Bja.Entidades
         public string Telefono { get; set; }
 
         public long IdRedSalud { get; set; }
-        public virtual RedSalud RedSalud { get; set; }
+        public RedSalud RedSalud { get; set; }
 
     }
 }

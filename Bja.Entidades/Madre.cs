@@ -37,6 +37,6 @@ namespace Bja.Entidades
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
 
-        public virtual ICollection<CorresponsabilidadMadre> CorresponsabilidadesMadre { get; set; }
+        public virtual List<CorresponsabilidadMadre> CorresponsabilidadesMadre { get; set; }
     }
 }

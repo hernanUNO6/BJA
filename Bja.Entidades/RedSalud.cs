@@ -22,6 +22,6 @@ namespace Bja.Entidades
         public long IdMunicipio { get; set; }
         public virtual Municipio Municipio { get; set; }
 
-        public virtual ICollection<EstablecimientoSalud> EstablecimientosSalud { get; set; }
+        public virtual List<EstablecimientoSalud> EstablecimientosSalud { get; set; }
     }
 }
