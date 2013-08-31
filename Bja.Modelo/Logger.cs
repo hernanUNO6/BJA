@@ -40,11 +40,11 @@ namespace Bja.Modelo
             context.SaveChanges();
 
             */
-            
+            /*
             switch (tipoClase.Name)
             {
                 case "Madre":
-                    MadreLog madreLog = new MadreLog();
+                    MadreTemporal madreLog = new MadreTemporal();
                     
                     object madrelogobj = (object)madreLog;
 
@@ -69,7 +69,7 @@ namespace Bja.Modelo
 
                     break;
                 case "CorresponsabilidadMadre":
-                    CorresponsabilidadMadreLog corresponsabilidadMadreLog = new CorresponsabilidadMadreLog();
+                    CorresponsabilidadMadreTemporal corresponsabilidadMadreLog = new CorresponsabilidadMadreTemporal();
                     
                     object corresponsabilidadmadrelogobj = (object)corresponsabilidadMadreLog;
 
@@ -117,7 +117,7 @@ namespace Bja.Modelo
                     break;
 
                 case "Menor":
-                    MenorLog menorLog = new MenorLog();
+                    MenorTemporal menorLog = new MenorTemporal();
 
                     object menorLogObj = (object)menorLog;
 
@@ -141,7 +141,7 @@ namespace Bja.Modelo
 
                     break;
                 case "CorresponsabilidadMenor":
-                    CorresponsabilidadMenorLog corresponsabilidadMenorLog = new CorresponsabilidadMenorLog();
+                    CorresponsabilidadMenorTemporal corresponsabilidadMenorLog = new CorresponsabilidadMenorTemporal();
 
                     object corresponsabilidadMenorLogObj = (object)corresponsabilidadMenorLog;
 
@@ -164,7 +164,7 @@ namespace Bja.Modelo
                     context.SaveChanges();
                     break;
                 case "ControlMenor":
-                    ControlMenorLog controlMenorLog = new ControlMenorLog();
+                    ControlMenorTemporal controlMenorLog = new ControlMenorTemporal();
 
                     object controlMenorLogObj = (object)controlMenorLog;
 
@@ -188,7 +188,7 @@ namespace Bja.Modelo
                     break;
 
                 case "Tutor":
-                    TutorLog tutorLog = new TutorLog();
+                    TutorTemporal tutorLog = new TutorTemporal();
 
                     object tutorLogObj = (object)tutorLog;
 
@@ -212,7 +212,7 @@ namespace Bja.Modelo
 
                     break;            
             }
-
+            */
             /*
             object claseDestino = System.Activator.CreateInstance(Type.GetType(tipoClase.FullName + "Log"));
 

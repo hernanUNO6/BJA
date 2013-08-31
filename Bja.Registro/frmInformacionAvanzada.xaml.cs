@@ -437,9 +437,9 @@ namespace Bja.Registro
             {
                 if (corresponsabilidadmadre != null)
                 {
-                    if (corresponsabilidadmadre.IdTutor > 0)
+                    if (corresponsabilidadmadre.IdTutor != null)
                     {
-                        this.grdTutorMadre.ItemsSource = modelotutor.RecuperarTutor(corresponsabilidadmadre.IdTutor);
+                        this.grdTutorMadre.ItemsSource = modelotutor.RecuperarTutor((long)corresponsabilidadmadre.IdTutor);
                         if (this.grdTutorMadre.Items.Count > 0)
                             this.grdTutorMadre.SelectedIndex = 0;
                     }
@@ -495,9 +495,9 @@ namespace Bja.Registro
             {
                 if (corresponsabilidadmenor != null)
                 {
-                    if (corresponsabilidadmenor.IdTutor > 0)
+                    if (corresponsabilidadmenor.IdTutor != null)
                     {
-                        this.grdTutorMenor.ItemsSource = modelotutor.RecuperarTutor(corresponsabilidadmenor.IdTutor);
+                        this.grdTutorMenor.ItemsSource = modelotutor.RecuperarTutor((long)corresponsabilidadmenor.IdTutor);
                         if (this.grdTutorMenor.Items.Count > 0)
                             this.grdTutorMenor.SelectedIndex = 0;
                     }

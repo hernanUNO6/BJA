@@ -21,6 +21,8 @@ namespace Bja.AccesoDatos
             Property(em => em.IdSesion).IsRequired();
             Property(em => em.FechaRegistro).IsRequired();
             Property(em => em.FechaUltimaTransaccion).IsRequired();
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(em => em.Codigo).IsRequired().HasMaxLength(10);
             Property(em => em.Nombre).IsRequired().HasMaxLength(100);

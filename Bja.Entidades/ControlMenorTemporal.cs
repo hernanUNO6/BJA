@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public class ControlMenorLog //: ControlMenor
+    public class ControlMenorTemporal //: ControlMenor
     {
-        public long IdLog { get; set; }
-        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
-        public String DescripcionEstado { get; set; }
+        public long IdTemporal { get; set; }
         public bool UltimoRegistro { get; set; }
 
         public long Id { get; set; }
@@ -18,6 +16,8 @@ namespace Bja.Entidades
         public DateTime FechaUltimaTransaccion { get; set; }
         public DateTime FechaRegistro { get; set; }
         public TipoEstadoRegistro EstadoRegistro { get; set; }
+        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
+        public String DescripcionEstadoSincronizacion { get; set; }
 
         public long IdCorresponsabilidadMenor { get; set; }
         public CorresponsabilidadMenor CorresponsabilidadMenor { get; set; }

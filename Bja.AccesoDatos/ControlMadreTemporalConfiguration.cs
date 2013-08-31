@@ -8,25 +8,27 @@ using System.Threading.Tasks;
 
 namespace Bja.AccesoDatos
 {
-    public class ControlMadreLogConfiguration : EntityTypeConfiguration<ControlMadreLog>
+    public class ControlMadreTemporalConfiguration : EntityTypeConfiguration<ControlMadreTemporal>
     {
-        public ControlMadreLogConfiguration()
+        public ControlMadreTemporalConfiguration()
         {
-            ToTable("ControlMadresLog");
-            HasKey(m => m.IdLog);
-            Property(m => m.EstadoSincronizacion).IsRequired();
-            Property(m => m.DescripcionEstado).IsRequired().HasMaxLength(512);
+            ToTable("ControlMadresTemporal");
+            HasKey(m => m.IdTemporal);
             Property(m => m.UltimoRegistro).IsRequired();
 
             Property(c => c.Id).IsRequired();
             Property(c => c.IdSesion).IsRequired();
             Property(c => c.FechaRegistro).IsRequired();
             Property(c => c.FechaUltimaTransaccion).IsRequired();
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(c => c.IdCorresponsabilidadMadre).IsRequired();
             Property(c => c.IdMedico).IsRequired();
             Property(c => c.IdMadre).IsRequired();
-            //Property(c => c.IdTutor).IsOptional();
+            Property(c => c.IdTutor).IsOptional();
+            Property(c => c.IdTipoParentesco).IsOptional();
+            Property(c => c.IdEstablecimientoSalud).IsRequired();
             Property(c => c.FechaProgramada).IsRequired();
             Property(c => c.FechaControl).IsRequired();
             Property(c => c.TallaCm).IsRequired();

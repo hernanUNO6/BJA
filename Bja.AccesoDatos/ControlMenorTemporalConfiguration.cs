@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Bja.AccesoDatos
 {
-    public class ControlMenorLogConfiguration : EntityTypeConfiguration<ControlMenorLog>
+    public class ControlMenorTemporalConfiguration : EntityTypeConfiguration<ControlMenorTemporal>
     {
-        public ControlMenorLogConfiguration()
+        public ControlMenorTemporalConfiguration()
         {
-            ToTable("ControlMenoresLog");
-            HasKey(m => m.IdLog);
-            Property(m => m.EstadoSincronizacion).IsRequired();
-            Property(m => m.DescripcionEstado).IsRequired().HasMaxLength(512);
+            ToTable("ControlMenoresTemporal");
+            HasKey(m => m.IdTemporal);
             Property(m => m.UltimoRegistro).IsRequired();
 
             Property(c => c.Id).IsRequired();
             Property(c => c.IdSesion).IsRequired();
             Property(c => c.FechaRegistro).IsRequired();
             Property(c => c.FechaUltimaTransaccion).IsRequired();
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(c => c.IdCorresponsabilidadMenor).IsRequired();
             Property(c => c.IdMedico).IsRequired();

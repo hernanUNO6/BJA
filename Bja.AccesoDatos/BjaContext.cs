@@ -42,15 +42,12 @@ namespace Bja.AccesoDatos
         public DbSet<EstablecimientoSalud> EstablecimientosSalud { get; set; }
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
 
-        public DbSet<MadreLog> MadreLog { get; set; }
-        public DbSet<ControlMadreLog> ControlMadreLog { get; set; }
-        public DbSet<CorresponsabilidadMadreLog> CorresponsabilidadMadreLog { get; set; }
-        public DbSet<ControlMenorLog> ControlMenorLog { get; set; }
-        public DbSet<CorresponsabilidadMenorLog> CorresponsabilidadMenorLog { get; set; }
-        public DbSet<EncargadoLog> EncargadoLog { get; set; }
-        public DbSet<MenorLog> MenorLog { get; set; }
-        public DbSet<MedicoLog> MedicoLog { get; set; }
-        public DbSet<TutorLog> TutorLog { get; set; }
+        public DbSet<MadreTemporal> MadreLog { get; set; }
+        public DbSet<CorresponsabilidadMadreTemporal> CorresponsabilidadMadreLog { get; set; }
+        public DbSet<ControlMenorTemporal> ControlMenorLog { get; set; }
+        public DbSet<CorresponsabilidadMenorTemporal> CorresponsabilidadMenorLog { get; set; }
+        public DbSet<MenorTemporal> MenorLog { get; set; }
+        public DbSet<TutorTemporal> TutorLog { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -80,15 +77,13 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new EstablecimientoSaludConfiguration());
             modelBuilder.Configurations.Add(new AsignacionMedicoConfiguration());
 
-            modelBuilder.Configurations.Add(new MadreLogConfiguration());
-            modelBuilder.Configurations.Add(new ControlMadreLogConfiguration());
-            modelBuilder.Configurations.Add(new CorresponsabilidadMadreLogConfiguration());
-            modelBuilder.Configurations.Add(new ControlMenorLogConfiguration());
-            modelBuilder.Configurations.Add(new CorresponsabilidadMenorLogConfiguration());
-            modelBuilder.Configurations.Add(new EncargadoLogConfiguration());
-            modelBuilder.Configurations.Add(new MenorLogConfiguration());
-            modelBuilder.Configurations.Add(new MedicoLogConfiguration());
-            modelBuilder.Configurations.Add(new TutorLogConfiguration());
+            modelBuilder.Configurations.Add(new MadreTemporalConfiguration());
+            modelBuilder.Configurations.Add(new ControlMadreTemporalConfiguration());
+            modelBuilder.Configurations.Add(new CorresponsabilidadMadreTemporalConfiguration());
+            modelBuilder.Configurations.Add(new ControlMenorTemporalConfiguration());
+            modelBuilder.Configurations.Add(new CorresponsabilidadMenorTemporalConfiguration());
+            modelBuilder.Configurations.Add(new MenorTemporalConfiguration());
+            modelBuilder.Configurations.Add(new TutorTemporalConfiguration());
         }
     }
 }

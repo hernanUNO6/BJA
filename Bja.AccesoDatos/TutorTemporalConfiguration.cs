@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Bja.AccesoDatos
 {
-    public class TutorLogConfiguration : EntityTypeConfiguration<TutorLog>
+    public class TutorTemporalConfiguration : EntityTypeConfiguration<TutorTemporal>
     {
-        public TutorLogConfiguration()
+        public TutorTemporalConfiguration()
         {
-            ToTable("TutoresLog");
-            HasKey(m => m.IdLog);
-            Property(m => m.EstadoSincronizacion).IsRequired();
-            Property(m => m.DescripcionEstado).IsRequired().HasMaxLength(512);
+            ToTable("TutoresTemporal");
+            HasKey(m => m.IdTemporal);
             Property(m => m.UltimoRegistro).IsRequired();
 
             Property(m => m.Id).IsRequired();
             Property(t => t.IdSesion).IsRequired();
             Property(t => t.FechaRegistro).IsRequired();
             Property(t => t.FechaUltimaTransaccion).IsRequired();
+            Property(m => m.EstadoSincronizacion).IsRequired();
+            Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(t => t.Nombres).IsRequired().HasMaxLength(100);
             Property(t => t.PrimerApellido).IsRequired().HasMaxLength(100);

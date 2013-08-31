@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bja.Entidades
 {
-    public class MenorLog
+    public class MadreTemporal //: Madre
     {
-        public long IdLog { get; set; }
-        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
-        public String DescripcionEstado { get; set; }
+        public long IdTemporal { get; set; }
         public bool UltimoRegistro { get; set; }
 
         public long Id { get; set; }
@@ -18,16 +16,16 @@ namespace Bja.Entidades
         public DateTime FechaUltimaTransaccion { get; set; }
         public DateTime FechaRegistro { get; set; }
         public TipoEstadoRegistro EstadoRegistro { get; set; }
+        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
+        public String DescripcionEstadoSincronizacion { get; set; }
 
         public String Nombres { get; set; }
         public String PrimerApellido { get; set; }
         public String SegundoApellido { get; set; }
+        public String TercerApellido { get; set; }
+        public String NombreCompleto { get; set; }
         public String DocumentoIdentidad { get; set; }
-        public String Oficialia { get; set; }
-        public String Libro { get; set; }
-        public String Partida { get; set; }
-        public String Folio { get; set; }
-        public long IdTipoDocumentoIdentidad { get; set; }
+        //public long IdTipoDocumentoIdentidad { get; set; }
         public TipoDocumentoIdentidad TipoDocumentoIdentidad { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
@@ -37,8 +35,9 @@ namespace Bja.Entidades
         public long IdMunicipio { get; set; } //solo referencial con la tabla Municipio
         public Municipio Municipio { get; set; }
         public String LocalidadNacimiento { get; set; }
+        //public long IdFamilia { get; set; }
+        //public Familia Familia { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
-        public String Sexo { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace Bja.Entidades
         public DateTime FechaUltimaTransaccion { get; set; }
         public DateTime FechaRegistro { get; set; }
         public TipoEstadoRegistro EstadoRegistro { get; set; }
+        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
+        public String DescripcionEstadoSincronizacion { get; set; }
 
         public long IdEstablecimientoSalud { get; set; }
         public EstablecimientoSalud EstablecimientoSalud { get; set; }
@@ -21,7 +23,7 @@ namespace Bja.Entidades
         public long IdMadre { get; set; }
         public Madre Madre { get; set; }
         public String DireccionMadre { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdTutor { get; set; }
         public Tutor Tutor { get; set; }
         public long IdTipoParentesco { get; set; }
         public TipoParentesco TipoParentesco { get; set; }

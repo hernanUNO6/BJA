@@ -14,6 +14,8 @@ namespace Bja.Entidades
         public long IdSesion { get; set; }
         public DateTime FechaUltimaTransaccion { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
+        public String DescripcionEstadoSincronizacion { get; set; }
 
         public DateTime FechaReclamo { get; set; }
         public long IdTipoReclamo { get; set; }

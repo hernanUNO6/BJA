@@ -484,9 +484,9 @@ namespace Bja.Registro
             if (corresponsabilidadmadre != null)
             {
                 IdSeleccionado = corresponsabilidadmadre.Id;
-                if (corresponsabilidadmadre.IdTutor > 0)
+                if (corresponsabilidadmadre.IdTutor != null)
                 {
-                    IdTutor = corresponsabilidadmadre.IdTutor;
+                    IdTutor = (long)corresponsabilidadmadre.IdTutor;
                     cboTipoParentesco.SelectedValue = corresponsabilidadmadre.TipoParentesco;
                     RecuperarTutor();
                     this.chkTutor.IsChecked = true;
