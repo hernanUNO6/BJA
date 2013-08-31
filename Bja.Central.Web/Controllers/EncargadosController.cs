@@ -35,7 +35,7 @@ namespace Bja.Central.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.TipoEncargado = TipoEncargado.GetNames(typeof(TipoEncargado))[encargado.IdTipoEncargado];
-            ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
+            //ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
             //Ojo
             //ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
             return View(encargado);
@@ -118,7 +118,7 @@ namespace Bja.Central.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.TipoEncargado = TipoEncargado.GetNames(typeof(TipoEncargado))[encargado.IdTipoEncargado];
-            ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
+            //ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[encargado.IdTipoDocumentoIdentidad];
             //ViewBag.TipoEstadoRegistro = TipoEstadoRegistro.GetNames(typeof(TipoEstadoRegistro))[encargado.IdTipoEstadoRegistro];
             //Ojo
 

@@ -30,11 +30,12 @@ namespace Bja.AccesoDatos
             Property(m => m.LocalidadNacimiento).IsRequired();
             Property(m => m.Observaciones).HasMaxLength(1024);
 
+            /*
             //relations
             HasRequired(m => m.Departamento).WithMany().HasForeignKey(m => m.IdDepartamento).WillCascadeOnDelete(false);
             HasRequired(m => m.Provincia).WithMany().HasForeignKey(m => m.IdProvincia).WillCascadeOnDelete(false);
             HasRequired(m => m.Municipio).WithMany().HasForeignKey(m => m.IdMunicipio).WillCascadeOnDelete(false);
-
+            */
         }
     }
 }

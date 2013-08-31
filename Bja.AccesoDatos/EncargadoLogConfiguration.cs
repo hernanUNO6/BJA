@@ -30,7 +30,7 @@ namespace Bja.AccesoDatos
             Property(e => e.DocumentoIdentidad).IsRequired().HasMaxLength(15);
             Property(e => e.TipoDocumentoIdentidad).IsRequired();
             Property(e => e.FechaNacimiento).IsRequired();
-            Property(e => e.IdLocalidadNacimiento).IsRequired();
+            Property(e => e.LocalidadNacimiento).IsRequired();
             Property(e => e.Observaciones).HasMaxLength(1024);
         }
     }

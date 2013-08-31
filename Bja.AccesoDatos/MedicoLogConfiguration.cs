@@ -32,14 +32,15 @@ namespace Bja.AccesoDatos
             Property(m => m.MatriculaColegioMedico).IsRequired().HasMaxLength(32);
             Property(m => m.CorreoElectronico).HasMaxLength(64);
             Property(m => m.FechaNacimiento).IsRequired();
-            Property(m => m.IdLocalidadNacimiento).IsRequired();
+            Property(m => m.LocalidadNacimiento).IsRequired();
             Property(m => m.Observaciones).HasMaxLength(1024);
 
+            /*
             //relations
             HasRequired(m => m.Departamento).WithMany().HasForeignKey(m => m.IdDepartamento).WillCascadeOnDelete(false);
             HasRequired(m => m.Provincia).WithMany().HasForeignKey(m => m.IdProvincia).WillCascadeOnDelete(false);
             HasRequired(m => m.Municipio).WithMany().HasForeignKey(m => m.IdMunicipio).WillCascadeOnDelete(false);
-
+            */
         }
     }
 }
