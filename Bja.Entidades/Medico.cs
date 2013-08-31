@@ -35,6 +35,5 @@ namespace Bja.Entidades
         public String CorreoElectronico { get; set; }
         public String Observaciones { get; set; }
 
-        public virtual ICollection<AsignacionMedico> AsignacionesMedico { get; set; }
     }
 }

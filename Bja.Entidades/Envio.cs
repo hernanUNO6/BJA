@@ -40,5 +40,9 @@ namespace Bja.Entidades
 
         public List<Madre> NuevasMadres { get; set; }
         public List<Tutor> NuevosTutores { get; set; }
+        public List<Menor> NuevosMenores { get; set; }
+        public List<ControlMadre> NuevosControlesMadre { get; set; }
+        public List<ControlMenor> NuevosControlesMenor { get; set; }
+
     }
 }

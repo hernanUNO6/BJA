@@ -24,6 +24,5 @@ namespace Bja.Entidades
         public long IdRedSalud { get; set; }
         public virtual RedSalud RedSalud { get; set; }
 
-        public virtual ICollection<AsignacionMedico> AsignacionesMedico { get; set; }
     }
 }

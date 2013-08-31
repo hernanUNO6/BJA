@@ -74,6 +74,15 @@ namespace Bja.Modelo
                     object corresponsabilidadmadrelogobj = (object)corresponsabilidadMadreLog;
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref corresponsabilidadmadrelogobj);
+
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroCorresponsabilidadMadre = (from m in context.CorresponsabilidadMadreLog
+                                                                 where m.Id == corresponsabilidadMadreLog.Id
+                                               && m.UltimoRegistro == true
+                                               select m).FirstOrDefault();
+
+                    ultimoRegistroCorresponsabilidadMadre.UltimoRegistro = false;
+
                     
                     corresponsabilidadMadreLog.IdLog = IdentifierGenerator.NewId();
                     corresponsabilidadMadreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
@@ -90,6 +99,14 @@ namespace Bja.Modelo
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref controlmadrelogobj);
 
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistrocontrolMadreLog = (from m in context.ControlMadreLog
+                                                                 where m.Id == controlMadreLog.Id
+                                                                    && m.UltimoRegistro == true
+                                                                 select m).FirstOrDefault();
+
+                    ultimoRegistrocontrolMadreLog.UltimoRegistro = false;
+                    
                     controlMadreLog.IdLog = IdentifierGenerator.NewId();
                     controlMadreLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
                     controlMadreLog.DescripcionEstado = "Pendiente";
@@ -105,6 +122,14 @@ namespace Bja.Modelo
                     object menorLogObj = (object)menorLog;
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref menorLogObj);
+
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroMenorLog = (from m in context.MenorLog
+                                                         where m.Id == menorLog.Id
+                                                            && m.UltimoRegistro == true
+                                                         select m).FirstOrDefault();
+
+                    ultimoRegistroMenorLog.UltimoRegistro = false;
 
                     menorLog.IdLog = IdentifierGenerator.NewId();
                     menorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
@@ -122,6 +147,14 @@ namespace Bja.Modelo
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref corresponsabilidadMenorLogObj);
 
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroCorresponsabilidadMenorLog = (from m in context.CorresponsabilidadMenorLog
+                                                                    where m.Id == corresponsabilidadMenorLog.Id
+                                                     && m.UltimoRegistro == true
+                                                  select m).FirstOrDefault();
+
+                    ultimoRegistroCorresponsabilidadMenorLog.UltimoRegistro = false;
+
                     corresponsabilidadMenorLog.IdLog = IdentifierGenerator.NewId();
                     corresponsabilidadMenorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
                     corresponsabilidadMenorLog.DescripcionEstado = "Pendiente";
@@ -136,6 +169,14 @@ namespace Bja.Modelo
                     object controlMenorLogObj = (object)controlMenorLog;
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref controlMenorLogObj);
+
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroControlMenorLog = (from m in context.ControlMenorLog
+                                                         where m.Id == controlMenorLog.Id
+                                                     && m.UltimoRegistro == true
+                                                                    select m).FirstOrDefault();
+
+                    ultimoRegistroControlMenorLog.UltimoRegistro = false;
 
                     controlMenorLog.IdLog = IdentifierGenerator.NewId();
                     controlMenorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
@@ -152,6 +193,14 @@ namespace Bja.Modelo
                     object tutorLogObj = (object)tutorLog;
 
                     SoporteObjetos.CopiarDatosObjetos(clase, ref tutorLogObj);
+
+                    //Limpiar todos los registros previos como no vigentes
+                    var ultimoRegistroTutorLog = (from m in context.TutorLog
+                                                  where m.Id == tutorLog.Id
+                                                     && m.UltimoRegistro == true
+                                                         select m).FirstOrDefault();
+
+                    ultimoRegistroTutorLog.UltimoRegistro = false;
 
                     tutorLog.IdLog = IdentifierGenerator.NewId();
                     tutorLog.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
