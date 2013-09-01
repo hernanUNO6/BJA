@@ -20,6 +20,8 @@ namespace Bja.Modelo
         tutor.FechaUltimaTransaccion = DateTime.Now;
         tutor.FechaRegistro = DateTime.Now;
         tutor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+        tutor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+        tutor.DescripcionEstadoSincronizacion = "";
 
         context.Tutores.Add(tutor);
 
@@ -37,7 +39,9 @@ namespace Bja.Modelo
         _tutor.IdSesion = SessionManager.getCurrentSession().Id;
         _tutor.FechaUltimaTransaccion = DateTime.Now;
         _tutor.FechaRegistro = DateTime.Now;
-        _tutor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+        _tutor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+        _tutor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+
         _tutor.Nombres = tutor.Nombres;
         _tutor.NombreCompleto = tutor.NombreCompleto;
         _tutor.PrimerApellido = tutor.PrimerApellido;

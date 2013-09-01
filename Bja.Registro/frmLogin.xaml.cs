@@ -29,7 +29,12 @@ namespace Bja.Registro
       this.Cursor = Cursors.Arrow;
     }
 
-    private void cmdAceptar_Click(object sender, RoutedEventArgs e)
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        this.txtUsuario.Focus();
+    }
+
+      private void cmdAceptar_Click(object sender, RoutedEventArgs e)
     {
         bool ok = false;
         if (!(this.txtUsuario.Text.Length > 0))
@@ -73,11 +78,6 @@ namespace Bja.Registro
                 MessageBox.Show("Usuario o contraseña no válidos.", "Error");
             }
         }
-    }
-
-    private void Window_Loaded(object sender, RoutedEventArgs e)
-    {
-        this.txtUsuario.Focus();
     }
 
     private void cmdCancelar_Click(object sender, RoutedEventArgs e)

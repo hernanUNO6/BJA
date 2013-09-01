@@ -22,6 +22,7 @@ namespace Bja.Modelo
           madre.FechaRegistro = DateTime.Now;
           madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
           madre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+          madre.DescripcionEstadoSincronizacion = "";
 
           context.Madres.Add(madre);
 

@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="cmdNuevaCorresponsabilidadMadre_Click" Tag="{Binding Id}" Content="Nueva Corresp."/>
+                            <Button Click="cmdNuevaCorresponsabilidadMadre_Click" Tag="{Binding Id}" Content="N. Corr."/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -61,7 +61,9 @@
         <DataGrid x:Name="grdControlMadre" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="200" Margin="454,86,0,0" VerticalAlignment="Top" Width="200">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="F. Programada" Binding="{Binding FechaProgramada, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="F. Control" Binding="{Binding FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Tipo" Binding="{Binding TipoControlMadre}" />
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPago}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -100,7 +102,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="cmdNuevaCorresponsabilidadMenor_Click" Tag="{Binding Id}" Content="Nueva Corresp."/>
+                            <Button Click="cmdNuevaCorresponsabilidadMenor_Click" Tag="{Binding Id}" Content="N. Corr."/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -131,7 +133,7 @@
         <DataGrid x:Name="grdControlMenor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="200" Margin="454,329,0,0" VerticalAlignment="Top" Width="200">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="F. Programada" Binding="{Binding FechaProgramada, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="F. Control" Binding="{Binding FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -30,7 +30,7 @@ namespace Bja.Registro
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            pasContrasenaActual.Focus();
+            this.pasContrasenaActual.Focus();
         }
 
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)

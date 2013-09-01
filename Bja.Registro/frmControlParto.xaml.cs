@@ -22,7 +22,7 @@ namespace Bja.Registro
     public partial class frmControlParto : Window
     {
         public long IdSeleccionado { get; set; }
-        private ControlMadre _controlmadre = new ControlMadre();
+        private ControlMadre controlmadre = new ControlMadre();
         public long IdMadre { get; set; }
         public long IdTutor { get; set; }
         public TipoAccion TipoAccion { get; set; }
@@ -39,19 +39,25 @@ namespace Bja.Registro
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-            _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
-            if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+            controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
+            if (controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
             {
                 this.chkDescartar.IsChecked = true;
                 this.dtpFechaControl.SelectedDate = DateTime.Now;
+                this.dtpFechaControl.IsEnabled = false;
+                this.cboMedico.IsEnabled = false;
             }
             else
             {
-                this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+                this.chkDescartar.IsChecked = false;
+                this.dtpFechaControl.SelectedDate = controlmadre.FechaControl;
             }
+
             if (TipoAccion == TipoAccion.Detalle)
             {
+                this.chkDescartar.IsEnabled = false;
                 this.dtpFechaControl.IsEnabled = false;
+                this.cboMedico.IsEnabled = false;
                 this.cmdAceptar.IsEnabled = false;
             }
         }
@@ -60,19 +66,19 @@ namespace Bja.Registro
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-            _controlmadre.IdTutor = IdTutor;
+            controlmadre.IdTutor = IdTutor;
             if (this.chkDescartar.IsChecked == true)
             {
-                _controlmadre.FechaControl = DateTime.Now;
-                _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+                controlmadre.FechaControl = DateTime.Now;
+                controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
             }
-            else 
+            else
             {
-                _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
-                _controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
+                controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
             }
 
-            modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
+            modelocontrolmadre.Editar(IdSeleccionado, controlmadre);
 
             Resultado = true;
 
@@ -85,6 +91,18 @@ namespace Bja.Registro
 
             this.Close();
         }
-    
+
+        private void chkDescartar_Checked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaControl.IsEnabled = false;
+            this.cboMedico.IsEnabled = false;
+        }
+
+        private void chkDescartar_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaControl.IsEnabled = true;
+            this.cboMedico.IsEnabled = true;
+        }
+
     }
 }

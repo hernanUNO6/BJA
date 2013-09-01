@@ -56,9 +56,9 @@ namespace Bja.Registro
                 _menor = modelomenor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _menor.DocumentoIdentidad;
                 //cboTipoDocumentoIdentidad.SelectedValue = _menor.IdTipoDocumentoIdentidad;
-                cboDepartamento.SelectedValue = _menor.IdDepartamento;
-                cboProvincia.SelectedValue = _menor.IdProvincia;
-                cboMunicipio.SelectedValue = _menor.IdMunicipio;
+                //cboDepartamento.SelectedValue = _menor.IdDepartamento;
+                //cboProvincia.SelectedValue = _menor.IdProvincia;
+                //cboMunicipio.SelectedValue = _menor.IdMunicipio;
                 txtOficialia.Text = _menor.Oficialia;
                 txtLibro.Text = _menor.Libro;
                 txtPartida.Text = _menor.Partida;

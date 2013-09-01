@@ -51,6 +51,8 @@
     <Compile Include="ControlMadreTemporalConfiguration.cs" />
     <Compile Include="ControlMenorTemporalConfiguration.cs" />
     <Compile Include="ConfiguracionConfiguration.cs" />
+    <Compile Include="FamiliaConfiguration.cs" />
+    <Compile Include="FamiliaTemporalConfiguration.cs" />
     <Compile Include="TutorTemporalConfiguration.cs" />
     <Compile Include="MenorTemporalConfiguration.cs" />
     <Compile Include="CorresponsabilidadMadreTemporalConfiguration.cs" />

@@ -56,9 +56,9 @@ namespace Bja.Registro
                 _tutor = modelotutor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _tutor.DocumentoIdentidad;
                 //cboTipoDocumentoIdentidad.SelectedValue = _tutor.IdTipoDocumentoIdentidad;
-                cboDepartamento.SelectedValue = _tutor.IdDepartamento;
-                cboProvincia.SelectedValue = _tutor.IdProvincia;
-                cboMunicipio.SelectedValue = _tutor.IdMunicipio;
+                //cboDepartamento.SelectedValue = _tutor.IdDepartamento;
+                //cboProvincia.SelectedValue = _tutor.IdProvincia;
+                //cboMunicipio.SelectedValue = _tutor.IdMunicipio;
                 txtPaterno.Text = _tutor.PrimerApellido;
                 txtMaterno.Text = _tutor.SegundoApellido;
                 txtNombres.Text = _tutor.Nombres;

@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Control" ShowInTaskbar="False" Height="300" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Name="InicioDeSesion">
-        <CheckBox x:Name="chkDescartar" Content="Descartar este control" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDescartar" Content="Descartar este control" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top" Checked="chkDescartar_Checked" Unchecked="chkDescartar_Unchecked"/>
         <Label x:Name="lblNumeroControl" Content="0" Height="64" HorizontalAlignment="Left" Margin="332,-3,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" FontSize="36" />
-        <Label x:Name="lblNumeroDeControl" Content="N° de Control:" HorizontalAlignment="Left" Margin="246,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641" Width="86"/>
-        <Label x:Name="lblFechaProgramada" Content="Fecha Programada:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblNumeroDeControl" Content="N° de Control:" HorizontalAlignment="Left" Margin="246,10,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label x:Name="lblFechaProgramada" Content="Fecha Programada:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dtpFechaProgramada" HorizontalAlignment="Left" Margin="126,56,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblTalla" Content="Talla:" HorizontalAlignment="Left" Margin="83,85,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblTalla" Content="Talla:" HorizontalAlignment="Left" Margin="83,85,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtTalla" HorizontalAlignment="Left" Height="23" Margin="125,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
-        <Label x:Name="lblPeso" Content="Peso:" HorizontalAlignment="Left" Margin="83,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblPeso" Content="Peso:" HorizontalAlignment="Left" Margin="83,113,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtPeso" HorizontalAlignment="Left" Height="23" Margin="125,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
-        <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dtpFechaControl" HorizontalAlignment="Left" Margin="126,141,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="68,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="68,170,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboMedico" HorizontalAlignment="Left" Margin="126,170,0,0" VerticalAlignment="Top" Width="245"/>
         <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="204,217,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
         <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="296,217,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>

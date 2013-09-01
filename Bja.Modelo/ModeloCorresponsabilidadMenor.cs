@@ -19,6 +19,8 @@ namespace Bja.Modelo
             corresponsabilidadmenor.FechaUltimaTransaccion = DateTime.Now;
             corresponsabilidadmenor.FechaRegistro = DateTime.Now;
             corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            corresponsabilidadmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            corresponsabilidadmenor.DescripcionEstadoSincronizacion = "";
 
             context.CorresponsabilidadesMenor.Add(corresponsabilidadmenor);
 
@@ -36,7 +38,8 @@ namespace Bja.Modelo
             _corresponsabilidadmenor.IdSesion = SessionManager.getCurrentSession().Id;
             _corresponsabilidadmenor.FechaUltimaTransaccion = DateTime.Now;
             _corresponsabilidadmenor.FechaRegistro = DateTime.Now;
-            _corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            _corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            _corresponsabilidadmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
             _corresponsabilidadmenor.IdEstablecimientoSalud = corresponsabilidadmenor.IdEstablecimientoSalud;
             _corresponsabilidadmenor.TipoInscripcionMenor = corresponsabilidadmenor.TipoInscripcionMenor;
@@ -47,7 +50,7 @@ namespace Bja.Modelo
             _corresponsabilidadmenor.DireccionMadre = corresponsabilidadmenor.DireccionMadre;
             _corresponsabilidadmenor.IdTutor = corresponsabilidadmenor.IdTutor;
             _corresponsabilidadmenor.DireccionTutor = corresponsabilidadmenor.DireccionTutor;
-            _corresponsabilidadmenor.TipoParentesco = corresponsabilidadmenor.TipoParentesco;
+            _corresponsabilidadmenor.IdTipoParentesco = corresponsabilidadmenor.IdTipoParentesco;
             _corresponsabilidadmenor.CodigoFormulario = corresponsabilidadmenor.CodigoFormulario;
             _corresponsabilidadmenor.FechaSalidaPrograma = corresponsabilidadmenor.FechaSalidaPrograma;
             _corresponsabilidadmenor.TipoSalidaMenor = corresponsabilidadmenor.TipoSalidaMenor;

@@ -15,17 +15,5 @@ namespace Bja.Entidades
         public TipoEstadoRegistro EstadoRegistro { get; set; }
 
         public String  Descripcion { get; set; }
-        /*
-        Padre = 1,      //Padre
-        Abuelo,         //Abuela
-        Tio,            //Tia
-        Hermano,        //Hermana
-        Primo,          //Prima
-        Padrastro,      //Madrastra
-        Suegro,         //Suegra
-        Cunado,         //Cuñada
-        Hermanastro,    //Hermanastra
-        Designado,
-        Otro*/
     }
 }

@@ -19,6 +19,8 @@ namespace Bja.Modelo
             controlmenor.FechaUltimaTransaccion = DateTime.Now;
             controlmenor.FechaRegistro = DateTime.Now;
             controlmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            controlmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            controlmenor.DescripcionEstadoSincronizacion = "";
 
             context.ControlesMenor.Add(controlmenor);
 
@@ -36,14 +38,15 @@ namespace Bja.Modelo
             _controlmenor.IdSesion = SessionManager.getCurrentSession().Id;
             _controlmenor.FechaUltimaTransaccion = DateTime.Now;
             _controlmenor.FechaRegistro = DateTime.Now;
-            _controlmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            _controlmenor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            _controlmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
             _controlmenor.IdCorresponsabilidadMenor = controlmenor.IdCorresponsabilidadMenor;
             _controlmenor.IdMedico = controlmenor.IdMedico;
             _controlmenor.IdMenor = controlmenor.IdMenor;
             _controlmenor.IdMadre = controlmenor.IdMadre;
             _controlmenor.IdTutor = controlmenor.IdTutor;
-            _controlmenor.TipoParentesco = controlmenor.TipoParentesco;
+            _controlmenor.IdTipoParentesco = controlmenor.IdTipoParentesco;
             _controlmenor.FechaProgramada = controlmenor.FechaProgramada;
             _controlmenor.FechaControl = controlmenor.FechaControl;
             _controlmenor.TallaCm = controlmenor.TallaCm;

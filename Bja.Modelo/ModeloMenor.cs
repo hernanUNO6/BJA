@@ -21,6 +21,8 @@ namespace Bja.Modelo
       menor.FechaUltimaTransaccion = DateTime.Now;
       menor.FechaRegistro = DateTime.Now;
       menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+      menor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+      menor.DescripcionEstadoSincronizacion = "";
 
       context.Menores.Add(menor);
 
@@ -38,7 +40,8 @@ namespace Bja.Modelo
       _menor.IdSesion = SessionManager.getCurrentSession().Id;
       _menor.FechaUltimaTransaccion = DateTime.Now;
       _menor.FechaRegistro = DateTime.Now;
-      _menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+      _menor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+      _menor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
       _menor.Nombres = menor.Nombres;
       _menor.PrimerApellido = menor.PrimerApellido;

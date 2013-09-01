@@ -68,8 +68,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="frmAdministracion.xaml.cs">
-      <DependentUpon>frmAdministracion.xaml</DependentUpon>
+    <Compile Include="frmBuscar.xaml.cs">
+      <DependentUpon>frmBuscar.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmControl.xaml.cs">
       <DependentUpon>frmControl.xaml</DependentUpon>
@@ -85,6 +85,12 @@
     </Compile>
     <Compile Include="frmCorresponsabilidadMenor.xaml.cs">
       <DependentUpon>frmCorresponsabilidadMenor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmFamilia.xaml.cs">
+      <DependentUpon>frmFamilia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmGrupoFamiliar.xaml.cs">
+      <DependentUpon>frmGrupoFamiliar.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmInformacionAvanzada.xaml.cs">
       <DependentUpon>frmInformacionAvanzada.xaml</DependentUpon>
@@ -117,7 +123,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="frmAdministracion.xaml">
+    <Page Include="frmBuscar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,6 +144,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCorresponsabilidadMenor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmFamilia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmGrupoFamiliar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

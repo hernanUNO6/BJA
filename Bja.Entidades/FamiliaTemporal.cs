@@ -19,15 +19,18 @@ namespace Bja.Entidades
         public TipoEstadoSincronizacion EstadoSincronizacion { get; set; }
         public String DescripcionEstadoSincronizacion { get; set; }
 
-        public String PrimerApellidoFamilia { get; set; }
-        public String SegundoApellidoFamilia { get; set; }
+        public long IdEstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
+        public String PrimerApellido { get; set; }
+        public String SegundoApellido { get; set; }
+        public DateTime FechaInscripcion { get; set; }
         public long IdDepartamento { get; set; } //solo referencial con la tabla Departamento
         public Departamento Departamento { get; set; }
         public long IdProvincia { get; set; } //solo referencial con la tabla Provincia
         public Provincia Provincia { get; set; }
         public long IdMunicipio { get; set; } //solo referencial con la tabla Municipio
         public Municipio Municipio { get; set; }
-        public String LocalidadFamilia { get; set; }
-        
+        public String Localidad { get; set; }
+        public String Observaciones { get; set; }
     }
 }

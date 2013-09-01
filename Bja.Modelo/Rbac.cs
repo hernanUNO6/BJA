@@ -65,6 +65,5 @@ namespace Bja.Modelo
             return user;
         }
 
-
     }
 }

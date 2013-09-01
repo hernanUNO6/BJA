@@ -38,7 +38,7 @@
         </DataGrid>
         <Label Content="Titulo" Height="40" HorizontalAlignment="Left" Margin="0,12,0,0" x:Name="lblTitulo" VerticalAlignment="Top" Width="578" HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold" />
         <Button Content="Cerrar" Height="24" HorizontalAlignment="Left" Margin="471,468,0,0" x:Name="cmdCerrar" VerticalAlignment="Top" Width="107" Click="cmdCerrar_Click" />
-        <Button Content="Nuevo" Height="23" HorizontalAlignment="Left" Margin="484,104,0,0" x:Name="buttonNuevo" VerticalAlignment="Top" Width="94" Click="buttonNuevo_Click" RenderTransformOrigin="0.936,0.739" />
+        <Button Content="Nuevo" Height="23" HorizontalAlignment="Left" Margin="484,104,0,0" x:Name="buttonNuevo" VerticalAlignment="Top" Width="94" Click="buttonNuevo_Click"/>
         <TextBox Height="23" HorizontalAlignment="Left" Margin="70,65,0,0" x:Name="txtCriterioBusqueda" VerticalAlignment="Top" Width="388" TextChanged="txtCriterioBusqueda_TextChanged" />
         <Label Content="Buscar:" Height="28" HorizontalAlignment="Left" Margin="17,60,0,0" x:Name="label1" VerticalAlignment="Top" Width="56" />
         <StackPanel Height="28" HorizontalAlignment="Left" Margin="14,422,0,0" x:Name="stackPanel1" VerticalAlignment="Top" Width="554" Orientation="Horizontal">
