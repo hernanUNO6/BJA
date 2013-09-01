@@ -12,8 +12,8 @@
         <Label x:Name="lblNombresMenor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="374,44,0,0" VerticalAlignment="Top" />
         <Label x:Name="lblNacimientoMenor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="284,70,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblFechaNacimientoMenor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="374,70,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblBeneficiario" Content="Controles del Beneficiario(a)" Height="28" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Width="175" FontWeight="Bold" />
-        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="281" Margin="10,219,0,0" VerticalAlignment="Top" Width="909">
+        <Label x:Name="lblBeneficiario" Content="Controles del Beneficiario(a)" Height="28" HorizontalAlignment="Left" Margin="15,171,0,0" VerticalAlignment="Top" Width="175" FontWeight="Bold" />
+        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="301" Margin="20,204,0,0" VerticalAlignment="Top" Width="899">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Número" Binding="{Binding NumeroControl}" />
@@ -64,22 +64,20 @@
             </StackPanel>
         </GroupBox>
         <Rectangle x:Name="recLugar" HorizontalAlignment="Left" Height="85" Margin="16,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="259"/>
-        <Rectangle x:Name="recMadre" HorizontalAlignment="Left" Height="85" Margin="600,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
-        <Rectangle x:Name="recTutor" HorizontalAlignment="Left" Height="90" Margin="600,109,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
+        <Rectangle x:Name="recMadre" HorizontalAlignment="Left" Height="66" Margin="600,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
+        <Rectangle x:Name="recTutor" HorizontalAlignment="Left" Height="90" Margin="600,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="319"/>
         <Label x:Name="lblLugarGeografico" Content="Lugar Geográfico" Height="28" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="113" FontWeight="Bold" />
         <Label x:Name="lblDepto" Content="Departamento:" Height="28" HorizontalAlignment="Left" Margin="20,44,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblDepartamento" Content="La Paz" Height="28" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblEstSal" Content="Establecimiento:" Height="28" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblEstablecimiento" Content="Centro de Salud de Viloco" Height="28" HorizontalAlignment="Left" Margin="119,70,0,0" VerticalAlignment="Top" Width="156" />
         <Label x:Name="lblMadrePago" Content="Madre - Para efectos de pago" Height="28" HorizontalAlignment="Left" Margin="600,20,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-        <Label x:Name="lblNombreMadre" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="622,44,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblNombresMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="689,44,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="599,70,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="689,70,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblTutorPago" Content="Tutor - Para efectos de pago" Height="28" HorizontalAlignment="Left" Margin="600,113,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-        <Label x:Name="lblTutor" Content="Tutor" HorizontalAlignment="Left" Margin="636,138,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cboTutor"  HorizontalAlignment="Left" Margin="679,141,0,0" VerticalAlignment="Top" Width="227"/>
-        <Label x:Name="lblParentesco" Content="Parentesco" HorizontalAlignment="Left" Margin="606,164,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cboTipoParentesco"  HorizontalAlignment="Left" Margin="679,169,0,0" VerticalAlignment="Top" Width="227"/>
+        <Label x:Name="lblTutorPago" Content="Tutor - Para efectos de pago" Height="28" HorizontalAlignment="Left" Margin="600,97,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label x:Name="lblTutor" Content="Tutor" HorizontalAlignment="Left" Margin="636,122,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cboTutor"  HorizontalAlignment="Left" Margin="679,125,0,0" VerticalAlignment="Top" Width="227"/>
+        <Label x:Name="lblParentesco" Content="Parentesco" HorizontalAlignment="Left" Margin="606,148,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cboTipoParentesco"  HorizontalAlignment="Left" Margin="679,153,0,0" VerticalAlignment="Top" Width="227"/>
+        <Label x:Name="lblMadre" Content="Tutor" HorizontalAlignment="Left" Margin="636,50,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cboMadre"  HorizontalAlignment="Left" Margin="679,53,0,0" VerticalAlignment="Top" Width="227"/>
     </Grid>
 </Window>

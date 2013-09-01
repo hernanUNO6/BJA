@@ -15,7 +15,6 @@ namespace Bja.Modelo
 
         public List<RegistroBusqueda> ListarBusquedaDeRegistrosPorCriterio(string CriterioDocIde, string CriterioPaterno, string CriterioMaterno, string CriterioNombres)
         {
-
             List<RegistroBusqueda> resultado = new List<RegistroBusqueda>();
 
             var madres = (from m in context.Madres

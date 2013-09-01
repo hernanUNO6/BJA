@@ -97,11 +97,6 @@ namespace Bja.Modelo
         return tutor;
     }
 
-    //public List<Tutor> Listar()
-    //{
-    //    return context.Tutores.ToList();
-    //}
-
     public List<Tutor> ListarTutoresDeMadresPorCriterio(string Criterio)
     {
         List<Tutor> tutor = new List<Tutor>();
@@ -153,6 +148,26 @@ namespace Bja.Modelo
                  select t).Distinct().ToList<Tutor>();
 
             return tutor;
+    }
+
+    public List<RegistroParaCombo> ListarTutoresDeUnaFamiliaParaCombo(long IdFamilia)
+    {//ojo filtrar los no borrados
+        List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
+
+        tutor = (from t in context.Tutores
+                 where t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                 from gf in context.GruposFamiliares
+                 where (gf.IdFamilia == IdFamilia) &&
+                       (gf.IdReferencial == t.Id) &&
+                       (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor) &&
+                       (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                 select new RegistroParaCombo
+                     {
+                        Id = t.Id,
+                        Descripcion = t.NombreCompleto
+                     }).ToList();
+
+        return tutor;
     }
 
     public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")

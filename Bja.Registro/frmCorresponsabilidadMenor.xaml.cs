@@ -21,10 +21,12 @@ namespace Bja.Registro
     /// </summary>
     public partial class frmCorresponsabilidadMenor : Window
     {
+        public long IdFamilia { get; set; }
         public long IdSeleccionado { get; set; }
-        public long IdMenor { get; set; }
-        long IdMadre { get; set; }
-        long IdTutor { get; set; }
+        //public long IdMenor { get; set; }
+        //long IdMadre { get; set; }
+        //long IdTutor { get; set; }
+        long IdCorresponsabilidadMenor { get; set; }
         public TipoAccion TipoAccion { get; set; }
         int CantidadDeControles { get; set; }  //debe definirse en la tabla parámetros.
 
@@ -39,15 +41,49 @@ namespace Bja.Registro
         {
             CantidadDeControles = 12;
 
-            //SoporteCombo.cargarEnumerador(this.cboTipoParentesco, typeof(TipoParentesco));
+            ////this.lblDepartamento.Content = "";
+            ////this.lblEstablecimiento.Content = "";
 
-            ////this.lblDepartamento.Content = "|";
-            ////this.lblEstablecimiento.Content = "|";
-            this.lblNombresMenor.Content = "";
-            this.lblFechaNacimientoMenor.Content = "";
-            this.lblNombreMadre.Content = "";
-            this.lblFechaNacimientoMadre.Content = "";
+            ModeloMenor modelomenor = new ModeloMenor();
+            Menor menor = new Menor();
+
+            menor = modelomenor.Recuperar(IdSeleccionado);
+
+            if (menor != null)
+            {
+                this.lblNombresMenor.Content = menor.PrimerApellido + " " + menor.SegundoApellido + " " + menor.Nombres;
+                this.lblFechaNacimientoMenor.Content = string.Format("{0:dd/MM/yyyy}", menor.FechaNacimiento);
+            }
+            else
+            {
+                this.lblNombresMenor.Content = "";
+                this.lblFechaNacimientoMenor.Content = "";
+            }
+
+            ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+
+            this.cboTipoParentesco.ItemsSource = modelotipoparentesco.Listar();
+            this.cboTipoParentesco.DisplayMemberPath = "Descripcion";
+            this.cboTipoParentesco.SelectedValuePath = "Id";
             this.cboTipoParentesco.SelectedIndex = -1;
+
+            ModeloTutor modelotutor = new ModeloTutor();
+            this.cboTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamiliaParaCombo(IdFamilia);
+            this.cboTutor.DisplayMemberPath = "Descripcion";
+            this.cboTutor.SelectedValuePath = "Id";
+            this.cboTutor.SelectedIndex = -1;
+
+            ModeloMadre modelomadre = new ModeloMadre();
+            this.cboTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamiliaParaCombo(IdFamilia);
+            this.cboTutor.DisplayMemberPath = "Descripcion";
+            this.cboTutor.SelectedValuePath = "Id";
+            this.cboTutor.SelectedIndex = -1;
+
+
+            //this.lblNombresMenor.Content = "";
+            //this.lblFechaNacimientoMenor.Content = "";
+            //this.lblNombresMadre.Content = "";
+            //this.lblFechaNacimientoMadre.Content = "";
 
             //ValoresPorDefecto();
 

@@ -147,24 +147,24 @@ namespace Bja.Registro
 
         private void VerCorresponsabilidadMadre(long IdCorresponsabilidadMadre, long IdMadre, TipoAccion TipoAccion)
         {
-            this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
-            objCorresponsabilidadMadreWindow.IdSeleccionado = IdCorresponsabilidadMadre;
-            objCorresponsabilidadMadreWindow.IdMadre = IdMadre;
-            objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMadreWindow.Owner = this;
-            objCorresponsabilidadMadreWindow.ShowDialog();
-            this.Cursor = Cursors.Arrow;
-            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
-            {
-                this.Cursor = Cursors.Wait;
+            //this.Cursor = Cursors.Wait;
+            //frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
+            //objCorresponsabilidadMadreWindow.IdSeleccionado = IdCorresponsabilidadMadre;
+            //objCorresponsabilidadMadreWindow.IdMadre = IdMadre;
+            //objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
+            //objCorresponsabilidadMadreWindow.Owner = this;
+            //objCorresponsabilidadMadreWindow.ShowDialog();
+            //this.Cursor = Cursors.Arrow;
+            //if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            //{
+            //    this.Cursor = Cursors.Wait;
 
-                OpcionDeBusquedaAsignada = 0;
-                RealizarBusqueda();
+            //    OpcionDeBusquedaAsignada = 0;
+            //    RealizarBusqueda();
 
-                this.Cursor = Cursors.Arrow;
-            }
-            objCorresponsabilidadMadreWindow = null;
+            //    this.Cursor = Cursors.Arrow;
+            //}
+            //objCorresponsabilidadMadreWindow = null;
         }
 
         private void cmdDetalleCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
@@ -183,24 +183,24 @@ namespace Bja.Registro
 
         private void VerCorresponsabilidadMenor(long IdCorresponsabilidadMenor, long IdMenor, TipoAccion TipoAccion)
         {
-            this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
-            objCorresponsabilidadMenorWindow.IdSeleccionado = IdCorresponsabilidadMenor;
-            objCorresponsabilidadMenorWindow.IdMenor = IdMenor;
-            objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMenorWindow.Owner = this;
-            objCorresponsabilidadMenorWindow.ShowDialog();
-            this.Cursor = Cursors.Arrow;
-            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
-            {
-                this.Cursor = Cursors.Wait;
+            //this.Cursor = Cursors.Wait;
+            //frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
+            //objCorresponsabilidadMenorWindow.IdSeleccionado = IdCorresponsabilidadMenor;
+            //objCorresponsabilidadMenorWindow.IdMenor = IdMenor;
+            //objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
+            //objCorresponsabilidadMenorWindow.Owner = this;
+            //objCorresponsabilidadMenorWindow.ShowDialog();
+            //this.Cursor = Cursors.Arrow;
+            //if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            //{
+            //    this.Cursor = Cursors.Wait;
 
-                OpcionDeBusquedaAsignada = 0;
-                RealizarBusqueda();
+            //    OpcionDeBusquedaAsignada = 0;
+            //    RealizarBusqueda();
 
-                this.Cursor = Cursors.Arrow;
-            }
-            objCorresponsabilidadMenorWindow = null;
+            //    this.Cursor = Cursors.Arrow;
+            //}
+            //objCorresponsabilidadMenorWindow = null;
         }
 
         private void cmdDetalleCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)

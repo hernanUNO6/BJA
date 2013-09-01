@@ -24,7 +24,8 @@ namespace Bja.Registro
         public long IdSeleccionado { get; set; }
         private ControlMadre controlmadre = new ControlMadre();
         public long IdMadre { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdTutor { get; set; }
+        public long? IdTipoParentesco { get; set; }
         public TipoAccion TipoAccion { get; set; }
         public bool Resultado { get; set; }
 
@@ -42,6 +43,7 @@ namespace Bja.Registro
             controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
 
             dtpFechaPrevista.SelectedDate = controlmadre.FechaProgramada;
+
             if (controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
             {
                 this.chkDescartar.IsChecked = true;
@@ -71,6 +73,8 @@ namespace Bja.Registro
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
             controlmadre.IdTutor = IdTutor;
+            controlmadre.IdTipoParentesco = IdTipoParentesco;
+
             if (this.chkDescartar.IsChecked == true)
             {
                 controlmadre.FechaControl = DateTime.Now;

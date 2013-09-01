@@ -29,7 +29,7 @@
         <TextBox x:Name="txtNumeroEmbarazo" Height="23" HorizontalAlignment="Left" Margin="794,171,0,0" VerticalAlignment="Top" Width="41" />
         <CheckBox x:Name="chkARO" Content="A. R. O." HorizontalAlignment="Left" Margin="847,176,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblBeneficiaria" Content="Controles de la beneficiaria" Height="28" HorizontalAlignment="Left" Margin="15,196,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" />
-        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="162" Margin="30,229,0,0" VerticalAlignment="Top" Width="887">
+        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="165" Margin="19,224,0,0" VerticalAlignment="Top" Width="901">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Número" Binding="{Binding NumeroControl}" />

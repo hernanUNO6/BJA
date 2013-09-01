@@ -25,9 +25,10 @@ namespace Bja.Registro
         public TipoControl TipoControl { get; set; }
         private ControlMadre controlmadre = new ControlMadre();
         private ControlMenor controlmenor = new ControlMenor();
-        public long IdMadre { get; set; }
         public long IdMenor { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdMadre { get; set; }
+        public long? IdTutor { get; set; }
+        public long? IdTipoParentesco { get; set; }
         public TipoAccion TipoAccion { get; set; }
         public bool Resultado { get; set; }
 
@@ -60,7 +61,7 @@ namespace Bja.Registro
                 }
                 else
                 {
-                    this.chkDescartar.IsChecked = true;
+                    this.chkDescartar.IsChecked = false;
                     this.txtPeso.Text = Convert.ToString(controlmadre.PesoKg);
                     this.txtTalla.Text = Convert.ToString(controlmadre.TallaCm);
                     this.dtpFechaControl.SelectedDate = controlmadre.FechaControl;
@@ -113,6 +114,7 @@ namespace Bja.Registro
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
                 controlmadre.IdTutor = IdTutor;
+                controlmadre.IdTipoParentesco = IdTipoParentesco;
 
                 if (this.chkDescartar.IsChecked == true)
                 {
@@ -138,6 +140,7 @@ namespace Bja.Registro
 
                 controlmenor.IdMadre = IdMadre;
                 controlmenor.IdTutor = IdTutor;
+                controlmenor.IdTipoParentesco = IdTipoParentesco;
 
                 if (this.chkDescartar.IsChecked == true)
                 {
@@ -175,7 +178,7 @@ namespace Bja.Registro
             this.dtpFechaProgramada.IsEnabled = false;
             this.dtpFechaControl.IsEnabled = false;
             this.txtPeso.IsEnabled = false;
-            txtTalla.IsEnabled = false;
+            this.txtTalla.IsEnabled = false;
             this.cboMedico.IsEnabled = false;
         }
 
@@ -184,7 +187,7 @@ namespace Bja.Registro
             this.dtpFechaProgramada.IsEnabled = true;
             this.dtpFechaControl.IsEnabled = true;
             this.txtPeso.IsEnabled = true;
-            txtTalla.IsEnabled = true;
+            this.txtTalla.IsEnabled = true;
             this.cboMedico.IsEnabled = true;
         }
 

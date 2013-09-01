@@ -88,16 +88,25 @@ namespace Bja.Modelo
           return corresponsabilidadmadre;
       }
 
-      public CorresponsabilidadMadre RecuperarElUltimoValido(long IdMadre)
+      public long RecuperarLaUltimaCorresponsabilidadValidaDeMadre(long IdMadre)
       {
-          CorresponsabilidadMadre corresponsabilidadmadre = null;
+          long Id;
+          string s;
 
-          corresponsabilidadmadre = (from cm in context.CorresponsabilidadesMadre.Take(1)
-                                     where cm.IdMadre == IdMadre
-                                     orderby cm.FechaInscripcion descending
-                                     select cm).FirstOrDefault();
+          Id = 0;
+          
+          var c = (from cm in context.CorresponsabilidadesMadre
+                                     where cm.IdMadre == IdMadre && 
+                                            cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                                     orderby cm.FechaRegistro descending
+                                     select cm.Id).Take(1);
+          foreach (var g in c)
+          {
+              s = g.ToString();
+              Id = Convert.ToInt64(s);
+          }
 
-          return corresponsabilidadmadre;
+          return Id;
       }
 
       public List<CorresponsabilidadMadre> ListarCorresponsabilidadesDeMadre(long IdMadre)

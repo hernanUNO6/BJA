@@ -129,6 +129,7 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
+            objCorresponsabilidadMadreWindow.IdFamilia = IdSeleccionado;
             objCorresponsabilidadMadreWindow.IdSeleccionado = IdMadre;
             objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
             objCorresponsabilidadMadreWindow.Owner = this;
@@ -144,7 +145,7 @@ namespace Bja.Registro
             {
                 Int64 Id = (Int64)Img.Tag;
                 if (Id > 0)
-                    VerCorresponsabilidadDeMadre(Id, TipoAccion.Detalle);
+                    VerCorresponsabilidadDeMadre(Id, TipoAccion.Edicion);
             }
         }
 
@@ -201,6 +202,7 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
+            objCorresponsabilidadMenorWindow.IdFamilia = IdSeleccionado;
             objCorresponsabilidadMenorWindow.IdSeleccionado = IdMenor;
             objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
             objCorresponsabilidadMenorWindow.Owner = this;
@@ -216,7 +218,7 @@ namespace Bja.Registro
             {
                 Int64 Id = (Int64)Img.Tag;
                 if (Id > 0)
-                    VerCorresponsabilidadDeMenor(Id, TipoAccion.Detalle);
+                    VerCorresponsabilidadDeMenor(Id, TipoAccion.Edicion);
             }
         }
 
