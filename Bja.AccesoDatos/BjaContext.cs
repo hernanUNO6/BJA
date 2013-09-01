@@ -24,6 +24,7 @@ namespace Bja.AccesoDatos
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Encargado> Encargados { get; set; }
         public DbSet<Familia> Familias { get; set; }
+        public DbSet<GrupoFamiliar> GruposFamiliares { get; set; }
         public DbSet<Madre> Madres { get; set; }
         public DbSet<Tutor> Tutores { get; set; }
         public DbSet<Menor> Menores { get; set; }
@@ -44,6 +45,7 @@ namespace Bja.AccesoDatos
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
 
         public DbSet<FamiliaTemporal> FamiliasTemporal { get; set; }
+        public DbSet<GrupoFamiliarTemporal> GruposFamiliaresTemporal { get; set; }
         public DbSet<MadreTemporal> MadresTemporal { get; set; }
         public DbSet<ControlMadreTemporal> ControlMadresTemporal { get; set; }
         public DbSet<CorresponsabilidadMadreTemporal> CorresponsabilidadMadresTemporal { get; set; }
@@ -63,6 +65,7 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new MedicoConfiguration());
             modelBuilder.Configurations.Add(new EncargadoConfiguration());
             modelBuilder.Configurations.Add(new FamiliaConfiguration());
+            modelBuilder.Configurations.Add(new GrupoFamiliarConfiguration());
             modelBuilder.Configurations.Add(new MadreConfiguration());
             modelBuilder.Configurations.Add(new TutorConfiguration());
             modelBuilder.Configurations.Add(new MenorConfiguration());
@@ -82,6 +85,7 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new AsignacionMedicoConfiguration());
 
             modelBuilder.Configurations.Add(new FamiliaTemporalConfiguration());
+            modelBuilder.Configurations.Add(new GrupoFamiliarTemporalConfiguration());
             modelBuilder.Configurations.Add(new MadreTemporalConfiguration());
             modelBuilder.Configurations.Add(new ControlMadreTemporalConfiguration());
             modelBuilder.Configurations.Add(new CorresponsabilidadMadreTemporalConfiguration());

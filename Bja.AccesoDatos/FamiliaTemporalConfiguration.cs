@@ -13,6 +13,9 @@ namespace Bja.AccesoDatos
         public FamiliaTemporalConfiguration()
         {
             ToTable("FamiliasTemporal");
+            HasKey(m => m.IdTemporal);
+            Property(m => m.UltimoRegistro).IsRequired();
+
             HasKey(m => m.Id);
             Property(m => m.IdSesion).IsRequired();
             Property(m => m.FechaRegistro).IsRequired();

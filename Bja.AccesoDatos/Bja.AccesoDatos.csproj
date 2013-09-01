@@ -53,6 +53,8 @@
     <Compile Include="ConfiguracionConfiguration.cs" />
     <Compile Include="FamiliaConfiguration.cs" />
     <Compile Include="FamiliaTemporalConfiguration.cs" />
+    <Compile Include="GrupoFamiliarConfiguration.cs" />
+    <Compile Include="GrupoFamiliarTemporalConfiguration.cs" />
     <Compile Include="TutorTemporalConfiguration.cs" />
     <Compile Include="MenorTemporalConfiguration.cs" />
     <Compile Include="CorresponsabilidadMadreTemporalConfiguration.cs" />

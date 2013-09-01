@@ -57,6 +57,8 @@
     <Compile Include="EstablecimientoSalud.cs" />
     <Compile Include="EstadoPago.cs" />
     <Compile Include="Familia.cs" />
+    <Compile Include="GrupoFamiliar.cs" />
+    <Compile Include="GrupoFamiliarTemporal.cs" />
     <Compile Include="Madre.cs" />
     <Compile Include="MadreTemporal.cs" />
     <Compile Include="Medico.cs" />

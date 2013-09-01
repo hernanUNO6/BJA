@@ -40,7 +40,6 @@ namespace Bja.AccesoDatos
             HasRequired(m => m.Provincia).WithMany().HasForeignKey(m => m.IdProvincia).WillCascadeOnDelete(false);
             HasRequired(m => m.Municipio).WithMany().HasForeignKey(m => m.IdMunicipio).WillCascadeOnDelete(false);
 
-
         }
     }
 }

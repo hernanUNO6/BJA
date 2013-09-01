@@ -70,7 +70,7 @@ namespace Bja.Registro
             if (ok == true)
             {
                 this.Cursor = Cursors.Wait;
-                frmCarpetaFamiliar objCarpetaFamiliarWindow = new frmCarpetaFamiliar();
+                frmGrupoFamiliar objCarpetaFamiliarWindow = new frmGrupoFamiliar();
                 objCarpetaFamiliarWindow.IdSeleccionado = Id;
                 objCarpetaFamiliarWindow.Owner = this;
                 objCarpetaFamiliarWindow.ShowDialog();

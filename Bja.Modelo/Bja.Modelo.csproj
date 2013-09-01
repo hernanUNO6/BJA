@@ -57,6 +57,7 @@
     <Compile Include="ModeloEncargado.cs" />
     <Compile Include="ModeloEstablecimientoSalud.cs" />
     <Compile Include="ModeloFamilia.cs" />
+    <Compile Include="ModeloGrupoFamiliar.cs" />
     <Compile Include="ModeloMadre.cs" />
     <Compile Include="ModeloMedico.cs" />
     <Compile Include="ModeloMenor.cs" />

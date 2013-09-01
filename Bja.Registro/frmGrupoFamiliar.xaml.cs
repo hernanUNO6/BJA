@@ -25,7 +25,7 @@ namespace Bja.Registro
         private bool ControlPreliminar { get; set; }
         private Familia _familia = new Familia();
 
-        public frmCarpetaFamiliar()
+        public frmGrupoFamiliar()
         {
             this.Cursor = Cursors.Wait;
             InitializeComponent();

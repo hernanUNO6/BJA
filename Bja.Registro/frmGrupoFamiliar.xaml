@@ -13,7 +13,7 @@
         <Button x:Name="cmdCerrar" Content="Cerrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="692,429,0,0" Click="cmdCerrar_Click" />
         <Label x:Name="lblMadres" Content="Madres" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" FontWeight="Bold"/>
         <Button x:Name="cmdNuevaMadre" Content="Nueva Madre" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="667,45,0,0" Click="cmdNuevaMadre_Click"/>
-        <DataGrid x:Name="grdMadre" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="68" Margin="10,70,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="grdMadre_SelectionChanged">
+        <DataGrid x:Name="grdMadre" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="68" Margin="10,70,0,0" VerticalAlignment="Top" Width="757" >
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Width="50" Header="Doc. Ide." Binding="{Binding DocumentoIdentidad}" />
@@ -46,7 +46,7 @@
         </DataGrid>
         <Label x:Name="lblMenores" Content="Menores" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,147,0,0" FontWeight="Bold"/>
         <Button x:Name="cmdNuevoMenor" Content="Nuevo Menor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="667,153,0,0" Click="cmdNuevoMenor_Click"/>
-        <DataGrid x:Name="grdMenor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="134" Margin="10,178,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="grdMadre_SelectionChanged">
+        <DataGrid x:Name="grdMenor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="134" Margin="10,178,0,0" VerticalAlignment="Top" Width="757">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Width="50" Header="Doc. Ide." Binding="{Binding DocumentoIdentidad}" />
@@ -80,7 +80,7 @@
         </DataGrid>
         <Label x:Name="lblTutores" Content="Tutores" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,317,0,0" FontWeight="Bold"/>
         <Button x:Name="cmdNuevoTutor" Content="Nuevo Tutor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="667,323,0,0" Click="cmdNuevoTutor_Click"/>
-        <DataGrid x:Name="grdTutor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="68" Margin="10,348,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="grdMadre_SelectionChanged">
+        <DataGrid x:Name="grdTutor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="68" Margin="10,348,0,0" VerticalAlignment="Top" Width="757">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Width="50" Header="Doc. Ide." Binding="{Binding DocumentoIdentidad}" />
