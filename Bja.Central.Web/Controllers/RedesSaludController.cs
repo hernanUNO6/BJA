@@ -53,20 +53,24 @@ namespace Bja.Central.Web.Controllers
         // POST: /RedesSalud/Create
 
         [HttpPost]
-        public ActionResult Create(RedSalud redsalud)
+        public ActionResult Create(RedSalud redSalud)
         {
-            redsalud.IdSesion = 1;
-            redsalud.FechaUltimaTransaccion = System.DateTime.Now;
-            redsalud.FechaRegistro = System.DateTime.Now;
+            redSalud.Id = IdentifierGenerator.NewId();
+            redSalud.IdSesion = 1;
+            redSalud.FechaUltimaTransaccion = DateTime.Now;
+            redSalud.FechaRegistro = DateTime.Now;
+            redSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            redSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            redSalud.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
-                modRedSalud.Crear(redsalud);
+                modRedSalud.Crear(redSalud);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", redsalud.IdMunicipio);
-            return View(redsalud);
+            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", redSalud.IdMunicipio);
+            return View(redSalud);
         }
 
         //
@@ -98,19 +102,22 @@ namespace Bja.Central.Web.Controllers
         // POST: /RedesSalud/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(RedSalud redsalud)
+        public ActionResult Edit(RedSalud redSalud)
         {
             if (ModelState.IsValid)
             {
-                redsalud.IdSesion = 1;
-                redsalud.FechaUltimaTransaccion = System.DateTime.Now;
-                redsalud.FechaRegistro = System.DateTime.Now;
+                redSalud.IdSesion = 1;
+                redSalud.FechaUltimaTransaccion = DateTime.Now;
+                redSalud.FechaRegistro = DateTime.Now;
+                redSalud.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                redSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                redSalud.DescripcionEstadoSincronizacion = "";
 
-                modRedSalud.Editar(redsalud);
+                modRedSalud.Editar(redSalud);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", redsalud.IdMunicipio);
-            return View(redsalud);
+            ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", redSalud.IdMunicipio);
+            return View(redSalud);
         }
 
         //

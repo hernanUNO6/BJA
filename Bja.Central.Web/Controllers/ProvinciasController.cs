@@ -55,9 +55,13 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Provincia provincia)
         {
+            provincia.Id = IdentifierGenerator.NewId();
             provincia.IdSesion = 1;
-            provincia.FechaUltimaTransaccion = System.DateTime.Now;
-            provincia.FechaRegistro = System.DateTime.Now;
+            provincia.FechaUltimaTransaccion = DateTime.Now;
+            provincia.FechaRegistro = DateTime.Now;
+            provincia.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            provincia.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            provincia.DescripcionEstadoSincronizacion = "";
 
             ModeloDepartamento modDepto = new ModeloDepartamento();
 
@@ -97,8 +101,11 @@ namespace Bja.Central.Web.Controllers
             if (ModelState.IsValid)
             {
                 provincia.IdSesion = 1;
-                provincia.FechaUltimaTransaccion = System.DateTime.Now;
-                provincia.FechaRegistro = System.DateTime.Now;
+                provincia.FechaUltimaTransaccion = DateTime.Now;
+                provincia.FechaRegistro = DateTime.Now;
+                provincia.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                provincia.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                provincia.DescripcionEstadoSincronizacion = "";
 
                 modProvincia.Editar(provincia);
                 return RedirectToAction("Index");
