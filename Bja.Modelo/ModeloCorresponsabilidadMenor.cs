@@ -45,11 +45,8 @@ namespace Bja.Modelo
             _corresponsabilidadmenor.TipoInscripcionMenor = corresponsabilidadmenor.TipoInscripcionMenor;
             _corresponsabilidadmenor.FechaInscripcion = corresponsabilidadmenor.FechaInscripcion;
             _corresponsabilidadmenor.IdMenor = corresponsabilidadmenor.IdMenor;
-            _corresponsabilidadmenor.DireccionMenor = corresponsabilidadmenor.DireccionMenor;
             _corresponsabilidadmenor.IdMadre = corresponsabilidadmenor.IdMadre;
-            _corresponsabilidadmenor.DireccionMadre = corresponsabilidadmenor.DireccionMadre;
             _corresponsabilidadmenor.IdTutor = corresponsabilidadmenor.IdTutor;
-            _corresponsabilidadmenor.DireccionTutor = corresponsabilidadmenor.DireccionTutor;
             _corresponsabilidadmenor.IdTipoParentesco = corresponsabilidadmenor.IdTipoParentesco;
             _corresponsabilidadmenor.CodigoFormulario = corresponsabilidadmenor.CodigoFormulario;
             _corresponsabilidadmenor.FechaSalidaPrograma = corresponsabilidadmenor.FechaSalidaPrograma;

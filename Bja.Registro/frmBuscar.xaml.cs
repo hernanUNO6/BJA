@@ -21,6 +21,8 @@ namespace Bja.Registro
     /// </summary>
     public partial class frmBuscar : Window
     {
+        private RegistroBusqueda registrobusqueda = new RegistroBusqueda();
+
         public frmBuscar()
         {
             this.Cursor = Cursors.Wait;
@@ -36,18 +38,45 @@ namespace Bja.Registro
 
         void Buscar()
         {
-            //ModeloBusqueda modelobusqueda = new ModeloBusqueda();
-            //this.grdResultado.ItemsSource = modelobusqueda.ListarBusquedaDeRegistrosPorCriterio(txtDocIde.Text, txtPaterno.Text, txtMaterno.Text, txtNombres.Text);
+            this.Cursor = Cursors.Wait;
+            ModeloBusqueda modelobusqueda = new ModeloBusqueda();
+            this.grdResultado.ItemsSource = modelobusqueda.ListarBusquedaDeRegistrosPorCriterio(txtDocIde.Text, txtPaterno.Text, txtMaterno.Text, txtNombres.Text);
+            this.Cursor = Cursors.Arrow;
         }
 
         private void grdResultado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            this.Cursor = Cursors.Wait;
+            registrobusqueda = this.grdResultado.SelectedItem as RegistroBusqueda;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void VerFamilia(long IdFamilia, TipoAccion TipoAccion)
+        {
+            this.Cursor = Cursors.Wait;
+            frmGrupoFamiliar objGrupoFamiliarWindow = new frmGrupoFamiliar();
+            objGrupoFamiliarWindow.IdSeleccionado = IdFamilia;
+            objGrupoFamiliarWindow.TipoAccion = TipoAccion;
+            objGrupoFamiliarWindow.Owner = this;
+            objGrupoFamiliarWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            {
+                if ((this.txtDocIde.Text.Trim().Length > 0) || (this.txtPaterno.Text.Trim().Length > 0) || (this.txtMaterno.Text.Trim().Length > 0) || (this.txtNombres.Text.Trim().Length > 0))
+                    Buscar();
+            }
+            objGrupoFamiliarWindow = null;
         }
 
         private void cmdSeleccionar_Click(object sender, RoutedEventArgs e)
         {
-
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
+            {
+                Int64 Id = (Int64)Img.Tag;
+                if (Id > 0)
+                    VerFamilia(Id, TipoAccion.Edicion);
+            }
         }
 
         private void cmdCerrar_Click(object sender, RoutedEventArgs e)

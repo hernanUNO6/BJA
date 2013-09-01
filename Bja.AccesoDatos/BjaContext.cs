@@ -43,6 +43,7 @@ namespace Bja.AccesoDatos
         public DbSet<RedSalud> RedesSalud { get; set; }
         public DbSet<EstablecimientoSalud> EstablecimientosSalud { get; set; }
         public DbSet<AsignacionMedico> AsignacionesMedico { get; set; }
+        public DbSet<TipoParentesco> TiposParentescos { get; set; }
 
         public DbSet<FamiliaTemporal> FamiliasTemporal { get; set; }
         public DbSet<GrupoFamiliarTemporal> GruposFamiliaresTemporal { get; set; }
@@ -83,6 +84,7 @@ namespace Bja.AccesoDatos
             modelBuilder.Configurations.Add(new RedSaludConfiguration());
             modelBuilder.Configurations.Add(new EstablecimientoSaludConfiguration());
             modelBuilder.Configurations.Add(new AsignacionMedicoConfiguration());
+            modelBuilder.Configurations.Add(new TipoParentescoConfiguration());
 
             modelBuilder.Configurations.Add(new FamiliaTemporalConfiguration());
             modelBuilder.Configurations.Add(new GrupoFamiliarTemporalConfiguration());

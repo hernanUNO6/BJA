@@ -5,26 +5,25 @@
     <Grid Name="Principal">
         <Menu HorizontalAlignment="Left" Margin="5,5,0,0" Height="25" VerticalAlignment="Top" Width="480">
             <MenuItem Header="_Archivo" x:Name="menArchivo">
-                <MenuItem Header="Cambiar contraseña" x:Name="menCamCon" Click="menCamCon_Click"/>
-                <Separator/>
                 <MenuItem Header="Salir" x:Name="menSalir" Click="menSalir_Click"/>
             </MenuItem>
-            <MenuItem Header="_Datos" x:Name="menDatos">
+            <MenuItem Header="_Familia" x:Name="menFamilia">
                 <MenuItem Header="Buscar" x:Name="menBusFam" Click="menBusFam_Click"/>
+                <MenuItem Header="Nueva" x:Name="menNueFam" Click="menNueFam_Click" />
+            </MenuItem>
+            <MenuItem Header="_Datos" x:Name="menDatos">
+                <MenuItem Header="De madre" x:Name="menBusMad" Click="menBusMad_Click" />
+                <MenuItem Header="De menor" x:Name="menBusMen" Click="menBusMen_Click" />
+                <MenuItem Header="De tutor" x:Name="menBusTut" Click="menBusTut_Click" />
                 <Separator/>
-                <MenuItem Header="Nueva familia" x:Name="menNueFam" Click="menNueFam_Click" />
-                <Separator/>
-                <MenuItem Header="Buscar madre" x:Name="menBusMad" />
-                <Separator/>
-                <MenuItem Header="Buscar menor" x:Name="menBusMen" />
-                <Separator/>
-                <MenuItem Header="Buscar tutor" x:Name="menBusTut" />
-                <Separator/>
-                <MenuItem Header="Búsqueda avanzada" x:Name="menBusAva" />
+                <MenuItem Header="Búsqueda avanzada" x:Name="menBusAva" Click="menBusAva_Click" />
             </MenuItem>
             <MenuItem Header="_Reportes" x:Name="mnuReporte">
                 <MenuItem Header="Reporte 1" x:Name="menRep01" />
                 <MenuItem Header="Reporte 2" x:Name="menRep02" />
+            </MenuItem>
+            <MenuItem Header="_Utiles" x:Name="menUtiles">
+                <MenuItem Header="Cambiar contraseña" x:Name="menCamCon" Click="menCamCon_Click"/>
             </MenuItem>
         </Menu>
     </Grid>

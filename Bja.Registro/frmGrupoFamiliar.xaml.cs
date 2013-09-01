@@ -23,6 +23,7 @@ namespace Bja.Registro
     {
         public long IdSeleccionado { get; set; }
         private bool ControlPreliminar { get; set; }
+        public TipoAccion TipoAccion { get; set; }
         private Familia _familia = new Familia();
         private Madre madre = new Madre();
         private Menor menor = new Menor();
@@ -33,6 +34,17 @@ namespace Bja.Registro
             this.Cursor = Cursors.Wait;
             InitializeComponent();
             this.Cursor = Cursors.Arrow;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (IdSeleccionado > 0)
+            {
+                RecuperarFamilia();
+                RecuperarMadres();
+                RecuperarMenores();
+                RecuperarTutores();
+            }
         }
 
         private void cmdModificar_Click(object sender, RoutedEventArgs e)
@@ -62,17 +74,6 @@ namespace Bja.Registro
             dtpFechaInscripcion.SelectedDate = _familia.FechaInscripcion;
             txtPaterno.Text = _familia.PrimerApellido;
             txtMaterno.Text = _familia.SegundoApellido;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (IdSeleccionado > 0)
-            {
-                RecuperarFamilia();
-                RecuperarMadres();
-                RecuperarMenores();
-                RecuperarTutores();
-            }
         }
 
         void RecuperarMadres()
@@ -124,9 +125,27 @@ namespace Bja.Registro
             }
         }
 
+        private void VerCorresponsabilidadDeMadre(long IdMadre, TipoAccion TipoAccion)
+        {
+            this.Cursor = Cursors.Wait;
+            frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
+            objCorresponsabilidadMadreWindow.IdSeleccionado = IdMadre;
+            objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
+            objCorresponsabilidadMadreWindow.Owner = this;
+            objCorresponsabilidadMadreWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            objCorresponsabilidadMadreWindow = null;
+        }
+
         private void cmdCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
         {
-
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
+            {
+                Int64 Id = (Int64)Img.Tag;
+                if (Id > 0)
+                    VerCorresponsabilidadDeMadre(Id, TipoAccion.Detalle);
+            }
         }
 
         void RecuperarMenores()
@@ -178,9 +197,27 @@ namespace Bja.Registro
             }
         }
 
+        private void VerCorresponsabilidadDeMenor(long IdMenor, TipoAccion TipoAccion)
+        {
+            this.Cursor = Cursors.Wait;
+            frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
+            objCorresponsabilidadMenorWindow.IdSeleccionado = IdMenor;
+            objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
+            objCorresponsabilidadMenorWindow.Owner = this;
+            objCorresponsabilidadMenorWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            objCorresponsabilidadMenorWindow = null;
+        }
+
         private void cmdCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
         {
-
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
+            {
+                Int64 Id = (Int64)Img.Tag;
+                if (Id > 0)
+                    VerCorresponsabilidadDeMenor(Id, TipoAccion.Detalle);
+            }
         }
 
         void RecuperarTutores()

@@ -66,6 +66,7 @@
     <Compile Include="ModeloProvincia.cs" />
     <Compile Include="ModeloReclamo.cs" />
     <Compile Include="ModeloRedSalud.cs" />
+    <Compile Include="ModeloTipoParentesco.cs" />
     <Compile Include="ModeloTutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rbac.cs" />

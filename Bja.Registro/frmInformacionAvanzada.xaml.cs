@@ -61,6 +61,7 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
+            objMadreWindow.IdFamilia = 0;
             objMadreWindow.IdSeleccionado = IdMadre;
             objMadreWindow.TipoAccion = TipoAccion;
             objMadreWindow.Owner = this;
@@ -76,11 +77,6 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
             }
             objMadreWindow = null;
-        }
-
-        private void cmdNuevaMadre_Click(object sender, RoutedEventArgs e)
-        {
-            VerMadre(0, TipoAccion.Nuevo);
         }
 
         private void cmdEditarMadre_Click(object sender, RoutedEventArgs e)
@@ -109,6 +105,7 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
+            objMenorWindow.IdFamilia = 0;
             objMenorWindow.IdSeleccionado = IdMenor;
             objMenorWindow.TipoAccion = TipoAccion;
             objMenorWindow.Owner = this;
@@ -124,11 +121,6 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
             }
             objMenorWindow = null;
-        }
-
-        private void cmdNuevoMenor_Click(object sender, RoutedEventArgs e)
-        {
-            VerMenor(0, TipoAccion.Nuevo);
         }
 
         private void cmdEditarMenor_Click(object sender, RoutedEventArgs e)
@@ -175,34 +167,6 @@ namespace Bja.Registro
             objCorresponsabilidadMadreWindow = null;
         }
 
-        private void cmdNuevaCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(Id);
-                    VerCorresponsabilidadMadre(0, corresponsabilidadmadre.IdMadre, TipoAccion.Nuevo);
-                }
-            }
-        }
-
-        private void cmdEditarCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(Id);
-                    VerCorresponsabilidadMadre(Id, corresponsabilidadmadre.IdMadre, TipoAccion.Edicion);
-                }
-            }
-        }
-
         private void cmdDetalleCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
         {
             Button Img = (Button)sender;
@@ -237,34 +201,6 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
             }
             objCorresponsabilidadMenorWindow = null;
-        }
-
-        private void cmdNuevaCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(Id);
-                    VerCorresponsabilidadMenor(0, corresponsabilidadmenor.IdMenor, TipoAccion.Nuevo);
-                }
-            }
-        }
-
-        private void cmdEditarCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(Id);
-                    VerCorresponsabilidadMenor(Id, corresponsabilidadmenor.IdMenor, TipoAccion.Edicion);
-                }
-            }
         }
 
         private void cmdDetalleCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
@@ -351,56 +287,6 @@ namespace Bja.Registro
             objControlMadrePostPartoWindow = null;
         }
 
-        private void cmdEditarControlMadre_Click(object sender, RoutedEventArgs e)
-        {
-            //Button Img = (Button)sender;
-            //if (Img.Tag != null)
-            //{
-            //    Int64 Id = (Int64)Img.Tag;
-            //    if (Id > 0)
-            //    {
-            //        controlmadre = modelocontrolmadre.Recuperar(Id);
-            //        switch (controlmadre.TipoControlMadre)
-            //        {
-            //            case TipoControlMadre.Control:
-            //                VerControlMadre(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Edicion);
-            //                break;
-            //            case TipoControlMadre.Parto:
-            //                VerControlMadreParto(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Edicion);
-            //                break;
-            //            case TipoControlMadre.PostParto:
-            //                VerControlMadrePostParto(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Edicion);
-            //                break;
-            //        }
-            //    }
-            //}
-        }
-
-        private void cmdDetalleControlMadre_Click(object sender, RoutedEventArgs e)
-        {
-            //Button Img = (Button)sender;
-            //if (Img.Tag != null)
-            //{
-            //    Int64 Id = (Int64)Img.Tag;
-            //    if (Id > 0)
-            //    {
-            //        controlmadre = modelocontrolmadre.Recuperar(Id);
-            //        switch (controlmadre.TipoControlMadre)
-            //        {
-            //            case TipoControlMadre.Control:
-            //                VerControlMadre(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Detalle);
-            //                break;
-            //            case TipoControlMadre.Parto:
-            //                VerControlMadreParto(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Detalle);
-            //                break;
-            //            case TipoControlMadre.PostParto:
-            //                VerControlMadrePostParto(Id, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Detalle);
-            //                break;
-            //        }
-            //    }
-            //}
-        }
-
         private void VerControlMenor(long IdControlMenor, long IdMenor, long IdMadre, long IdTutor, TipoAccion TipoAccion)
         {
             this.Cursor = Cursors.Wait;
@@ -426,38 +312,11 @@ namespace Bja.Registro
             objControlMenorWindow = null;
         }
 
-        private void cmdEditarControlMenor_Click(object sender, RoutedEventArgs e)
-        {
-            //Button Img = (Button)sender;
-            //if (Img.Tag != null)
-            //{
-            //    Int64 Id = (Int64)Img.Tag;
-            //    if (Id > 0)
-            //    {
-            //        controlmenor = modelocontrolmenor.Recuperar(Id);
-            //        VerControlMenor(Id, controlmenor.IdMenor, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Edicion);
-            //    }
-            //}
-        }
-
-        private void cmdDetalleControlMenor_Click(object sender, RoutedEventArgs e)
-        {
-            //Button Img = (Button)sender;
-            //if (Img.Tag != null)
-            //{
-            //    Int64 Id = (Int64)Img.Tag;
-            //    if (Id > 0)
-            //    {
-            //        controlmenor = modelocontrolmenor.Recuperar(Id);
-            //        VerControlMenor(Id, controlmenor.IdMenor, controlmenor.IdMadre, controlmenor.IdTutor, TipoAccion.Detalle);
-            //    }
-            //}
-        }
-
         private void VerTutor(long IdTutor, TipoAccion TipoAccion)
         {
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
+            objTutorWindow.IdFamilia = 0;
             objTutorWindow.IdSeleccionado = IdTutor;
             objTutorWindow.TipoAccion = TipoAccion;
             objTutorWindow.Owner = this;

@@ -13,21 +13,9 @@ namespace Bja.Entidades
         public string Paterno { get; set; }
         public string Materno { get; set; }
         public string Nombres { get; set; }
-        public long IdFamilia { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public string Sexo { get; set; }
         public string Familia { get; set; }
         public string Tipo { get; set; }
-
-        public RegistroBusqueda(long id, string documentoidentidad, string paterno, string materno, string nombres, long idfamilia, string familia, string tipo)
-        {
-            this.Id = id;
-            this.DocumentoIdentidad = documentoidentidad;
-            this.Paterno = paterno;
-            this.Materno = materno;
-            this.Nombres = nombres;
-            this.IdFamilia = idfamilia;
-            this.Familia = familia;
-            this.Tipo = tipo;
-        }
-
     }
 }

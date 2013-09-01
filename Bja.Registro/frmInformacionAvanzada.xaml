@@ -27,13 +27,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdNuevaCorresponsabilidadMadre_Click" Tag="{Binding Id}" Content="N. Corr."/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lblCorresponsabilidadesMadres" Content="Corresponsabilidades de madre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,60,0,0"/>
@@ -41,13 +34,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="F. Inscripción" Binding="{Binding FechaInscripcion, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdEditarCorresponsabilidadMadre_Click" Tag="{Binding Id}" Content="Editar"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -64,20 +50,6 @@
                 <DataGridTextColumn Header="F. Control" Binding="{Binding FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
                 <DataGridTextColumn Header="Tipo" Binding="{Binding TipoControlMadre}" />
                 <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPago}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdEditarControlMadre_Click" Tag="{Binding Id}" Content="Editar"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdDetalleControlMadre_Click" Tag="{Binding Id}" Content="Detalle"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lblMenores" Content="Menores" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,303,0,0"/>
@@ -99,13 +71,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdNuevaCorresponsabilidadMenor_Click" Tag="{Binding Id}" Content="N. Corr."/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lblCorresponsabilidadesMenores" Content="Corresponsabilidades de menor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,303,0,0"/>
@@ -113,13 +78,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="F. Inscripción" Binding="{Binding FechaInscripcion, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdEditarCorresponsabilidadMenor_Click" Tag="{Binding Id}" Content="Editar"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -134,20 +92,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="F. Control" Binding="{Binding FechaControl, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdEditarControlMenor_Click" Tag="{Binding Id}" Content="Editar"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="cmdDetalleControlMenor_Click" Tag="{Binding Id}" Content="Detalle"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="cmdSalir" Content="Cerrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="800,547,0,0" Click="cmdSalir_Click" />
@@ -193,8 +137,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="cmdNuevaMadre" Content="Nueva Madre" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="114,61,0,0" Click="cmdNuevaMadre_Click"/>
-        <Button x:Name="cmdNuevoMenor" Content="Nuevo Menor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="114,303,0,0" Click="cmdNuevoMenor_Click"/>
         <Ellipse x:Name="ellMadres" Fill="Black" HorizontalAlignment="Left" Margin="14,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="15" Height="15"/>
         <Ellipse x:Name="ellMenores" Fill="Black" HorizontalAlignment="Left" Margin="14,309,0,0" Stroke="Black" VerticalAlignment="Top" Width="15" Height="15"/>
         <Ellipse x:Name="ellTutoresDeMadres" Fill="Black" HorizontalAlignment="Left" Margin="674,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="15" Height="15"/>
