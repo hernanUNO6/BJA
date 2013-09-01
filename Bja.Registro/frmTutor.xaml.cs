@@ -22,6 +22,7 @@ namespace Bja.Registro
     public partial class frmTutor : Window
     {
         public long IdSeleccionado { get; set; }
+        public long IdFamilia { get; set; }
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Tutor _tutor = new Tutor();
@@ -55,12 +56,10 @@ namespace Bja.Registro
 
                 _tutor = modelotutor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _tutor.DocumentoIdentidad;
-                //cboTipoDocumentoIdentidad.SelectedValue = _tutor.IdTipoDocumentoIdentidad;
-                //cboDepartamento.SelectedValue = _tutor.IdDepartamento;
-                //cboProvincia.SelectedValue = _tutor.IdProvincia;
-                //cboMunicipio.SelectedValue = _tutor.IdMunicipio;
+                cboTipoDocumentoIdentidad.SelectedValue = _tutor.TipoDocumentoIdentidad;
                 txtPaterno.Text = _tutor.PrimerApellido;
                 txtMaterno.Text = _tutor.SegundoApellido;
+                txtConyuge.Text = _tutor.TercerApellido; 
                 txtNombres.Text = _tutor.Nombres;
                 txtNombreCompleto.Text = _tutor.NombreCompleto;
                 dtpFechaNacimiento.SelectedDate = _tutor.FechaNacimiento;
@@ -161,7 +160,7 @@ namespace Bja.Registro
                 ModeloTutor modelotutor = new ModeloTutor();
 
                 _tutor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                //_tutor.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad; //cboTipoDocumentoIdentidad.SelectedValue;
                 _tutor.PrimerApellido = txtPaterno.Text;
                 _tutor.SegundoApellido = txtMaterno.Text;
                 _tutor.TercerApellido = txtConyuge.Text;
@@ -184,7 +183,18 @@ namespace Bja.Registro
                 if (IdSeleccionado > 0)
                     modelotutor.Editar(IdSeleccionado, _tutor);
                 else
+                {
+                    ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+
                     modelotutor.Crear(_tutor);
+
+                    grupofamiliar.IdFamilia = IdFamilia;
+                    grupofamiliar.IdReferencial = _tutor.Id;
+                    grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
+
+                    modelogrupofamiliar.Crear(grupofamiliar);
+                }
 
                 Resultado = true;
 

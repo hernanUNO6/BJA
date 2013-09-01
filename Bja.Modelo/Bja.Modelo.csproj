@@ -48,6 +48,7 @@
     <Compile Include="IdentifierGenerator.cs" />
     <Compile Include="InitializationBD.cs" />
     <Compile Include="ModeloAsignacionMedico.cs" />
+    <Compile Include="ModeloBusqueda.cs" />
     <Compile Include="ModeloControlMadre.cs" />
     <Compile Include="ModeloControlMenor.cs" />
     <Compile Include="ModeloCorresponsabilidadMadre.cs" />

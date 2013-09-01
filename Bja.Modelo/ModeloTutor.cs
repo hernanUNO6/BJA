@@ -48,7 +48,6 @@ namespace Bja.Modelo
         _tutor.SegundoApellido = tutor.SegundoApellido;
         _tutor.TercerApellido = tutor.TercerApellido;
         _tutor.DocumentoIdentidad = tutor.DocumentoIdentidad;
-        //_tutor.IdTipoDocumentoIdentidad = tutor.IdTipoDocumentoIdentidad;
         _tutor.TipoDocumentoIdentidad = tutor.TipoDocumentoIdentidad;
         _tutor.FechaNacimiento = tutor.FechaNacimiento;
         _tutor.IdDepartamento = tutor.IdDepartamento;
@@ -98,22 +97,24 @@ namespace Bja.Modelo
         return tutor;
     }
 
-    public List<Tutor> Listar()
-    {
-        return context.Tutores.ToList();
-    }
+    //public List<Tutor> Listar()
+    //{
+    //    return context.Tutores.ToList();
+    //}
 
     public List<Tutor> ListarTutoresDeMadresPorCriterio(string Criterio)
     {
         List<Tutor> tutor = new List<Tutor>();
 
         tutor = (from t in context.Tutores
-                 where t.Nombres.Contains(Criterio) ||
-                 t.PrimerApellido.Contains(Criterio) ||
-                 t.SegundoApellido.Contains(Criterio) ||
-                 t.DocumentoIdentidad.Contains(Criterio)
+                 where (t.Nombres.Contains(Criterio) ||
+                       t.PrimerApellido.Contains(Criterio) ||
+                       t.SegundoApellido.Contains(Criterio) ||
+                       t.DocumentoIdentidad.Contains(Criterio)) &&
+                       (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  from cm in context.CorresponsabilidadesMadre
-                 where cm.IdTutor == t.Id
+                 where cm.IdTutor == t.Id &&
+                       cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                  orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
                  select t).Distinct().ToList<Tutor>();
 
@@ -125,16 +126,33 @@ namespace Bja.Modelo
         List<Tutor> tutor = new List<Tutor>();
 
         tutor = (from t in context.Tutores
-                 where t.Nombres.Contains(Criterio) ||
-                 t.PrimerApellido.Contains(Criterio) ||
-                 t.SegundoApellido.Contains(Criterio) ||
-                 t.DocumentoIdentidad.Contains(Criterio)
+                 where (t.Nombres.Contains(Criterio) ||
+                       t.PrimerApellido.Contains(Criterio) ||
+                       t.SegundoApellido.Contains(Criterio) ||
+                       t.DocumentoIdentidad.Contains(Criterio)) &&
+                       (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  from cn in context.CorresponsabilidadesMenor
                  where cn.IdTutor == t.Id
                  orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
                  select t).Distinct().ToList<Tutor>();
 
         return tutor;
+    }
+
+    public List<Tutor> ListarTutoresDeUnaFamilia(long IdFamilia)
+    {//ojo filtrar los no borrados
+        List<Tutor> tutor = new List<Tutor>();
+
+        tutor = (from t in context.Tutores 
+                 where t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                 from gf in context.GruposFamiliares
+                 where (gf.IdFamilia == IdFamilia) &&
+                       (gf.IdReferencial == t.Id) &&
+                       (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor) &&
+                       (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                 select t).Distinct().ToList<Tutor>();
+
+            return tutor;
     }
 
     public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
@@ -146,11 +164,12 @@ namespace Bja.Modelo
         Int64 totalRegistrosEncontrados = 0;
         Int64 totalRegistros = 0;
 
-        var lista = (from m in context.Tutores
-                     where m.Nombres.Contains(criterioBusqueda) ||
-                     m.PrimerApellido.Contains(criterioBusqueda) ||
-                     m.SegundoApellido.Contains(criterioBusqueda)
-                     select m).ToList();
+        var lista = (from t in context.Tutores
+                     where (t.Nombres.Contains(criterioBusqueda) ||
+                           t.PrimerApellido.Contains(criterioBusqueda) ||
+                           t.SegundoApellido.Contains(criterioBusqueda)) &&
+                           (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                     select t).ToList();
 
         //var lista = BuscarConveniosMantenimientoPaginada(ref totalRegistrosEncontrados, ref totalRegistros, saltarRegistros, tamañoPagina, criterioBusqueda);
 
