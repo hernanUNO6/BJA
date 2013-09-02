@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsignacionesMedicoController.cs" />
+    <Compile Include="Controllers\DatosController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EncargadosController.cs" />
     <Compile Include="Controllers\EstablecimientosSaludController.cs" />
