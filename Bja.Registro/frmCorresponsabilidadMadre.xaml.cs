@@ -127,6 +127,7 @@ namespace Bja.Registro
             CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
 
             corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(IdCorresponsabilidadMadre);
+
             if (corresponsabilidadmadre != null)
             {
                 if (corresponsabilidadmadre.IdTutor.HasValue)
@@ -136,63 +137,63 @@ namespace Bja.Registro
                     if (corresponsabilidadmadre.IdTipoParentesco.HasValue)
                         cboTipoParentesco.SelectedValue = corresponsabilidadmadre.IdTipoParentesco.Value;
                 }
-                    this.rdbNueva.IsEnabled = false;
-                    this.rdbTransferencia.IsEnabled = false;
-                    if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Nueva)
-                        this.rdbNueva.IsChecked = true;
-                    else if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Transferencia)
-                        this.rdbTransferencia.IsChecked = true;
-                    this.txtCodigoFormulario.Text = corresponsabilidadmadre.CodigoFormulario;
-                    this.txtCodigoFormulario.IsEnabled = false;
-                    this.dtpFechaInscripcion.SelectedDate = corresponsabilidadmadre.FechaInscripcion;
-                    this.dtpFechaInscripcion.IsEnabled = false;
-                    this.dtpFechaFUM.SelectedDate = corresponsabilidadmadre.FechaUltimaMenstruacion;
-                    this.dtpFechaFUM.IsEnabled = false;
-                    this.dtpFechaUltimoParto.SelectedDate = corresponsabilidadmadre.FechaUltimoParto;
-                    this.dtpFechaUltimoParto.IsEnabled = false;
-                    this.txtNumeroEmbarazo.Text = corresponsabilidadmadre.NumeroEmbarazo.ToString();
-                    this.txtNumeroEmbarazo.IsEnabled = false;
-                    this.chkARO.IsChecked = corresponsabilidadmadre.ARO;
-                    this.chkARO.IsEnabled = false;
-                    RecuperarControlMadre();
-                    this.chkSalida.IsEnabled = true;
-                    if (corresponsabilidadmadre.TipoSalidaMadre > 0)
+                this.rdbNueva.IsEnabled = false;
+                this.rdbTransferencia.IsEnabled = false;
+                if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Nueva)
+                    this.rdbNueva.IsChecked = true;
+                else if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Transferencia)
+                    this.rdbTransferencia.IsChecked = true;
+                this.txtCodigoFormulario.Text = corresponsabilidadmadre.CodigoFormulario;
+                this.txtCodigoFormulario.IsEnabled = false;
+                this.dtpFechaInscripcion.SelectedDate = corresponsabilidadmadre.FechaInscripcion;
+                this.dtpFechaInscripcion.IsEnabled = false;
+                this.dtpFechaFUM.SelectedDate = corresponsabilidadmadre.FechaUltimaMenstruacion;
+                this.dtpFechaFUM.IsEnabled = false;
+                this.dtpFechaUltimoParto.SelectedDate = corresponsabilidadmadre.FechaUltimoParto;
+                this.dtpFechaUltimoParto.IsEnabled = false;
+                this.txtNumeroEmbarazo.Text = corresponsabilidadmadre.NumeroEmbarazo.ToString();
+                this.txtNumeroEmbarazo.IsEnabled = false;
+                this.chkARO.IsChecked = corresponsabilidadmadre.ARO;
+                this.chkARO.IsEnabled = false;
+                RecuperarControlMadre();
+                this.chkSalida.IsEnabled = true;
+                if (corresponsabilidadmadre.TipoSalidaMadre > 0)
+                {
+                    this.chkSalida.IsChecked = true;
+                    this.dtpFechaSalida.SelectedDate = corresponsabilidadmadre.FechaSalidaPrograma;
+                    this.dtpFechaSalida.IsEnabled = true;
+                    this.rdbAborto.IsEnabled = true;
+                    this.rdbCumplimiento.IsEnabled = true;
+                    this.rdbFallecimiento.IsEnabled = true;
+                    this.rdbIncumplimiento.IsEnabled = true;
+                    this.rdbObitoFetal.IsEnabled = true;
+                    this.rdbTransferenciaSalida.IsEnabled = true;
+                    switch (corresponsabilidadmadre.TipoSalidaMadre)
                     {
-                        this.chkSalida.IsChecked = true;
-                        this.dtpFechaSalida.SelectedDate = corresponsabilidadmadre.FechaSalidaPrograma;
-                        this.dtpFechaSalida.IsEnabled = true;
-                        this.rdbAborto.IsEnabled = true;
-                        this.rdbCumplimiento.IsEnabled = true;
-                        this.rdbFallecimiento.IsEnabled = true;
-                        this.rdbIncumplimiento.IsEnabled = true;
-                        this.rdbObitoFetal.IsEnabled = true;
-                        this.rdbTransferenciaSalida.IsEnabled = true;
-                        switch (corresponsabilidadmadre.TipoSalidaMadre)
-                        {
-                            case TipoSalidaMadre.Aborto:
-                                this.rdbAborto.IsChecked = true;
-                                break;
-                            case TipoSalidaMadre.Cumplimiento:
-                                this.rdbCumplimiento.IsChecked = true;
-                                break;
-                            case TipoSalidaMadre.Fallecimiento:
-                                this.rdbFallecimiento.IsChecked = true;
-                                break;
-                            case TipoSalidaMadre.Incumplimiento:
-                                this.rdbIncumplimiento.IsChecked = true;
-                                break;
-                            case TipoSalidaMadre.ObitoFetal:
-                                this.rdbObitoFetal.IsChecked = true;
-                                break;
-                            case TipoSalidaMadre.Transferencia:
-                                this.rdbTransferenciaSalida.IsChecked = true;
-                                break;
-                        }
-                        this.txtAutorizado.Text = corresponsabilidadmadre.AutorizadoPor;
-                        this.txtAutorizado.IsEnabled = true;
-                        this.txtCargo.Text = corresponsabilidadmadre.CargoAutorizador;
-                        this.txtCargo.IsEnabled = true;
+                        case TipoSalidaMadre.Aborto:
+                            this.rdbAborto.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Cumplimiento:
+                            this.rdbCumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Fallecimiento:
+                            this.rdbFallecimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Incumplimiento:
+                            this.rdbIncumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.ObitoFetal:
+                            this.rdbObitoFetal.IsChecked = true;
+                            break;
+                        case TipoSalidaMadre.Transferencia:
+                            this.rdbTransferenciaSalida.IsChecked = true;
+                            break;
                     }
+                    this.txtAutorizado.Text = corresponsabilidadmadre.AutorizadoPor;
+                    this.txtAutorizado.IsEnabled = true;
+                    this.txtCargo.Text = corresponsabilidadmadre.CargoAutorizador;
+                    this.txtCargo.IsEnabled = true;
+                }
             }
         }
 
@@ -240,9 +241,9 @@ namespace Bja.Registro
 
                 bool ok = false;
 
-                if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                     {
-                        if (!(Convert.ToInt32(cboTipoParentesco.SelectedValue) > 0))
+                        if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
                         {
                             MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
                             ok = true;
@@ -292,7 +293,7 @@ namespace Bja.Registro
 
                         corresponsabilidadmadre.FechaInscripcion = this.dtpFechaInscripcion.SelectedDate.Value;
                         corresponsabilidadmadre.IdMadre = IdSeleccionado;
-                        if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                         {
                             corresponsabilidadmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
                             corresponsabilidadmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
@@ -326,7 +327,7 @@ namespace Bja.Registro
                             controlmadre.IdEstablecimientoSalud = 1;
                             controlmadre.IdMedico = 1;
                             controlmadre.IdMadre = IdSeleccionado;
-                            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                             {
                                 controlmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
                                 controlmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
@@ -339,7 +340,7 @@ namespace Bja.Registro
                             controlmadre.Observaciones = "";
                             controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
                             controlmadre.TipoControlMadre = TipoControlMadre.Control;
-                            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
                             else
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
@@ -351,11 +352,11 @@ namespace Bja.Registro
                             fechitaControles = fechitaControles.AddMonths(2);
 
                             ControlMadre controlmadre = new ControlMadre();
-                            controlmadre.IdCorresponsabilidadMadre = IdSeleccionado;
+                            controlmadre.IdCorresponsabilidadMadre = IdCorresponsabilidadMadre;
                             controlmadre.IdEstablecimientoSalud = 1;
                             controlmadre.IdMedico = 1;
                             controlmadre.IdMadre = IdSeleccionado;
-                            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                             {
                                 controlmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
                                 controlmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
@@ -376,7 +377,7 @@ namespace Bja.Registro
                                 controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
                                 controlmadre.TipoControlMadre = TipoControlMadre.PostParto;
                             }
-                            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
                             else
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
@@ -395,9 +396,9 @@ namespace Bja.Registro
                     }
                     else
                     {
-                        corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(IdSeleccionado);
+                        corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(IdCorresponsabilidadMadre);
 
-                        if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
                         {
                             corresponsabilidadmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
                             corresponsabilidadmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
@@ -429,7 +430,7 @@ namespace Bja.Registro
                             corresponsabilidadmadre.CargoAutorizador = "";
                         }
 
-                        modelocorresponsabilidadmadre.Editar(IdSeleccionado, corresponsabilidadmadre);
+                        modelocorresponsabilidadmadre.Editar(IdCorresponsabilidadMadre, corresponsabilidadmadre);
                     }
                 }
         }
@@ -437,7 +438,7 @@ namespace Bja.Registro
         void RecuperarControlMadre()
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-            this.grdControl.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(IdSeleccionado);
+            this.grdControl.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(IdCorresponsabilidadMadre);
         }
 
         private void VerControlPartoMadre(long IdControl, TipoAccion TipoAccion)
@@ -503,30 +504,37 @@ namespace Bja.Registro
 
         private void cmdEditarControl_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
-            {
-                if (!(Convert.ToInt32(cboTipoParentesco.SelectedValue) > 0))
-                    MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-            }
+            bool ok = false;
 
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
+            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
             {
-                Int64 Id = (Int64)Img.Tag;
-
-                if (Id > 0)
+                if (!(Convert.ToInt32(cboTipoParentesco.SelectedIndex) >= 0))
                 {
-                    ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-                    ControlMadre controlmadre = new ControlMadre();
+                    MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
+                    ok = true;
+                }
+            }
+            if (ok == false)
+            {
+                Button Img = (Button)sender;
+                if (Img.Tag != null)
+                {
+                    Int64 Id = (Int64)Img.Tag;
 
-                    controlmadre = modelocontrolmadre.Recuperar(Id);
+                    if (Id > 0)
+                    {
+                        ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
+                        ControlMadre controlmadre = new ControlMadre();
 
-                    if (controlmadre.TipoControlMadre == TipoControlMadre.Parto)
-                        VerControlPartoMadre(Id, TipoAccion.Edicion);
-                    else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
-                        VerControlPostPartoMadre(Id, TipoAccion.Edicion);
-                    else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
-                        VerControlMadre(Id, TipoAccion.Edicion);
+                        controlmadre = modelocontrolmadre.Recuperar(Id);
+
+                        if (controlmadre.TipoControlMadre == TipoControlMadre.Parto)
+                            VerControlPartoMadre(Id, TipoAccion.Edicion);
+                        else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
+                            VerControlPostPartoMadre(Id, TipoAccion.Edicion);
+                        else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
+                            VerControlMadre(Id, TipoAccion.Edicion);
+                    }
                 }
             }
         }

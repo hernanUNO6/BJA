@@ -90,10 +90,31 @@ namespace Bja.Modelo
             List<CorresponsabilidadMenor> corresponsabilidadmenor = new List<CorresponsabilidadMenor>();
 
             corresponsabilidadmenor = (from cm in context.CorresponsabilidadesMenor
-                                       where cm.IdMadre == IdMenor
+                                       where cm.IdMenor == IdMenor
                                        select cm).ToList<CorresponsabilidadMenor>();
 
             return corresponsabilidadmenor;
+        }
+
+        public long RecuperarLaUltimaCorresponsabilidadValidaDeMenor(long IdMenor)
+        {
+            long Id;
+            string s;
+
+            Id = 0;
+
+            var c = (from cn in context.CorresponsabilidadesMenor 
+                     where cn.IdMenor == IdMenor &&
+                            cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                     orderby cn.FechaRegistro descending
+                     select cn.Id).Take(1);
+            foreach (var g in c)
+            {
+                s = g.ToString();
+                Id = Convert.ToInt64(s);
+            }
+
+            return Id;
         }
 
     }

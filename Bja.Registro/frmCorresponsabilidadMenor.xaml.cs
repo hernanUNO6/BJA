@@ -74,708 +74,372 @@ namespace Bja.Registro
             this.cboTutor.SelectedIndex = -1;
 
             ModeloMadre modelomadre = new ModeloMadre();
-            this.cboTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamiliaParaCombo(IdFamilia);
-            this.cboTutor.DisplayMemberPath = "Descripcion";
-            this.cboTutor.SelectedValuePath = "Id";
-            this.cboTutor.SelectedIndex = -1;
+            this.cboMadre.ItemsSource = modelomadre.ListarMadresDeUnaFamiliaParaCombo(IdFamilia);
+            this.cboMadre.DisplayMemberPath = "Descripcion";
+            this.cboMadre.SelectedValuePath = "Id";
+            this.cboMadre.SelectedIndex = -1;
 
+            ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
 
-            //this.lblNombresMenor.Content = "";
-            //this.lblFechaNacimientoMenor.Content = "";
-            //this.lblNombresMadre.Content = "";
-            //this.lblFechaNacimientoMadre.Content = "";
+            IdCorresponsabilidadMenor = modelocorresponsabilidadmenor.RecuperarLaUltimaCorresponsabilidadValidaDeMenor(IdSeleccionado);
 
-            //ValoresPorDefecto();
+            ValoresPorDefecto();
 
-            //if (IdMenor > 0)
-            //{
-            //    RecuperarMenor();
-            //    this.cmdModificarMenor.IsEnabled = true;
-            //    this.cmdDetallesMenor.IsEnabled = true;
-            //}
+            if (IdCorresponsabilidadMenor > 0)
+                RecuperarCorresponsabilidadMenor();
+            else
+            {
+                this.txtCodigoFormulario.IsEnabled = true;
+                this.dtpFechaInscripcion.IsEnabled = true;
+                this.rdbNueva.IsEnabled = true;
+                this.rdbTransferencia.IsEnabled = true;
+                this.cboMadre.IsEnabled = true;
+                this.cboTutor.IsEnabled = true;
+                this.cboTipoParentesco.IsEnabled = true;
+                this.cmdGuardar.IsEnabled = true;
+            }
 
-            //if (IdSeleccionado > 0)
-            //    RecuperarCorresponsabilidadMenor(IdSeleccionado);
-            //if (TipoAccion == TipoAccion.Detalle)
-            //{
-            //    this.txtCodigoFormulario.IsEnabled = false;
-            //    this.dtpFechaInscripcion.IsEnabled = false;
-            //    this.cmdSeleccionarMenor.IsEnabled = false;
-            //    this.cmdModificarMenor.IsEnabled = false;
-            //    this.cmdDetallesMenor.IsEnabled = false;
-            //    this.chkMadre.IsEnabled = false;
-            //    this.cmdSeleccionarMadre.IsEnabled = false;
-            //    this.cmdModificarMadre.IsEnabled = false;
-            //    this.cmdDetallesMadre.IsEnabled = false;
-            //    this.chkTutor.IsEnabled = false;
-            //    this.cmdSeleccionarTutor.IsEnabled = false;
-            //    this.cmdModificarTutor.IsEnabled = false;
-            //    this.cmdDetallesTutor.IsEnabled = false;
-            //    this.chkSalida.IsEnabled = false;
-            //    this.rdbCumplimiento.IsEnabled = false;
-            //    this.rdbFallecimiento.IsEnabled = false;
-            //    this.rdbIncumplimiento.IsEnabled = false;
-            //    this.rdbNueva.IsEnabled = false;
-            //    this.rdbTransferencia.IsEnabled = false;
-            //    this.rdbTransferenciaSalida.IsEnabled = false;
-            //    this.txtAutorizado.IsEnabled = false;
-            //    this.txtCargo.IsEnabled = false;
-            //    this.cmdGuardar.IsEnabled = false;
-            //}
-            //else if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
-            //    this.cmdSeleccionarMenor.IsEnabled = false;
+            if (TipoAccion == TipoAccion.Detalle)
+            {
+                this.txtCodigoFormulario.IsEnabled = false;
+                this.dtpFechaInscripcion.IsEnabled = false;
+                this.dtpFechaSalida.IsEnabled = false;
+                this.chkSalida.IsEnabled = false;
+                this.rdbCumplimiento.IsEnabled = false;
+                this.rdbFallecimiento.IsEnabled = false;
+                this.rdbIncumplimiento.IsEnabled = false;
+                this.rdbNueva.IsEnabled = false;
+                this.rdbTransferencia.IsEnabled = false;
+                this.rdbTransferenciaSalida.IsEnabled = false;
+                this.txtAutorizado.IsEnabled = false;
+                this.txtCargo.IsEnabled = false;
+                this.cboMadre.IsEnabled = false;
+                this.cboTutor.IsEnabled = false;
+                this.cboTipoParentesco.IsEnabled = false;
+                this.cmdGuardar.IsEnabled = false;
+            }
         }
 
-        //private void ValoresPorDefecto()
-        //{
-        //    this.txtCodigoFormulario.Text = "";
-        //    this.dtpFechaInscripcion.SelectedDate = DateTime.Today;
-        //    this.dtpFechaSalida.SelectedDate = DateTime.Today;
-        //    this.rdbNueva.IsChecked = true;
-        //    this.cmdDetallesMenor.IsEnabled = false;
-        //    this.cmdModificarMenor.IsEnabled = false;
-        //    this.chkMadre.IsChecked = false;
-        //    this.cmdSeleccionarMadre.IsEnabled = false;
-        //    this.cmdDetallesMadre.IsEnabled = false;
-        //    this.cmdModificarMadre.IsEnabled = false;
-        //    this.chkTutor.IsChecked = false;
-        //    this.cboTipoParentesco.IsEnabled = false;
-        //    this.cmdSeleccionarTutor.IsEnabled = false;
-        //    this.cmdDetallesTutor.IsEnabled = false;
-        //    this.cmdModificarTutor.IsEnabled = false;
-        //    this.chkSalida.IsChecked = false;
-        //    this.chkSalida.IsEnabled = false;
-        //    this.dtpFechaSalida.IsEnabled = false;
-        //    this.rdbCumplimiento.IsChecked = false;
-        //    this.rdbCumplimiento.IsEnabled = false;
-        //    this.rdbFallecimiento.IsChecked = false;
-        //    this.rdbFallecimiento.IsEnabled = false;
-        //    this.rdbIncumplimiento.IsChecked = false;
-        //    this.rdbIncumplimiento.IsEnabled = false;
-        //    this.rdbTransferenciaSalida.IsChecked = false;
-        //    this.rdbTransferenciaSalida.IsEnabled = false;
-        //    this.txtAutorizado.Text = "";
-        //    this.txtAutorizado.IsEnabled = false;
-        //    this.txtCargo.Text = "";
-        //    this.txtCargo.IsEnabled = false;
-        //}
+        private void ValoresPorDefecto()
+        {
+            this.txtCodigoFormulario.Text = "";
+            this.dtpFechaInscripcion.SelectedDate = DateTime.Today;
+            this.dtpFechaSalida.SelectedDate = DateTime.Today;
+            this.rdbNueva.IsChecked = true;
+            this.cboMadre.IsEnabled = false;
+            this.cboTutor.IsEnabled = false;
+            this.cboTipoParentesco.IsEnabled = false;
+            this.chkSalida.IsChecked = false;
+            this.chkSalida.IsEnabled = false;
+            this.dtpFechaSalida.IsEnabled = false;
+            this.rdbCumplimiento.IsChecked = false;
+            this.rdbCumplimiento.IsEnabled = false;
+            this.rdbFallecimiento.IsChecked = false;
+            this.rdbFallecimiento.IsEnabled = false;
+            this.rdbIncumplimiento.IsChecked = false;
+            this.rdbIncumplimiento.IsEnabled = false;
+            this.rdbTransferenciaSalida.IsChecked = false;
+            this.rdbTransferenciaSalida.IsEnabled = false;
+            this.txtAutorizado.Text = "";
+            this.txtAutorizado.IsEnabled = false;
+            this.txtCargo.Text = "";
+            this.txtCargo.IsEnabled = false;
+        }
 
         private void cmdSalir_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        //private void cmdSeleccionarMenor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmLista formularioListaMenores = new frmLista();
+        void RecuperarCorresponsabilidadMenor()
+        {
+            ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
+            CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
 
-        //    formularioListaMenores.NuevoRegistro += formularioListaMenores_NuevoRegistro;
-        //    formularioListaMenores.DetallesRegistro += formularioListaMenores_DetallesRegistro;
-        //    formularioListaMenores.ModificarRegistro += formularioListaMenores_ModificarRegistro;
-        //    formularioListaMenores.SeleccionarRegistro += formularioListaMenores_SeleccionarRegistro;
+            corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdCorresponsabilidadMenor);
 
-        //    ModeloMenor modelomenor = new ModeloMenor();
+            if (corresponsabilidadmenor != null)
+            {
+                if (corresponsabilidadmenor.IdMadre.HasValue)
+                {
+                    if (corresponsabilidadmenor.IdMadre.Value > 0)
+                        cboMadre.SelectedValue = corresponsabilidadmenor.IdMadre.Value;
+                }
 
-        //    formularioListaMenores.proveedorDatos = modelomenor;
-        //    formularioListaMenores.titulo = "Menores";
-        //    formularioListaMenores.ShowDialog();
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMenores_NuevoRegistro(object sender, EventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMenor objMenorWindow = new frmMenor();
-        //    objMenorWindow.IdSeleccionado = 0;
-        //    objMenorWindow.TipoAccion = TipoAccion.Nuevo;
-        //    objMenorWindow.Owner = this;
-        //    objMenorWindow.ShowDialog();
-        //    objMenorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMenores_DetallesRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMenor objMenorWindow = new frmMenor();
-        //    objMenorWindow.IdSeleccionado = fe.id;
-        //    objMenorWindow.TipoAccion = TipoAccion.Detalle;
-        //    objMenorWindow.Owner = this;
-        //    objMenorWindow.ShowDialog();
-        //    objMenorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMenores_ModificarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMenor objMenorWindow = new frmMenor();
-        //    objMenorWindow.IdSeleccionado = fe.id;
-        //    objMenorWindow.TipoAccion = TipoAccion.Edicion;
-        //    objMenorWindow.Owner = this;
-        //    objMenorWindow.ShowDialog();
-        //    objMenorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMenores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    IdMenor = fe.id;
-        //    this.lblNombresMenor.Content = "";
-        //    this.lblFechaNacimientoMenor.Content = "";
-        //    this.lblNombreMadre.Content = "";
-        //    this.lblFechaNacimientoMadre.Content = "";
-        //    this.lblNombreTutor.Content = "";
-        //    this.lblFechaNacimientoTutor.Content = "";
-        //    RecuperarMenor();
-        //    ValoresPorDefecto();
-        //    RecuperarCorresponsabilidadMenor(0);
-        //    this.cmdModificarMenor.IsEnabled = true;
-        //    this.cmdDetallesMenor.IsEnabled = true;
-        //}
-
-        //void RecuperarCorresponsabilidadMenor(long IdCual)
-        //{
-        //    //ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
-        //    //CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
-
-        //    //if (IdCual > 0)
-        //    //    corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdCual);
-        //    //else
-        //    //    corresponsabilidadmenor = modelocorresponsabilidadmenor.RecuperarElUltimoValido(IdMenor);
-        //    //if (corresponsabilidadmenor != null)
-        //    //{
-        //    //    IdSeleccionado = corresponsabilidadmenor.Id;
-
-        //    //    if (corresponsabilidadmenor.IdMadre > 0)
-        //    //    {
-        //    //        IdMadre = corresponsabilidadmenor.IdMadre;
-        //    //        RecuperarMadre();
-        //    //        this.chkMadre.IsChecked = true;
-        //    //        this.cmdDetallesMadre.IsEnabled = true;
-        //    //        this.cmdModificarMadre.IsEnabled = true;
-        //    //    }
-
-        //    //    if (corresponsabilidadmenor.IdTutor > 0)
-        //    //    {
-        //    //        IdTutor = corresponsabilidadmenor.IdTutor;
-        //    //        cboTipoParentesco.SelectedValue = corresponsabilidadmenor.IdTipoParentesco;
-        //    //        RecuperarTutor();
-        //    //        this.chkTutor.IsChecked = true;
-        //    //        this.cmdDetallesTutor.IsEnabled = true;
-        //    //        this.cmdModificarTutor.IsEnabled = true;
-        //    //    }
-        //    //    this.rdbNueva.IsEnabled = false;
-        //    //    this.rdbTransferencia.IsEnabled = false;
-        //    //    if (corresponsabilidadmenor.TipoInscripcionMenor == TipoInscripcion.Nueva)
-        //    //        this.rdbNueva.IsChecked = true;
-        //    //    else if (corresponsabilidadmenor.TipoInscripcionMenor == TipoInscripcion.Transferencia)
-        //    //        this.rdbTransferencia.IsChecked = true;
-        //    //    this.txtCodigoFormulario.Text = corresponsabilidadmenor.CodigoFormulario;
-        //    //    this.txtCodigoFormulario.IsEnabled = false;
-        //    //    this.dtpFechaInscripcion.SelectedDate = corresponsabilidadmenor.FechaInscripcion;
-        //    //    this.dtpFechaInscripcion.IsEnabled = false;
-        //    //    RecuperarControlMenor();
-        //    //    this.chkSalida.IsEnabled = true;
-        //    //    if (corresponsabilidadmenor.TipoSalidaMenor > 0)
-        //    //    {
-        //    //        this.chkSalida.IsChecked = true;
-        //    //        this.dtpFechaSalida.SelectedDate = corresponsabilidadmenor.FechaSalidaPrograma;
-        //    //        this.dtpFechaSalida.IsEnabled = true;
-        //    //        this.rdbCumplimiento.IsEnabled = true;
-        //    //        this.rdbFallecimiento.IsEnabled = true;
-        //    //        this.rdbIncumplimiento.IsEnabled = true;
-        //    //        this.rdbTransferenciaSalida.IsEnabled = true;
-        //    //        switch (corresponsabilidadmenor.TipoSalidaMenor)
-        //    //        {
-        //    //            case TipoSalidaMenor.Cumplimiento:
-        //    //                this.rdbCumplimiento.IsChecked = true;
-        //    //                break;
-        //    //            case TipoSalidaMenor.Fallecimiento:
-        //    //                this.rdbFallecimiento.IsChecked = true;
-        //    //                break;
-        //    //            case TipoSalidaMenor.Incumplimiento:
-        //    //                this.rdbIncumplimiento.IsChecked = true;
-        //    //                break;
-        //    //            case TipoSalidaMenor.Transferencia:
-        //    //                this.rdbTransferenciaSalida.IsChecked = true;
-        //    //                break;
-        //    //        }
-        //    //        this.txtAutorizado.Text = corresponsabilidadmenor.AutorizadoPor;
-        //    //        this.txtAutorizado.IsEnabled = true;
-        //    //        this.txtCargo.Text = corresponsabilidadmenor.CargoAutorizador;
-        //    //        this.txtCargo.IsEnabled = true;
-        //    //    }
-        //    //}
-        //    //else
-        //    //{
-        //    //    IdSeleccionado = 0;
-        //    //    this.txtCodigoFormulario.IsEnabled = true;
-        //    //    this.dtpFechaInscripcion.IsEnabled = true;
-        //    //    this.rdbNueva.IsEnabled = true;
-        //    //    this.rdbTransferencia.IsEnabled = true;
-        //    //    this.grdControl.ItemsSource = null;
-        //    //}
-        //}
-
-        //void RecuperarMenor()
-        //{
-        //    ModeloMenor modelomenor = new ModeloMenor();
-        //    Menor menor = new Menor();
-        //    menor = modelomenor.Recuperar(IdMenor);
-        //    lblNombresMenor.Content = menor.Nombres + " " + menor.PrimerApellido + " " + menor.SegundoApellido;
-        //    lblFechaNacimientoMenor.Content = string.Format("{0:dd/MM/yyyy}", menor.FechaNacimiento);
-        //}
-
-        //private void cmdSeleccionarMadre_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmLista formularioListaMadres = new frmLista();
-
-        //    formularioListaMadres.NuevoRegistro += formularioListaMadres_NuevoRegistro;
-        //    formularioListaMadres.DetallesRegistro += formularioListaMadres_DetallesRegistro;
-        //    formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
-        //    formularioListaMadres.SeleccionarRegistro += formularioListaMadres_SeleccionarRegistro;
-
-        //    ModeloMadre modelomadre = new ModeloMadre();
-
-        //    formularioListaMadres.proveedorDatos = modelomadre;
-        //    formularioListaMadres.titulo = "Madres";
-        //    formularioListaMadres.ShowDialog();
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMadres_NuevoRegistro(object sender, EventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMadre objMadreWindow = new frmMadre();
-        //    objMadreWindow.TipoAccion = TipoAccion.Nuevo;
-        //    objMadreWindow.IdSeleccionado = 0;
-        //    objMadreWindow.Owner = this;
-        //    objMadreWindow.ShowDialog();
-        //    objMadreWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMadres_DetallesRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMadre objMadreWindow = new frmMadre();
-        //    objMadreWindow.IdSeleccionado = fe.id;
-        //    objMadreWindow.TipoAccion = TipoAccion.Detalle;
-        //    objMadreWindow.Owner = this;
-        //    objMadreWindow.ShowDialog();
-        //    objMadreWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMadres_ModificarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmMadre objMadreWindow = new frmMadre();
-        //    objMadreWindow.IdSeleccionado = fe.id;
-        //    objMadreWindow.TipoAccion = TipoAccion.Edicion;
-        //    objMadreWindow.Owner = this;
-        //    objMadreWindow.ShowDialog();
-        //    objMadreWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaMadres_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    IdMadre = fe.id;
-        //    RecuperarMadre();
-        //}
-
-        //void RecuperarMadre()
-        //{
-        //    ModeloMadre modelomadre = new ModeloMadre();
-        //    Madre madre = new Madre();
-        //    madre = modelomadre.Recuperar(IdMadre);
-        //    lblNombreMadre.Content = madre.Nombres + " " + madre.PrimerApellido + " " + madre.SegundoApellido;
-        //    lblFechaNacimientoMadre.Content = string.Format("{0:dd/MM/yyyy}", madre.FechaNacimiento);
-        //}
-
-        //private void cmdDetallesMenor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmMenor objMenorWindow = new frmMenor();
-        //        objMenorWindow.IdSeleccionado = IdMenor;
-        //        objMenorWindow.TipoAccion = TipoAccion.Detalle;
-        //        objMenorWindow.Owner = this;
-        //        objMenorWindow.ShowDialog();
-        //        objMenorWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //    }
-        //}
-
-        //private void cmdModificarMenor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmMenor objMenorWindow = new frmMenor();
-        //        objMenorWindow.IdSeleccionado = IdMenor;
-        //        objMenorWindow.TipoAccion = TipoAccion.Edicion;
-        //        objMenorWindow.Owner = this;
-        //        objMenorWindow.ShowDialog();
-        //        objMenorWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //        RecuperarMenor();
-        //    }
-        //}
-
-        //private void cmdSeleccionarTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmLista formularioListaTutores = new frmLista();
-
-        //    formularioListaTutores.NuevoRegistro += formularioListaTutores_NuevoRegistro;
-        //    formularioListaTutores.DetallesRegistro += formularioListaTutores_DetallesRegistro;
-        //    formularioListaTutores.ModificarRegistro += formularioListaTutores_ModificarRegistro;
-        //    formularioListaTutores.SeleccionarRegistro += formularioListaTutores_SeleccionarRegistro;
-
-        //    ModeloTutor modelotutor = new ModeloTutor();
-
-        //    formularioListaTutores.proveedorDatos = modelotutor;
-        //    formularioListaTutores.titulo = "Tutores";
-        //    formularioListaTutores.ShowDialog();
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaTutores_NuevoRegistro(object sender, EventArgs e)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmTutor objTutorWindow = new frmTutor();
-        //    objTutorWindow.TipoAccion = TipoAccion.Nuevo;
-        //    objTutorWindow.IdSeleccionado = 0;
-        //    objTutorWindow.Owner = this;
-        //    objTutorWindow.ShowDialog();
-        //    objTutorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaTutores_DetallesRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmTutor objTutorWindow = new frmTutor();
-        //    objTutorWindow.IdSeleccionado = fe.id;
-        //    objTutorWindow.TipoAccion = TipoAccion.Detalle;
-        //    objTutorWindow.Owner = this;
-        //    objTutorWindow.ShowDialog();
-        //    objTutorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaTutores_ModificarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    this.Cursor = Cursors.Wait;
-        //    frmTutor objTutorWindow = new frmTutor();
-        //    objTutorWindow.IdSeleccionado = fe.id;
-        //    objTutorWindow.TipoAccion = TipoAccion.Edicion;
-        //    objTutorWindow.Owner = this;
-        //    objTutorWindow.ShowDialog();
-        //    objTutorWindow = null;
-        //    this.Cursor = Cursors.Arrow;
-        //}
-
-        //void formularioListaTutores_SeleccionarRegistro(object sender, IdentidadEventArgs fe)
-        //{
-        //    IdTutor = fe.id;
-        //    RecuperarTutor();
-        //}
-
-        //void RecuperarTutor()
-        //{
-        //    ModeloTutor modelotutor = new ModeloTutor();
-        //    Tutor tutor = new Tutor();
-        //    tutor = modelotutor.Recuperar(IdTutor);
-        //    lblNombreTutor.Content = tutor.Nombres + " " + tutor.PrimerApellido + " " + tutor.SegundoApellido;
-        //    lblFechaNacimientoTutor.Content = string.Format("{0:dd/MM/yyyy}", tutor.FechaNacimiento);
-        //}
-
-        //private void cmdDetallesTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdTutor > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmTutor objTutorWindow = new frmTutor();
-        //        objTutorWindow.IdSeleccionado = IdTutor;
-        //        objTutorWindow.TipoAccion = TipoAccion.Detalle;
-        //        objTutorWindow.Owner = this;
-        //        objTutorWindow.ShowDialog();
-        //        objTutorWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //    }
-        //}
-
-        //private void cmdModificarTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdTutor > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmTutor objTutorWindow = new frmTutor();
-        //        objTutorWindow.IdSeleccionado = IdTutor;
-        //        objTutorWindow.TipoAccion = TipoAccion.Edicion;
-        //        objTutorWindow.Owner = this;
-        //        objTutorWindow.ShowDialog();
-        //        objTutorWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //        RecuperarTutor();
-        //    }
-        //}
-
-        //private void cmdDetallesMadre_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMadre > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmMadre objMadreWindow = new frmMadre();
-        //        objMadreWindow.IdSeleccionado = IdMadre;
-        //        objMadreWindow.TipoAccion = TipoAccion.Detalle;
-        //        objMadreWindow.Owner = this;
-        //        objMadreWindow.ShowDialog();
-        //        objMadreWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //    }
-        //}
-
-        //private void cmdModificarMadre_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMadre > 0)
-        //    {
-        //        this.Cursor = Cursors.Wait;
-        //        frmMadre objMadreWindow = new frmMadre();
-        //        objMadreWindow.IdSeleccionado = IdMadre;
-        //        objMadreWindow.TipoAccion = TipoAccion.Edicion;
-        //        objMadreWindow.Owner = this;
-        //        objMadreWindow.ShowDialog();
-        //        objMadreWindow = null;
-        //        this.Cursor = Cursors.Arrow;
-        //        RecuperarMadre();
-        //    }
-        //}
+                if (corresponsabilidadmenor.IdTutor.HasValue)
+                {
+                    if (corresponsabilidadmenor.IdTutor.Value > 0)
+                        cboTutor.SelectedValue = corresponsabilidadmenor.IdTutor.Value;
+                    if (corresponsabilidadmenor.IdTipoParentesco.HasValue)
+                        cboTipoParentesco.SelectedValue = corresponsabilidadmenor.IdTipoParentesco.Value;
+                }
+                this.rdbNueva.IsEnabled = false;
+                this.rdbTransferencia.IsEnabled = false;
+                if (corresponsabilidadmenor.TipoInscripcionMenor == TipoInscripcion.Nueva)
+                    this.rdbNueva.IsChecked = true;
+                else if (corresponsabilidadmenor.TipoInscripcionMenor == TipoInscripcion.Transferencia)
+                    this.rdbTransferencia.IsChecked = true;
+                this.txtCodigoFormulario.Text = corresponsabilidadmenor.CodigoFormulario;
+                this.txtCodigoFormulario.IsEnabled = false;
+                this.dtpFechaInscripcion.SelectedDate = corresponsabilidadmenor.FechaInscripcion;
+                this.dtpFechaInscripcion.IsEnabled = false;
+                RecuperarControlMenor();
+                this.chkSalida.IsEnabled = true;
+                if (corresponsabilidadmenor.TipoSalidaMenor > 0)
+                {
+                    this.chkSalida.IsChecked = true;
+                    this.dtpFechaSalida.SelectedDate = corresponsabilidadmenor.FechaSalidaPrograma;
+                    this.dtpFechaSalida.IsEnabled = true;
+                    this.rdbCumplimiento.IsEnabled = true;
+                    this.rdbFallecimiento.IsEnabled = true;
+                    this.rdbIncumplimiento.IsEnabled = true;
+                    this.rdbTransferenciaSalida.IsEnabled = true;
+                    switch (corresponsabilidadmenor.TipoSalidaMenor)
+                    {
+                        case TipoSalidaMenor.Cumplimiento:
+                            this.rdbCumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMenor.Fallecimiento:
+                            this.rdbFallecimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMenor.Incumplimiento:
+                            this.rdbIncumplimiento.IsChecked = true;
+                            break;
+                        case TipoSalidaMenor.Transferencia:
+                            this.rdbTransferenciaSalida.IsChecked = true;
+                            break;
+                    }
+                    this.txtAutorizado.Text = corresponsabilidadmenor.AutorizadoPor;
+                    this.txtAutorizado.IsEnabled = true;
+                    this.txtCargo.Text = corresponsabilidadmenor.CargoAutorizador;
+                    this.txtCargo.IsEnabled = true;
+                }
+            }
+        }
 
         private void cmdGuardar_Click(object sender, RoutedEventArgs e)
         {
-            //    ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
-            //    CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
+            ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
+            CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
 
-            //    bool ok = false;
+            bool ok = false;
 
-            //    if (!(IdMenor > 0))
-            //    {
-            //        MessageBox.Show("Se requiere especificar menor.", "Error");
-            //        ok = true;
-            //    }
-            //    else if ((!(IdMadre > 0)) && (!(IdTutor > 0)))
-            //    {
-            //        MessageBox.Show("Se requiere especificar madre o tutor del menor.", "Error");
-            //        ok = true;
-            //    }
+            if ((Convert.ToInt64(cboMadre.SelectedIndex) < 0) && (Convert.ToInt64(cboTutor.SelectedIndex) < 0))
+            {
+                MessageBox.Show("Se requiere especificar madre y/o tutor para el menor.", "Error");
+                ok = true;
+            }
 
-            //    if (ok == false)
-            //    {
-            //        if (this.chkMadre.IsChecked == true)
-            //        {
-            //            if (!(IdMadre > 0))
-            //            {
-            //                MessageBox.Show("Se requiere especificar madre.", "Error");
-            //                ok = true;
-            //            }
-            //        }
-            //    }
+            if (ok == false)
+                {
+                    if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                    {
+                        if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
+                        {
+                            MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
+                            ok = true;
+                        }
+                    }
+                }
 
-            //    if (ok == false)
-            //    {
-            //        if (this.chkTutor.IsChecked == true)
-            //        {
-            //            if (!(IdTutor > 0))
-            //            {
-            //                MessageBox.Show("Se requiere especificar tutor.", "Error");
-            //                ok = true;
-            //            }
-            //            else if (!(Convert.ToInt32(cboTipoParentesco.SelectedValue) > 0))
-            //            {
-            //                MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-            //                ok = true;
-            //            }
-            //        }
-            //    }
+                if (ok == false)
+                {
+                    if (!(txtCodigoFormulario.Text.Length > 0))
+                    {
+                        MessageBox.Show("Se requiere especificar número de formulario.", "Error");
+                        ok = true;
+                    }
+                }
 
-            //    if (ok == false)
-            //    {
-            //        if (!(txtCodigoFormulario.Text.Length > 0))
-            //        {
-            //            MessageBox.Show("Se requiere especificar número de formulario.", "Error");
-            //            ok = true;
-            //        }
-            //    }
+                if (ok == false)
+                {
+                    if (IdCorresponsabilidadMenor == 0)
+                    {
+                        corresponsabilidadmenor.IdEstablecimientoSalud = 1;
+                        if (rdbNueva.IsChecked == true)
+                            corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Nueva;
+                        else if (rdbTransferencia.IsChecked == true)
+                            corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Transferencia;
 
-            //    if (ok == false)
-            //    {
-            //        if (IdSeleccionado == 0)
-            //        {
-            //            corresponsabilidadmenor.IdEstablecimientoSalud = 1;
-            //            if (rdbNueva.IsChecked == true)
-            //                corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Nueva;
-            //            else if (rdbTransferencia.IsChecked == true)
-            //                corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Transferencia;
+                        corresponsabilidadmenor.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
+                        corresponsabilidadmenor.IdMenor = IdSeleccionado;
 
-            //            corresponsabilidadmenor.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
-            //            corresponsabilidadmenor.IdMenor = IdMenor;
-            //            corresponsabilidadmenor.IdMadre = IdMadre;
-            //            corresponsabilidadmenor.IdTutor = IdMadre;
-            //            corresponsabilidadmenor.CodigoFormulario = txtCodigoFormulario.Text;
-            //            corresponsabilidadmenor.FechaSalidaPrograma = dtpFechaSalida.SelectedDate.Value;
-            //            corresponsabilidadmenor.TipoSalidaMenor = 0;
-            //            corresponsabilidadmenor.Observaciones = "";
-            //            corresponsabilidadmenor.AutorizadoPor = txtAutorizado.Text;
-            //            corresponsabilidadmenor.CargoAutorizador = txtCargo.Text;
+                        if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
+                            corresponsabilidadmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
 
-            //            modelocorresponsabilidadmenor.Crear(corresponsabilidadmenor);
-            //            IdSeleccionado = corresponsabilidadmenor.Id;
+                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                        {
+                            corresponsabilidadmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
+                            corresponsabilidadmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                        }
 
-            //            ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
-            //            DateTime fechitaControles;
+                        corresponsabilidadmenor.CodigoFormulario = txtCodigoFormulario.Text;
+                        corresponsabilidadmenor.FechaSalidaPrograma = dtpFechaSalida.SelectedDate.Value;
+                        corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.EnProceso;
+                        corresponsabilidadmenor.Observaciones = "";
+                        corresponsabilidadmenor.AutorizadoPor = txtAutorizado.Text;
+                        corresponsabilidadmenor.CargoAutorizador = txtCargo.Text;
 
-            //            fechitaControles = Convert.ToDateTime(lblFechaNacimientoMenor.Content);
-            //            fechitaControles = fechitaControles.AddMonths(-1);
+                        modelocorresponsabilidadmenor.Crear(corresponsabilidadmenor);
+                        IdCorresponsabilidadMenor = corresponsabilidadmenor.Id;
 
-            //            for (int i = 0; i < CantidadDeControles; i++)
-            //            {
-            //                fechitaControles = fechitaControles.AddMonths(2);
+                        ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
+                        DateTime fechitaControles;
 
-            //                ControlMenor controlmenor = new ControlMenor();
-            //                controlmenor.IdCorresponsabilidadMenor = IdSeleccionado;
-            //                controlmenor.IdMedico = 1;
-            //                controlmenor.IdMadre = IdMadre;
-            //                controlmenor.IdTutor = IdTutor;
-            //                controlmenor.FechaProgramada = fechitaControles;
-            //                controlmenor.FechaControl = DateTime.Now;
-            //                controlmenor.TallaCm = 0;
-            //                controlmenor.PesoKg = 0;
-            //                controlmenor.NumeroControl = i + 1;
-            //                controlmenor.Observaciones = "";
-            //                controlmenor.EstadoPago = TipoEstadoPago.NoPagado;
-            //                if (IdTutor > 0)
-            //                    controlmenor.TipoBeneficiario = TipoBeneficiario.Tutor;
-            //                else
-            //                    controlmenor.TipoBeneficiario = TipoBeneficiario.Madre;
-            //                modelocontrolmenor.Crear(controlmenor);
-            //            }
-            //            this.txtCodigoFormulario.IsEnabled = false;
-            //            this.dtpFechaInscripcion.IsEnabled = false;
-            //            this.rdbNueva.IsEnabled = false;
-            //            this.rdbTransferencia.IsEnabled = false;
-            //            RecuperarControlMenor();
-            //        }
-            //        else
-            //        {
-            //            corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdSeleccionado);
+                        fechitaControles = Convert.ToDateTime(lblFechaNacimientoMenor.Content);
+                        fechitaControles = fechitaControles.AddMonths(-1);
 
-            //            if (this.chkMadre.IsChecked == true)
-            //                corresponsabilidadmenor.IdMadre = IdMadre;
-            //            else
-            //                corresponsabilidadmenor.IdMadre = 0; //rrsc
+                        for (int i = 0; i < CantidadDeControles; i++)
+                        {
+                            fechitaControles = fechitaControles.AddMonths(2);
 
-            //            if (this.chkTutor.IsChecked == true)
-            //            {
-            //                corresponsabilidadmenor.IdTutor = IdTutor;
-            //                corresponsabilidadmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
-            //            }
-            //            else
-            //            {
-            //                corresponsabilidadmenor.IdTutor = 0; //rrsc
-            //                corresponsabilidadmenor.IdTipoParentesco = 0; //rrsc
-            //            }
+                            ControlMenor controlmenor = new ControlMenor();
+                            controlmenor.IdCorresponsabilidadMenor = IdCorresponsabilidadMenor;
+                            controlmenor.IdEstablecimientoSalud = 1;
+                            controlmenor.IdMenor = IdSeleccionado;
+                            controlmenor.IdMedico = 1;
 
-            //            if (this.chkSalida.IsChecked == true)
-            //            {
-            //                corresponsabilidadmenor.FechaSalidaPrograma = this.dtpFechaSalida.SelectedDate.Value;
-            //                if (this.rdbCumplimiento.IsChecked == true)
-            //                    corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Cumplimiento;
-            //                else if (this.rdbFallecimiento.IsChecked == true)
-            //                    corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Fallecimiento;
-            //                else if (this.rdbIncumplimiento.IsChecked == true)
-            //                    corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Incumplimiento;
-            //                else if (this.rdbTransferenciaSalida.IsChecked == true)
-            //                    corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Transferencia;
-            //                corresponsabilidadmenor.AutorizadoPor = this.txtAutorizado.Text;
-            //                corresponsabilidadmenor.CargoAutorizador = this.txtCargo.Text;
-            //            }
-            //            else
-            //            {
-            //                corresponsabilidadmenor.FechaSalidaPrograma = DateTime.Now;
-            //                corresponsabilidadmenor.TipoSalidaMenor = 0;
-            //                corresponsabilidadmenor.AutorizadoPor = "";
-            //                corresponsabilidadmenor.CargoAutorizador = "";
-            //            }
+                            if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
+                                controlmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
 
-            //            modelocorresponsabilidadmenor.Editar(IdSeleccionado, corresponsabilidadmenor);
-            //        }
-            //    }
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                            {
+                                controlmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
+                                controlmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                            }
+
+                            controlmenor.FechaProgramada = fechitaControles;
+                            controlmenor.FechaControl = DateTime.Now;
+                            controlmenor.TallaCm = 0;
+                            controlmenor.PesoKg = 0;
+                            controlmenor.NumeroControl = i + 1;
+                            controlmenor.Observaciones = "";
+                            controlmenor.EstadoPago = TipoEstadoPago.NoPagado;
+                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                                controlmenor.TipoBeneficiario = TipoBeneficiario.Tutor;
+                            else
+                                controlmenor.TipoBeneficiario = TipoBeneficiario.Madre;
+                            modelocontrolmenor.Crear(controlmenor);
+                        }
+                        this.txtCodigoFormulario.IsEnabled = false;
+                        this.dtpFechaInscripcion.IsEnabled = false;
+                        this.rdbNueva.IsEnabled = false;
+                        this.rdbTransferencia.IsEnabled = false;
+                        RecuperarControlMenor();
+                    }
+                    else
+                    {
+                        corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdCorresponsabilidadMenor);
+
+                        if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
+                            corresponsabilidadmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
+
+                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                        {
+                            corresponsabilidadmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
+                            corresponsabilidadmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                        }
+
+                        if (this.chkSalida.IsChecked == true)
+                        {
+                            corresponsabilidadmenor.FechaSalidaPrograma = this.dtpFechaSalida.SelectedDate.Value;
+                            if (this.rdbCumplimiento.IsChecked == true)
+                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Cumplimiento;
+                            else if (this.rdbFallecimiento.IsChecked == true)
+                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Fallecimiento;
+                            else if (this.rdbIncumplimiento.IsChecked == true)
+                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Incumplimiento;
+                            else if (this.rdbTransferenciaSalida.IsChecked == true)
+                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Transferencia;
+                            corresponsabilidadmenor.AutorizadoPor = this.txtAutorizado.Text;
+                            corresponsabilidadmenor.CargoAutorizador = this.txtCargo.Text;
+                        }
+                        else
+                        {
+                            corresponsabilidadmenor.FechaSalidaPrograma = DateTime.Now;
+                            corresponsabilidadmenor.TipoSalidaMenor = 0;
+                            corresponsabilidadmenor.AutorizadoPor = "";
+                            corresponsabilidadmenor.CargoAutorizador = "";
+                        }
+
+                        modelocorresponsabilidadmenor.Editar(IdCorresponsabilidadMenor, corresponsabilidadmenor);
+                    }
+                }
         }
 
-        //void RecuperarControlMenor()
-        //{
-        //    ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
-        //    this.grdControl.ItemsSource = modelocontrolmenor.ListarControlesDeCorresponsabilidadDeMenor(IdSeleccionado);
-        //}
+        void RecuperarControlMenor()
+        {
+            ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
+            this.grdControl.ItemsSource = modelocontrolmenor.ListarControlesDeCorresponsabilidadDeMenor(IdCorresponsabilidadMenor);
+        }
+
+        private void VerControlMenor(long IdControl, TipoAccion TipoAccion)
+        {
+            this.Cursor = Cursors.Wait;
+            frmControl objControlWindow = new frmControl();
+            objControlWindow.IdSeleccionado = IdControl;
+            objControlWindow.IdMadre = IdSeleccionado;
+            if (Convert.ToInt64(cboMadre.SelectedValue) > 0)
+                objControlWindow.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
+            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+            {
+                objControlWindow.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
+                objControlWindow.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue);
+            }
+            objControlWindow.TipoAccion = TipoAccion;
+            objControlWindow.TipoControl = TipoControl.Menor;
+            objControlWindow.Owner = this;
+            objControlWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            if ((TipoAccion == TipoAccion.Edicion) && (objControlWindow.Resultado == true))
+                RecuperarControlMenor();
+            objControlWindow = null;
+        }
 
         private void cmdEditarControl_Click(object sender, RoutedEventArgs e)
         {
-            //    Button Img = (Button)sender;
-            //    if (Img.Tag != null)
-            //    {
-            //        Int64 Id = (Int64)Img.Tag;
+            bool ok = false;
 
-            //        if (Id > 0)
-            //        {
-            //            this.Cursor = Cursors.Wait;
-            //            frmControl objControlWindow = new frmControl();
-            //            objControlWindow.IdSeleccionado = Id;
-            //            objControlWindow.IdMenor = IdMenor;
-            //            objControlWindow.IdMadre = IdMadre;
-            //            objControlWindow.IdTutor = IdTutor;
-            //            objControlWindow.TipoAccion = TipoAccion.Edicion;
-            //            objControlWindow.TipoControl = TipoControl.Menor;
-            //            objControlWindow.Owner = this;
-            //            objControlWindow.ShowDialog();
-            //            if (objControlWindow.Resultado == true)
-            //                RecuperarControlMenor();
-            //            objControlWindow = null;
-            //            this.Cursor = Cursors.Arrow;
-            //        }
-            //    }
+            if ((Convert.ToInt64(cboMadre.SelectedIndex) < 0) && (Convert.ToInt64(cboTutor.SelectedIndex) < 0))
+            {
+                MessageBox.Show("Se requiere especificar madre y/o tutor para el menor.", "Error");
+                ok = true;
+            }
+            if (ok == false)
+            {
+                if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                {
+                    if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
+                    {
+                        MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
+                        ok = true;
+                    }
+                }
+            }
+
+            if (ok == false)
+            {
+                Button Img = (Button)sender;
+                if (Img.Tag != null)
+                {
+                    Int64 Id = (Int64)Img.Tag;
+
+                    if (Id > 0)
+                        VerControlMenor(Id, TipoAccion.Edicion);
+                }
+            }
         }
 
         private void cmdDetalleControl_Click(object sender, RoutedEventArgs e)
         {
-            //    Button Img = (Button)sender;
-            //    if (Img.Tag != null)
-            //    {
-            //        Int64 Id = (Int64)Img.Tag;
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
+            {
+                Int64 Id = (Int64)Img.Tag;
 
-            //        if (Id > 0)
-            //        {
-            //            this.Cursor = Cursors.Wait;
-            //            frmControl objControlWindow = new frmControl();
-            //            objControlWindow.IdSeleccionado = Id;
-            //            objControlWindow.IdMenor = IdMenor;
-            //            objControlWindow.IdMadre = IdMadre;
-            //            objControlWindow.IdTutor = IdTutor;
-            //            objControlWindow.TipoAccion = TipoAccion.Detalle;
-            //            objControlWindow.TipoControl = TipoControl.Menor;
-            //            objControlWindow.Owner = this;
-            //            objControlWindow.ShowDialog();
-            //            objControlWindow = null;
-            //            this.Cursor = Cursors.Arrow;
-            //        }
-            //    }
+                if (Id > 0)
+                    VerControlMenor(Id, TipoAccion.Detalle);
+            }
         }
 
         private void chkSalida_Checked(object sender, RoutedEventArgs e)
@@ -806,56 +470,6 @@ namespace Bja.Registro
             this.txtAutorizado.Text = "";
             this.txtCargo.Text = "";
         }
-
-        //private void chkMadre_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.cmdSeleccionarMadre.IsEnabled = true;
-        //        this.cmdDetallesMadre.IsEnabled = true;
-        //        this.cmdModificarMadre.IsEnabled = true;
-        //    }
-
-        //}
-
-        //private void chkMadre_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.cmdSeleccionarMadre.IsEnabled = false;
-        //        this.cmdDetallesMadre.IsEnabled = false;
-        //        this.cmdModificarMadre.IsEnabled = false;
-        //        IdMadre = 0;
-        //        this.lblNombreMadre.Content = "";
-        //        this.lblFechaNacimientoMadre.Content = "";
-        //    }
-        //}
-
-        //private void chkTutor_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.cboTipoParentesco.IsEnabled = true;
-        //        this.cmdSeleccionarTutor.IsEnabled = true;
-        //        this.cmdDetallesTutor.IsEnabled = true;
-        //        this.cmdModificarTutor.IsEnabled = true;
-        //    }
-        //}
-
-        //private void chkTutor_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    if (IdMenor > 0)
-        //    {
-        //        this.cboTipoParentesco.IsEnabled = false;
-        //        this.cmdSeleccionarTutor.IsEnabled = false;
-        //        this.cmdDetallesTutor.IsEnabled = false;
-        //        this.cmdModificarTutor.IsEnabled = false;
-        //        IdTutor = 0;
-        //        this.lblNombreTutor.Content = "";
-        //        this.lblFechaNacimientoTutor.Content = "";
-        //        this.cboTipoParentesco.SelectedIndex = -1;
-        //    }
-        //}
 
     }
 }

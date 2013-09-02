@@ -4,7 +4,7 @@
         Title="Corresponsabilidad de Menor" ShowInTaskbar="False" Height="675" Width="950" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Name="CorresponsabilidadMenor">
         <Rectangle x:Name="recMenor" HorizontalAlignment="Left" Height="85" Margin="281,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="313"/>
-        <Rectangle x:Name="recSalida" HorizontalAlignment="Left" Height="108" Margin="15,510,0,0" Stroke="Black" VerticalAlignment="Top" Width="701"/>
+        <Rectangle x:Name="recSalida" HorizontalAlignment="Left" Height="108" Margin="15,510,0,0" Stroke="Black" VerticalAlignment="Top" Width="700"/>
         <Label x:Name="lblFormulario" Content="N° Formulario" Height="28" HorizontalAlignment="Left" Margin="223,126,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="txtCodigoFormulario" Height="23" HorizontalAlignment="Left" Margin="312,130,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblMenor" Content="Menor - Beneficiario (Niño / Niña)" Height="28" HorizontalAlignment="Left" Margin="281,19,0,0" VerticalAlignment="Top" Width="210" FontWeight="Bold" />
@@ -12,8 +12,8 @@
         <Label x:Name="lblNombresMenor" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="374,44,0,0" VerticalAlignment="Top" />
         <Label x:Name="lblNacimientoMenor" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="284,70,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblFechaNacimientoMenor" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="374,70,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblBeneficiario" Content="Controles del Beneficiario(a)" Height="28" HorizontalAlignment="Left" Margin="15,171,0,0" VerticalAlignment="Top" Width="175" FontWeight="Bold" />
-        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="301" Margin="20,204,0,0" VerticalAlignment="Top" Width="899">
+        <Label x:Name="lblBeneficiario" Content="Controles del Beneficiario(a)" Height="28" HorizontalAlignment="Left" Margin="15,166,0,0" VerticalAlignment="Top" Width="175" FontWeight="Bold" />
+        <DataGrid x:Name="grdControl" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="311" Margin="15,194,0,0" VerticalAlignment="Top" Width="904">
             <DataGrid.Columns>
                 <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Número" Binding="{Binding NumeroControl}" />
@@ -40,7 +40,7 @@
         </DataGrid>
         <Label x:Name="lblFechaInscripcion" Content="F. Inscripción" Height="28" HorizontalAlignment="Left" Margin="411,125,0,0" VerticalAlignment="Top" />
         <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="494,127,0,0" VerticalAlignment="Top" Width="100"/>
-        <CheckBox x:Name="chkSalida" Content="Salida del beneficiario(a) del programa" HorizontalAlignment="Left" Margin="30,519,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Checked="chkSalida_Checked" Unchecked="chkSalida_Unchecked"/>
+        <CheckBox x:Name="chkSalida" Content="Salida del beneficiario(a) del programa" HorizontalAlignment="Left" Margin="20,515,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Checked="chkSalida_Checked" Unchecked="chkSalida_Unchecked"/>
         <Label x:Name="lblFechaSalida" Content="Fecha:" Height="28" HorizontalAlignment="Left" Margin="32,539,0,0" VerticalAlignment="Top" Width="45" />
         <DatePicker x:Name="dtpFechaSalida" HorizontalAlignment="Left" Margin="82,543,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
         <Label x:Name="lblAutorizado" Content="Autorizado por:" Height="28" HorizontalAlignment="Left" Margin="32,579,0,0" VerticalAlignment="Top" Width="96" />
@@ -55,7 +55,7 @@
                 <RadioButton x:Name="rdbTransferencia" Margin="3,3,0,0" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="201,524,334,72">
+        <GroupBox x:Name="gbxSalida" Header="Causa" BorderBrush="Black" Margin="201,530,334,72">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,-3">
                 <RadioButton x:Name="rdbCumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cumplimiento" IsEnabled="False"/>
                 <RadioButton x:Name="rdbTransferenciaSalida" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Transferencia" IsEnabled="False"/>
@@ -77,7 +77,7 @@
         <ComboBox x:Name="cboTutor"  HorizontalAlignment="Left" Margin="679,125,0,0" VerticalAlignment="Top" Width="227"/>
         <Label x:Name="lblParentesco" Content="Parentesco" HorizontalAlignment="Left" Margin="606,148,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboTipoParentesco"  HorizontalAlignment="Left" Margin="679,153,0,0" VerticalAlignment="Top" Width="227"/>
-        <Label x:Name="lblMadre" Content="Tutor" HorizontalAlignment="Left" Margin="636,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblMadre" Content="Madre" HorizontalAlignment="Left" Margin="630,49,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboMadre"  HorizontalAlignment="Left" Margin="679,53,0,0" VerticalAlignment="Top" Width="227"/>
     </Grid>
 </Window>

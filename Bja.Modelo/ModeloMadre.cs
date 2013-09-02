@@ -156,25 +156,25 @@ namespace Bja.Modelo
           return madre;
       }
 
-      //public List<RegistroParaCombo> ListarTutoresDeUnaFamiliaParaCombo(long IdFamilia)
-      //{//ojo filtrar los no borrados
-      //    List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
+      public List<RegistroParaCombo> ListarMadresDeUnaFamiliaParaCombo(long IdFamilia)
+      {//ojo filtrar los no borrados
+          List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
 
-      //    tutor = (from t in context.Tutores
-      //             where t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
-      //             from gf in context.GruposFamiliares
-      //             where (gf.IdFamilia == IdFamilia) &&
-      //                   (gf.IdReferencial == t.Id) &&
-      //                   (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor) &&
-      //                   (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
-      //             select new RegistroParaCombo
-      //             {
-      //                 Id = t.Id,
-      //                 Descripcion = t.NombreCompleto
-      //             }).ToList();
+          tutor = (from m in context.Madres 
+                   where m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                   from gf in context.GruposFamiliares
+                   where (gf.IdFamilia == IdFamilia) &&
+                         (gf.IdReferencial == m.Id) &&
+                         (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) &&
+                         (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                   select new RegistroParaCombo
+                   {
+                       Id = m.Id,
+                       Descripcion = m.NombreCompleto
+                   }).ToList();
 
-      //    return tutor;
-      //}
+          return tutor;
+      }
 
       public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
       {
