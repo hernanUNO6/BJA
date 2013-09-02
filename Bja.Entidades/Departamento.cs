@@ -21,6 +21,6 @@ namespace Bja.Entidades
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
 
-        public virtual List<Provincia> Provincias { get; set; }
+        public List<Provincia> Provincias { get; set; }
     }
 }

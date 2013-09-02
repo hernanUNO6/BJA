@@ -41,6 +41,8 @@ namespace Bja.Entidades
         public int TotalBorradoMenores { get; set; }
 
         public List<Madre> NuevasMadres { get; set; }
+        public List<Madre> MadresModificadas { get; set; }
+
         public List<Tutor> NuevosTutores { get; set; }
         public List<Menor> NuevosMenores { get; set; }
         public List<ControlMadre> NuevosControlesMadre { get; set; }
