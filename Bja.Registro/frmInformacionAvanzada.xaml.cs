@@ -169,16 +169,16 @@ namespace Bja.Registro
 
         private void cmdDetalleCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
         {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(Id);
-                    VerCorresponsabilidadMadre(Id, corresponsabilidadmadre.IdMadre, TipoAccion.Detalle);
-                }
-            }
+            //Button Img = (Button)sender;
+            //if (Img.Tag != null)
+            //{
+            //    Int64 Id = (Int64)Img.Tag;
+            //    if (Id > 0)
+            //    {
+            //        corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(Id);
+            //        VerCorresponsabilidadMadre(Id, corresponsabilidadmadre.IdMadre, TipoAccion.Detalle);
+            //    }
+            //}
         }
 
         private void VerCorresponsabilidadMenor(long IdCorresponsabilidadMenor, long IdMenor, TipoAccion TipoAccion)
@@ -205,16 +205,16 @@ namespace Bja.Registro
 
         private void cmdDetalleCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
         {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                {
-                    corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(Id);
-                    VerCorresponsabilidadMenor(Id, corresponsabilidadmenor.IdMenor, TipoAccion.Detalle);
-                }
-            }
+            //Button Img = (Button)sender;
+            //if (Img.Tag != null)
+            //{
+            //    Int64 Id = (Int64)Img.Tag;
+            //    if (Id > 0)
+            //    {
+            //        corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(Id);
+            //        VerCorresponsabilidadMenor(Id, corresponsabilidadmenor.IdMenor, TipoAccion.Detalle);
+            //    }
+            //}
         }
 
         private void VerControlMadre(long IdControlMadre, long IdMadre, long IdTutor, TipoAccion TipoAccion)

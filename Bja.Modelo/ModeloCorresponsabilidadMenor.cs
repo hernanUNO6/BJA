@@ -102,7 +102,7 @@ namespace Bja.Modelo
             string s;
 
             Id = 0;
-
+            //Hay que mejorar este asunto
             var c = (from cn in context.CorresponsabilidadesMenor 
                      where cn.IdMenor == IdMenor &&
                             cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico

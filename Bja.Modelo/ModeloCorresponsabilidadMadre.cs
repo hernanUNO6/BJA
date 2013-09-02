@@ -94,7 +94,7 @@ namespace Bja.Modelo
           string s;
 
           Id = 0;
-          
+          //Hay que mejorar este asunto
           var c = (from cm in context.CorresponsabilidadesMadre
                                      where cm.IdMadre == IdMadre && 
                                             cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
