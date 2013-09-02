@@ -40,5 +40,6 @@ namespace Bja.Entidades
         public String CargoAutorizador { get; set; }
 
         public List<ControlMadre> ControlesMadre { get; set; }
+        public List<Envio> Envios { get; set; }
     }
 }

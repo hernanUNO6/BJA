@@ -37,7 +37,6 @@ namespace Bja.Entidades
         public String Observaciones { get; set; }
 
         public List<CorresponsabilidadMadre> CorresponsabilidadesMadre { get; set; }
-        public List<Envio> EnviosNuevaMadre { get; set; }
-        public List<Envio> EnviosMadreModificada { get; set; }
+        public List<Envio> Envios { get; set; }
     }
 }

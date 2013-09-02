@@ -22,31 +22,14 @@ namespace Bja.Entidades
         public Medico Medico { get; set; }
         public DateTime FechaEnvio { get; set; }
         public String CodigoVerificacion { get; set; } //md5, sha
-        public int TotalNuevasMadres { get; set; }
-        public int TotalNuevosTutores { get; set; }
-        public int TotalNuevosMenores { get; set; }
-        public int TotalNuevosControlMadre { get; set; }
-        public int TotalNuevosControlMenor { get; set; }
-        public int TotalNuevaCorresponsabilidadMenor { get; set; }
-        public int TotalNuevaCorresponsabilidadMadre { get; set; }
-        public int TotalModificacionMadres { get; set; }
-        public int TotalModificacionTutores { get; set; }
-        public int TotalModificacionMenores { get; set; }
-        public int TotalModificacionControlMenor { get; set; }
-        public int TotalModificacionControlMadre { get; set; }
-        public int TotalModificacionCorresponsabilidadMenor { get; set; }
-        public int TotalModificacionCorresponsabilidadMadre { get; set; }
-        public int TotalBorradoMadres { get; set; }
-        public int TotalBorradoTutores { get; set; }
-        public int TotalBorradoMenores { get; set; }
 
-        public List<Madre> NuevasMadres { get; set; }
-        public List<Madre> MadresModificadas { get; set; }
-
-        public List<Tutor> NuevosTutores { get; set; }
-        public List<Menor> NuevosMenores { get; set; }
-        public List<ControlMadre> NuevosControlesMadre { get; set; }
-        public List<ControlMenor> NuevosControlesMenor { get; set; }
-
+        //lista de registros con cambios
+        public List<Madre> Madres { get; set; }
+        public List<Tutor> Tutores { get; set; }
+        public List<Menor> Menores { get; set; }
+        public List<CorresponsabilidadMadre> CorresponsabilidadMadres { get; set; }
+        public List<ControlMadre> ControlMadres { get; set; }
+        public List<CorresponsabilidadMenor> CorresponsabilidadMenores { get; set; }
+        public List<ControlMenor> ControlMenores { get; set; }
     }
 }

@@ -223,5 +223,12 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
+        private void cmdEnvio_Click(object sender, RoutedEventArgs e)
+        {
+            //generar archivo de datos para envio
+            Transportador.generarArchivoEnvio("ArchivoEnvioDatos.xml");
+
+        }
+
     }
 }

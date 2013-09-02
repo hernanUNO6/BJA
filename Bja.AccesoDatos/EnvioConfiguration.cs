@@ -24,30 +24,16 @@ namespace Bja.AccesoDatos
             Property(c => c.IdMedico).IsRequired();
             Property(c => c.FechaEnvio).IsRequired();
             Property(c => c.CodigoVerificacion).IsRequired().HasMaxLength(128);
-            Property(c => c.TotalNuevasMadres).IsRequired();
-            Property(c => c.TotalNuevosTutores).IsRequired();
-            Property(c => c.TotalNuevosMenores).IsRequired();
-            Property(c => c.TotalNuevosControlMadre).IsRequired();
-            Property(c => c.TotalNuevosControlMenor).IsRequired();
-            Property(c => c.TotalNuevaCorresponsabilidadMadre).IsRequired();
-            Property(c => c.TotalNuevaCorresponsabilidadMenor).IsRequired();
-            Property(c => c.TotalModificacionMadres).IsRequired();
-            Property(c => c.TotalModificacionMenores).IsRequired();
-            Property(c => c.TotalModificacionTutores).IsRequired();
-            Property(c => c.TotalModificacionControlMadre).IsRequired();
-            Property(c => c.TotalModificacionControlMenor).IsRequired();
-            Property(c => c.TotalModificacionCorresponsabilidadMadre).IsRequired();
-            Property(c => c.TotalModificacionCorresponsabilidadMenor).IsRequired();
-            Property(c => c.TotalBorradoMadres).IsRequired();
-            Property(c => c.TotalBorradoTutores).IsRequired();
-            Property(c => c.TotalBorradoMenores).IsRequired();
 
             //relaciones
-            //HasRequired(c => c.CorresponsabilidadMadre).WithMany(cm => cm.ControlesMadre).HasForeignKey(c => c.IdCorresponsabilidadMadre);
-            //HasRequired(c => c.Medico).WithMany().HasForeignKey(c => c.IdMedico).WillCascadeOnDelete(false);
-            //HasRequired(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
-            //HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
-            //HasRequired(c => c.EstablecimientoSalud).WithMany().HasForeignKey(c => c.IdEstablecimientoSalud).WillCascadeOnDelete(false);
+            HasMany(e=> e.Madres).WithMany(m => m.Envios);
+            HasMany(e => e.Tutores).WithMany(m => m.Envios);
+            HasMany(e => e.Menores).WithMany(m => m.Envios);
+
+            HasMany(e => e.CorresponsabilidadMadres).WithMany(m => m.Envios);
+            HasMany(e => e.ControlMadres).WithMany(m => m.Envios);
+            HasMany(e => e.CorresponsabilidadMenores).WithMany(m => m.Envios);
+            HasMany(e => e.ControlMenores).WithMany(m => m.Envios);
         }
     }
 }
