@@ -126,9 +126,9 @@ namespace Bja.Registro
             this.dtpFechaInscripcion.SelectedDate = DateTime.Today;
             this.dtpFechaSalida.SelectedDate = DateTime.Today;
             this.rdbNueva.IsChecked = true;
-            this.cboMadre.IsEnabled = false;
-            this.cboTutor.IsEnabled = false;
-            this.cboTipoParentesco.IsEnabled = false;
+            //this.cboMadre.IsEnabled = false;
+            //this.cboTutor.IsEnabled = false;
+            //this.cboTipoParentesco.IsEnabled = false;
             this.chkSalida.IsChecked = false;
             this.chkSalida.IsEnabled = false;
             this.dtpFechaSalida.IsEnabled = false;

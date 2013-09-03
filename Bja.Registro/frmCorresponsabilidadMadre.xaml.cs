@@ -206,8 +206,8 @@ namespace Bja.Registro
             this.dtpFechaSalida.SelectedDate = DateTime.Today;
             this.rdbNueva.IsChecked = true;
             this.txtNumeroEmbarazo.Text = "0";
-            this.cboTutor.IsEnabled = false;
-            this.cboTipoParentesco.IsEnabled = false;
+            //this.cboTutor.IsEnabled = false;
+            //this.cboTipoParentesco.IsEnabled = false;
             this.chkSalida.IsChecked = false;
             this.chkSalida.IsEnabled = false;
             this.dtpFechaSalida.IsEnabled = false;
