@@ -1,12 +1,30 @@
 ﻿<Window x:Class="Bja.Registro.frmPrincipal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sistema del Bono Juana Azurduy de Padilla" Height="290" Width="250" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="Sistema del Bono Juana Azurduy de Padilla" Height="300" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid Name="Principal">
-        <Button x:Name="cmdCorresponsabilidadesDeMadres" Content="Corresponsabilidades de Madres" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" Width="202" Click="cmdCorresponsabilidadesDeMadres_Click"/>
-        <Button x:Name="cmdCorresponsabilidadesDeMenores" Content="Corresponsabilidades de Menores" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="202" Click="cmdCorresponsabilidadesDeMenores_Click"/>
-        <Button x:Name="cmdAvanzado" Content="Información Avanzado" HorizontalAlignment="Left" Margin="20,115,0,0" VerticalAlignment="Top" Width="202" Click="cmdAvanzado_Click"/>
-        <Button x:Name="cmdAdministracion" Content="Administración" HorizontalAlignment="Left" Margin="20,160,0,0" VerticalAlignment="Top" Width="202" Click="cmdAdministracion_Click"/>
-        <Button x:Name="cmdSalir" Content="Salir" HorizontalAlignment="Left" Margin="20,205,0,0" VerticalAlignment="Top" Width="202" Click="cmdSalir_Click"/>
+        <Menu HorizontalAlignment="Left" Margin="5,5,0,0" Height="25" VerticalAlignment="Top" Width="480">
+            <MenuItem Header="_Archivo" x:Name="menArchivo">
+                <MenuItem Header="Salir" x:Name="menSalir" Click="menSalir_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Familia" x:Name="menFamilia">
+                <MenuItem Header="Buscar" x:Name="menBusFam" Click="menBusFam_Click"/>
+                <MenuItem Header="Nueva" x:Name="menNueFam" Click="menNueFam_Click" />
+            </MenuItem>
+            <MenuItem Header="_Datos" x:Name="menDatos">
+                <MenuItem Header="De madre" x:Name="menBusMad" Click="menBusMad_Click" />
+                <MenuItem Header="De menor" x:Name="menBusMen" Click="menBusMen_Click" />
+                <MenuItem Header="De tutor" x:Name="menBusTut" Click="menBusTut_Click" />
+                <Separator/>
+                <MenuItem Header="Búsqueda avanzada" x:Name="menBusAva" Click="menBusAva_Click" />
+            </MenuItem>
+            <MenuItem Header="_Reportes" x:Name="mnuReporte">
+                <MenuItem Header="Reporte 1" x:Name="menRep01" />
+                <MenuItem Header="Reporte 2" x:Name="menRep02" />
+            </MenuItem>
+            <MenuItem Header="_Utiles" x:Name="menUtiles">
+                <MenuItem Header="Cambiar contraseña" x:Name="menCamCon" Click="menCamCon_Click"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

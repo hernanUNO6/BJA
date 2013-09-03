@@ -22,12 +22,11 @@ namespace Bja.Modelo
           madre.FechaRegistro = DateTime.Now;
           madre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
           madre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+          madre.DescripcionEstadoSincronizacion = "";
 
           context.Madres.Add(madre);
 
           context.SaveChanges();
-
-          
       }
 
       public void Editar(long Id, Madre madre)
@@ -49,7 +48,8 @@ namespace Bja.Modelo
           _madre.PrimerApellido = madre.PrimerApellido;
           _madre.SegundoApellido = madre.SegundoApellido;
           _madre.TercerApellido = madre.TercerApellido;
-          //_madre.IdTipoDocumentoIdentidad = madre.IdTipoDocumentoIdentidad;
+          _madre.DocumentoIdentidad = madre.DocumentoIdentidad;
+          _madre.TipoDocumentoIdentidad = madre.TipoDocumentoIdentidad;
           _madre.FechaNacimiento = madre.FechaNacimiento;
           _madre.IdDepartamento = madre.IdDepartamento;
           _madre.IdProvincia = madre.IdProvincia;
@@ -59,8 +59,6 @@ namespace Bja.Modelo
           _madre.Observaciones = madre.Observaciones;
 
           context.SaveChanges();
-
-          
       }
 
       public void Eliminar(long Id)
@@ -90,21 +88,22 @@ namespace Bja.Modelo
           return madre;
       }
 
-      public List<Madre> Listar()
-      {
-          //ojo filtrar los no borrados
-          return context.Madres.ToList();
-      }
+      //public List<Madre> Listar()
+      //{
+      //    //ojo filtrar los no borrados
+      //    return context.Madres.ToList();
+      //}
 
       public List<Madre> ListarMadresPorCriterio(string Criterio)
       {//ojo filtrar los no borrados
           List<Madre> madre = new List<Madre>();
 
           madre = (from m in context.Madres
-                   where m.Nombres.Contains(Criterio) ||
-                   m.PrimerApellido.Contains(Criterio) ||
-                   m.SegundoApellido.Contains(Criterio) ||
-                   m.DocumentoIdentidad.Contains(Criterio)
+                   where (m.Nombres.Contains(Criterio) ||
+                         m.PrimerApellido.Contains(Criterio) ||
+                         m.SegundoApellido.Contains(Criterio) ||
+                         m.DocumentoIdentidad.Contains(Criterio)) && 
+                         (m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    orderby m.PrimerApellido, m.SegundoApellido, m.Nombres
                    select m).ToList<Madre>();
 
@@ -116,9 +115,11 @@ namespace Bja.Modelo
           List<Madre> madre = new List<Madre>();
 
           madre = (from cn in context.CorresponsabilidadesMenor
-                   where cn.IdMenor == IdMenor
+                   where (cn.IdMenor == IdMenor) && 
+                         (cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    from m in context.Madres
-                   where cn.IdMadre == m.Id
+                   where (m.Id == cn.IdMadre) && 
+                         (m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    select m).Distinct().ToList<Madre>();
 
           return madre;
@@ -129,12 +130,50 @@ namespace Bja.Modelo
           List<Madre> madre = new List<Madre>();
 
           madre = (from cm in context.CorresponsabilidadesMadre
-                   where cm.IdTutor == IdTutor
+                   where (cm.IdTutor == IdTutor) &&
+                         (cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    from m in context.Madres
-                   where cm.IdMadre == m.Id
+                   where (m.Id == cm.IdMadre) &&
+                         (m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    select m).Distinct().ToList<Madre>();
 
           return madre;
+      }
+
+      public List<Madre> ListarMadresDeUnaFamilia(long IdFamilia)
+      {//ojo filtrar los no borrados
+          List<Madre> madre = new List<Madre>();
+
+          madre = (from m in context.Madres 
+                   where m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                   from gf in context.GruposFamiliares
+                   where (gf.IdFamilia == IdFamilia) && 
+                         (gf.IdReferencial == m.Id) &&
+                         (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) && 
+                         (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                   select m).Distinct().ToList<Madre>();
+
+          return madre;
+      }
+
+      public List<RegistroParaCombo> ListarMadresDeUnaFamiliaParaCombo(long IdFamilia)
+      {//ojo filtrar los no borrados
+          List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
+
+          tutor = (from m in context.Madres 
+                   where m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                   from gf in context.GruposFamiliares
+                   where (gf.IdFamilia == IdFamilia) &&
+                         (gf.IdReferencial == m.Id) &&
+                         (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) &&
+                         (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                   select new RegistroParaCombo
+                   {
+                       Id = m.Id,
+                       Descripcion = m.NombreCompleto
+                   }).ToList();
+
+          return tutor;
       }
 
       public ResultadoPaginacion listaPaginada(long saltarRegistros = 0, long tamañoPagina = 20, string criterioBusqueda = "")
@@ -147,9 +186,10 @@ namespace Bja.Modelo
           Int64 totalRegistros = 0;
 
           var lista = (from m in context.Madres
-                           where m.Nombres.Contains(criterioBusqueda) || 
-                           m.PrimerApellido.Contains(criterioBusqueda) || 
-                           m.SegundoApellido.Contains(criterioBusqueda)
+                           where (m.Nombres.Contains(criterioBusqueda) || 
+                                 m.PrimerApellido.Contains(criterioBusqueda) || 
+                                 m.SegundoApellido.Contains(criterioBusqueda)) &&
+                                 (m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                            select m).ToList();
 
           //var lista = BuscarConveniosMantenimientoPaginada(ref totalRegistrosEncontrados, ref totalRegistros, saltarRegistros, tamañoPagina, criterioBusqueda);

@@ -19,6 +19,8 @@ namespace Bja.Modelo
           corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           corresponsabilidadmadre.FechaRegistro = DateTime.Now;
           corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+          corresponsabilidadmadre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+          corresponsabilidadmadre.DescripcionEstadoSincronizacion = "";
 
           context.CorresponsabilidadesMadre.Add(corresponsabilidadmadre);
 
@@ -36,16 +38,15 @@ namespace Bja.Modelo
           _corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
           _corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           _corresponsabilidadmadre.FechaRegistro = DateTime.Now;
-          _corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+          _corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+          _corresponsabilidadmadre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
           _corresponsabilidadmadre.IdEstablecimientoSalud = corresponsabilidadmadre.IdEstablecimientoSalud;
           _corresponsabilidadmadre.TipoInscripcionMadre = corresponsabilidadmadre.TipoInscripcionMadre;
           _corresponsabilidadmadre.FechaInscripcion = corresponsabilidadmadre.FechaInscripcion;
           _corresponsabilidadmadre.IdMadre = corresponsabilidadmadre.IdMadre;
-          _corresponsabilidadmadre.DireccionMadre = corresponsabilidadmadre.DireccionMadre;
           _corresponsabilidadmadre.IdTutor = corresponsabilidadmadre.IdTutor;
-          _corresponsabilidadmadre.DireccionTutor = corresponsabilidadmadre.DireccionTutor;
-          _corresponsabilidadmadre.TipoParentesco = corresponsabilidadmadre.TipoParentesco;
+          _corresponsabilidadmadre.IdTipoParentesco = corresponsabilidadmadre.IdTipoParentesco;
           _corresponsabilidadmadre.CodigoFormulario = corresponsabilidadmadre.CodigoFormulario;
           _corresponsabilidadmadre.FechaUltimaMenstruacion = corresponsabilidadmadre.FechaUltimaMenstruacion;
           _corresponsabilidadmadre.FechaUltimoParto = corresponsabilidadmadre.FechaUltimoParto;
@@ -87,16 +88,25 @@ namespace Bja.Modelo
           return corresponsabilidadmadre;
       }
 
-      public CorresponsabilidadMadre RecuperarElUltimoValido(long IdMadre)
+      public long RecuperarLaUltimaCorresponsabilidadValidaDeMadre(long IdMadre)
       {
-          CorresponsabilidadMadre corresponsabilidadmadre = null;
+          long Id;
+          string s;
 
-          corresponsabilidadmadre = (from cm in context.CorresponsabilidadesMadre.Take(1)
-                                     where cm.IdMadre == IdMadre
-                                     orderby cm.FechaInscripcion descending
-                                     select cm).FirstOrDefault();
+          Id = 0;
+          //Hay que mejorar este asunto
+          var c = (from cm in context.CorresponsabilidadesMadre
+                                     where cm.IdMadre == IdMadre && 
+                                            cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                                     orderby cm.FechaRegistro descending
+                                     select cm.Id).Take(1);
+          foreach (var g in c)
+          {
+              s = g.ToString();
+              Id = Convert.ToInt64(s);
+          }
 
-          return corresponsabilidadmadre;
+          return Id;
       }
 
       public List<CorresponsabilidadMadre> ListarCorresponsabilidadesDeMadre(long IdMadre)

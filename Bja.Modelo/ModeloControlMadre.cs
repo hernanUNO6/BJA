@@ -19,6 +19,8 @@ namespace Bja.Modelo
             controlmadre.FechaUltimaTransaccion = DateTime.Now;
             controlmadre.FechaRegistro = DateTime.Now;
             controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            controlmadre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            controlmadre.DescripcionEstadoSincronizacion = "";
 
             context.ControlesMadre.Add(controlmadre);
 
@@ -36,13 +38,14 @@ namespace Bja.Modelo
             _controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
             _controlmadre.FechaUltimaTransaccion = DateTime.Now;
             _controlmadre.FechaRegistro = DateTime.Now;
-            _controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            _controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            _controlmadre.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
             _controlmadre.IdCorresponsabilidadMadre = controlmadre.IdCorresponsabilidadMadre;
             _controlmadre.IdMedico = controlmadre.IdMedico;
             _controlmadre.IdMadre = controlmadre.IdMadre;
             _controlmadre.IdTutor = controlmadre.IdTutor;
-            _controlmadre.TipoParentesco = controlmadre.TipoParentesco;
+            _controlmadre.IdTipoParentesco = controlmadre.IdTipoParentesco;
             _controlmadre.FechaProgramada = controlmadre.FechaProgramada;
             _controlmadre.FechaControl = controlmadre.FechaControl;
             _controlmadre.TallaCm = controlmadre.TallaCm;

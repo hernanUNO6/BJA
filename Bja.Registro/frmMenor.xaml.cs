@@ -22,6 +22,7 @@ namespace Bja.Registro
     public partial class frmMenor : Window
     {
         public long IdSeleccionado { get; set; }
+        public long IdFamilia { get; set; }
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Menor _menor = new Menor();
@@ -55,10 +56,7 @@ namespace Bja.Registro
 
                 _menor = modelomenor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _menor.DocumentoIdentidad;
-                //cboTipoDocumentoIdentidad.SelectedValue = _menor.IdTipoDocumentoIdentidad;
-                cboDepartamento.SelectedValue = _menor.IdDepartamento;
-                cboProvincia.SelectedValue = _menor.IdProvincia;
-                cboMunicipio.SelectedValue = _menor.IdMunicipio;
+                cboTipoDocumentoIdentidad.SelectedValue = _menor.TipoDocumentoIdentidad;
                 txtOficialia.Text = _menor.Oficialia;
                 txtLibro.Text = _menor.Libro;
                 txtPartida.Text = _menor.Partida;
@@ -178,7 +176,7 @@ namespace Bja.Registro
                 ModeloMenor modelomenor = new ModeloMenor();
 
                 _menor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                //_menor.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad; //cboTipoDocumentoIdentidad.SelectedValue;
                 _menor.Oficialia = txtOficialia.Text;
                 _menor.Libro = txtLibro.Text;
                 _menor.Partida = txtPartida.Text;
@@ -203,7 +201,18 @@ namespace Bja.Registro
                 if (IdSeleccionado > 0)
                     modelomenor.Editar(IdSeleccionado, _menor);
                 else
+                {
+                    ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+
                     modelomenor.Crear(_menor);
+
+                    grupofamiliar.IdFamilia = IdFamilia;
+                    grupofamiliar.IdReferencial = _menor.Id;
+                    grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
+
+                    modelogrupofamiliar.Crear(grupofamiliar);
+                }
 
                 Resultado = true;
 

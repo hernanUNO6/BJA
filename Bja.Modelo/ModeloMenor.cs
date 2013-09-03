@@ -21,6 +21,8 @@ namespace Bja.Modelo
       menor.FechaUltimaTransaccion = DateTime.Now;
       menor.FechaRegistro = DateTime.Now;
       menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+      menor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+      menor.DescripcionEstadoSincronizacion = "";
 
       context.Menores.Add(menor);
 
@@ -38,13 +40,14 @@ namespace Bja.Modelo
       _menor.IdSesion = SessionManager.getCurrentSession().Id;
       _menor.FechaUltimaTransaccion = DateTime.Now;
       _menor.FechaRegistro = DateTime.Now;
-      _menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+      _menor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+      _menor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
       _menor.Nombres = menor.Nombres;
       _menor.PrimerApellido = menor.PrimerApellido;
       _menor.SegundoApellido = menor.SegundoApellido;
       _menor.DocumentoIdentidad = menor.DocumentoIdentidad;
-      //_menor.IdTipoDocumentoIdentidad = menor.IdTipoDocumentoIdentidad;
+      _menor.TipoDocumentoIdentidad = menor.TipoDocumentoIdentidad;
       _menor.Oficialia = menor.Oficialia;
       _menor.Libro = menor.Libro;
       _menor.Partida = menor.Partida;
@@ -88,19 +91,21 @@ namespace Bja.Modelo
         return menor;
     }
 
-    public List<Menor> Listar()
-    {
-        return context.Menores.ToList();
-    }
+    //public List<Menor> Listar()
+    //{
+    //    return context.Menores.ToList();
+    //}
 
     public List<Menor> ListarHijosDeMadreATravesDeCorresponsabilidadDeMenor(long IdMadre)
     {
         List<Menor> menor = new List<Menor>();
 
         menor = (from cn in context.CorresponsabilidadesMenor
-                 where cn.IdMadre == IdMadre
+                 where cn.IdMadre == IdMadre &&
+                       cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                  from n in context.Menores
-                 where cn.IdMenor == n.Id
+                 where n.Id == cn.IdMenor &&
+                       n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                  select n).Distinct().ToList<Menor>();
 
         return menor;
@@ -111,10 +116,11 @@ namespace Bja.Modelo
         List<Menor> menor = new List<Menor>();
 
         menor = (from n in context.Menores
-                 where n.Nombres.Contains(Criterio) ||
-                 n.PrimerApellido.Contains(Criterio) ||
-                 n.SegundoApellido.Contains(Criterio) ||
-                 n.DocumentoIdentidad.Contains(Criterio)
+                 where (n.Nombres.Contains(Criterio) ||
+                       n.PrimerApellido.Contains(Criterio) ||
+                       n.SegundoApellido.Contains(Criterio) ||
+                       n.DocumentoIdentidad.Contains(Criterio)) &&
+                       (n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  orderby n.PrimerApellido, n.SegundoApellido, n.Nombres
                  select n).ToList<Menor>();
 
@@ -126,9 +132,27 @@ namespace Bja.Modelo
         List<Menor> menor = new List<Menor>();
 
         menor = (from cn in context.CorresponsabilidadesMenor
-                 where cn.IdTutor == IdTutor
+                 where (cn.IdTutor == IdTutor) &&
+                       (cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  from n in context.Menores
-                 where cn.IdMenor == n.Id
+                 where (n.Id == cn.IdMenor) &&
+                       (n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                 select n).Distinct().ToList<Menor>();
+
+        return menor;
+    }
+
+    public List<Menor> ListarMenoresDeUnaFamilia(long IdFamilia)
+    {//ojo filtrar los no borrados
+        List<Menor> menor = new List<Menor>();
+
+        menor = (from n in context.Menores 
+                 where n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                 from gf in context.GruposFamiliares
+                 where (gf.IdFamilia == IdFamilia) &&
+                       (gf.IdReferencial == n.Id) &&
+                       (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Menor) &&
+                       (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  select n).Distinct().ToList<Menor>();
 
         return menor;
@@ -143,9 +167,10 @@ namespace Bja.Modelo
         Int64 totalRegistrosEncontrados = 0;
         Int64 totalRegistros = 0;
         var lista = (from n in context.Menores
-                     where n.Nombres.Contains(criterioBusqueda) ||
-                     n.PrimerApellido.Contains(criterioBusqueda) ||
-                     n.SegundoApellido.Contains(criterioBusqueda)
+                     where (n.Nombres.Contains(criterioBusqueda) ||
+                           n.PrimerApellido.Contains(criterioBusqueda) ||
+                           n.SegundoApellido.Contains(criterioBusqueda)) &&
+                           (n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                      select n).ToList();
         //var lista = BuscarConveniosMantenimientoPaginada(ref totalRegistrosEncontrados, ref totalRegistros, saltarRegistros, tamañoPagina, criterioBusqueda);
         //crear la lista de objetos de tipo RegistroGrid

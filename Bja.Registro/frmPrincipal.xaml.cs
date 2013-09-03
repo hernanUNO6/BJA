@@ -33,56 +33,192 @@ namespace Bja.Registro
             SessionManager.endSession();
         }
 
-        private void cmdSalir_Click(object sender, RoutedEventArgs e)
-        {
-            SessionManager.endSession();
-            this.Close();
-        }
-
-        private void cmdCorresponsabilidadesDeMadres_Click(object sender, RoutedEventArgs e)
+        private void menCamCon_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-
-            //Transportador.generarArchivoEnvio("envio.xml");
-
-            frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
-            objCorresponsabilidadMadreWindow.IdSeleccionado = 0;
-            objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion.Nuevo;
-            objCorresponsabilidadMadreWindow.Owner = this;
-            objCorresponsabilidadMadreWindow.ShowDialog();
-            objCorresponsabilidadMadreWindow = null;
+            frmPassword objPasswordWindow = new frmPassword();
+            objPasswordWindow.Owner = this;
+            objPasswordWindow.ShowDialog();
+            objPasswordWindow = null;
             this.Cursor = Cursors.Arrow;
         }
 
-        private void cmdCorresponsabilidadesDeMenores_Click(object sender, RoutedEventArgs e)
+        private void menBusFam_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
-            objCorresponsabilidadMenorWindow.IdSeleccionado = 0;
-            objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion.Nuevo;
-            objCorresponsabilidadMenorWindow.Owner = this;
-            objCorresponsabilidadMenorWindow.ShowDialog();
-            objCorresponsabilidadMenorWindow = null;
+            frmBuscar objBuscarWindow = new frmBuscar();
+            objBuscarWindow.Owner = this;
+            objBuscarWindow.ShowDialog();
+            objBuscarWindow = null;
             this.Cursor = Cursors.Arrow;
         }
 
-        private void cmdAdministracion_Click(object sender, RoutedEventArgs e)
+        private void menNueFam_Click(object sender, RoutedEventArgs e)
         {
+            bool ok;
+            long Id;
             this.Cursor = Cursors.Wait;
-            frmAdministracion objAdministracionWindow = new frmAdministracion();
-            objAdministracionWindow.Owner = this;
-            objAdministracionWindow.ShowDialog();
-            objAdministracionWindow = null;
+            frmFamilia objFamiliaWindow = new frmFamilia();
+            objFamiliaWindow.IdSeleccionado = 0;
+            objFamiliaWindow.TipoAccion = TipoAccion.Nuevo;
+            objFamiliaWindow.Owner = this;
+            objFamiliaWindow.ShowDialog();
+            ok = objFamiliaWindow.Resultado;
+            Id = objFamiliaWindow.Id;
+            objFamiliaWindow = null;
             this.Cursor = Cursors.Arrow;
+            if (ok == true)
+            {
+                this.Cursor = Cursors.Wait;
+                frmGrupoFamiliar objGrupoFamiliarWindow = new frmGrupoFamiliar();
+                objGrupoFamiliarWindow.IdSeleccionado = Id;
+                objGrupoFamiliarWindow.TipoAccion = TipoAccion.Nuevo;
+                objGrupoFamiliarWindow.Owner = this;
+                objGrupoFamiliarWindow.ShowDialog();
+                objGrupoFamiliarWindow = null;
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
-        private void cmdAvanzado_Click(object sender, RoutedEventArgs e)
+        private void menBusAva_Click(object sender, RoutedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
             frmInformacionAvanzada objInformacionAvanzadaWindow = new frmInformacionAvanzada();
             objInformacionAvanzadaWindow.Owner = this;
             objInformacionAvanzadaWindow.ShowDialog();
             objInformacionAvanzadaWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void menSalir_Click(object sender, RoutedEventArgs e)
+        {
+            SessionManager.endSession();
+            this.Close();
+        }
+
+        private void menBusMad_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmLista formularioListaMadres = new frmLista();
+
+            formularioListaMadres.ModificarRegistro += formularioListaMadres_ModificarRegistro;
+            formularioListaMadres.DetallesRegistro += formularioListaMadres_DetallesRegistro;
+
+            ModeloMadre modelomadre = new ModeloMadre();
+
+            formularioListaMadres.proveedorDatos = modelomadre;
+            formularioListaMadres.titulo = "Madres";
+            formularioListaMadres.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaMadres_ModificarRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmMadre objMadreWindow = new frmMadre();
+            objMadreWindow.IdFamilia = 0;
+            objMadreWindow.IdSeleccionado = fe.id;
+            objMadreWindow.TipoAccion = TipoAccion.Edicion;
+            objMadreWindow.Owner = this;
+            objMadreWindow.ShowDialog();
+            objMadreWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaMadres_DetallesRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmMadre objMadreWindow = new frmMadre();
+            objMadreWindow.IdFamilia = 0;
+            objMadreWindow.IdSeleccionado = fe.id;
+            objMadreWindow.TipoAccion = TipoAccion.Detalle;
+            objMadreWindow.Owner = this;
+            objMadreWindow.ShowDialog();
+            objMadreWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void menBusMen_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmLista formularioListaMenores = new frmLista();
+
+            formularioListaMenores.ModificarRegistro += formularioListaMenores_ModificarRegistro;
+            formularioListaMenores.DetallesRegistro += formularioListaMenores_DetallesRegistro;
+
+            ModeloMenor modelomenor = new ModeloMenor();
+
+            formularioListaMenores.proveedorDatos = modelomenor;
+            formularioListaMenores.titulo = "Menores";
+            formularioListaMenores.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaMenores_ModificarRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmMenor objMenorWindow = new frmMenor();
+            objMenorWindow.IdFamilia = 0;
+            objMenorWindow.IdSeleccionado = fe.id;
+            objMenorWindow.TipoAccion = TipoAccion.Edicion;
+            objMenorWindow.Owner = this;
+            objMenorWindow.ShowDialog();
+            objMenorWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaMenores_DetallesRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmMenor objMenorWindow = new frmMenor();
+            objMenorWindow.IdFamilia = 0;
+            objMenorWindow.IdSeleccionado = fe.id;
+            objMenorWindow.TipoAccion = TipoAccion.Detalle;
+            objMenorWindow.Owner = this;
+            objMenorWindow.ShowDialog();
+            objMenorWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void menBusTut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmLista formularioListaTutores = new frmLista();
+
+            formularioListaTutores.ModificarRegistro += formularioListaTutores_ModificarRegistro;
+            formularioListaTutores.DetallesRegistro += formularioListaTutores_DetallesRegistro;
+
+            ModeloTutor modelotutor = new ModeloTutor();
+
+            formularioListaTutores.proveedorDatos = modelotutor;
+            formularioListaTutores.titulo = "Tutores";
+            formularioListaTutores.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaTutores_ModificarRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmTutor objTutorWindow = new frmTutor();
+            objTutorWindow.IdFamilia = 0;
+            objTutorWindow.IdSeleccionado = fe.id;
+            objTutorWindow.TipoAccion = TipoAccion.Edicion;
+            objTutorWindow.Owner = this;
+            objTutorWindow.ShowDialog();
+            objTutorWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void formularioListaTutores_DetallesRegistro(object sender, IdentidadEventArgs fe)
+        {
+            this.Cursor = Cursors.Wait;
+            frmTutor objTutorWindow = new frmTutor();
+            objTutorWindow.IdFamilia = 0;
+            objTutorWindow.IdSeleccionado = fe.id;
+            objTutorWindow.TipoAccion = TipoAccion.Detalle;
+            objTutorWindow.Owner = this;
+            objTutorWindow.ShowDialog();
+            objTutorWindow = null;
             this.Cursor = Cursors.Arrow;
         }
 

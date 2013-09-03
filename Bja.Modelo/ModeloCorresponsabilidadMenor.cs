@@ -19,6 +19,8 @@ namespace Bja.Modelo
             corresponsabilidadmenor.FechaUltimaTransaccion = DateTime.Now;
             corresponsabilidadmenor.FechaRegistro = DateTime.Now;
             corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            corresponsabilidadmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            corresponsabilidadmenor.DescripcionEstadoSincronizacion = "";
 
             context.CorresponsabilidadesMenor.Add(corresponsabilidadmenor);
 
@@ -36,18 +38,16 @@ namespace Bja.Modelo
             _corresponsabilidadmenor.IdSesion = SessionManager.getCurrentSession().Id;
             _corresponsabilidadmenor.FechaUltimaTransaccion = DateTime.Now;
             _corresponsabilidadmenor.FechaRegistro = DateTime.Now;
-            _corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            _corresponsabilidadmenor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            _corresponsabilidadmenor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
             _corresponsabilidadmenor.IdEstablecimientoSalud = corresponsabilidadmenor.IdEstablecimientoSalud;
             _corresponsabilidadmenor.TipoInscripcionMenor = corresponsabilidadmenor.TipoInscripcionMenor;
             _corresponsabilidadmenor.FechaInscripcion = corresponsabilidadmenor.FechaInscripcion;
             _corresponsabilidadmenor.IdMenor = corresponsabilidadmenor.IdMenor;
-            _corresponsabilidadmenor.DireccionMenor = corresponsabilidadmenor.DireccionMenor;
             _corresponsabilidadmenor.IdMadre = corresponsabilidadmenor.IdMadre;
-            _corresponsabilidadmenor.DireccionMadre = corresponsabilidadmenor.DireccionMadre;
             _corresponsabilidadmenor.IdTutor = corresponsabilidadmenor.IdTutor;
-            _corresponsabilidadmenor.DireccionTutor = corresponsabilidadmenor.DireccionTutor;
-            _corresponsabilidadmenor.TipoParentesco = corresponsabilidadmenor.TipoParentesco;
+            _corresponsabilidadmenor.IdTipoParentesco = corresponsabilidadmenor.IdTipoParentesco;
             _corresponsabilidadmenor.CodigoFormulario = corresponsabilidadmenor.CodigoFormulario;
             _corresponsabilidadmenor.FechaSalidaPrograma = corresponsabilidadmenor.FechaSalidaPrograma;
             _corresponsabilidadmenor.TipoSalidaMenor = corresponsabilidadmenor.TipoSalidaMenor;
@@ -90,10 +90,31 @@ namespace Bja.Modelo
             List<CorresponsabilidadMenor> corresponsabilidadmenor = new List<CorresponsabilidadMenor>();
 
             corresponsabilidadmenor = (from cm in context.CorresponsabilidadesMenor
-                                       where cm.IdMadre == IdMenor
+                                       where cm.IdMenor == IdMenor
                                        select cm).ToList<CorresponsabilidadMenor>();
 
             return corresponsabilidadmenor;
+        }
+
+        public long RecuperarLaUltimaCorresponsabilidadValidaDeMenor(long IdMenor)
+        {
+            long Id;
+            string s;
+
+            Id = 0;
+            //Hay que mejorar este asunto
+            var c = (from cn in context.CorresponsabilidadesMenor 
+                     where cn.IdMenor == IdMenor &&
+                            cn.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                     orderby cn.FechaRegistro descending
+                     select cn.Id).Take(1);
+            foreach (var g in c)
+            {
+                s = g.ToString();
+                Id = Convert.ToInt64(s);
+            }
+
+            return Id;
         }
 
     }

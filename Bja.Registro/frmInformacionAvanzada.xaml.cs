@@ -30,9 +30,11 @@ namespace Bja.Registro
         private ModeloMenor modelomenor = new ModeloMenor();
         private Madre madre = new Madre();
         private CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
+        private ControlMadre controlmadre = new ControlMadre();
         private Tutor tutormadre = new Tutor();
         private Menor menor = new Menor();
         private CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
+        private ControlMenor controlmenor = new ControlMenor();
         private Tutor tutormenor = new Tutor();
         private int OpcionDeBusquedaAsignada = 0;
 
@@ -59,6 +61,7 @@ namespace Bja.Registro
         {
             this.Cursor = Cursors.Wait;
             frmMadre objMadreWindow = new frmMadre();
+            objMadreWindow.IdFamilia = 0;
             objMadreWindow.IdSeleccionado = IdMadre;
             objMadreWindow.TipoAccion = TipoAccion;
             objMadreWindow.Owner = this;
@@ -74,11 +77,6 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
             }
             objMadreWindow = null;
-        }
-
-        private void cmdNuevaMadre_Click(object sender, RoutedEventArgs e)
-        {
-            VerMadre(0, TipoAccion.Nuevo);
         }
 
         private void cmdEditarMadre_Click(object sender, RoutedEventArgs e)
@@ -103,66 +101,11 @@ namespace Bja.Registro
             }
         }
 
-        private void VerCorresponsabilidadMadre(long IdCorresponsabilidadMadre, TipoAccion TipoAccion)
-        {
-            this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
-            objCorresponsabilidadMadreWindow.IdSeleccionado = IdCorresponsabilidadMadre;
-            objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMadreWindow.Owner = this;
-            objCorresponsabilidadMadreWindow.ShowDialog();
-            this.Cursor = Cursors.Arrow;
-            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
-            {
-                this.Cursor = Cursors.Wait;
-
-                OpcionDeBusquedaAsignada = 0;
-                RealizarBusqueda();
-
-                this.Cursor = Cursors.Arrow;
-            }
-            objCorresponsabilidadMadreWindow = null;
-        }
-
-        private void cmdNuevaCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
-        {
-            VerCorresponsabilidadMadre(0, TipoAccion.Nuevo);
-        }
-
-        private void cmdEditarCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerCorresponsabilidadMadre(Id, TipoAccion.Edicion);
-            }
-        }
-
-        private void cmdDetalleCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
-            {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerCorresponsabilidadMadre(Id, TipoAccion.Detalle);
-            }
-        }
-
-        private void cmdEditarControlMadre_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void cmdDetalleControlMadre_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void VerMenor(long IdMenor, TipoAccion TipoAccion)
         {
             this.Cursor = Cursors.Wait;
             frmMenor objMenorWindow = new frmMenor();
+            objMenorWindow.IdFamilia = 0;
             objMenorWindow.IdSeleccionado = IdMenor;
             objMenorWindow.TipoAccion = TipoAccion;
             objMenorWindow.Owner = this;
@@ -178,11 +121,6 @@ namespace Bja.Registro
                 this.Cursor = Cursors.Arrow;
             }
             objMenorWindow = null;
-        }
-
-        private void cmdNuevoMenor_Click(object sender, RoutedEventArgs e)
-        {
-            VerMenor(0, TipoAccion.Nuevo);
         }
 
         private void cmdEditarMenor_Click(object sender, RoutedEventArgs e)
@@ -207,16 +145,91 @@ namespace Bja.Registro
             }
         }
 
-        private void VerCorresponsabilidadMenor(long IdCorresponsabilidadMenor, TipoAccion TipoAccion)
+        private void VerCorresponsabilidadMadre(long IdCorresponsabilidadMadre, long IdMadre, TipoAccion TipoAccion)
+        {
+            //this.Cursor = Cursors.Wait;
+            //frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
+            //objCorresponsabilidadMadreWindow.IdSeleccionado = IdCorresponsabilidadMadre;
+            //objCorresponsabilidadMadreWindow.IdMadre = IdMadre;
+            //objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
+            //objCorresponsabilidadMadreWindow.Owner = this;
+            //objCorresponsabilidadMadreWindow.ShowDialog();
+            //this.Cursor = Cursors.Arrow;
+            //if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            //{
+            //    this.Cursor = Cursors.Wait;
+
+            //    OpcionDeBusquedaAsignada = 0;
+            //    RealizarBusqueda();
+
+            //    this.Cursor = Cursors.Arrow;
+            //}
+            //objCorresponsabilidadMadreWindow = null;
+        }
+
+        private void cmdDetalleCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
+        {
+            //Button Img = (Button)sender;
+            //if (Img.Tag != null)
+            //{
+            //    Int64 Id = (Int64)Img.Tag;
+            //    if (Id > 0)
+            //    {
+            //        corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(Id);
+            //        VerCorresponsabilidadMadre(Id, corresponsabilidadmadre.IdMadre, TipoAccion.Detalle);
+            //    }
+            //}
+        }
+
+        private void VerCorresponsabilidadMenor(long IdCorresponsabilidadMenor, long IdMenor, TipoAccion TipoAccion)
+        {
+            //this.Cursor = Cursors.Wait;
+            //frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
+            //objCorresponsabilidadMenorWindow.IdSeleccionado = IdCorresponsabilidadMenor;
+            //objCorresponsabilidadMenorWindow.IdMenor = IdMenor;
+            //objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
+            //objCorresponsabilidadMenorWindow.Owner = this;
+            //objCorresponsabilidadMenorWindow.ShowDialog();
+            //this.Cursor = Cursors.Arrow;
+            //if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            //{
+            //    this.Cursor = Cursors.Wait;
+
+            //    OpcionDeBusquedaAsignada = 0;
+            //    RealizarBusqueda();
+
+            //    this.Cursor = Cursors.Arrow;
+            //}
+            //objCorresponsabilidadMenorWindow = null;
+        }
+
+        private void cmdDetalleCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
+        {
+            //Button Img = (Button)sender;
+            //if (Img.Tag != null)
+            //{
+            //    Int64 Id = (Int64)Img.Tag;
+            //    if (Id > 0)
+            //    {
+            //        corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(Id);
+            //        VerCorresponsabilidadMenor(Id, corresponsabilidadmenor.IdMenor, TipoAccion.Detalle);
+            //    }
+            //}
+        }
+
+        private void VerControlMadre(long IdControlMadre, long IdMadre, long IdTutor, TipoAccion TipoAccion)
         {
             this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
-            objCorresponsabilidadMenorWindow.IdSeleccionado = IdCorresponsabilidadMenor;
-            objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMenorWindow.Owner = this;
-            objCorresponsabilidadMenorWindow.ShowDialog();
+            frmControl objControlMadreWindow = new frmControl();
+            objControlMadreWindow.IdSeleccionado = IdControlMadre;
+            objControlMadreWindow.IdMadre = IdMadre;
+            objControlMadreWindow.IdTutor = IdTutor;
+            objControlMadreWindow.TipoAccion = TipoAccion;
+            objControlMadreWindow.TipoControl = TipoControl.Madre;
+            objControlMadreWindow.Owner = this;
+            objControlMadreWindow.ShowDialog();
             this.Cursor = Cursors.Arrow;
-            if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
+            if (TipoAccion == TipoAccion.Edicion)
             {
                 this.Cursor = Cursors.Wait;
 
@@ -225,48 +238,85 @@ namespace Bja.Registro
 
                 this.Cursor = Cursors.Arrow;
             }
-            objCorresponsabilidadMenorWindow = null;
+            objControlMadreWindow = null;
         }
 
-        private void cmdNuevaCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
+        private void VerControlMadreParto(long IdControlMadre, long IdMadre, long IdTutor, TipoAccion TipoAccion)
         {
-            VerCorresponsabilidadMenor(0, TipoAccion.Nuevo);
-        }
-
-        private void cmdEditarCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
-        {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
+            this.Cursor = Cursors.Wait;
+            frmControlParto objControlMadrePartoWindow = new frmControlParto();
+            objControlMadrePartoWindow.IdSeleccionado = IdControlMadre;
+            objControlMadrePartoWindow.IdMadre = IdMadre;
+            objControlMadrePartoWindow.IdTutor = IdTutor;
+            objControlMadrePartoWindow.TipoAccion = TipoAccion;
+            objControlMadrePartoWindow.Owner = this;
+            objControlMadrePartoWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            if (TipoAccion == TipoAccion.Edicion)
             {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerCorresponsabilidadMenor(Id, TipoAccion.Edicion);
+                this.Cursor = Cursors.Wait;
+
+                OpcionDeBusquedaAsignada = 0;
+                RealizarBusqueda();
+
+                this.Cursor = Cursors.Arrow;
             }
+            objControlMadrePartoWindow = null;
         }
 
-        private void cmdDetalleCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
+        private void VerControlMadrePostParto(long IdControlMadre, long IdMadre, long IdTutor, TipoAccion TipoAccion)
         {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
+            this.Cursor = Cursors.Wait;
+            frmControlPostParto objControlMadrePostPartoWindow = new frmControlPostParto();
+            objControlMadrePostPartoWindow.IdSeleccionado = IdControlMadre;
+            objControlMadrePostPartoWindow.IdMadre = IdMadre;
+            objControlMadrePostPartoWindow.IdTutor = IdTutor;
+            objControlMadrePostPartoWindow.TipoAccion = TipoAccion;
+            objControlMadrePostPartoWindow.Owner = this;
+            objControlMadrePostPartoWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            if (TipoAccion == TipoAccion.Edicion)
             {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerCorresponsabilidadMenor(Id, TipoAccion.Detalle);
+                this.Cursor = Cursors.Wait;
+
+                OpcionDeBusquedaAsignada = 0;
+                RealizarBusqueda();
+
+                this.Cursor = Cursors.Arrow;
             }
+            objControlMadrePostPartoWindow = null;
         }
 
-        private void cmdEditarControlMenor_Click(object sender, RoutedEventArgs e)
+        private void VerControlMenor(long IdControlMenor, long IdMenor, long IdMadre, long IdTutor, TipoAccion TipoAccion)
         {
-        }
+            this.Cursor = Cursors.Wait;
+            frmControl objControlMenorWindow = new frmControl();
+            objControlMenorWindow.IdSeleccionado = IdControlMenor;
+            objControlMenorWindow.IdMenor = IdMenor;
+            objControlMenorWindow.IdMadre = IdMadre;
+            objControlMenorWindow.IdTutor = IdTutor;
+            objControlMenorWindow.TipoAccion = TipoAccion;
+            objControlMenorWindow.TipoControl = TipoControl.Menor;
+            objControlMenorWindow.Owner = this;
+            objControlMenorWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+            if (TipoAccion == TipoAccion.Edicion)
+            {
+                this.Cursor = Cursors.Wait;
 
-        private void cmdDetalleControlMenor_Click(object sender, RoutedEventArgs e)
-        {
+                OpcionDeBusquedaAsignada = 0;
+                RealizarBusqueda();
+
+                this.Cursor = Cursors.Arrow;
+            }
+            objControlMenorWindow = null;
         }
 
         private void VerTutor(long IdTutor, TipoAccion TipoAccion)
         {
             this.Cursor = Cursors.Wait;
             frmTutor objTutorWindow = new frmTutor();
+            objTutorWindow.IdFamilia = 0;
             objTutorWindow.IdSeleccionado = IdTutor;
             objTutorWindow.TipoAccion = TipoAccion;
             objTutorWindow.Owner = this;
@@ -429,29 +479,33 @@ namespace Bja.Registro
 
         private void grdCorresponsabilidadMadre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Cursor = Cursors.Wait;
+            //this.Cursor = Cursors.Wait;
 
-            corresponsabilidadmadre = this.grdCorresponsabilidadMadre.SelectedItem as CorresponsabilidadMadre;
+            //this.grdControlMadre.ItemsSource = null;
 
-            if ((OpcionDeBusquedaAsignada == 1) || (OpcionDeBusquedaAsignada == 2))
-            {
-                if (corresponsabilidadmadre != null)
-                {
-                    if (corresponsabilidadmadre.IdTutor != null)
-                    {
-                        this.grdTutorMadre.ItemsSource = modelotutor.RecuperarTutor((long)corresponsabilidadmadre.IdTutor);
-                        if (this.grdTutorMadre.Items.Count > 0)
-                            this.grdTutorMadre.SelectedIndex = 0;
-                    }
-                }
-            }
-            if (corresponsabilidadmadre != null)
-            {
-                this.grdControlMadre.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(corresponsabilidadmadre.Id);
-                if (this.grdControlMadre.Items.Count > 0)
-                    this.grdControlMadre.SelectedIndex = 0;
-            }
-            this.Cursor = Cursors.Arrow;
+            //corresponsabilidadmadre = this.grdCorresponsabilidadMadre.SelectedItem as CorresponsabilidadMadre;
+
+            //if ((OpcionDeBusquedaAsignada == 1) || (OpcionDeBusquedaAsignada == 2))
+            //{
+            //    this.grdTutorMadre.ItemsSource = null;
+
+            //    if (corresponsabilidadmadre != null)
+            //    {
+            //        if (corresponsabilidadmadre.IdTutor > 0)
+            //        {
+            //            this.grdTutorMadre.ItemsSource = modelotutor.RecuperarTutor(corresponsabilidadmadre.IdTutor);
+            //            if (this.grdTutorMadre.Items.Count > 0)
+            //                this.grdTutorMadre.SelectedIndex = 0;
+            //        }
+            //    }
+            //}
+            //if (corresponsabilidadmadre != null)
+            //{
+            //    this.grdControlMadre.ItemsSource = modelocontrolmadre.ListarControlesDeCorresponsabilidadDeMadre(corresponsabilidadmadre.Id);
+            //    if (this.grdControlMadre.Items.Count > 0)
+            //        this.grdControlMadre.SelectedIndex = 0;
+            //}
+            //this.Cursor = Cursors.Arrow;
         }
 
         private void grdMenor_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -487,29 +541,33 @@ namespace Bja.Registro
 
         private void grdCorresponsabilidadMenor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Cursor = Cursors.Wait;
+            //this.Cursor = Cursors.Wait;
 
-            corresponsabilidadmenor = this.grdCorresponsabilidadMenor.SelectedItem as CorresponsabilidadMenor;
+            //this.grdControlMenor.ItemsSource = null;
 
-            if ((OpcionDeBusquedaAsignada == 1) || (OpcionDeBusquedaAsignada == 2))
-            {
-                if (corresponsabilidadmenor != null)
-                {
-                    if (corresponsabilidadmenor.IdTutor != null)
-                    {
-                        this.grdTutorMenor.ItemsSource = modelotutor.RecuperarTutor((long)corresponsabilidadmenor.IdTutor);
-                        if (this.grdTutorMenor.Items.Count > 0)
-                            this.grdTutorMenor.SelectedIndex = 0;
-                    }
-                }
-            }
-            if (corresponsabilidadmenor != null)
-            {
-                this.grdControlMenor.ItemsSource = modelocontrolmenor.ListarControlesDeCorresponsabilidadDeMenor(corresponsabilidadmenor.Id);
-                if (this.grdControlMenor.Items.Count > 0)
-                    this.grdControlMenor.SelectedIndex = 0;
-            }
-            this.Cursor = Cursors.Arrow;
+            //corresponsabilidadmenor = this.grdCorresponsabilidadMenor.SelectedItem as CorresponsabilidadMenor;
+
+            //if ((OpcionDeBusquedaAsignada == 1) || (OpcionDeBusquedaAsignada == 2))
+            //{
+            //    this.grdTutorMenor.ItemsSource = null;
+
+            //    if (corresponsabilidadmenor != null)
+            //    {
+            //        if (corresponsabilidadmenor.IdTutor > 0)
+            //        {
+            //            this.grdTutorMenor.ItemsSource = modelotutor.RecuperarTutor(corresponsabilidadmenor.IdTutor);
+            //            if (this.grdTutorMenor.Items.Count > 0)
+            //                this.grdTutorMenor.SelectedIndex = 0;
+            //        }
+            //    }
+            //}
+            //if (corresponsabilidadmenor != null)
+            //{
+            //    this.grdControlMenor.ItemsSource = modelocontrolmenor.ListarControlesDeCorresponsabilidadDeMenor(corresponsabilidadmenor.Id);
+            //    if (this.grdControlMenor.Items.Count > 0)
+            //        this.grdControlMenor.SelectedIndex = 0;
+            //}
+            //this.Cursor = Cursors.Arrow;
         }
 
         private void grdTutorMadre_SelectionChanged(object sender, SelectionChangedEventArgs e)

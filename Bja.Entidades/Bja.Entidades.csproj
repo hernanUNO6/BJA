@@ -57,6 +57,8 @@
     <Compile Include="EstablecimientoSalud.cs" />
     <Compile Include="EstadoPago.cs" />
     <Compile Include="Familia.cs" />
+    <Compile Include="GrupoFamiliar.cs" />
+    <Compile Include="GrupoFamiliarTemporal.cs" />
     <Compile Include="Madre.cs" />
     <Compile Include="MadreTemporal.cs" />
     <Compile Include="Medico.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Recepcion.cs" />
     <Compile Include="Reclamo.cs" />
     <Compile Include="RedSalud.cs" />
+    <Compile Include="RegistroBusqueda.cs" />
+    <Compile Include="RegistroParaCombo.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="SolicitudPago.cs" />
@@ -83,6 +87,7 @@
     <Compile Include="TipoEstadoPago.cs" />
     <Compile Include="TipoEstadoRegistro.cs" />
     <Compile Include="TipoEstadoSincronizacion.cs" />
+    <Compile Include="TipoGrupoFamiliar.cs" />
     <Compile Include="TipoInscripcion.cs" />
     <Compile Include="TipoParentesco.cs" />
     <Compile Include="TipoReclamo.cs" />

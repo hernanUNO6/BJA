@@ -23,11 +23,12 @@ namespace Bja.Registro
     {
         public long IdSeleccionado { get; set; }
         public TipoControl TipoControl { get; set; }
-        private ControlMadre _controlmadre = new ControlMadre();
-        private ControlMenor _controlmenor = new ControlMenor();
-        public long IdMadre { get; set; }
+        private ControlMadre controlmadre = new ControlMadre();
+        private ControlMenor controlmenor = new ControlMenor();
         public long IdMenor { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdMadre { get; set; }
+        public long? IdTutor { get; set; }
+        public long? IdTipoParentesco { get; set; }
         public TipoAccion TipoAccion { get; set; }
         public bool Resultado { get; set; }
 
@@ -44,43 +45,64 @@ namespace Bja.Registro
             {
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-                _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
+                controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
 
-                this.dtpFechaProgramada.SelectedDate = _controlmadre.FechaProgramada;
-                if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+                this.dtpFechaProgramada.SelectedDate = controlmadre.FechaProgramada;
+
+                if (controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
                 {
-                    this.chkDescartar.IsChecked = true; 
+                    this.chkDescartar.IsChecked = true;
+                    this.dtpFechaProgramada.IsEnabled = false;
+                    this.dtpFechaControl.SelectedDate = DateTime.Now;
+                    this.dtpFechaControl.IsEnabled = false;
                     this.txtPeso.Text = "0";
                     this.txtTalla.Text = "0";
-                    this.dtpFechaControl.SelectedDate = DateTime.Now;
+                    this.cboMedico.IsEnabled = false;
                 }
                 else
                 {
-                    this.chkDescartar.IsChecked = true;
-                    this.txtPeso.Text = Convert.ToString(_controlmadre.PesoKg);
-                    this.txtTalla.Text = Convert.ToString(_controlmadre.TallaCm);
-                    this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+                    this.chkDescartar.IsChecked = false;
+                    this.txtPeso.Text = Convert.ToString(controlmadre.PesoKg);
+                    this.txtTalla.Text = Convert.ToString(controlmadre.TallaCm);
+                    this.dtpFechaControl.SelectedDate = controlmadre.FechaControl;
                 }
-                this.lblNumeroControl.Content = _controlmadre.NumeroControl;
+                this.lblNumeroControl.Content = controlmadre.NumeroControl;
             }
-            else
+            else if (TipoControl == TipoControl.Menor)
             {
                 ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
 
-                _controlmenor = modelocontrolmenor.Recuperar(IdSeleccionado);
-                this.dtpFechaProgramada.SelectedDate = _controlmenor.FechaProgramada;
-                this.txtPeso.Text = Convert.ToString(_controlmenor.PesoKg);
-                this.txtTalla.Text = Convert.ToString(_controlmenor.TallaCm);
-                this.dtpFechaControl.SelectedDate = _controlmenor.FechaControl;
-                this.lblNumeroControl.Content = _controlmenor.NumeroControl;
+                controlmenor = modelocontrolmenor.Recuperar(IdSeleccionado);
+
+                this.dtpFechaProgramada.SelectedDate = controlmenor.FechaProgramada;
+
+                if (controlmenor.EstadoPago == TipoEstadoPago.NoAsignable)
+                {
+                    this.chkDescartar.IsChecked = true;
+                    this.dtpFechaProgramada.IsEnabled = false;
+                    this.dtpFechaControl.SelectedDate = DateTime.Now;
+                    this.dtpFechaControl.IsEnabled = false;
+                    this.txtPeso.Text = "0";
+                    this.txtTalla.Text = "0";
+                    this.cboMedico.IsEnabled = false;
+                }
+                else
+                {
+                    this.txtPeso.Text = Convert.ToString(controlmenor.PesoKg);
+                    this.txtTalla.Text = Convert.ToString(controlmenor.TallaCm);
+                    this.dtpFechaControl.SelectedDate = controlmenor.FechaControl;
+                    this.lblNumeroControl.Content = controlmenor.NumeroControl;
+                }
+                this.lblNumeroControl.Content = controlmenor.NumeroControl;
             }
             if (TipoAccion == TipoAccion.Detalle)
             {
                 this.chkDescartar.IsEnabled = false;
                 this.dtpFechaProgramada.IsEnabled = false;
+                this.dtpFechaControl.IsEnabled = false;
                 this.txtTalla.IsEnabled = false;
                 this.txtPeso.IsEnabled = false;
-                this.dtpFechaControl.IsEnabled = false;
+                this.cboMedico.IsEnabled = false;
                 this.cmdAceptar.IsEnabled = false;
             }
         }
@@ -91,38 +113,52 @@ namespace Bja.Registro
             {
                 ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-                _controlmadre.IdTutor = IdTutor;
+                controlmadre.IdTutor = IdTutor;
+                controlmadre.IdTipoParentesco = IdTipoParentesco;
 
                 if (this.chkDescartar.IsChecked == true)
                 {
-                    _controlmadre.PesoKg = 0;
-                    _controlmadre.TallaCm = 0;
-                    _controlmadre.FechaControl = DateTime.Now;
-                    _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+                    controlmadre.PesoKg = 0;
+                    controlmadre.TallaCm = 0;
+                    controlmadre.FechaControl = DateTime.Now;
+                    controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
                 }
                 else
                 {
-                    _controlmadre.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
-                    _controlmadre.PesoKg = Convert.ToSingle(this.txtPeso.Text);
-                    _controlmadre.TallaCm = Convert.ToInt32(this.txtTalla.Text);
-                    _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
-                    _controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
+                    controlmadre.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
+                    controlmadre.PesoKg = Convert.ToSingle(this.txtPeso.Text);
+                    controlmadre.TallaCm = Convert.ToInt32(this.txtTalla.Text);
+                    controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                    controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
                 }
 
-                modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
+                modelocontrolmadre.Editar(IdSeleccionado, controlmadre);
             }
             else
             {
                 ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
 
-                _controlmenor.IdMadre = IdMadre;
-                _controlmenor.IdTutor = IdTutor;
-                _controlmenor.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
-                _controlmenor.PesoKg = Convert.ToSingle(this.txtPeso.Text);
-                _controlmenor.TallaCm = Convert.ToInt32(this.txtTalla.Text);
-                _controlmenor.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                controlmenor.IdMadre = IdMadre;
+                controlmenor.IdTutor = IdTutor;
+                controlmenor.IdTipoParentesco = IdTipoParentesco;
 
-                modelocontrolmenor.Editar(IdSeleccionado, _controlmenor);
+                if (this.chkDescartar.IsChecked == true)
+                {
+                    controlmenor.PesoKg = 0;
+                    controlmenor.TallaCm = 0;
+                    controlmenor.FechaControl = DateTime.Now;
+                    controlmenor.EstadoPago = TipoEstadoPago.NoAsignable;
+                }
+                else
+                {
+                    controlmenor.FechaProgramada = this.dtpFechaProgramada.SelectedDate.Value;
+                    controlmenor.PesoKg = Convert.ToSingle(this.txtPeso.Text);
+                    controlmenor.TallaCm = Convert.ToInt32(this.txtTalla.Text);
+                    controlmenor.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                    controlmenor.EstadoPago = TipoEstadoPago.NoPagado;
+                }
+
+                modelocontrolmenor.Editar(IdSeleccionado, controlmenor);
             }
 
             Resultado = true;
@@ -135,6 +171,24 @@ namespace Bja.Registro
             Resultado = false;
 
             this.Close();
+        }
+
+        private void chkDescartar_Checked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaProgramada.IsEnabled = false;
+            this.dtpFechaControl.IsEnabled = false;
+            this.txtPeso.IsEnabled = false;
+            this.txtTalla.IsEnabled = false;
+            this.cboMedico.IsEnabled = false;
+        }
+
+        private void chkDescartar_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaProgramada.IsEnabled = true;
+            this.dtpFechaControl.IsEnabled = true;
+            this.txtPeso.IsEnabled = true;
+            this.txtTalla.IsEnabled = true;
+            this.cboMedico.IsEnabled = true;
         }
 
     }

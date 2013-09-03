@@ -20,6 +20,8 @@ namespace Bja.Modelo
         tutor.FechaUltimaTransaccion = DateTime.Now;
         tutor.FechaRegistro = DateTime.Now;
         tutor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+        tutor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+        tutor.DescripcionEstadoSincronizacion = "";
 
         context.Tutores.Add(tutor);
 
@@ -37,14 +39,15 @@ namespace Bja.Modelo
         _tutor.IdSesion = SessionManager.getCurrentSession().Id;
         _tutor.FechaUltimaTransaccion = DateTime.Now;
         _tutor.FechaRegistro = DateTime.Now;
-        _tutor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+        _tutor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+        _tutor.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+
         _tutor.Nombres = tutor.Nombres;
         _tutor.NombreCompleto = tutor.NombreCompleto;
         _tutor.PrimerApellido = tutor.PrimerApellido;
         _tutor.SegundoApellido = tutor.SegundoApellido;
         _tutor.TercerApellido = tutor.TercerApellido;
         _tutor.DocumentoIdentidad = tutor.DocumentoIdentidad;
-        //_tutor.IdTipoDocumentoIdentidad = tutor.IdTipoDocumentoIdentidad;
         _tutor.TipoDocumentoIdentidad = tutor.TipoDocumentoIdentidad;
         _tutor.FechaNacimiento = tutor.FechaNacimiento;
         _tutor.IdDepartamento = tutor.IdDepartamento;
@@ -94,22 +97,19 @@ namespace Bja.Modelo
         return tutor;
     }
 
-    public List<Tutor> Listar()
-    {
-        return context.Tutores.ToList();
-    }
-
     public List<Tutor> ListarTutoresDeMadresPorCriterio(string Criterio)
     {
         List<Tutor> tutor = new List<Tutor>();
 
         tutor = (from t in context.Tutores
-                 where t.Nombres.Contains(Criterio) ||
-                 t.PrimerApellido.Contains(Criterio) ||
-                 t.SegundoApellido.Contains(Criterio) ||
-                 t.DocumentoIdentidad.Contains(Criterio)
+                 where (t.Nombres.Contains(Criterio) ||
+                       t.PrimerApellido.Contains(Criterio) ||
+                       t.SegundoApellido.Contains(Criterio) ||
+                       t.DocumentoIdentidad.Contains(Criterio)) &&
+                       (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  from cm in context.CorresponsabilidadesMadre
-                 where cm.IdTutor == t.Id
+                 where cm.IdTutor == t.Id &&
+                       cm.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                  orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
                  select t).Distinct().ToList<Tutor>();
 
@@ -121,14 +121,51 @@ namespace Bja.Modelo
         List<Tutor> tutor = new List<Tutor>();
 
         tutor = (from t in context.Tutores
-                 where t.Nombres.Contains(Criterio) ||
-                 t.PrimerApellido.Contains(Criterio) ||
-                 t.SegundoApellido.Contains(Criterio) ||
-                 t.DocumentoIdentidad.Contains(Criterio)
+                 where (t.Nombres.Contains(Criterio) ||
+                       t.PrimerApellido.Contains(Criterio) ||
+                       t.SegundoApellido.Contains(Criterio) ||
+                       t.DocumentoIdentidad.Contains(Criterio)) &&
+                       (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  from cn in context.CorresponsabilidadesMenor
                  where cn.IdTutor == t.Id
                  orderby t.PrimerApellido, t.SegundoApellido, t.Nombres
                  select t).Distinct().ToList<Tutor>();
+
+        return tutor;
+    }
+
+    public List<Tutor> ListarTutoresDeUnaFamilia(long IdFamilia)
+    {//ojo filtrar los no borrados
+        List<Tutor> tutor = new List<Tutor>();
+
+        tutor = (from t in context.Tutores 
+                 where t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                 from gf in context.GruposFamiliares
+                 where (gf.IdFamilia == IdFamilia) &&
+                       (gf.IdReferencial == t.Id) &&
+                       (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor) &&
+                       (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                 select t).Distinct().ToList<Tutor>();
+
+            return tutor;
+    }
+
+    public List<RegistroParaCombo> ListarTutoresDeUnaFamiliaParaCombo(long IdFamilia)
+    {//ojo filtrar los no borrados
+        List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
+
+        tutor = (from t in context.Tutores
+                 where t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
+                 from gf in context.GruposFamiliares
+                 where (gf.IdFamilia == IdFamilia) &&
+                       (gf.IdReferencial == t.Id) &&
+                       (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor) &&
+                       (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                 select new RegistroParaCombo
+                     {
+                        Id = t.Id,
+                        Descripcion = t.NombreCompleto
+                     }).ToList();
 
         return tutor;
     }
@@ -142,11 +179,12 @@ namespace Bja.Modelo
         Int64 totalRegistrosEncontrados = 0;
         Int64 totalRegistros = 0;
 
-        var lista = (from m in context.Tutores
-                     where m.Nombres.Contains(criterioBusqueda) ||
-                     m.PrimerApellido.Contains(criterioBusqueda) ||
-                     m.SegundoApellido.Contains(criterioBusqueda)
-                     select m).ToList();
+        var lista = (from t in context.Tutores
+                     where (t.Nombres.Contains(criterioBusqueda) ||
+                           t.PrimerApellido.Contains(criterioBusqueda) ||
+                           t.SegundoApellido.Contains(criterioBusqueda)) &&
+                           (t.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
+                     select t).ToList();
 
         //var lista = BuscarConveniosMantenimientoPaginada(ref totalRegistrosEncontrados, ref totalRegistros, saltarRegistros, tamañoPagina, criterioBusqueda);
 

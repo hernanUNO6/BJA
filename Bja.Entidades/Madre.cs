@@ -31,8 +31,6 @@ namespace Bja.Entidades
         public long IdMunicipio { get; set; } 
         public Municipio Municipio { get; set; }
         public String LocalidadNacimiento { get; set; }
-        //public long IdFamilia { get; set; }
-        //public Familia Familia { get; set; }
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
 

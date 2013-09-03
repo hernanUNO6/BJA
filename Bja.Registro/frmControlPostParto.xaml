@@ -3,14 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Control Post Parto" ShowInTaskbar="False" Height="225" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Name="InicioDeSesion">
-        <Label x:Name="lblFechaPevista" Content="Fecha Prevista:" HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblFechaPevista" Content="Fecha Prevista:" HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dtpFechaPrevista" HorizontalAlignment="Left" Margin="126,42,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblFechaControl" Content="Fecha de Control:" HorizontalAlignment="Left" Margin="18,71,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dtpFechaControl" HorizontalAlignment="Left" Margin="126,71,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="69,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.641"/>
+        <Label x:Name="lblMedico" Content="Médico:" HorizontalAlignment="Left" Margin="69,97,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboMedico"  HorizontalAlignment="Left" Margin="126,100,0,0" VerticalAlignment="Top" Width="245"/>
         <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="204,146,0,0" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
         <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="296,146,0,0" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
-        <CheckBox x:Name="chkDescartar" Content="Descartar este control" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDescartar" Content="Descartar este control" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top" Checked="chkDescartar_Checked" Unchecked="chkDescartar_Unchecked"/>
     </Grid>
 </Window>

@@ -24,12 +24,9 @@ namespace Bja.AccesoDatos
             Property(c => c.TipoInscripcionMenor).IsRequired();
             Property(c => c.FechaInscripcion).IsRequired();
             Property(c => c.IdMenor).IsRequired();            
-            Property(c => c.DireccionMenor).IsOptional().HasMaxLength(512);
             Property(c => c.IdMadre).IsOptional();
-            Property(c => c.DireccionMadre).IsOptional().HasMaxLength(512);
             Property(c => c.IdTutor).IsOptional();
             Property(c => c.IdTipoParentesco).IsOptional();
-            Property(c => c.DireccionTutor).IsOptional().HasMaxLength(512);
             Property(c => c.CodigoFormulario).IsRequired().HasMaxLength(16);
             Property(c => c.FechaSalidaPrograma).IsOptional();
             Property(c => c.TipoSalidaMenor).IsOptional();

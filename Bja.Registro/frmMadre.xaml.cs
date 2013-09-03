@@ -22,6 +22,7 @@ namespace Bja.Registro
     public partial class frmMadre : Window
     {
         public long IdSeleccionado { get; set; }
+        public long IdFamilia { get; set; }
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Madre _madre = new Madre();
@@ -40,9 +41,11 @@ namespace Bja.Registro
 
             SoporteCombo.cargarEnumerador(cboTipoDocumentoIdentidad, typeof(TipoDocumentoIdentidad));
             ModeloDepartamento modelodepartamento = new ModeloDepartamento();
+
             this.cboDepartamento.ItemsSource = modelodepartamento.Listar();
             this.cboDepartamento.DisplayMemberPath = "Descripcion";
             this.cboDepartamento.SelectedValuePath = "Id";
+
             if (IdSeleccionado == 0)
             {
                 this.cboTipoDocumentoIdentidad.SelectedIndex = -1;
@@ -54,9 +57,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
                 _madre = modelomadre.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _madre.DocumentoIdentidad;
-                //cboTipoDocumentoIdentidad.SelectedValue = _madre.IdTipoDocumentoIdentidad;
-                cboProvincia.SelectedValue = _madre.IdProvincia;
-                cboMunicipio.SelectedValue = _madre.IdMunicipio;
+                cboTipoDocumentoIdentidad.SelectedValue = _madre.TipoDocumentoIdentidad;
                 txtPaterno.Text = _madre.PrimerApellido;
                 txtMaterno.Text = _madre.SegundoApellido;
                 txtNombres.Text = _madre.Nombres;
@@ -147,7 +148,7 @@ namespace Bja.Registro
                 ModeloMadre modelomadre = new ModeloMadre();
 
                 _madre.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                //_madre.IdTipoDocumentoIdentidad = Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue);
+                _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad; //cboTipoDocumentoIdentidad.SelectedValue;
                 _madre.PrimerApellido = txtPaterno.Text;
                 _madre.SegundoApellido = txtMaterno.Text;
                 _madre.TercerApellido = txtConyuge.Text;
@@ -164,7 +165,18 @@ namespace Bja.Registro
                 if (IdSeleccionado > 0)
                     modelomadre.Editar(IdSeleccionado, _madre);
                 else
+                {
+                    ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+
                     modelomadre.Crear(_madre);
+
+                    grupofamiliar.IdFamilia = IdFamilia;
+                    grupofamiliar.IdReferencial = _madre.Id;
+                    grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Madre;
+
+                    modelogrupofamiliar.Crear(grupofamiliar);
+                }
 
                 Resultado = true;
 

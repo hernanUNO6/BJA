@@ -22,9 +22,10 @@ namespace Bja.Registro
     public partial class frmControlPostParto : Window
     {
         public long IdSeleccionado { get; set; }
-        private ControlMadre _controlmadre = new ControlMadre();
+        private ControlMadre controlmadre = new ControlMadre();
         public long IdMadre { get; set; }
-        public long IdTutor { get; set; }
+        public long? IdTutor { get; set; }
+        public long? IdTipoParentesco { get; set; }
         public TipoAccion TipoAccion { get; set; }
         public bool Resultado { get; set; }
 
@@ -39,21 +40,30 @@ namespace Bja.Registro
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-            _controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
-            dtpFechaPrevista.SelectedDate = _controlmadre.FechaProgramada;
-            if (_controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
+            controlmadre = modelocontrolmadre.Recuperar(IdSeleccionado);
+
+            dtpFechaPrevista.SelectedDate = controlmadre.FechaProgramada;
+
+            if (controlmadre.EstadoPago == TipoEstadoPago.NoAsignable)
             {
                 this.chkDescartar.IsChecked = true;
+                this.dtpFechaPrevista.IsEnabled = false;
                 this.dtpFechaControl.SelectedDate = DateTime.Now;
+                this.dtpFechaControl.IsEnabled = false;
+                this.cboMedico.IsEnabled = false;
             }
             else
             {
-                this.dtpFechaControl.SelectedDate = _controlmadre.FechaControl;
+                this.chkDescartar.IsChecked = false;
+                this.dtpFechaPrevista.SelectedDate = controlmadre.FechaProgramada;
+                this.dtpFechaControl.SelectedDate = controlmadre.FechaControl;
             }
             if (TipoAccion == TipoAccion.Detalle)
             {
+                this.chkDescartar.IsEnabled = false;
                 this.dtpFechaPrevista.IsEnabled = false;
                 this.dtpFechaControl.IsEnabled = false;
+                this.cboMedico.IsEnabled = false;
                 this.cmdAceptar.IsEnabled = false;
             }
         }
@@ -62,20 +72,22 @@ namespace Bja.Registro
         {
             ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
 
-            _controlmadre.IdTutor = IdTutor;
+            controlmadre.IdTutor = IdTutor;
+            controlmadre.IdTipoParentesco = IdTipoParentesco;
+
             if (this.chkDescartar.IsChecked == true)
             {
-                _controlmadre.FechaControl = DateTime.Now;
-                _controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
+                controlmadre.FechaControl = DateTime.Now;
+                controlmadre.EstadoPago = TipoEstadoPago.NoAsignable;
             }
             else
             {
-                _controlmadre.FechaProgramada = this.dtpFechaPrevista.SelectedDate.Value;
-                _controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
-                _controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
+                controlmadre.FechaProgramada = this.dtpFechaPrevista.SelectedDate.Value;
+                controlmadre.FechaControl = this.dtpFechaControl.SelectedDate.Value;
+                controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
             }
 
-            modelocontrolmadre.Editar(IdSeleccionado, _controlmadre);
+            modelocontrolmadre.Editar(IdSeleccionado, controlmadre);
 
             Resultado = true;
 
@@ -87,6 +99,20 @@ namespace Bja.Registro
             Resultado = false;
 
             this.Close();
+        }
+
+        private void chkDescartar_Checked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaPrevista.IsEnabled = false;
+            this.dtpFechaControl.IsEnabled = false;
+            this.cboMedico.IsEnabled = false;
+        }
+
+        private void chkDescartar_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.dtpFechaPrevista.IsEnabled = true;
+            this.dtpFechaControl.IsEnabled = true;
+            this.cboMedico.IsEnabled = true;
         }
 
     }
