@@ -35,7 +35,7 @@
             @Html.DisplayNameFor(model => model.DocumentoIdentidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.DisplayNameFor(model => model.TipoDocumentoIdentidad)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaNacimiento)
@@ -72,8 +72,8 @@
             @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.IdTipoDocumentoIdentidad)*@
-            @ViewBag.TiposDI[item.IdTipoDocumentoIdentidad]
+            @Html.DisplayFor(modelItem => item.TipoDocumentoIdentidad)
+            @*@ViewBag.TiposDI[item.TipoDocumentoIdentidad]*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaNacimiento)

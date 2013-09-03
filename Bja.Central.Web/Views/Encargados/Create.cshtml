@@ -14,8 +14,7 @@
         #Sexo { 
             background-color : transparent;
             width : auto;
-        }
-        
+        }    
     </style>
 }
 
@@ -30,7 +29,7 @@
         })
 
         $("#cboTipoDI").change(function () {  
-            $('#IdTipoDocumentoIdentidad').val($('#cboTipoDI').val());
+            $('#TipoDocumentoIdentidad').val($('#cboTipoDI').val());
         })
 
         jQuery(function ($) {
@@ -54,7 +53,7 @@
         </div>
         <div class="editor-field">
             @Html.DropDownList("cboTipoEncargado", "--Seleccione tipo encargado--")
-            @Html.TextBoxFor(model => model.IdTipoEncargado, new {style="width: 1px; visibility:hidden" })
+            @Html.TextBoxFor(model => model.IdTipoEncargado, new {style="width: 10px; visibility:hidden0" })
             @Html.ValidationMessageFor(model => model.IdTipoEncargado)
         </div>
 
@@ -99,12 +98,12 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.LabelFor(model => model.TipoDocumentoIdentidad)
         </div>
         <div class="editor-field">
             @Html.DropDownList("cboTipoDI", "--Seleccione tipo de documento--")
-            @Html.TextBoxFor(model => model.IdTipoDocumentoIdentidad, new {style="width: 1px; visibility:hidden" })
-            @Html.ValidationMessageFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width: 10px; visibility:hidden0" })
+            @Html.ValidationMessageFor(model => model.TipoDocumentoIdentidad)
             @*@Html.ListBox("cboTipoDI")*@
         </div>
 
@@ -127,11 +126,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdLocalidadNacimiento)
+            @Html.LabelFor(model => model.LocalidadNacimiento)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.IdLocalidadNacimiento)
-            @Html.ValidationMessageFor(model => model.IdLocalidadNacimiento)
+            @Html.TextBoxFor(model => model.LocalidadNacimiento)
+            @Html.ValidationMessageFor(model => model.LocalidadNacimiento)
         </div>
 
         <div class="editor-label">

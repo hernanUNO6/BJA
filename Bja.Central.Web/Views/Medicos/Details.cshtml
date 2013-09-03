@@ -11,14 +11,6 @@
     <legend>Medico</legend>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.FechaRegistro)
-        @*@Model.FechaRegistro.ToString("dd/MM/yyyy")*@
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaRegistro)
-    </div>
-
-    <div class="display-label">
          @Html.DisplayNameFor(model => model.Nombres)
     </div>
     <div class="display-field">
@@ -54,12 +46,11 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.IdTipoDocumentoIdentidad)
+         @Html.DisplayNameFor(model => model.TipoDocumentoIdentidad)
     </div>
     <div class="display-field">
-        @*@Html.DisplayFor(model => model.IdTipoDocumentoIdentidad)
-        -*@
-        @ViewBag.TipoDI
+        @Html.DisplayFor(model => model.TipoDocumentoIdentidad)
+        @*@ViewBag.TipoDI*@
     </div>
 
     <div class="display-label">
@@ -70,10 +61,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.IdLocalidadNacimiento)
+         @Html.DisplayNameFor(model => model.LocalidadNacimiento)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdLocalidadNacimiento)
+        @Html.DisplayFor(model => model.LocalidadNacimiento)
     </div>
 
     <div class="display-label">

@@ -46,5 +46,12 @@ namespace Bja.Modelo
             db.Departamentos.Remove(depto);
             db.SaveChanges();
         }
+
+        public void EliminarTodo()
+        {
+            foreach (var item in db.Departamentos)
+                db.Departamentos.Remove(item);
+            db.SaveChanges();
+        }
     }
 }

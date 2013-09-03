@@ -59,8 +59,6 @@ namespace Bja.Central.Web.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.TipoDI = TipoDocumentoIdentidad.GetNames(typeof(TipoDocumentoIdentidad))[medico.IdTipoDocumentoIdentidad];
-            //Ojo
             return View(medico);
         }
 
@@ -80,8 +78,13 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Medico medico)
         {
+            medico.Id = IdentifierGenerator.NewId();
             medico.IdSesion = 1;
-            medico.FechaUltimaTransaccion = System.DateTime.Now;
+            medico.FechaUltimaTransaccion = DateTime.Now;
+            medico.FechaRegistro = DateTime.Now;
+            medico.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            medico.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
@@ -102,8 +105,12 @@ namespace Bja.Central.Web.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.cboTipoDI = (from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
-                                 select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
+            //ViewBag.cboTipoDI = (from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
+            //                     select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
+
+            ViewBag.cboTipoDI = new SelectList((from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
+                                                select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() }), "Value", "Text", (int)medico.TipoDocumentoIdentidad);
+
             return View(medico);
         }
 
@@ -116,7 +123,11 @@ namespace Bja.Central.Web.Controllers
             if (ModelState.IsValid)
             {
                 medico.IdSesion = 1;
-                medico.FechaUltimaTransaccion = System.DateTime.Now;
+                medico.FechaUltimaTransaccion = DateTime.Now;
+                medico.FechaRegistro = DateTime.Now;
+                medico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                medico.DescripcionEstadoSincronizacion = "";
 
                 modMedico.Editar(medico);
                 return RedirectToAction("Index");

@@ -19,19 +19,15 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#cboTipoDI").change(function () {  
-            $('#IdTipoDocumentoIdentidad').val($('#cboTipoDI').val());
+            $('#TipoDocumentoIdentidad').val($('#cboTipoDI').val());
         })
-
-        $(function () {
-            //$("#FechaRegistro").datepicker();
-            $("#FechaRegistro").datepicker($.datepicker.regional["es"]);
-        });
 
         jQuery(function ($) {
             $("#FechaNacimiento").mask("99/99/9999");
         });
 
-        $("#cboTipoDI").val($('#IdTipoDocumentoIdentidad').val());
+        //$("#cboTipoDI").val($('#TipoDocumentoIdentidad').val());
+        $('#TipoDocumentoIdentidad').val($('#cboTipoDI').val());
     });
 </script>    
 }
@@ -46,30 +42,6 @@
         <legend>Medico</legend>
 
         @Html.HiddenFor(model => model.Id)
-
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.IdSesion)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.IdSesion)
-            @Html.ValidationMessageFor(model => model.IdSesion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaUltimaTransaccion)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.FechaUltimaTransaccion)
-            @Html.ValidationMessageFor(model => model.FechaUltimaTransaccion)
-        </div>*@
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaRegistro)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.FechaRegistro, new {style="width:120px;", @readonly = "readonly", maxlength=10,  @Value = Model.FechaRegistro.ToString("dd/MM/yyyy")})
-            @Html.ValidationMessageFor(model => model.FechaRegistro)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nombres)
@@ -112,13 +84,15 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.LabelFor(model => model.TipoDocumentoIdentidad)
         </div>
+
         <div class="editor-field">
-            @*@Html.DropDownList("cboTipoDI", "--Seleccione tipo de documento--")*@
-            @Html.DropDownList("cboTipoDI", "CertificadoNacimiento")
-            @Html.TextBoxFor(model => model.IdTipoDocumentoIdentidad, new {style="width:10px; visibility:hidden" })
-            @Html.ValidationMessageFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.DropDownList("cboTipoDI", "... Seleccione Tipo de Documento ...")
+            @*@Html.DropDownList("cboTipoDI", "CertificadoNacimiento")*@
+
+            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width:10px; visibility:hidden0" })
+            @Html.ValidationMessageFor(model => model.TipoDocumentoIdentidad)
         </div>
 
         <div class="editor-label">
@@ -130,11 +104,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdLocalidadNacimiento)
+            @Html.LabelFor(model => model.LocalidadNacimiento)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.IdLocalidadNacimiento)
-            @Html.ValidationMessageFor(model => model.IdLocalidadNacimiento)
+            @Html.TextBoxFor(model => model.LocalidadNacimiento)
+            @Html.ValidationMessageFor(model => model.LocalidadNacimiento)
         </div>
 
         <div class="editor-label">
