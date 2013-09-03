@@ -35,6 +35,7 @@ namespace Bja.Entidades
         public String AutorizadoPor { get; set; }
         public String CargoAutorizador { get; set; }
 
-        public virtual List<ControlMenor> ControlesMenor { get; set; }
+        public List<ControlMenor> ControlesMenor { get; set; }
+        public List<Envio> Envios { get; set; }
     }
 }

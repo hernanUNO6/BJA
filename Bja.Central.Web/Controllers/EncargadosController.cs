@@ -59,10 +59,13 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Encargado encargado)
         {
+            encargado.Id = IdentifierGenerator.NewId();
             encargado.IdSesion = 1;
-            encargado.FechaUltimaTransaccion = System.DateTime.Now;
-            encargado.FechaRegistro = System.DateTime.Now;
-            //encargado.IdTipoEstadoRegistro = (long)TipoEstadoRegistro.Vigente;
+            encargado.FechaUltimaTransaccion = DateTime.Now;
+            encargado.FechaRegistro = DateTime.Now;
+            encargado.EstadoRegistro = (int)TipoEstadoRegistro.VigenteNuevoRegistro;
+            encargado.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            encargado.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
@@ -84,8 +87,9 @@ namespace Bja.Central.Web.Controllers
             }
             ViewBag.cboTipoEncargado = (from TipoEncargado e in Enum.GetValues(typeof(TipoEncargado))
                                         select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
-            ViewBag.cboTipoDI = (from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
-                                 select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() });
+            ViewBag.cboTipoDI = new SelectList((from TipoDocumentoIdentidad e in Enum.GetValues(typeof(TipoDocumentoIdentidad))
+                                                select new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() }), "Value", "Text", (int)encargado.TipoDocumentoIdentidad);
+
             return View(encargado);
         }
 
@@ -98,8 +102,11 @@ namespace Bja.Central.Web.Controllers
             if (ModelState.IsValid)
             {
                 encargado.IdSesion = 1;
-                encargado.FechaUltimaTransaccion = System.DateTime.Now;
-                encargado.FechaRegistro = System.DateTime.Now;
+                encargado.FechaUltimaTransaccion = DateTime.Now;
+                encargado.FechaRegistro = DateTime.Now;
+                encargado.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                encargado.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                encargado.DescripcionEstadoSincronizacion = "";
 
                 modEncargado.Editar(encargado);
                 return RedirectToAction("Index");

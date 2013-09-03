@@ -53,9 +53,12 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Reclamo reclamo)
         {
+            reclamo.Id = IdentifierGenerator.NewId();
             reclamo.IdSesion = 1;
-            reclamo.FechaUltimaTransaccion = System.DateTime.Now;
-            reclamo.FechaRegistro = System.DateTime.Now;
+            reclamo.FechaUltimaTransaccion = DateTime.Now;
+            reclamo.FechaRegistro = DateTime.Now;
+            reclamo.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            reclamo.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
@@ -89,8 +92,10 @@ namespace Bja.Central.Web.Controllers
             if (ModelState.IsValid)
             {
                 reclamo.IdSesion = 1;
-                reclamo.FechaUltimaTransaccion = System.DateTime.Now;
-                reclamo.FechaRegistro = System.DateTime.Now;
+                reclamo.FechaUltimaTransaccion = DateTime.Now;
+                reclamo.FechaRegistro = DateTime.Now;
+                reclamo.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                reclamo.DescripcionEstadoSincronizacion = "";
 
                 modReclamo.Editar(reclamo);
                 return RedirectToAction("Index");

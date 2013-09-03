@@ -23,9 +23,9 @@ namespace Bja.Entidades
         public string Observaciones { get; set; }
 
         public long IdMedico { get; set; }
-        public virtual Medico Medico { get; set; }
+        public Medico Medico { get; set; }
 
         public long IdEstablecimientoSalud { get; set; }
-        public virtual EstablecimientoSalud EstablecimientoSalud { get; set; }
+        public EstablecimientoSalud EstablecimientoSalud { get; set; }
     }
 }

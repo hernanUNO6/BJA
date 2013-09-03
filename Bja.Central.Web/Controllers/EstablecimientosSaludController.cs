@@ -30,6 +30,7 @@ namespace Bja.Central.Web.Controllers
         public ActionResult Details(long id = 0)
         {
             EstablecimientoSalud estableSalud = modEstableSalud.Buscar(id);
+            estableSalud.RedSalud = modRedSalud.Buscar(estableSalud.IdRedSalud);
             if (estableSalud == null)
             {
                 return HttpNotFound();
@@ -63,6 +64,8 @@ namespace Bja.Central.Web.Controllers
             estableSalud.FechaUltimaTransaccion = DateTime.Now;
             estableSalud.FechaRegistro = DateTime.Now;
             estableSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            estableSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            estableSalud.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
@@ -103,47 +106,51 @@ namespace Bja.Central.Web.Controllers
             return View(estableSalud);
         }
 
-        ////
-        //// POST: /EstablecimientosSalud/Edit/5
+        //
+        // POST: /EstablecimientosSalud/Edit/5
 
-        //[HttpPost]
-        //public ActionResult Edit(EstablecimientoSalud estableSalud)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        estableSalud.IdSesion = 1;
-        //        estableSalud.FechaUltimaTransaccion = System.DateTime.Now;
-        //        estableSalud.FechaRegistro = System.DateTime.Now;
+        [HttpPost]
+        public ActionResult Edit(EstablecimientoSalud estableSalud)
+        {
+            if (ModelState.IsValid)
+            {
+                estableSalud.IdSesion = 1;
+                estableSalud.FechaUltimaTransaccion = DateTime.Now;
+                estableSalud.FechaRegistro = DateTime.Now;
+                estableSalud.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                estableSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                estableSalud.DescripcionEstadoSincronizacion = "";
 
-        //        modEstableSalud.Editar(estableSalud);
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.IdMunicipio = new SelectList(modMunicipio.Listar(), "Id", "Descripcion", estableSalud.IdMunicipio);
-        //    return View(estableSalud);
-        //}
+                modEstableSalud.Editar(estableSalud);
+                return RedirectToAction("Index");
+            }
+            //ViewBag.IdRedSalud = new SelectList(modRedSalud.Listar(), "Id", "Descripcion", estableSalud.IdRedSalud);
+            return View(estableSalud);
+        }
 
-        ////
-        //// GET: /EstablecimientosSalud/Delete/5
+        //
+        // GET: /EstablecimientosSalud/Delete/5
 
-        //public ActionResult Delete(long id = 0)
-        //{
-        //    EstablecimientoSalud estableSalud = modEstableSalud.Buscar(id);
-        //    if (estableSalud == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(estableSalud);
-        //}
+        public ActionResult Delete(long id = 0)
+        {
+            EstablecimientoSalud estableSalud = modEstableSalud.Buscar(id);
+            estableSalud.RedSalud = modRedSalud.Buscar(estableSalud.IdRedSalud);
+            if (estableSalud == null)
+            {
+                return HttpNotFound();
+            }
+            return View(estableSalud);
+        }
 
-        ////
-        //// POST: /EstablecimientosSalud/Delete/5
+        //
+        // POST: /EstablecimientosSalud/Delete/5
 
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(long id)
-        //{
-        //    modEstableSalud.Eliminar(id);
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(long id)
+        {
+            modEstableSalud.Eliminar(id);
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

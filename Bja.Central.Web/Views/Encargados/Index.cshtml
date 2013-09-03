@@ -30,16 +30,13 @@
             @Html.DisplayNameFor(model => model.DocumentoIdentidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdTipoDocumentoIdentidad)
+            @Html.DisplayNameFor(model => model.TipoDocumentoIdentidad)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaNacimiento)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Sexo)
-        </th>
-        <th>
-            Es Reg
         </th>
         <th></th>
     </tr>
@@ -65,17 +62,14 @@
             @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
         </td>
         <td>
-            @ViewBag.TiposDI[item.IdTipoDocumentoIdentidad]
+            @*@ViewBag.TiposDI[item.TipoDocumentoIdentidad]*@
+            @Html.DisplayFor(modelItem => item.TipoDocumentoIdentidad)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaNacimiento)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Sexo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdTipoEstadoRegistro)
-            @*@ViewBag.TiposEstadosRegistros[item.IdTipoEstadoRegistro]*@
         </td>
         <td>
             @{ string nombreControlador = "Encargados"; }

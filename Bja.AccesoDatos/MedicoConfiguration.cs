@@ -15,8 +15,9 @@ namespace Bja.AccesoDatos
             ToTable("Medicos");
             HasKey(m => m.Id);
             Property(m => m.IdSesion).IsRequired();
-            Property(m => m.FechaRegistro).IsRequired();
             Property(m => m.FechaUltimaTransaccion).IsRequired();
+            Property(m => m.FechaRegistro).IsRequired();
+            Property(m => m.EstadoRegistro).IsRequired();
             Property(m => m.EstadoSincronizacion).IsRequired();
             Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 

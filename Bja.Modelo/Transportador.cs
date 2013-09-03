@@ -27,21 +27,27 @@ namespace Bja.Modelo
             nuevoEnvio.FechaEnvio = DateTime.Now;
             nuevoEnvio.CodigoVerificacion = "";
 
-            //buscar registros de madres nuevas
-            nuevoEnvio.NuevasMadres = (from m in context.Madres
-                                     where m.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+            //buscar registros de madres nuevas, modificadas, borradas
+            nuevoEnvio.Madres = (from m in context.Madres
+                                     where m.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                      select m).ToList();
-            nuevoEnvio.NuevosTutores = (from t in context.Tutores
-                                       where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+            nuevoEnvio.Tutores = (from t in context.Tutores
+                                  where t.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                        select t).ToList();
-            nuevoEnvio.NuevosMenores = (from t in context.Menores
-                                        where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+            nuevoEnvio.Menores = (from t in context.Menores
+                                  where t.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                         select t).ToList();
-            nuevoEnvio.NuevosControlesMadre = (from m in context.ControlesMadre
-                                       where m.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+            nuevoEnvio.CorresponsabilidadMadres = (from m in context.CorresponsabilidadesMadre
+                                         where m.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
+                                         select m).ToList();
+            nuevoEnvio.ControlMadres = (from m in context.ControlesMadre
+                                         where m.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                        select m).ToList();
-            nuevoEnvio.NuevosControlesMenor = (from t in context.ControlesMenor
-                                        where t.EstadoRegistro == TipoEstadoRegistro.VigenteNuevoRegistro
+            nuevoEnvio.CorresponsabilidadMenores = (from m in context.CorresponsabilidadesMenor
+                                                    where m.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
+                                                    select m).ToList();
+            nuevoEnvio.ControlMenores = (from t in context.ControlesMenor
+                                         where t.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                         select t).ToList();
 
             return nuevoEnvio;
@@ -49,9 +55,47 @@ namespace Bja.Modelo
 
         public static void generarArchivoEnvio(String path)
         {
+            BjaContext context = new BjaContext();
+
             Envio datosEnvio = generarEnvio();
 
+            context.Envios.Add(datosEnvio);
+
             Serializer.serializar(datosEnvio, path);
+
+            //cambiar estados de registros a generados
+            datosEnvio.Madres.ForEach(delegate(Madre madre)
+            {
+                madre.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+
+            datosEnvio.Tutores.ForEach(delegate(Tutor registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+
+            datosEnvio.Menores.ForEach(delegate(Menor registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+            datosEnvio.CorresponsabilidadMadres.ForEach(delegate(CorresponsabilidadMadre registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+            datosEnvio.ControlMadres.ForEach(delegate(ControlMadre registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+            datosEnvio.CorresponsabilidadMenores.ForEach(delegate(CorresponsabilidadMenor registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+            datosEnvio.ControlMenores.ForEach(delegate(ControlMenor registro)
+            {
+                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+            });
+
+            context.SaveChanges();
         }
 
     }

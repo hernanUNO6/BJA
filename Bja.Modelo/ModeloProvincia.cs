@@ -49,6 +49,13 @@ namespace Bja.Modelo
             db.SaveChanges();
         }
 
+        public void EliminarTodo()
+        {
+            foreach (var item in db.Provincias)
+                db.Provincias.Remove(item);
+            db.SaveChanges();
+        }
+
         public List<Provincia> GetProvinciasPorDepartamento(string idDepto)
         {
             Int64 Identificador = Convert.ToInt64(idDepto);

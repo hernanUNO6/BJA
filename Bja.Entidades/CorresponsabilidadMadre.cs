@@ -37,6 +37,7 @@ namespace Bja.Entidades
         public String AutorizadoPor { get; set; }
         public String CargoAutorizador { get; set; }
 
-        public virtual List<ControlMadre> ControlesMadre { get; set; }
+        public List<ControlMadre> ControlesMadre { get; set; }
+        public List<Envio> Envios { get; set; }
     }
 }

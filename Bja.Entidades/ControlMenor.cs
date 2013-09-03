@@ -38,5 +38,7 @@ namespace Bja.Entidades
         public String Observaciones { get; set; }
         public TipoEstadoPago EstadoPago { get; set; }
         public TipoBeneficiario TipoBeneficiario { get; set; }
+
+        public List<Envio> Envios { get; set; }
     }
 }

@@ -22,8 +22,8 @@ namespace Bja.Entidades
         public string Descripcion { get; set; }
 
         public long IdDepartamento { get; set; }
-        public virtual Departamento Departamento { get; set; }
+        public Departamento Departamento { get; set; }
 
-        public virtual List<Municipio> Municipios { get; set; }
+        public List<Municipio> Municipios { get; set; }
     }
 }

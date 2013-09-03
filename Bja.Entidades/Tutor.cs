@@ -34,5 +34,7 @@ namespace Bja.Entidades
         public bool Defuncion { get; set; }
         public String Observaciones { get; set; }
         public String Sexo { get; set; }
+
+        public List<Envio> Envios { get; set; }
     }
 }

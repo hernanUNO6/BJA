@@ -30,7 +30,6 @@ namespace Bja.Entidades
         public String Sexo { get; set; } //char(1)
         public String LocalidadNacimiento { get; set; }
         public String Observaciones { get; set; }
-        //public long IdTipoEstadoRegistro { get; set; }
         
     }
 }

@@ -54,9 +54,13 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Municipio municipio)
         {
+            municipio.Id = IdentifierGenerator.NewId();
             municipio.IdSesion = 1;
-            municipio.FechaUltimaTransaccion = System.DateTime.Now;
-            municipio.FechaRegistro = System.DateTime.Now;
+            municipio.FechaUltimaTransaccion = DateTime.Now;
+            municipio.FechaRegistro = DateTime.Now;
+            municipio.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            municipio.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            municipio.DescripcionEstadoSincronizacion = "";
 
             if (ModelState.IsValid)
             {
@@ -97,8 +101,11 @@ namespace Bja.Central.Web.Controllers
             if (ModelState.IsValid)
             {
                 municipio.IdSesion = 1;
-                municipio.FechaUltimaTransaccion = System.DateTime.Now;
-                municipio.FechaRegistro = System.DateTime.Now;
+                municipio.FechaUltimaTransaccion = DateTime.Now;
+                municipio.FechaRegistro = DateTime.Now;
+                municipio.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+                municipio.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+                municipio.DescripcionEstadoSincronizacion = "";
 
                 modMunicipio.Editar(municipio);
                 return RedirectToAction("Index");
