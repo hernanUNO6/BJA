@@ -172,7 +172,7 @@ namespace Bja.Registro
                     modelomadre.Crear(_madre);
 
                     grupofamiliar.IdFamilia = IdFamilia;
-                    grupofamiliar.IdReferencial = _madre.Id;
+                    grupofamiliar.IdMadre = _madre.Id;
                     grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Madre;
 
                     modelogrupofamiliar.Crear(grupofamiliar);

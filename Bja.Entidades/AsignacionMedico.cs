@@ -27,5 +27,8 @@ namespace Bja.Entidades
 
         public long IdEstablecimientoSalud { get; set; }
         public EstablecimientoSalud EstablecimientoSalud { get; set; }
+
+        //Para establecer el establecimiento de salud para la operación actual
+        public bool? OperacionActual { get; set; }
     }
 }

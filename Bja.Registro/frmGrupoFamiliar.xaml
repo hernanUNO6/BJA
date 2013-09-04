@@ -45,7 +45,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lblMenores" Content="Menores" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,147,0,0" FontWeight="Bold"/>
+        <Label x:Name="lblMenores" Content="Niño/Niña" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,147,0,0" FontWeight="Bold"/>
         <Button x:Name="cmdNuevoMenor" Content="Nuevo Menor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="667,153,0,0" Click="cmdNuevoMenor_Click"/>
         <DataGrid x:Name="grdMenor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="134" Margin="10,178,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="grdMenor_SelectionChanged">
             <DataGrid.Columns>
@@ -79,7 +79,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lblTutores" Content="Tutores" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,317,0,0" FontWeight="Bold"/>
+        <Label x:Name="lblTutores" Content="Titulares de Pago" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,317,0,0" FontWeight="Bold"/>
         <Button x:Name="cmdNuevoTutor" Content="Nuevo Tutor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="667,323,0,0" Click="cmdNuevoTutor_Click"/>
         <DataGrid x:Name="grdTutor" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="68" Margin="10,348,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="grdTutor_SelectionChanged">
             <DataGrid.Columns>

@@ -208,7 +208,7 @@ namespace Bja.Registro
                     modelomenor.Crear(_menor);
 
                     grupofamiliar.IdFamilia = IdFamilia;
-                    grupofamiliar.IdReferencial = _menor.Id;
+                    grupofamiliar.IdMenor = _menor.Id;
                     grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
 
                     modelogrupofamiliar.Crear(grupofamiliar);

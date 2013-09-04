@@ -15,19 +15,13 @@ namespace Bja.Modelo
             Database.SetInitializer(
                 new DropCreateDatabaseIfModelChanges<BjaContext>());
 
-            var rbac = new Rbac();
-
-            if (rbac.authenticate("admin", "admin")==null)
-            {
-                //inicializa base de datos con session 1
-                long session = 1;
-                rbac.insertUser("admin", "Admin", "admin", 1, session);
-            }
-
-            //adiciona registros de configuración
-            AdministradorConfiguracion.Crear("idMedicoAsignado", "general", "123", Entidades.TipoDato.enterolargo);
-            AdministradorConfiguracion.Crear("idEstablecimientoSalud", "general", "123", Entidades.TipoDato.enterolargo);
-
+            //adiciona registros de configuración 
+            //Lo siguiente en lo futuro hay que quitar
+            // Se asumen que estos vendrán establecidos por la central
+            AdministradorConfiguracion.Crear("ControlesDeMadrePreParto", "Madre", "4", Entidades.TipoDato.enterolargo);
+            AdministradorConfiguracion.Crear("ControlesDeMadreParto", "Madre", "1", Entidades.TipoDato.enterolargo);
+            AdministradorConfiguracion.Crear("ControlesDeMadrePostParto", "Madre", "1", Entidades.TipoDato.enterolargo);
+            AdministradorConfiguracion.Crear("ControlesDeMenor", "Menor", "12", Entidades.TipoDato.enterolargo);
         }
     }
 }

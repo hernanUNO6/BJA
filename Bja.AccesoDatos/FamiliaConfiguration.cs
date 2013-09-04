@@ -35,7 +35,8 @@ namespace Bja.AccesoDatos
             HasRequired(f => f.Departamento).WithMany().HasForeignKey(f => f.IdDepartamento);
             HasRequired(f => f.Municipio).WithMany().HasForeignKey(f => f.IdMunicipio);
             HasRequired(f => f.Provincia).WithMany().HasForeignKey(f => f.IdProvincia);
-            HasRequired(f => f.Departamento).WithMany().HasForeignKey(f => f.IdDepartamento);
+            //Por duplicidad
+            //HasRequired(f => f.Departamento).WithMany().HasForeignKey(f => f.IdDepartamento);
         }
     }
 }

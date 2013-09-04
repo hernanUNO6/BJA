@@ -18,7 +18,11 @@ namespace Bja.Entidades
 
         public long IdFamilia { get; set; }
         public Familia Familia { get; set; }
-        public long IdReferencial { get; set; } // Id de Madre, Menor, Tutor
+        public long? IdMenor { get; set; }
+        public long? IdMadre { get; set; }
+        public long? IdTutor { get; set; }
+        public long? IdTipoParentesco { get; set; }
         public TipoGrupoFamiliar TipoGrupoFamiliar { get; set; } // Tipo: Madre, Menor, Tutor
+        public bool? TitularPagoVigente { get; set; }
     }
 }

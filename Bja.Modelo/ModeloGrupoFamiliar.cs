@@ -43,7 +43,10 @@ namespace Bja.Modelo
             _grupofamiliar.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
 
             _grupofamiliar.IdFamilia = grupofamiliar.IdFamilia;
-            _grupofamiliar.IdReferencial = grupofamiliar.IdReferencial;
+            _grupofamiliar.IdMadre = grupofamiliar.IdMadre;
+            _grupofamiliar.IdMenor = grupofamiliar.IdMenor;
+            _grupofamiliar.IdTutor = grupofamiliar.IdTutor;
+            _grupofamiliar.IdTipoParentesco = grupofamiliar.IdTipoParentesco;
             _grupofamiliar.TipoGrupoFamiliar = grupofamiliar.TipoGrupoFamiliar;
 
             context.SaveChanges();
