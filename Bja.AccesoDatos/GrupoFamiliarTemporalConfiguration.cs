@@ -24,9 +24,14 @@ namespace Bja.AccesoDatos
             Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(m => m.IdFamilia).IsRequired();
-            Property(m => m.IdReferencial).IsRequired();
+            Property(m => m.IdMenor).IsOptional();
+            Property(m => m.IdMadre).IsOptional();
+            Property(m => m.IdTutor).IsOptional();
+            Property(m => m.IdTipoParentesco).IsOptional();
             Property(m => m.TipoGrupoFamiliar).IsRequired();
+            Property(m => m.TitularPagoVigente).IsOptional();
 
+            //Relaciones
             HasRequired(m => m.Familia).WithMany().HasForeignKey(m => m.IdFamilia).WillCascadeOnDelete(false);
         }
     }

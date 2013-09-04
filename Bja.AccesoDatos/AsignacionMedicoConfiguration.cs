@@ -25,6 +25,9 @@ namespace Bja.AccesoDatos
             Property(am => am.FechaFin).IsRequired();
             Property(am => am.Observaciones).HasMaxLength(300);
 
+            Property(am => am.OperacionActual).IsOptional();
+
+            //Relaciones
             HasRequired(am => am.Medico).WithMany().HasForeignKey(am => am.IdMedico);
             HasRequired(am => am.EstablecimientoSalud).WithMany().HasForeignKey(am => am.IdEstablecimientoSalud).WillCascadeOnDelete(false);
         }

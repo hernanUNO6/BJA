@@ -144,12 +144,12 @@ namespace Bja.Modelo
       {//ojo filtrar los no borrados
           List<Madre> madre = new List<Madre>();
 
-          madre = (from m in context.Madres 
+          madre = (from m in context.Madres
                    where m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                    from gf in context.GruposFamiliares
-                   where (gf.IdFamilia == IdFamilia) && 
-                         (gf.IdReferencial == m.Id) &&
-                         (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) && 
+                   where (gf.IdFamilia == IdFamilia) &&
+                         (gf.IdMadre == m.Id) &&
+                         (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) &&
                          (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    select m).Distinct().ToList<Madre>();
 
@@ -160,11 +160,11 @@ namespace Bja.Modelo
       {//ojo filtrar los no borrados
           List<RegistroParaCombo> tutor = new List<RegistroParaCombo>();
 
-          tutor = (from m in context.Madres 
+          tutor = (from m in context.Madres
                    where m.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                    from gf in context.GruposFamiliares
                    where (gf.IdFamilia == IdFamilia) &&
-                         (gf.IdReferencial == m.Id) &&
+                         (gf.IdMadre == m.Id) &&
                          (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre) &&
                          (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                    select new RegistroParaCombo

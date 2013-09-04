@@ -28,6 +28,30 @@ namespace Bja.Registro
             this.Cursor = Cursors.Arrow;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ModeloAsignacionMedico modeloasignacionmedico = new ModeloAsignacionMedico();
+            AsignacionMedico asignacionmedico = new AsignacionMedico();
+
+            //Por ahora el médico tiene código 1
+            asignacionmedico = modeloasignacionmedico.EstablecimientoDeSaludHabilitado(1);
+
+            if (asignacionmedico == null)
+            {
+                menFamilia.IsEnabled = false;
+                menBusFam.IsEnabled = false;
+                menNueFam.IsEnabled = false;
+                menDatos.IsEnabled = false;
+                menBusMad.IsEnabled = false;
+                menBusMen.IsEnabled = false;
+                menBusTut.IsEnabled = false;
+                menBusAva.IsEnabled = false;
+                menReporte.IsEnabled = false;
+                menRep01.IsEnabled = false;
+                menRep02.IsEnabled = false;
+            }
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             SessionManager.endSession();
@@ -220,6 +244,32 @@ namespace Bja.Registro
             objTutorWindow.ShowDialog();
             objTutorWindow = null;
             this.Cursor = Cursors.Arrow;
+        }
+
+        private void menOperacion_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmOperacion objOperacionWindow = new frmOperacion();
+            objOperacionWindow.Owner = this;
+            objOperacionWindow.ShowDialog();
+            this.Cursor = Cursors.Arrow;
+
+            if (objOperacionWindow.Resultado == true)
+            {
+                menFamilia.IsEnabled = true;
+                menBusFam.IsEnabled = true;
+                menNueFam.IsEnabled = true;
+                menDatos.IsEnabled = true;
+                menBusMad.IsEnabled = true;
+                menBusMen.IsEnabled = true;
+                menBusTut.IsEnabled = true;
+                menBusAva.IsEnabled = true;
+                menReporte.IsEnabled = true;
+                menRep01.IsEnabled = true;
+                menRep02.IsEnabled = true;
+            }
+
+            objOperacionWindow = null;
         }
 
     }

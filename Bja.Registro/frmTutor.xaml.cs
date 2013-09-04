@@ -190,7 +190,7 @@ namespace Bja.Registro
                     modelotutor.Crear(_tutor);
 
                     grupofamiliar.IdFamilia = IdFamilia;
-                    grupofamiliar.IdReferencial = _tutor.Id;
+                    grupofamiliar.IdTutor = _tutor.Id;
                     grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
 
                     modelogrupofamiliar.Crear(grupofamiliar);

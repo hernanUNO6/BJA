@@ -58,5 +58,81 @@ namespace Bja.Modelo
         //                             select m).ToList();
         //    return provs;
         //}
+
+        public AsignacionMedico EstablecimientoDeSaludHabilitado(long IdMedico)
+        {
+            AsignacionMedico asignacionmedico = null;
+
+            asignacionmedico = (from am in db.AsignacionesMedico
+                                where (am.IdMedico == IdMedico) && 
+                                      (am.OperacionActual == true)
+                                select am).FirstOrDefault();
+
+            return asignacionmedico;
+        }
+
+        public List<RegistroParaCombo> ListarEstablecimientoDeSaludHabilitado(long IdMedico)
+        {
+            List<RegistroParaCombo> asignacionmedico = new List<RegistroParaCombo>();
+
+            asignacionmedico = (from am in db.AsignacionesMedico
+                                where (am.IdMedico == IdMedico) &&
+                                      (am.OperacionActual == true)
+                                select new RegistroParaCombo
+                                 {
+                                     Id = am.IdEstablecimientoSalud,
+                                     Descripcion = am.EstablecimientoSalud.Nombre
+                                 }).ToList();
+
+            return asignacionmedico;
+        }
+
+        public List<RegistroParaCombo> ListarEstablecimientoDeSaludConfigurado(long IdMedico)
+        {
+            List<RegistroParaCombo> asignacionmedico = new List<RegistroParaCombo>();
+
+            asignacionmedico = (from am in db.AsignacionesMedico
+                                where am.IdMedico == IdMedico
+                                select new RegistroParaCombo
+                                {
+                                    Id = am.IdEstablecimientoSalud,
+                                    Descripcion = am.EstablecimientoSalud.Nombre
+                                }).ToList();
+
+            return asignacionmedico;
+        }
+
+        public void EstablecerEstablecimientoDeSaludComoVigenteParaUnMedico(long IdMedico, long IdEstablecimientoSalud)
+        {
+            AsignacionMedico _asignacionmedico = null;
+
+            var asignacionmedico = (from am in db.AsignacionesMedico
+                          where am.IdMedico == IdMedico &&
+                                am.IdEstablecimientoSalud != IdEstablecimientoSalud
+                          select am).ToList();
+
+            foreach (var g in asignacionmedico)
+            {
+                g.OperacionActual = false;
+            }
+
+            db.SaveChanges();
+
+            _asignacionmedico = (from am in db.AsignacionesMedico
+                                 where (am.IdMedico == IdMedico) &&
+                                       (am.IdEstablecimientoSalud == IdEstablecimientoSalud)
+                                 select am).FirstOrDefault();
+
+            _asignacionmedico.IdSesion = SessionManager.getCurrentSession().Id;
+            _asignacionmedico.FechaUltimaTransaccion = DateTime.Now;
+            _asignacionmedico.FechaRegistro = DateTime.Now;
+            _asignacionmedico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            _asignacionmedico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+
+            _asignacionmedico.OperacionActual = true;
+
+            db.SaveChanges();
+        }
+
     }
 }

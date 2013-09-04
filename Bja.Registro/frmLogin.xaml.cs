@@ -59,10 +59,9 @@ namespace Bja.Registro
             User user = rbac.authenticate(this.txtUsuario.Text, this.pasContrasena.Password);
             if (user != null)
             {
-                //MessageBox.Show("Acceso concedido.","Mensaje");
                 //inicia session
                 SessionManager.initSession(user);
-                //rrscgyov
+
                 this.Hide();
 
                 frmPrincipal objPrincipal = new frmPrincipal();

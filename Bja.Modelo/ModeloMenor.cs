@@ -146,11 +146,11 @@ namespace Bja.Modelo
     {//ojo filtrar los no borrados
         List<Menor> menor = new List<Menor>();
 
-        menor = (from n in context.Menores 
+        menor = (from n in context.Menores
                  where n.EstadoRegistro != TipoEstadoRegistro.BorradoLogico
                  from gf in context.GruposFamiliares
                  where (gf.IdFamilia == IdFamilia) &&
-                       (gf.IdReferencial == n.Id) &&
+                       (gf.IdMenor == n.Id) &&
                        (gf.TipoGrupoFamiliar == TipoGrupoFamiliar.Menor) &&
                        (gf.EstadoRegistro != TipoEstadoRegistro.BorradoLogico)
                  select n).Distinct().ToList<Menor>();
