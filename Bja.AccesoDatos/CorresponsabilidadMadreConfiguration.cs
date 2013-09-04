@@ -41,6 +41,7 @@ namespace Bja.AccesoDatos
             HasRequired(c => c.EstablecimientoSalud).WithMany().HasForeignKey(c => c.IdEstablecimientoSalud).WillCascadeOnDelete(false);
             HasRequired(c => c.Madre).WithMany(m => m.CorresponsabilidadesMadre).HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
             HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
+            HasOptional(c => c.TipoParentesco).WithMany().HasForeignKey(c => c.IdTipoParentesco).WillCascadeOnDelete(false);
         }
     }
 }

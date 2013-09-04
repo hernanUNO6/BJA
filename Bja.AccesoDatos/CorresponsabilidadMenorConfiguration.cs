@@ -39,6 +39,7 @@ namespace Bja.AccesoDatos
             HasRequired(c => c.Menor).WithMany().HasForeignKey(c => c.IdMenor).WillCascadeOnDelete(false);
             HasOptional(c => c.Madre).WithMany().HasForeignKey(c => c.IdMadre).WillCascadeOnDelete(false);
             HasOptional(c => c.Tutor).WithMany().HasForeignKey(c => c.IdTutor).WillCascadeOnDelete(false);
+            HasOptional(c => c.TipoParentesco).WithMany().HasForeignKey(c => c.IdTipoParentesco).WillCascadeOnDelete(false);
         }
     }
 }

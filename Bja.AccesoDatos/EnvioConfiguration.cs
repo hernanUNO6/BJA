@@ -26,6 +26,8 @@ namespace Bja.AccesoDatos
             Property(c => c.CodigoVerificacion).IsRequired().HasMaxLength(128);
 
             //relaciones
+            HasRequired(e => e.Medico).WithMany().HasForeignKey(e => e.IdMedico);
+            HasRequired(e => e.EstablecimientoSalud).WithMany().HasForeignKey(e => e.IdEstablecimientoSalud);
             HasMany(e=> e.Madres).WithMany(m => m.Envios);
             HasMany(e => e.Tutores).WithMany(m => m.Envios);
             HasMany(e => e.Menores).WithMany(m => m.Envios);
@@ -34,6 +36,7 @@ namespace Bja.AccesoDatos
             HasMany(e => e.ControlMadres).WithMany(m => m.Envios);
             HasMany(e => e.CorresponsabilidadMenores).WithMany(m => m.Envios);
             HasMany(e => e.ControlMenores).WithMany(m => m.Envios);
+
         }
     }
 }

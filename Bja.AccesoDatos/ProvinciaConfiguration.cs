@@ -29,7 +29,7 @@ namespace Bja.AccesoDatos
 
             HasRequired(p => p.Departamento)
                 .WithMany(p => p.Provincias)
-                .HasForeignKey(p => p.IdDepartamento);
+                .HasForeignKey(p => p.IdDepartamento).WillCascadeOnDelete(false);
         }
     }
 }

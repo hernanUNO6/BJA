@@ -26,7 +26,7 @@ namespace Bja.AccesoDatos
             Property(d => d.Codigo).IsRequired().HasMaxLength(4);
             Property(d => d.Nombre).IsRequired().HasMaxLength(100);
 
-            HasRequired(r => r.Municipio).WithMany(r => r.RedesSalud).HasForeignKey(r => r.IdMunicipio);
+            HasRequired(r => r.Municipio).WithMany(r => r.RedesSalud).HasForeignKey(r => r.IdMunicipio).WillCascadeOnDelete(false);
         }
     }
 }

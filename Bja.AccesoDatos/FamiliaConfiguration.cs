@@ -29,6 +29,13 @@ namespace Bja.AccesoDatos
             Property(m => m.IdMunicipio).IsRequired();
             Property(m => m.Localidad).IsRequired().HasMaxLength(100);
             Property(m => m.Observaciones).IsOptional().HasMaxLength(1024);
+
+            //relaciones
+            HasRequired(f => f.EstablecimientoSalud).WithMany().HasForeignKey(f => f.IdEstablecimientoSalud);
+            HasRequired(f => f.Departamento).WithMany().HasForeignKey(f => f.IdDepartamento);
+            HasRequired(f => f.Municipio).WithMany().HasForeignKey(f => f.IdMunicipio);
+            HasRequired(f => f.Provincia).WithMany().HasForeignKey(f => f.IdProvincia);
+            HasRequired(f => f.Departamento).WithMany().HasForeignKey(f => f.IdDepartamento);
         }
     }
 }
