@@ -30,6 +30,10 @@ namespace Bja.AccesoDatos
 
             //Relaciones
             HasRequired(m => m.Familia).WithMany().HasForeignKey(m => m.IdFamilia).WillCascadeOnDelete(false);
+            HasOptional(g => g.Madre).WithMany().HasForeignKey(g => g.IdMadre).WillCascadeOnDelete(false);
+            HasOptional(g => g.Menor).WithMany().HasForeignKey(g => g.IdMenor).WillCascadeOnDelete(false);
+            HasOptional(g => g.Tutor).WithMany().HasForeignKey(g => g.IdTutor).WillCascadeOnDelete(false);
+
         }
     }
 }
