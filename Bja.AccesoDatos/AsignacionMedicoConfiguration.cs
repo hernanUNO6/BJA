@@ -25,8 +25,6 @@ namespace Bja.AccesoDatos
             Property(am => am.FechaFin).IsRequired();
             Property(am => am.Observaciones).HasMaxLength(300);
 
-            Property(am => am.IdMedico).IsRequired();
-            Property(am => am.IdEstablecimientoSalud).IsRequired();
             Property(am => am.OperacionActual).IsOptional();
 
             //Relaciones
