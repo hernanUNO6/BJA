@@ -14,11 +14,11 @@
         <Label x:Name="lblDepartamento" Content="La Paz" Height="28" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblEstSal" Content="Establecimiento:" Height="28" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="94" />
         <Label x:Name="lblEstablecimiento" Content="Centro de Salud de Viloco" Height="28" HorizontalAlignment="Left" Margin="119,70,0,0" VerticalAlignment="Top" Width="156" />
-        <Label x:Name="lblMadrePago" Content="Madre - Para efectos de pago" Height="28" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-        <Label x:Name="lblNombreMadre" Content="Nombres:" Height="28" HorizontalAlignment="Left" Margin="303,44,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblNombresMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="370,44,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento:" Height="28" HorizontalAlignment="Left" Margin="280,70,0,0" VerticalAlignment="Top" />
-        <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="370,70,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblMadrePago" Content="Madre" Height="28" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label x:Name="lblNombreMadre" Content="Nombre" Height="28" HorizontalAlignment="Left" Margin="309,44,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblNombresMadre" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="368,44,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblNacimientoMadre" Content="F. Nacimiento" Height="28" HorizontalAlignment="Left" Margin="280,70,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblFechaNacimientoMadre" Content="Nacimiento" Height="28" HorizontalAlignment="Left" Margin="368,70,0,0" VerticalAlignment="Top" />
         <Label x:Name="lblFechaInscripcion" Content="Fecha de Inscripción" Height="28" HorizontalAlignment="Left" Margin="261,110,0,0" VerticalAlignment="Top" Width="122" />
         <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="388,110,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="lblFechaFUM" Content="Fecha Ultima Menstruación" Height="28" HorizontalAlignment="Left" Margin="190,166,0,0" VerticalAlignment="Top" Width="154" />
@@ -38,7 +38,7 @@
                 <DataGridTextColumn Header="Peso (Kg)" Binding="{Binding PesoKg, StringFormat=\{0:n2\}}" />
                 <DataGridTextColumn Header="Fecha" Binding="{Binding FechaControl, StringFormat=\{0:dd/MM/yyyy\}}" />
                 <DataGridTextColumn Header="Tipo" Binding="{Binding TipoControlMadre}" />
-                <DataGridTextColumn Header="Beneficiario" Binding="{Binding TipoBeneficiario}" />
+                <DataGridTextColumn Header="Titular de Pago" Binding="{Binding TipoBeneficiario}" />
                 <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPago}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -65,11 +65,9 @@
         <TextBox x:Name="txtCargo" Height="23" HorizontalAlignment="Left" Margin="482,481,0,0" VerticalAlignment="Top" Width="257" IsEnabled="False" />
         <Button x:Name="cmdGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="809,454,0,0" VerticalAlignment="Top" Width="111" Click="cmdGuardar_Click"/>
         <Button x:Name="cmdSalir" Content="Cerrar" HorizontalAlignment="Left" Margin="809,494,0,0" VerticalAlignment="Top" Width="111" Click="cmdSalir_Click"/>
-        <Label x:Name="lblTutorPago" Content="Tutor - Para efectos de pago" Height="28" HorizontalAlignment="Left" Margin="616,20,0,0" VerticalAlignment="Top" FontWeight="Bold" />
-        <Label x:Name="lblTutor" Content="Tutor" HorizontalAlignment="Left" Margin="657,44,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cboTutor"  HorizontalAlignment="Left" Margin="700,47,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label x:Name="lblTitularDePago" Content="Titular de Pago" Height="28" HorizontalAlignment="Left" Margin="616,20,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label x:Name="lblTitular" Content="Nombre" HorizontalAlignment="Left" Margin="641,44,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblParentesco" Content="Parentesco" HorizontalAlignment="Left" Margin="627,70,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cboTipoParentesco"  HorizontalAlignment="Left" Margin="700,75,0,0" VerticalAlignment="Top" Width="210"/>
         <GroupBox x:Name="gbxTipo" Header="Tipo" BorderBrush="Black" Margin="17,140,750,353" FontWeight="Bold" >
             <StackPanel Orientation="Horizontal" Margin="0,0,0,-12">
                 <RadioButton x:Name="rdbNueva" Margin="3,3,0,3" GroupName="Tipo" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Nueva"/>
@@ -86,5 +84,7 @@
                 <RadioButton x:Name="rdbIncumplimiento" Margin="3,3,0,0" GroupName="Salida" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Incumplimiento" IsEnabled="False"/>
             </StackPanel>
         </GroupBox>
+        <Label x:Name="lblNombreTitular" Content="Nombres" Height="28" HorizontalAlignment="Left" Margin="700,44,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblParentescoTitular" Content="Parentesco" Height="28" HorizontalAlignment="Left" Margin="700,70,0,0" VerticalAlignment="Top" />
     </Grid>
 </Window>

@@ -26,6 +26,7 @@ namespace Bja.Registro
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Tutor _tutor = new Tutor();
+        private GrupoFamiliar _grupofamiliar = new GrupoFamiliar();
         public bool Resultado { get; set; }
 
         public frmTutor()
@@ -41,14 +42,34 @@ namespace Bja.Registro
 
             SoporteCombo.cargarEnumerador(cboTipoDocumentoIdentidad, typeof(TipoDocumentoIdentidad));
             ModeloDepartamento modelodepartamento = new ModeloDepartamento();
+
             this.cboDepartamento.ItemsSource = modelodepartamento.Listar();
             this.cboDepartamento.DisplayMemberPath = "Descripcion";
             this.cboDepartamento.SelectedValuePath = "Id";
+
+            ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+
+            this.cboTipoParentesco.ItemsSource = modelotipoparentesco.Listar();
+            this.cboTipoParentesco.DisplayMemberPath = "Descripcion";
+            this.cboTipoParentesco.SelectedValuePath = "Id";
+
+            if (IdFamilia > 0)
+            {
+                ModeloFamilia modelofamilia = new ModeloFamilia();
+                Familia familia = new Familia();
+
+                familia = modelofamilia.Recuperar(IdFamilia);
+                this.txtPaternoFamilia.Text = familia.PrimerApellido;
+                this.txtMaternoFamilia.Text = familia.SegundoApellido;
+            }
+
             if (IdSeleccionado == 0)
             {
                 this.cboTipoDocumentoIdentidad.SelectedIndex = -1;
                 this.dtpFechaNacimiento.SelectedDate = DateTime.Today;
                 this.cboDepartamento.SelectedIndex = -1;
+
+                this.cboTipoParentesco.SelectedIndex = -1;
             }
             else
             {
@@ -56,7 +77,18 @@ namespace Bja.Registro
 
                 _tutor = modelotutor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _tutor.DocumentoIdentidad;
-                cboTipoDocumentoIdentidad.SelectedValue = _tutor.TipoDocumentoIdentidad;
+                switch (_tutor.TipoDocumentoIdentidad)
+                {
+                    case TipoDocumentoIdentidad.CarnetIdentidad:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 0;
+                        break;
+                    case TipoDocumentoIdentidad.CertificadoNacimiento:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 1;
+                        break;
+                    case TipoDocumentoIdentidad.Pasaporte:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 2;
+                        break;
+                }
                 txtPaterno.Text = _tutor.PrimerApellido;
                 txtMaterno.Text = _tutor.SegundoApellido;
                 txtConyuge.Text = _tutor.TercerApellido; 
@@ -75,8 +107,15 @@ namespace Bja.Registro
                 cboProvincia.SelectedValue = _tutor.IdProvincia;
                 RecuperarMunicipios(_tutor.IdProvincia.ToString());
                 cboMunicipio.SelectedValue = _tutor.IdMunicipio;
+
+                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                _grupofamiliar = modelogrupofamiliar.RecuperarPorTutorDeFamilia(IdFamilia, IdSeleccionado);
+
+                cboTipoParentesco.SelectedValue = _grupofamiliar.IdTipoParentesco;
+
                 if (TipoAccion == TipoAccion.Detalle)
                 {
+                    cboTipoParentesco.IsEnabled = false;
                     txtDocumentoIdentidad.IsEnabled = false;
                     cboTipoDocumentoIdentidad.IsEnabled = false;
                     txtPaterno.IsEnabled = false;
@@ -96,7 +135,7 @@ namespace Bja.Registro
             }
             ControlPreliminar = true;
             if ((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion))
-                this.txtDocumentoIdentidad.Focus();
+                this.cboTipoParentesco.Focus();
         }
 
         private void cmdCancelar_Click(object sender, RoutedEventArgs e)
@@ -109,12 +148,17 @@ namespace Bja.Registro
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
         {
             bool ok = false;
-            if (!(txtDocumentoIdentidad.Text.Length > 0))
+            if ((Convert.ToInt64(cboTipoParentesco.SelectedIndex) < 0))
+            {
+                ok = true;
+                MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
+            }
+            else if (!(txtDocumentoIdentidad.Text.Length > 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar documento de identidad.", "Error");
             }
-            else if (!(Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error");
@@ -134,17 +178,17 @@ namespace Bja.Registro
                 ok = true;
                 MessageBox.Show("Se requiere especificar nombre completo.", "Error");
             }
-            else if (!(Convert.ToInt64(cboDepartamento.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboDepartamento.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar departamento.", "Error");
             }
-            else if (!(Convert.ToInt64(cboProvincia.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboProvincia.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
-            else if (!(Convert.ToInt64(cboMunicipio.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboMunicipio.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar municipio.", "Error");
@@ -158,9 +202,21 @@ namespace Bja.Registro
             if (ok == false)
             {
                 ModeloTutor modelotutor = new ModeloTutor();
+                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
 
                 _tutor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad; //cboTipoDocumentoIdentidad.SelectedValue;
+                switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                {
+                    case 0:
+                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                        break;
+                    case 1:
+                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                        break;
+                    case 2:
+                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                        break;
+                }
                 _tutor.PrimerApellido = txtPaterno.Text;
                 _tutor.SegundoApellido = txtMaterno.Text;
                 _tutor.TercerApellido = txtConyuge.Text;
@@ -180,20 +236,24 @@ namespace Bja.Registro
                 else
                     _tutor.Sexo = "-";
 
+                _grupofamiliar.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue); 
+
                 if (IdSeleccionado > 0)
+                {
                     modelotutor.Editar(IdSeleccionado, _tutor);
+
+                    modelogrupofamiliar.Editar(_grupofamiliar.Id, _grupofamiliar); 
+                }
                 else
                 {
-                    ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
-                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
-
                     modelotutor.Crear(_tutor);
+                    IdSeleccionado = _tutor.Id;
 
-                    grupofamiliar.IdFamilia = IdFamilia;
-                    grupofamiliar.IdTutor = _tutor.Id;
-                    grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
+                    _grupofamiliar.IdFamilia = IdFamilia;
+                    _grupofamiliar.IdTutor = _tutor.Id;
+                    _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
 
-                    modelogrupofamiliar.Crear(grupofamiliar);
+                    modelogrupofamiliar.Crear(_grupofamiliar);
                 }
 
                 Resultado = true;

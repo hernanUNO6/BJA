@@ -23,9 +23,8 @@ namespace Bja.Registro
     {
         public long IdFamilia { get; set; }
         public long IdSeleccionado { get; set; }
-        //public long IdMenor { get; set; }
-        //long IdMadre { get; set; }
-        //long IdTutor { get; set; }
+        private GrupoFamiliar _grupofamiliar = new GrupoFamiliar();
+        private GrupoFamiliar _grupofamiliarmadre = new GrupoFamiliar();
         long IdCorresponsabilidadMenor { get; set; }
         public TipoAccion TipoAccion { get; set; }
         int CantidadDeControles { get; set; }  //debe definirse en la tabla parámetros.
@@ -60,24 +59,47 @@ namespace Bja.Registro
                 this.lblFechaNacimientoMenor.Content = "";
             }
 
-            ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
 
-            this.cboTipoParentesco.ItemsSource = modelotipoparentesco.Listar();
-            this.cboTipoParentesco.DisplayMemberPath = "Descripcion";
-            this.cboTipoParentesco.SelectedValuePath = "Id";
-            this.cboTipoParentesco.SelectedIndex = -1;
+            _grupofamiliar = modelogrupofamiliar.RecuperarTitularHabilitado(IdFamilia);
+            _grupofamiliarmadre = modelogrupofamiliar.RecuperarMadreDeFamilia(IdFamilia);
 
-            ModeloTutor modelotutor = new ModeloTutor();
-            this.cboTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamiliaParaCombo(IdFamilia);
-            this.cboTutor.DisplayMemberPath = "Descripcion";
-            this.cboTutor.SelectedValuePath = "Id";
-            this.cboTutor.SelectedIndex = -1;
+            if (_grupofamiliar != null)
+            {
+                if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre)
+                {
+                    ModeloMadre modelomadre = new ModeloMadre();
+                    Madre madre = new Madre();
 
-            ModeloMadre modelomadre = new ModeloMadre();
-            this.cboMadre.ItemsSource = modelomadre.ListarMadresDeUnaFamiliaParaCombo(IdFamilia);
-            this.cboMadre.DisplayMemberPath = "Descripcion";
-            this.cboMadre.SelectedValuePath = "Id";
-            this.cboMadre.SelectedIndex = -1;
+                    madre = modelomadre.Recuperar(_grupofamiliar.IdMadre.Value);
+                    this.lblNombreTitular.Content = madre.NombreCompleto;
+
+                    this.lblParentescoTitular.Content = "MADRE";
+                }
+                else if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
+                {
+                    ModeloTutor modelotutor = new ModeloTutor();
+                    Tutor tutor = new Tutor();
+                    tutor = modelotutor.Recuperar(_grupofamiliar.IdTutor.Value);
+                    this.lblNombreTitular.Content = tutor.NombreCompleto;
+
+                    ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+                    TipoParentesco tipoparentesco = new TipoParentesco();
+
+                    tipoparentesco = modelotipoparentesco.Recuperar(_grupofamiliar.IdTipoParentesco.Value);
+                    this.lblParentescoTitular.Content = tipoparentesco.Descripcion;
+                }
+                else
+                {
+                    this.lblNombreTitular.Content = "";
+                    this.lblParentescoTitular.Content = "";
+                }
+            }
+            else
+            {
+                this.lblNombreTitular.Content = "";
+                this.lblParentescoTitular.Content = "";
+            }
 
             ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
 
@@ -93,9 +115,6 @@ namespace Bja.Registro
                 this.dtpFechaInscripcion.IsEnabled = true;
                 this.rdbNueva.IsEnabled = true;
                 this.rdbTransferencia.IsEnabled = true;
-                this.cboMadre.IsEnabled = true;
-                this.cboTutor.IsEnabled = true;
-                this.cboTipoParentesco.IsEnabled = true;
                 this.cmdGuardar.IsEnabled = true;
             }
 
@@ -113,9 +132,6 @@ namespace Bja.Registro
                 this.rdbTransferenciaSalida.IsEnabled = false;
                 this.txtAutorizado.IsEnabled = false;
                 this.txtCargo.IsEnabled = false;
-                this.cboMadre.IsEnabled = false;
-                this.cboTutor.IsEnabled = false;
-                this.cboTipoParentesco.IsEnabled = false;
                 this.cmdGuardar.IsEnabled = false;
             }
         }
@@ -126,9 +142,6 @@ namespace Bja.Registro
             this.dtpFechaInscripcion.SelectedDate = DateTime.Today;
             this.dtpFechaSalida.SelectedDate = DateTime.Today;
             this.rdbNueva.IsChecked = true;
-            //this.cboMadre.IsEnabled = false;
-            //this.cboTutor.IsEnabled = false;
-            //this.cboTipoParentesco.IsEnabled = false;
             this.chkSalida.IsChecked = false;
             this.chkSalida.IsEnabled = false;
             this.dtpFechaSalida.IsEnabled = false;
@@ -160,19 +173,6 @@ namespace Bja.Registro
 
             if (corresponsabilidadmenor != null)
             {
-                if (corresponsabilidadmenor.IdMadre.HasValue)
-                {
-                    if (corresponsabilidadmenor.IdMadre.Value > 0)
-                        cboMadre.SelectedValue = corresponsabilidadmenor.IdMadre.Value;
-                }
-
-                if (corresponsabilidadmenor.IdTutor.HasValue)
-                {
-                    if (corresponsabilidadmenor.IdTutor.Value > 0)
-                        cboTutor.SelectedValue = corresponsabilidadmenor.IdTutor.Value;
-                    if (corresponsabilidadmenor.IdTipoParentesco.HasValue)
-                        cboTipoParentesco.SelectedValue = corresponsabilidadmenor.IdTipoParentesco.Value;
-                }
                 this.rdbNueva.IsEnabled = false;
                 this.rdbTransferencia.IsEnabled = false;
                 if (corresponsabilidadmenor.TipoInscripcionMenor == TipoInscripcion.Nueva)
@@ -224,147 +224,133 @@ namespace Bja.Registro
 
             bool ok = false;
 
-            if ((Convert.ToInt64(cboMadre.SelectedIndex) < 0) && (Convert.ToInt64(cboTutor.SelectedIndex) < 0))
+            if (ok == false)
             {
-                MessageBox.Show("Se requiere especificar madre y/o tutor para el menor.", "Error");
-                ok = true;
+                if (!(txtCodigoFormulario.Text.Length > 0))
+                {
+                    MessageBox.Show("Se requiere especificar número de formulario.", "Error");
+                    ok = true;
+                }
             }
 
             if (ok == false)
+            {
+                if (IdCorresponsabilidadMenor == 0)
                 {
-                    if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                    corresponsabilidadmenor.IdEstablecimientoSalud = 1;
+                    if (rdbNueva.IsChecked == true)
+                        corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Nueva;
+                    else if (rdbTransferencia.IsChecked == true)
+                        corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Transferencia;
+
+                    corresponsabilidadmenor.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
+                    corresponsabilidadmenor.IdMenor = IdSeleccionado;
+
+                    if (_grupofamiliarmadre != null)
+                        corresponsabilidadmenor.IdMadre = _grupofamiliarmadre.IdMadre.Value;
+
+                    if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                     {
-                        if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
-                        {
-                            MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-                            ok = true;
-                        }
+                        corresponsabilidadmenor.IdTutor = _grupofamiliar.IdTutor.Value;
+                        corresponsabilidadmenor.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
                     }
-                }
 
-                if (ok == false)
-                {
-                    if (!(txtCodigoFormulario.Text.Length > 0))
+                    corresponsabilidadmenor.CodigoFormulario = txtCodigoFormulario.Text;
+                    corresponsabilidadmenor.FechaSalidaPrograma = dtpFechaSalida.SelectedDate.Value;
+                    corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.EnProceso;
+                    corresponsabilidadmenor.Observaciones = "";
+                    corresponsabilidadmenor.AutorizadoPor = txtAutorizado.Text;
+                    corresponsabilidadmenor.CargoAutorizador = txtCargo.Text;
+
+                    modelocorresponsabilidadmenor.Crear(corresponsabilidadmenor);
+                    IdCorresponsabilidadMenor = corresponsabilidadmenor.Id;
+
+                    ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
+                    DateTime fechitaControles;
+
+                    fechitaControles = Convert.ToDateTime(lblFechaNacimientoMenor.Content);
+                    fechitaControles = fechitaControles.AddMonths(-1);
+
+                    for (int i = 0; i < CantidadDeControles; i++)
                     {
-                        MessageBox.Show("Se requiere especificar número de formulario.", "Error");
-                        ok = true;
+                        fechitaControles = fechitaControles.AddMonths(2);
+
+                        ControlMenor controlmenor = new ControlMenor();
+
+                        controlmenor.IdCorresponsabilidadMenor = IdCorresponsabilidadMenor;
+                        controlmenor.IdEstablecimientoSalud = 1;
+                        controlmenor.IdMenor = IdSeleccionado;
+                        controlmenor.IdMedico = 1;
+
+                        if (_grupofamiliarmadre != null)
+                            controlmenor.IdMadre = _grupofamiliarmadre.IdMadre.Value;
+
+                        if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
+                        {
+                            controlmenor.IdTutor = _grupofamiliar.IdTutor.Value;
+                            controlmenor.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
+                        }
+
+                        controlmenor.FechaProgramada = fechitaControles;
+                        controlmenor.FechaControl = DateTime.Now;
+                        controlmenor.TallaCm = 0;
+                        controlmenor.PesoKg = 0;
+                        controlmenor.NumeroControl = i + 1;
+                        controlmenor.Observaciones = "";
+                        controlmenor.EstadoPago = TipoEstadoPago.NoPagado;
+
+                        if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
+                            controlmenor.TipoBeneficiario = TipoBeneficiario.Tutor;
+                        else
+                            controlmenor.TipoBeneficiario = TipoBeneficiario.Madre;
+
+                        modelocontrolmenor.Crear(controlmenor);
                     }
+
+                    this.txtCodigoFormulario.IsEnabled = false;
+                    this.dtpFechaInscripcion.IsEnabled = false;
+                    this.rdbNueva.IsEnabled = false;
+                    this.rdbTransferencia.IsEnabled = false;
+                    RecuperarControlMenor();
                 }
-
-                if (ok == false)
+                else
                 {
-                    if (IdCorresponsabilidadMenor == 0)
+                    corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdCorresponsabilidadMenor);
+
+                    if (_grupofamiliarmadre != null)
+                        corresponsabilidadmenor.IdMadre = _grupofamiliarmadre.IdMadre.Value;
+
+                    if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                     {
-                        corresponsabilidadmenor.IdEstablecimientoSalud = 1;
-                        if (rdbNueva.IsChecked == true)
-                            corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Nueva;
-                        else if (rdbTransferencia.IsChecked == true)
-                            corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Transferencia;
+                        corresponsabilidadmenor.IdTutor = _grupofamiliar.IdTutor.Value;
+                        corresponsabilidadmenor.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
+                    }
 
-                        corresponsabilidadmenor.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
-                        corresponsabilidadmenor.IdMenor = IdSeleccionado;
-
-                        if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
-                            corresponsabilidadmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
-
-                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                        {
-                            corresponsabilidadmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                            corresponsabilidadmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
-                        }
-
-                        corresponsabilidadmenor.CodigoFormulario = txtCodigoFormulario.Text;
-                        corresponsabilidadmenor.FechaSalidaPrograma = dtpFechaSalida.SelectedDate.Value;
-                        corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.EnProceso;
-                        corresponsabilidadmenor.Observaciones = "";
-                        corresponsabilidadmenor.AutorizadoPor = txtAutorizado.Text;
-                        corresponsabilidadmenor.CargoAutorizador = txtCargo.Text;
-
-                        modelocorresponsabilidadmenor.Crear(corresponsabilidadmenor);
-                        IdCorresponsabilidadMenor = corresponsabilidadmenor.Id;
-
-                        ModeloControlMenor modelocontrolmenor = new ModeloControlMenor();
-                        DateTime fechitaControles;
-
-                        fechitaControles = Convert.ToDateTime(lblFechaNacimientoMenor.Content);
-                        fechitaControles = fechitaControles.AddMonths(-1);
-
-                        for (int i = 0; i < CantidadDeControles; i++)
-                        {
-                            fechitaControles = fechitaControles.AddMonths(2);
-
-                            ControlMenor controlmenor = new ControlMenor();
-                            controlmenor.IdCorresponsabilidadMenor = IdCorresponsabilidadMenor;
-                            controlmenor.IdEstablecimientoSalud = 1;
-                            controlmenor.IdMenor = IdSeleccionado;
-                            controlmenor.IdMedico = 1;
-
-                            if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
-                                controlmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
-
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                            {
-                                controlmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                                controlmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
-                            }
-
-                            controlmenor.FechaProgramada = fechitaControles;
-                            controlmenor.FechaControl = DateTime.Now;
-                            controlmenor.TallaCm = 0;
-                            controlmenor.PesoKg = 0;
-                            controlmenor.NumeroControl = i + 1;
-                            controlmenor.Observaciones = "";
-                            controlmenor.EstadoPago = TipoEstadoPago.NoPagado;
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                                controlmenor.TipoBeneficiario = TipoBeneficiario.Tutor;
-                            else
-                                controlmenor.TipoBeneficiario = TipoBeneficiario.Madre;
-                            modelocontrolmenor.Crear(controlmenor);
-                        }
-                        this.txtCodigoFormulario.IsEnabled = false;
-                        this.dtpFechaInscripcion.IsEnabled = false;
-                        this.rdbNueva.IsEnabled = false;
-                        this.rdbTransferencia.IsEnabled = false;
-                        RecuperarControlMenor();
+                    if (this.chkSalida.IsChecked == true)
+                    {
+                        corresponsabilidadmenor.FechaSalidaPrograma = this.dtpFechaSalida.SelectedDate.Value;
+                        if (this.rdbCumplimiento.IsChecked == true)
+                            corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Cumplimiento;
+                        else if (this.rdbFallecimiento.IsChecked == true)
+                            corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Fallecimiento;
+                        else if (this.rdbIncumplimiento.IsChecked == true)
+                            corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Incumplimiento;
+                        else if (this.rdbTransferenciaSalida.IsChecked == true)
+                            corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Transferencia;
+                        corresponsabilidadmenor.AutorizadoPor = this.txtAutorizado.Text;
+                        corresponsabilidadmenor.CargoAutorizador = this.txtCargo.Text;
                     }
                     else
                     {
-                        corresponsabilidadmenor = modelocorresponsabilidadmenor.Recuperar(IdCorresponsabilidadMenor);
-
-                        if (Convert.ToInt64(cboMadre.SelectedIndex) >= 0)
-                            corresponsabilidadmenor.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
-
-                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                        {
-                            corresponsabilidadmenor.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                            corresponsabilidadmenor.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
-                        }
-
-                        if (this.chkSalida.IsChecked == true)
-                        {
-                            corresponsabilidadmenor.FechaSalidaPrograma = this.dtpFechaSalida.SelectedDate.Value;
-                            if (this.rdbCumplimiento.IsChecked == true)
-                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Cumplimiento;
-                            else if (this.rdbFallecimiento.IsChecked == true)
-                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Fallecimiento;
-                            else if (this.rdbIncumplimiento.IsChecked == true)
-                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Incumplimiento;
-                            else if (this.rdbTransferenciaSalida.IsChecked == true)
-                                corresponsabilidadmenor.TipoSalidaMenor = TipoSalidaMenor.Transferencia;
-                            corresponsabilidadmenor.AutorizadoPor = this.txtAutorizado.Text;
-                            corresponsabilidadmenor.CargoAutorizador = this.txtCargo.Text;
-                        }
-                        else
-                        {
-                            corresponsabilidadmenor.FechaSalidaPrograma = DateTime.Now;
-                            corresponsabilidadmenor.TipoSalidaMenor = 0;
-                            corresponsabilidadmenor.AutorizadoPor = "";
-                            corresponsabilidadmenor.CargoAutorizador = "";
-                        }
-
-                        modelocorresponsabilidadmenor.Editar(IdCorresponsabilidadMenor, corresponsabilidadmenor);
+                        corresponsabilidadmenor.FechaSalidaPrograma = DateTime.Now;
+                        corresponsabilidadmenor.TipoSalidaMenor = 0;
+                        corresponsabilidadmenor.AutorizadoPor = "";
+                        corresponsabilidadmenor.CargoAutorizador = "";
                     }
+
+                    modelocorresponsabilidadmenor.Editar(IdCorresponsabilidadMenor, corresponsabilidadmenor);
                 }
+            }
         }
 
         void RecuperarControlMenor()
@@ -379,13 +365,16 @@ namespace Bja.Registro
             frmControl objControlWindow = new frmControl();
             objControlWindow.IdSeleccionado = IdControl;
             objControlWindow.IdMadre = IdSeleccionado;
-            if (Convert.ToInt64(cboMadre.SelectedValue) > 0)
-                objControlWindow.IdMadre = Convert.ToInt64(cboMadre.SelectedValue);
-            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+
+            if (_grupofamiliarmadre != null)
+                objControlWindow.IdMadre = _grupofamiliarmadre.IdMadre.Value;
+
+            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
             {
-                objControlWindow.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                objControlWindow.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue);
+                objControlWindow.IdTutor = _grupofamiliar.IdTutor.Value;
+                objControlWindow.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
             }
+
             objControlWindow.TipoAccion = TipoAccion;
             objControlWindow.TipoControl = TipoControl.Menor;
             objControlWindow.Owner = this;
@@ -398,35 +387,13 @@ namespace Bja.Registro
 
         private void cmdEditarControl_Click(object sender, RoutedEventArgs e)
         {
-            bool ok = false;
-
-            if ((Convert.ToInt64(cboMadre.SelectedIndex) < 0) && (Convert.ToInt64(cboTutor.SelectedIndex) < 0))
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
             {
-                MessageBox.Show("Se requiere especificar madre y/o tutor para el menor.", "Error");
-                ok = true;
-            }
-            if (ok == false)
-            {
-                if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                {
-                    if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
-                    {
-                        MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-                        ok = true;
-                    }
-                }
-            }
+                Int64 Id = (Int64)Img.Tag;
 
-            if (ok == false)
-            {
-                Button Img = (Button)sender;
-                if (Img.Tag != null)
-                {
-                    Int64 Id = (Int64)Img.Tag;
-
-                    if (Id > 0)
-                        VerControlMenor(Id, TipoAccion.Edicion);
-                }
+                if (Id > 0)
+                    VerControlMenor(Id, TipoAccion.Edicion);
             }
         }
 

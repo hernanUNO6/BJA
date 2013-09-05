@@ -26,6 +26,7 @@ namespace Bja.Registro
         public TipoAccion TipoAccion { get; set; }
         private bool ControlPreliminar { get; set; }
         private Menor _menor = new Menor();
+        private GrupoFamiliar _grupofamiliar = new GrupoFamiliar();
         public bool Resultado { get; set; }
 
         public frmMenor()
@@ -41,9 +42,21 @@ namespace Bja.Registro
 
             SoporteCombo.cargarEnumerador(cboTipoDocumentoIdentidad, typeof(TipoDocumentoIdentidad));
             ModeloDepartamento modelodepartamento = new ModeloDepartamento();
+
             this.cboDepartamento.ItemsSource = modelodepartamento.Listar();
             this.cboDepartamento.DisplayMemberPath = "Descripcion";
             this.cboDepartamento.SelectedValuePath = "Id";
+
+            if (IdFamilia > 0)
+            {
+                ModeloFamilia modelofamilia = new ModeloFamilia();
+                Familia familia = new Familia();
+
+                familia = modelofamilia.Recuperar(IdFamilia);
+                this.txtPaternoFamilia.Text = familia.PrimerApellido;
+                this.txtMaternoFamilia.Text = familia.SegundoApellido;
+            }
+
             if (IdSeleccionado == 0)
             {
                 this.cboTipoDocumentoIdentidad.SelectedIndex = -1;
@@ -56,7 +69,18 @@ namespace Bja.Registro
 
                 _menor = modelomenor.Recuperar(IdSeleccionado);
                 txtDocumentoIdentidad.Text = _menor.DocumentoIdentidad;
-                cboTipoDocumentoIdentidad.SelectedValue = _menor.TipoDocumentoIdentidad;
+                switch (_menor.TipoDocumentoIdentidad)
+                {
+                    case TipoDocumentoIdentidad.CarnetIdentidad:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 0;
+                        break;
+                    case TipoDocumentoIdentidad.CertificadoNacimiento:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 1;
+                        break;
+                    case TipoDocumentoIdentidad.Pasaporte:
+                        cboTipoDocumentoIdentidad.SelectedIndex = 2;
+                        break;
+                }
                 txtOficialia.Text = _menor.Oficialia;
                 txtLibro.Text = _menor.Libro;
                 txtPartida.Text = _menor.Partida;
@@ -77,6 +101,11 @@ namespace Bja.Registro
                 cboProvincia.SelectedValue = _menor.IdProvincia;
                 RecuperarMunicipios(_menor.IdProvincia.ToString());
                 cboMunicipio.SelectedValue = _menor.IdMunicipio;
+
+                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+
+                _grupofamiliar = modelogrupofamiliar.RecuperarPorMenorDeFamilia(IdFamilia, IdSeleccionado);
+
                 if (TipoAccion == TipoAccion.Detalle)
                 {
                     txtDocumentoIdentidad.IsEnabled = false;
@@ -112,7 +141,7 @@ namespace Bja.Registro
                 ok = true;
                 MessageBox.Show("Se requiere especificar documento de identidad.", "Error");
             }
-            else if (!(Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error");
@@ -150,17 +179,17 @@ namespace Bja.Registro
                 ok = true;
                 MessageBox.Show("Se requiere especificar nombre.", "Error");
             }
-            else if (!(Convert.ToInt64(cboDepartamento.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboDepartamento.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar departamento.", "Error");
             }
-            else if (!(Convert.ToInt64(cboProvincia.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboProvincia.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
-            else if (!(Convert.ToInt64(cboMunicipio.SelectedValue) >= 0))
+            else if ((Convert.ToInt64(cboMunicipio.SelectedIndex) < 0))
             {
                 ok = true;
                 MessageBox.Show("Se requiere especificar municipio.", "Error");
@@ -173,10 +202,31 @@ namespace Bja.Registro
 
             if (ok == false)
             {
+                if ((txtPaterno.Text != txtPaternoFamilia.Text) || (txtMaterno.Text != txtMaternoFamilia.Text))
+                {
+                    if (MessageBox.Show("El apellido paterno o materno no son iguales a los apellidos paterno o materno de la familia. ¿Desea continua?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                        ok = true;
+                }
+            }
+
+            if (ok == false)
+            {
                 ModeloMenor modelomenor = new ModeloMenor();
+                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
 
                 _menor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad; //cboTipoDocumentoIdentidad.SelectedValue;
+                switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                {
+                    case 0:
+                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                        break;
+                    case 1:
+                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                        break;
+                    case 2:
+                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                        break;
+                }
                 _menor.Oficialia = txtOficialia.Text;
                 _menor.Libro = txtLibro.Text;
                 _menor.Partida = txtPartida.Text;
@@ -202,16 +252,14 @@ namespace Bja.Registro
                     modelomenor.Editar(IdSeleccionado, _menor);
                 else
                 {
-                    ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
-                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
-
                     modelomenor.Crear(_menor);
+                    IdSeleccionado = _menor.Id;
 
-                    grupofamiliar.IdFamilia = IdFamilia;
-                    grupofamiliar.IdMenor = _menor.Id;
-                    grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
+                    _grupofamiliar.IdFamilia = IdFamilia;
+                    _grupofamiliar.IdMenor = _menor.Id;
+                    _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
 
-                    modelogrupofamiliar.Crear(grupofamiliar);
+                    modelogrupofamiliar.Crear(_grupofamiliar);
                 }
 
                 Resultado = true;

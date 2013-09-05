@@ -27,7 +27,7 @@ namespace Bja.Registro
         private Familia _familia = new Familia();
         private Madre madre = new Madre();
         private Menor menor = new Menor();
-        private Tutor tutor = new Tutor();
+        private RegistroTitularPago registrotitularpago = new RegistroTitularPago();
 
         public frmGrupoFamiliar()
         {
@@ -43,7 +43,7 @@ namespace Bja.Registro
                 RecuperarFamilia();
                 RecuperarMadres();
                 RecuperarMenores();
-                RecuperarTutores();
+                RecuperarMadresYTutoresALaVez();
             }
         }
 
@@ -93,7 +93,10 @@ namespace Bja.Registro
             objMadreWindow.ShowDialog();
             this.Cursor = Cursors.Arrow;
             if (((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion)) && (objMadreWindow.Resultado == true))
+            { 
                 RecuperarMadres();
+                RecuperarMadresYTutoresALaVez();
+            }
             objMadreWindow = null;
         }
 
@@ -127,15 +130,25 @@ namespace Bja.Registro
 
         private void VerCorresponsabilidadDeMadre(long IdMadre, TipoAccion TipoAccion)
         {
-            this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
-            objCorresponsabilidadMadreWindow.IdFamilia = IdSeleccionado;
-            objCorresponsabilidadMadreWindow.IdSeleccionado = IdMadre;
-            objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMadreWindow.Owner = this;
-            objCorresponsabilidadMadreWindow.ShowDialog();
-            this.Cursor = Cursors.Arrow;
-            objCorresponsabilidadMadreWindow = null;
+            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+            GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+
+            grupofamiliar = modelogrupofamiliar.RecuperarTitularHabilitado(IdSeleccionado);
+
+            if (grupofamiliar != null)
+            {
+                this.Cursor = Cursors.Wait;
+                frmCorresponsabilidadMadre objCorresponsabilidadMadreWindow = new frmCorresponsabilidadMadre();
+                objCorresponsabilidadMadreWindow.IdFamilia = IdSeleccionado;
+                objCorresponsabilidadMadreWindow.IdSeleccionado = IdMadre;
+                objCorresponsabilidadMadreWindow.TipoAccion = TipoAccion;
+                objCorresponsabilidadMadreWindow.Owner = this;
+                objCorresponsabilidadMadreWindow.ShowDialog();
+                this.Cursor = Cursors.Arrow;
+                objCorresponsabilidadMadreWindow = null;
+            }
+            else
+                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error");
         }
 
         private void cmdCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
@@ -200,15 +213,25 @@ namespace Bja.Registro
 
         private void VerCorresponsabilidadDeMenor(long IdMenor, TipoAccion TipoAccion)
         {
-            this.Cursor = Cursors.Wait;
-            frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
-            objCorresponsabilidadMenorWindow.IdFamilia = IdSeleccionado;
-            objCorresponsabilidadMenorWindow.IdSeleccionado = IdMenor;
-            objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
-            objCorresponsabilidadMenorWindow.Owner = this;
-            objCorresponsabilidadMenorWindow.ShowDialog();
-            this.Cursor = Cursors.Arrow;
-            objCorresponsabilidadMenorWindow = null;
+            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+            GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+
+            grupofamiliar = modelogrupofamiliar.RecuperarTitularHabilitado(IdSeleccionado);
+
+            if (grupofamiliar != null)
+            {
+                this.Cursor = Cursors.Wait;
+                frmCorresponsabilidadMenor objCorresponsabilidadMenorWindow = new frmCorresponsabilidadMenor();
+                objCorresponsabilidadMenorWindow.IdFamilia = IdSeleccionado;
+                objCorresponsabilidadMenorWindow.IdSeleccionado = IdMenor;
+                objCorresponsabilidadMenorWindow.TipoAccion = TipoAccion;
+                objCorresponsabilidadMenorWindow.Owner = this;
+                objCorresponsabilidadMenorWindow.ShowDialog();
+                this.Cursor = Cursors.Arrow;
+                objCorresponsabilidadMenorWindow = null;
+            }
+            else
+                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error");
         }
 
         private void cmdCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
@@ -222,10 +245,10 @@ namespace Bja.Registro
             }
         }
 
-        void RecuperarTutores()
+        void RecuperarMadresYTutoresALaVez()
         {
-            ModeloTutor modelotutor = new ModeloTutor();
-            this.grdTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamilia(IdSeleccionado);
+            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+            this.grdTutor.ItemsSource = modelogrupofamiliar.ListarMadresYTutoresDeUnaFamilia(IdSeleccionado);
         }
 
         private void VerTutor(long IdTutor, TipoAccion TipoAccion)
@@ -239,7 +262,7 @@ namespace Bja.Registro
             objTutorWindow.ShowDialog();
             this.Cursor = Cursors.Arrow;
             if (((TipoAccion == TipoAccion.Nuevo) || (TipoAccion == TipoAccion.Edicion)) && (objTutorWindow.Resultado == true))
-                RecuperarTutores();
+                RecuperarMadresYTutoresALaVez();
             objTutorWindow = null;
         }
 
@@ -251,23 +274,77 @@ namespace Bja.Registro
 
         private void cmdEditarTutor_Click(object sender, RoutedEventArgs e)
         {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
+            if (registrotitularpago != null)
             {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerTutor(Id, TipoAccion.Edicion);
+                Button Img = (Button)sender;
+                if (Img.Tag != null)
+                {
+                    Int64 Id = (Int64)Img.Tag;
+                    if (Id > 0)
+                    {
+                        if (registrotitularpago.Tipo =="Madre")
+                            VerMadre(Id, TipoAccion.Edicion);
+                        else
+                            VerTutor(Id, TipoAccion.Edicion);
+                    }
+                }
             }
         }
 
         private void cmdDetalleTutor_Click(object sender, RoutedEventArgs e)
         {
-            Button Img = (Button)sender;
-            if (Img.Tag != null)
+            if (registrotitularpago != null)
             {
-                Int64 Id = (Int64)Img.Tag;
-                if (Id > 0)
-                    VerTutor(Id, TipoAccion.Detalle);
+                Button Img = (Button)sender;
+                if (Img.Tag != null)
+                {
+                    Int64 Id = (Int64)Img.Tag;
+                    if (Id > 0)
+                    {
+                        if (registrotitularpago.Tipo == "Madre")
+                            VerMadre(Id, TipoAccion.Detalle);
+                        else
+                            VerTutor(Id, TipoAccion.Detalle);
+                    }
+                }
+            }
+        }
+
+        private void cmdEstablecerTutor_Click(object sender, RoutedEventArgs e)
+        {
+            if (registrotitularpago != null)
+            {
+                Button Img = (Button)sender;
+                if (Img.Tag != null)
+                {
+                    Int64 Id = (Int64)Img.Tag;
+                    if (Id > 0)
+                    {
+                        string NombreCompleto = "";
+
+                        if (registrotitularpago.Tipo == "Madre")
+                        {
+                            ModeloMadre modelomadre = new ModeloMadre();
+                            Madre __madre = new Madre();
+                            __madre = modelomadre.Recuperar(Id);
+                            NombreCompleto = __madre.NombreCompleto;
+                        }
+                        else
+                        {
+                            ModeloTutor modelotutor = new ModeloTutor();
+                            Tutor __tutor = new Tutor();
+                            __tutor = modelotutor.Recuperar(Id);
+                            NombreCompleto = __tutor.NombreCompleto;
+                        }
+
+                        if (MessageBox.Show("¿Desea establecer a " + NombreCompleto + " como titular de pago para esta familia?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        {
+                            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                            modelogrupofamiliar.EstablecerTitularDePagoVigenteDeFamilia(IdSeleccionado, registrotitularpago.IdGrupoFamiliar);
+                            RecuperarMadresYTutoresALaVez();
+                        }
+                    }
+                }
             }
         }
 
@@ -288,7 +365,7 @@ namespace Bja.Registro
         private void grdTutor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             this.Cursor = Cursors.Wait;
-            tutor = this.grdTutor.SelectedItem as Tutor;
+            registrotitularpago = this.grdTutor.SelectedItem as RegistroTitularPago;
             this.Cursor = Cursors.Arrow;
         }
 
