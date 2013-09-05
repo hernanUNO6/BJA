@@ -9,7 +9,7 @@
         <ComboBox x:Name="cboTipoDocumentoIdentidad"  HorizontalAlignment="Left" Margin="173,169,0,0" VerticalAlignment="Top" Width="158"/>
         <Label x:Name="lblPaterno" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="70,193,0,0" VerticalAlignment="Top" Height="26"/>
         <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" Margin="173,196,0,0" VerticalAlignment="Top" Width="158"/>
-        <Label x:Name="lblMaterno" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="70,221,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label x:Name="lblMaterno" Content="Apellido Materno" HorizontalAlignment="Left" Margin="70,221,0,0" VerticalAlignment="Top" Height="26"/>
         <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" Margin="173,224,0,0" VerticalAlignment="Top" Width="158"/>
         <Label x:Name="lblConyuge" Content="Apellido de Conyuge" HorizontalAlignment="Left" Margin="47,249,0,0" VerticalAlignment="Top" Height="26"/>
         <TextBox x:Name="txtConyuge" HorizontalAlignment="Left" Height="23" Margin="173,252,0,0" VerticalAlignment="Top" Width="158"/>

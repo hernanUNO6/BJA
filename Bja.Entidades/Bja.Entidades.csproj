@@ -73,6 +73,7 @@
     <Compile Include="RedSalud.cs" />
     <Compile Include="RegistroBusqueda.cs" />
     <Compile Include="RegistroParaCombo.cs" />
+    <Compile Include="RegistroTitularPago.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="SolicitudPago.cs" />

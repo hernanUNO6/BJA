@@ -23,8 +23,7 @@ namespace Bja.Registro
     {
         public long IdFamilia { get; set; }
         public long IdSeleccionado { get; set; }
-        //public long IdMadre { get; set; }
-        //long IdTutor { get; set; }
+        private GrupoFamiliar _grupofamiliar = new GrupoFamiliar();
         long IdCorresponsabilidadMadre { get; set; }
         public TipoAccion TipoAccion { get; set; }
         int CantidadDeControles { get; set; }  //debe definirse en la tabla parámetros.
@@ -59,18 +58,38 @@ namespace Bja.Registro
                 this.lblFechaNacimientoMadre.Content = "";
             }
 
-            ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
 
-            this.cboTipoParentesco.ItemsSource = modelotipoparentesco.Listar();
-            this.cboTipoParentesco.DisplayMemberPath = "Descripcion";
-            this.cboTipoParentesco.SelectedValuePath = "Id";
-            this.cboTipoParentesco.SelectedIndex = -1;
+            _grupofamiliar = modelogrupofamiliar.RecuperarPorMadreDeFamilia(IdFamilia, IdSeleccionado);
 
-            ModeloTutor modelotutor = new ModeloTutor();
-            this.cboTutor.ItemsSource = modelotutor.ListarTutoresDeUnaFamiliaParaCombo(IdFamilia);
-            this.cboTutor.DisplayMemberPath = "Descripcion";
-            this.cboTutor.SelectedValuePath = "Id";
-            this.cboTutor.SelectedIndex = -1;
+            if (_grupofamiliar.TitularPagoVigente == true)
+            {
+                this.lblNombreTitular.Content = this.lblNombresMadre.Content;
+                this.lblParentescoTitular.Content = "Madre Gestante";
+            }
+            else
+            {
+                _grupofamiliar = modelogrupofamiliar.RecuperarTitularHabilitado(IdFamilia);
+
+                if (_grupofamiliar != null)
+                {
+                    ModeloTutor modelotutor = new ModeloTutor();
+                    Tutor tutor = new Tutor();
+                    tutor = modelotutor.Recuperar(_grupofamiliar.IdTutor.Value);
+                    this.lblNombreTitular.Content = tutor.NombreCompleto;
+
+                    ModeloTipoParentesco modelotipoparentesco = new ModeloTipoParentesco();
+                    TipoParentesco tipoparentesco = new TipoParentesco();
+
+                    tipoparentesco = modelotipoparentesco.Recuperar(_grupofamiliar.IdTipoParentesco.Value);
+                    this.lblParentescoTitular.Content = tipoparentesco.Descripcion;
+                }
+                else
+                {
+                    this.lblNombreTitular.Content = "";
+                    this.lblParentescoTitular.Content = "";
+                }
+            }
 
             ModeloCorresponsabilidadMadre modelocorresponsabilidadmadre = new ModeloCorresponsabilidadMadre();
 
@@ -90,8 +109,6 @@ namespace Bja.Registro
                 this.chkARO.IsEnabled = true;
                 this.rdbNueva.IsEnabled = true;
                 this.rdbTransferencia.IsEnabled = true;
-                this.cboTutor.IsEnabled = true;
-                this.cboTipoParentesco.IsEnabled = true;
                 this.cmdGuardar.IsEnabled = true;
             }
 
@@ -115,8 +132,6 @@ namespace Bja.Registro
                 this.rdbTransferenciaSalida.IsEnabled = false;
                 this.txtAutorizado.IsEnabled = false;
                 this.txtCargo.IsEnabled = false;
-                this.cboTutor.IsEnabled = false;
-                this.cboTipoParentesco.IsEnabled = false;
                 this.cmdGuardar.IsEnabled = false;
             }
         }
@@ -130,13 +145,6 @@ namespace Bja.Registro
 
             if (corresponsabilidadmadre != null)
             {
-                if (corresponsabilidadmadre.IdTutor.HasValue)
-                {
-                    if (corresponsabilidadmadre.IdTutor.Value > 0)
-                        cboTutor.SelectedValue = corresponsabilidadmadre.IdTutor.Value;
-                    if (corresponsabilidadmadre.IdTipoParentesco.HasValue)
-                        cboTipoParentesco.SelectedValue = corresponsabilidadmadre.IdTipoParentesco.Value;
-                }
                 this.rdbNueva.IsEnabled = false;
                 this.rdbTransferencia.IsEnabled = false;
                 if (corresponsabilidadmadre.TipoInscripcionMadre == TipoInscripcion.Nueva)
@@ -206,8 +214,6 @@ namespace Bja.Registro
             this.dtpFechaSalida.SelectedDate = DateTime.Today;
             this.rdbNueva.IsChecked = true;
             this.txtNumeroEmbarazo.Text = "0";
-            //this.cboTutor.IsEnabled = false;
-            //this.cboTipoParentesco.IsEnabled = false;
             this.chkSalida.IsChecked = false;
             this.chkSalida.IsEnabled = false;
             this.dtpFechaSalida.IsEnabled = false;
@@ -240,15 +246,6 @@ namespace Bja.Registro
                 CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
 
                 bool ok = false;
-
-                if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                    {
-                        if (Convert.ToInt32(cboTipoParentesco.SelectedIndex) < 0)
-                        {
-                            MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-                            ok = true;
-                        }
-                    }
 
                 if (ok == false)
                 {
@@ -293,10 +290,10 @@ namespace Bja.Registro
 
                         corresponsabilidadmadre.FechaInscripcion = this.dtpFechaInscripcion.SelectedDate.Value;
                         corresponsabilidadmadre.IdMadre = IdSeleccionado;
-                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                        if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                         {
-                            corresponsabilidadmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                            corresponsabilidadmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                            corresponsabilidadmadre.IdTutor = _grupofamiliar.IdTutor.Value;
+                            corresponsabilidadmadre.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
                         }
                         corresponsabilidadmadre.CodigoFormulario = this.txtCodigoFormulario.Text;
                         corresponsabilidadmadre.FechaUltimaMenstruacion = this.dtpFechaFUM.SelectedDate.Value; ;
@@ -323,15 +320,18 @@ namespace Bja.Registro
                             fechitaControles = fechitaControles.AddMonths(2);
 
                             ControlMadre controlmadre = new ControlMadre();
+
                             controlmadre.IdCorresponsabilidadMadre = IdCorresponsabilidadMadre;
                             controlmadre.IdEstablecimientoSalud = 1;
                             controlmadre.IdMedico = 1;
                             controlmadre.IdMadre = IdSeleccionado;
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+
+                            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                             {
-                                controlmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                                controlmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                                controlmadre.IdTutor = _grupofamiliar.IdTutor.Value;
+                                controlmadre.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
                             }
+
                             controlmadre.FechaProgramada = fechitaControles;
                             controlmadre.FechaControl = DateTime.Now;
                             controlmadre.TallaCm = 0;
@@ -340,10 +340,12 @@ namespace Bja.Registro
                             controlmadre.Observaciones = "";
                             controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
                             controlmadre.TipoControlMadre = TipoControlMadre.Control;
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
-                            else
+
+                            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre)
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
+                            else
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
+
                             modelocontrolmadre.Crear(controlmadre);
                         }
 
@@ -352,21 +354,25 @@ namespace Bja.Registro
                             fechitaControles = fechitaControles.AddMonths(2);
 
                             ControlMadre controlmadre = new ControlMadre();
+
                             controlmadre.IdCorresponsabilidadMadre = IdCorresponsabilidadMadre;
                             controlmadre.IdEstablecimientoSalud = 1;
                             controlmadre.IdMedico = 1;
                             controlmadre.IdMadre = IdSeleccionado;
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+
+                            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                             {
-                                controlmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                                controlmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                                controlmadre.IdTutor = _grupofamiliar.IdTutor.Value;
+                                controlmadre.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
                             }
+
                             controlmadre.FechaProgramada = fechitaControles;
                             controlmadre.FechaControl = DateTime.Now;
                             controlmadre.TallaCm = 0;
                             controlmadre.PesoKg = 0;
                             controlmadre.NumeroControl = CantidadDeControles + i + 1;
                             controlmadre.Observaciones = "";
+
                             if (i == 0)
                             {
                                 controlmadre.EstadoPago = TipoEstadoPago.NoAplicable;
@@ -377,10 +383,12 @@ namespace Bja.Registro
                                 controlmadre.EstadoPago = TipoEstadoPago.NoPagado;
                                 controlmadre.TipoControlMadre = TipoControlMadre.PostParto;
                             }
-                            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
-                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
-                            else
+
+                            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Madre)
                                 controlmadre.TipoBeneficiario = TipoBeneficiario.Madre;
+                            else
+                                controlmadre.TipoBeneficiario = TipoBeneficiario.Tutor;
+
                             modelocontrolmadre.Crear(controlmadre);
                         }
 
@@ -398,10 +406,10 @@ namespace Bja.Registro
                     {
                         corresponsabilidadmadre = modelocorresponsabilidadmadre.Recuperar(IdCorresponsabilidadMadre);
 
-                        if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+                        if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
                         {
-                            corresponsabilidadmadre.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                            corresponsabilidadmadre.IdTipoParentesco = Convert.ToInt32(cboTipoParentesco.SelectedValue);
+                            corresponsabilidadmadre.IdTutor = _grupofamiliar.IdTutor.Value;
+                            corresponsabilidadmadre.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
                         }
 
                         if (this.chkSalida.IsChecked == true)
@@ -447,10 +455,10 @@ namespace Bja.Registro
             frmControlParto objControlWindow = new frmControlParto();
             objControlWindow.IdSeleccionado = IdControl;
             objControlWindow.IdMadre = IdSeleccionado;
-            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
             {
-                objControlWindow.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                objControlWindow.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue);
+                objControlWindow.IdTutor = _grupofamiliar.IdTutor.Value;
+                objControlWindow.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
             }
             objControlWindow.TipoAccion = TipoAccion;
             objControlWindow.Owner = this;
@@ -467,10 +475,10 @@ namespace Bja.Registro
             frmControlPostParto objControlWindow = new frmControlPostParto();
             objControlWindow.IdSeleccionado = IdControl;
             objControlWindow.IdMadre = IdSeleccionado;
-            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
             {
-                objControlWindow.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                objControlWindow.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue);
+                objControlWindow.IdTutor = _grupofamiliar.IdTutor.Value;
+                objControlWindow.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value;
             }
             objControlWindow.TipoAccion = TipoAccion;
             objControlWindow.Owner = this;
@@ -487,10 +495,10 @@ namespace Bja.Registro
             frmControl objControlWindow = new frmControl();
             objControlWindow.IdSeleccionado = IdControl;
             objControlWindow.IdMadre = IdSeleccionado;
-            if (Convert.ToInt64(cboTutor.SelectedValue) > 0)
+            if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
             {
-                objControlWindow.IdTutor = Convert.ToInt64(cboTutor.SelectedValue);
-                objControlWindow.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue);
+                objControlWindow.IdTutor = _grupofamiliar.IdTutor.Value;
+                objControlWindow.IdTipoParentesco = _grupofamiliar.IdTipoParentesco.Value; 
             }
             objControlWindow.TipoAccion = TipoAccion;
             objControlWindow.TipoControl = TipoControl.Madre;
@@ -504,37 +512,24 @@ namespace Bja.Registro
 
         private void cmdEditarControl_Click(object sender, RoutedEventArgs e)
         {
-            bool ok = false;
-
-            if (Convert.ToInt64(cboTutor.SelectedIndex) >= 0)
+            Button Img = (Button)sender;
+            if (Img.Tag != null)
             {
-                if (!(Convert.ToInt32(cboTipoParentesco.SelectedIndex) >= 0))
+                Int64 Id = (Int64)Img.Tag;
+
+                if (Id > 0)
                 {
-                    MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
-                    ok = true;
-                }
-            }
-            if (ok == false)
-            {
-                Button Img = (Button)sender;
-                if (Img.Tag != null)
-                {
-                    Int64 Id = (Int64)Img.Tag;
+                    ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
+                    ControlMadre controlmadre = new ControlMadre();
 
-                    if (Id > 0)
-                    {
-                        ModeloControlMadre modelocontrolmadre = new ModeloControlMadre();
-                        ControlMadre controlmadre = new ControlMadre();
+                    controlmadre = modelocontrolmadre.Recuperar(Id);
 
-                        controlmadre = modelocontrolmadre.Recuperar(Id);
-
-                        if (controlmadre.TipoControlMadre == TipoControlMadre.Parto)
-                            VerControlPartoMadre(Id, TipoAccion.Edicion);
-                        else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
-                            VerControlPostPartoMadre(Id, TipoAccion.Edicion);
-                        else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
-                            VerControlMadre(Id, TipoAccion.Edicion);
-                    }
+                    if (controlmadre.TipoControlMadre == TipoControlMadre.Parto)
+                        VerControlPartoMadre(Id, TipoAccion.Edicion);
+                    else if (controlmadre.TipoControlMadre == TipoControlMadre.PostParto)
+                        VerControlPostPartoMadre(Id, TipoAccion.Edicion);
+                    else if (controlmadre.TipoControlMadre == TipoControlMadre.Control)
+                        VerControlMadre(Id, TipoAccion.Edicion);
                 }
             }
         }
