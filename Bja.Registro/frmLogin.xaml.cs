@@ -39,27 +39,25 @@ namespace Bja.Registro
         bool ok = false;
         if (!(this.txtUsuario.Text.Length > 0))
         {
+            MessageBox.Show("Se requiere especificar cuenta de usuario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             ok = true;
-            MessageBox.Show("Se requiere especificar cuenta de usuario.", "Error");
         }
         else if (!(this.pasContrasena.Password.Length > 0))
         {
+            MessageBox.Show("Se requiere especificar contraseña.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             ok = true;
-            MessageBox.Show("Se requiere especificar contraseña.", "Error");
         }
         else if (!(this.pasContrasena.Password.Length >= 3))
         {
+            MessageBox.Show("Se requiere especificar contraseña válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             ok = true;
-            MessageBox.Show("Se requiere especificar contraseña válida.", "Error");
         }
         if (ok == false)
         {
-            //authenticar usuario
             var rbac = new Rbac();
             User user = rbac.authenticate(this.txtUsuario.Text, this.pasContrasena.Password);
             if (user != null)
             {
-                //inicia session
                 SessionManager.initSession(user);
 
                 this.Hide();
@@ -73,9 +71,7 @@ namespace Bja.Registro
                 }
             }
             else
-            {
-                MessageBox.Show("Usuario o contraseña no válidos.", "Error");
-            }
+                MessageBox.Show("Usuario o contraseña no válidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

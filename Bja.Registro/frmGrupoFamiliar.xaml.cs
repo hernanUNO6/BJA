@@ -148,7 +148,7 @@ namespace Bja.Registro
                 objCorresponsabilidadMadreWindow = null;
             }
             else
-                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error");
+                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void cmdCorresponsabilidadMadre_Click(object sender, RoutedEventArgs e)
@@ -231,7 +231,7 @@ namespace Bja.Registro
                 objCorresponsabilidadMenorWindow = null;
             }
             else
-                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error");
+                MessageBox.Show("Se requiere especificar previamente titular de pago.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void cmdCorresponsabilidadMenor_Click(object sender, RoutedEventArgs e)
@@ -310,7 +310,7 @@ namespace Bja.Registro
             }
         }
 
-        private void cmdEstablecerTutor_Click(object sender, RoutedEventArgs e)
+        private void cmdTitularTutor_Click(object sender, RoutedEventArgs e)
         {
             if (registrotitularpago != null)
             {
@@ -320,29 +320,34 @@ namespace Bja.Registro
                     Int64 Id = (Int64)Img.Tag;
                     if (Id > 0)
                     {
-                        string NombreCompleto = "";
-
-                        if (registrotitularpago.Tipo == "Madre")
+                        if (registrotitularpago.Titular != "SI")
                         {
-                            ModeloMadre modelomadre = new ModeloMadre();
-                            Madre __madre = new Madre();
-                            __madre = modelomadre.Recuperar(Id);
-                            NombreCompleto = __madre.NombreCompleto;
+                            string NombreCompleto = "";
+
+                            if (registrotitularpago.Tipo == "Madre")
+                            {
+                                ModeloMadre modelomadre = new ModeloMadre();
+                                Madre __madre = new Madre();
+                                __madre = modelomadre.Recuperar(Id);
+                                NombreCompleto = __madre.NombreCompleto;
+                            }
+                            else
+                            {
+                                ModeloTutor modelotutor = new ModeloTutor();
+                                Tutor __tutor = new Tutor();
+                                __tutor = modelotutor.Recuperar(Id);
+                                NombreCompleto = __tutor.NombreCompleto;
+                            }
+
+                            if (MessageBox.Show("¿Desea establecer a " + NombreCompleto + " como titular de pago para esta familia?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                            {
+                                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+                                modelogrupofamiliar.EstablecerTitularDePagoVigenteDeFamilia(IdSeleccionado, registrotitularpago.IdGrupoFamiliar);
+                                RecuperarMadresYTutoresALaVez();
+                            }
                         }
                         else
-                        {
-                            ModeloTutor modelotutor = new ModeloTutor();
-                            Tutor __tutor = new Tutor();
-                            __tutor = modelotutor.Recuperar(Id);
-                            NombreCompleto = __tutor.NombreCompleto;
-                        }
-
-                        if (MessageBox.Show("¿Desea establecer a " + NombreCompleto + " como titular de pago para esta familia?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                        {
-                            ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
-                            modelogrupofamiliar.EstablecerTitularDePagoVigenteDeFamilia(IdSeleccionado, registrotitularpago.IdGrupoFamiliar);
-                            RecuperarMadresYTutoresALaVez();
-                        }
+                            MessageBox.Show("Esta persona ya se halla establecida como titular de pago de esta familia.", "Mensaje", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }

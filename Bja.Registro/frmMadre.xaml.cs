@@ -129,51 +129,52 @@ namespace Bja.Registro
             gf = modelogrupofamiliar.RecuperarTitularHabilitado(IdFamilia);
             bool ok = false;
             bool OK = false;
+            int OKM = 0;
 
             if (!(txtDocumentoIdentidad.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar documento de identidad.", "Error");
             }
             else if ((Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error");
             }
             else if (!(txtPaterno.Text.Length > 0) && !(txtMaterno.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar apellidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar apellidos.", "Error");
             }
             else if (!(txtNombres.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar nombre.", "Error");
             }
             else if (!(txtNombreCompleto.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar nombre completo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar nombre completo.", "Error");
             }
             else if ((Convert.ToInt64(cboDepartamento.SelectedIndex) < 0))
             {
                 ok = true;
-                MessageBox.Show("Se requiere especificar departamento.", "Error");
+                MessageBox.Show("Se requiere especificar departamento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if ((Convert.ToInt64(cboProvincia.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar provincia.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
             else if ((Convert.ToInt64(cboMunicipio.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar municipio.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar municipio.", "Error");
             }
             else if (!(txtLugarNacimiento.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error");
             }
 
             if (ok == false)
@@ -189,93 +190,134 @@ namespace Bja.Registro
             {
                 if (ok == false)
                 {
-                    DateTime FechitaDeNacimiento;
-                    DateTime FechitaActual;
-
-                    FechitaDeNacimiento = dtpFechaNacimiento.SelectedDate.Value;
-                    FechitaActual = DateTime.Now;
-                    FechitaActual = FechitaActual.AddYears(-16);
-
-                    if (FechitaDeNacimiento > FechitaActual)
+                    switch (MessageBox.Show("¿Desea guardar los datos correspondiente a este madre?", "Consulta", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
                     {
-                        if (MessageBox.Show("La fecha de nacimiento de la madre es: " + string.Format("{0:dd/MM/yyyy}", FechitaDeNacimiento) + ", lo cual a la fecha determina que es menor de edad. ¿Desea registrar ahora un nuevo titular de pago para la familia?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        case MessageBoxResult.Yes:
+                            OKM = 1;
+                            break;
+                        case MessageBoxResult.No:
+                            OKM = 2;
+                            break;
+                        case MessageBoxResult.Cancel:
+                            OKM = 3;
+                            break;
+                    }
+
+                    if (OKM == 1)
+                    {
+                        DateTime FechitaDeNacimiento;
+                        DateTime FechitaActual;
+
+                        FechitaDeNacimiento = dtpFechaNacimiento.SelectedDate.Value;
+                        FechitaActual = DateTime.Now;
+                        FechitaActual = FechitaActual.AddYears(-16);
+
+                        if (FechitaDeNacimiento > FechitaActual)
                         {
-                            this.Cursor = Cursors.Wait;
-                            frmTutor objTutorWindow = new frmTutor();
-                            objTutorWindow.IdFamilia = IdFamilia;
-                            objTutorWindow.IdSeleccionado = 0;
-                            objTutorWindow.TipoAccion = TipoAccion.Nuevo;
-                            objTutorWindow.Owner = this;
-                            objTutorWindow.ShowDialog();
-                            this.Cursor = Cursors.Arrow;
-                            if (objTutorWindow.Resultado == true)
+                            if (MessageBox.Show("La fecha de nacimiento de la madre es: " + string.Format("{0:dd/MM/yyyy}", FechitaDeNacimiento) + ", lo cual a la fecha determina que es menor de edad. ¿Desea registrar ahora un nuevo titular de pago para la familia?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                             {
-                                GrupoFamiliar grupofamiliar = new GrupoFamiliar();
+                                this.Cursor = Cursors.Wait;
+                                frmTutor objTutorWindow = new frmTutor();
+                                objTutorWindow.IdFamilia = IdFamilia;
+                                objTutorWindow.IdSeleccionado = 0;
+                                objTutorWindow.TipoAccion = TipoAccion.Nuevo;
+                                objTutorWindow.Owner = this;
+                                objTutorWindow.ShowDialog();
+                                this.Cursor = Cursors.Arrow;
+                                if (objTutorWindow.Resultado == true)
+                                {
+                                    GrupoFamiliar grupofamiliar = new GrupoFamiliar();
 
-                                grupofamiliar = modelogrupofamiliar.RecuperarPorTutorDeFamilia(IdFamilia, objTutorWindow.IdSeleccionado);
-                                grupofamiliar.TitularPagoVigente = true;
-                                modelogrupofamiliar.Editar(grupofamiliar.Id, grupofamiliar);
+                                    grupofamiliar = modelogrupofamiliar.RecuperarPorTutorDeFamilia(IdFamilia, objTutorWindow.IdSeleccionado);
+                                    grupofamiliar.TitularPagoVigente = true;
+                                    modelogrupofamiliar.Editar(grupofamiliar.Id, grupofamiliar);
 
-                                OK = true;
+                                    OK = true;
+                                }
+                                objTutorWindow = null;
                             }
-                            objTutorWindow = null;
                         }
                     }
+                }
+            }
+            else
+            {
+                switch (MessageBox.Show("¿Desea guardar los datos correspondiente a este madre?", "Consulta", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+                {
+                    case MessageBoxResult.Yes:
+                        OKM = 1;
+                        break;
+                    case MessageBoxResult.No:
+                        OKM = 2;
+                        break;
+                    case MessageBoxResult.Cancel:
+                        OKM = 3;
+                        break;
                 }
             }
 
             if (ok == false)
             {
-                ModeloMadre modelomadre = new ModeloMadre();
-
-                _madre.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                switch (cboTipoDocumentoIdentidad.SelectedIndex)
-                {
-                    case 0:
-                        _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
-                        break;
+                switch (OKM)
+                { 
                     case 1:
-                        _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                        ModeloMadre modelomadre = new ModeloMadre();
+
+                        _madre.DocumentoIdentidad = txtDocumentoIdentidad.Text;
+                        switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                        {
+                            case 0:
+                                _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                                break;
+                            case 1:
+                                _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                                break;
+                            case 2:
+                                _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                                break;
+                        }
+                        _madre.PrimerApellido = txtPaterno.Text;
+                        _madre.SegundoApellido = txtMaterno.Text;
+                        _madre.TercerApellido = txtConyuge.Text;
+                        _madre.Nombres = txtNombres.Text;
+                        _madre.NombreCompleto = txtNombreCompleto.Text;
+                        _madre.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
+                        _madre.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
+                        _madre.Observaciones = "";
+                        _madre.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
+                        _madre.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
+                        _madre.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
+                        _madre.LocalidadNacimiento = txtLugarNacimiento.Text;
+
+                        if (IdSeleccionado > 0)
+                            modelomadre.Editar(IdSeleccionado, _madre);
+                        else
+                        {
+                            modelomadre.Crear(_madre);
+                            IdSeleccionado = _madre.Id;
+
+                            _grupofamiliar.IdFamilia = IdFamilia;
+                            _grupofamiliar.IdMadre = _madre.Id;
+                            _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Madre;
+                            if (gf == null)
+                            {
+                                if (OK == false)
+                                    _grupofamiliar.TitularPagoVigente = true;
+                            }
+
+                            modelogrupofamiliar.Crear(_grupofamiliar);
+                        }
+
+                        Resultado = true;
+
+                        this.Close();
                         break;
-                    case 2:
-                        _madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                    case 3:
+                        IdSeleccionado = 0;
+                        Resultado = false;
+                        this.Close();
                         break;
                 }
-                _madre.PrimerApellido = txtPaterno.Text;
-                _madre.SegundoApellido = txtMaterno.Text;
-                _madre.TercerApellido = txtConyuge.Text;
-                _madre.Nombres = txtNombres.Text;
-                _madre.NombreCompleto = txtNombreCompleto.Text;
-                _madre.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
-                _madre.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
-                _madre.Observaciones = "";
-                _madre.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
-                _madre.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
-                _madre.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _madre.LocalidadNacimiento = txtLugarNacimiento.Text;
-
-                if (IdSeleccionado > 0)
-                    modelomadre.Editar(IdSeleccionado, _madre);
-                else
-                {
-                    modelomadre.Crear(_madre);
-                    IdSeleccionado = _madre.Id;
-
-                    _grupofamiliar.IdFamilia = IdFamilia;
-                    _grupofamiliar.IdMadre = _madre.Id;
-                    _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Madre;
-                    if (gf == null)
-                    {
-                        if (OK == false)
-                            _grupofamiliar.TitularPagoVigente = true;
-                    }
-
-                    modelogrupofamiliar.Crear(_grupofamiliar);
-                }
-
-                Resultado = true;
-
-                this.Close();
             }
         }
 

@@ -6,9 +6,9 @@
         <Label x:Name="lblFechaInscripcion" Content="Fecha de Inscripción" HorizontalAlignment="Left" Margin="18,18,0,0" VerticalAlignment="Top" />
         <DatePicker x:Name="dtpFechaInscripcion" HorizontalAlignment="Left" Margin="141,20,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="lblApellidoPaterno" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="38,46,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" Margin="141,49,0,0" VerticalAlignment="Top" Width="177"/>
+        <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" Margin="141,49,0,0" VerticalAlignment="Top" Width="177" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblApellidoMaterno" Content="Apellido Materno" HorizontalAlignment="Left" Margin="32,74,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" Margin="141,77,0,0" VerticalAlignment="Top" Width="177"/>
+        <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" Margin="141,77,0,0" VerticalAlignment="Top" Width="177" CharacterCasing="Upper" MaxLength="50"/>
         <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="450,226,0,0" Click="cmdAceptar_Click"/>
         <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="552,226,0,0" Click="cmdCancelar_Click"/>
         <Label x:Name="lblDepartamento" Content="Departamento" HorizontalAlignment="Left" Margin="49,101,0,0" VerticalAlignment="Top"/>
@@ -18,6 +18,6 @@
         <Label x:Name="lblMunicipio" Content="Municipio" HorizontalAlignment="Left" Margin="73,153,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboMunicipio"  HorizontalAlignment="Left" Margin="141,159,-133,0" VerticalAlignment="Top" Width="486"/>
         <Label x:Name="lblLugarFamilia" Content="Lugar" HorizontalAlignment="Left" Margin="96,183,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtLugar" HorizontalAlignment="Left" Height="23" Margin="141,186,-133,0" VerticalAlignment="Top" Width="486"/>
+        <TextBox x:Name="txtLugar" HorizontalAlignment="Left" Height="23" Margin="141,186,-133,0" VerticalAlignment="Top" Width="486" MaxLength="250"/>
     </Grid>
 </Window>

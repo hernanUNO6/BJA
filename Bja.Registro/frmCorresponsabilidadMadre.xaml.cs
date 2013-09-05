@@ -65,7 +65,8 @@ namespace Bja.Registro
             if (_grupofamiliar.TitularPagoVigente == true)
             {
                 this.lblNombreTitular.Content = this.lblNombresMadre.Content;
-                this.lblParentescoTitular.Content = "Madre Gestante";
+                this.lblParentesco.Content = "";
+                this.lblParentescoTitular.Content = "MADRE GESTANTE";
             }
             else
             {
@@ -251,7 +252,7 @@ namespace Bja.Registro
                 {
                     if (!(txtCodigoFormulario.Text.Length > 0))
                     {
-                        MessageBox.Show("Se requiere especificar número de formulario.", "Error");
+                        MessageBox.Show("Se requiere especificar número de formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         ok = true;
                     }
                 }
@@ -262,17 +263,17 @@ namespace Bja.Registro
                     {
                         if ((this.rdbTransferenciaSalida.IsChecked == false) && (this.rdbObitoFetal.IsChecked == false) && (this.rdbIncumplimiento.IsChecked == false) && (this.rdbFallecimiento.IsChecked == false) && (this.rdbCumplimiento.IsChecked == false) && (this.rdbAborto.IsChecked == false))
                         {
-                            MessageBox.Show("Se requiere especificar causa.", "Error");
+                            MessageBox.Show("Se requiere especificar causa.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             ok = true;
                         }
                         else if (!(txtAutorizado.Text.Length > 0))
                         {
-                            MessageBox.Show("Se requiere especificar autorizador.", "Error");
+                            MessageBox.Show("Se requiere especificar autorizador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             ok = true;
                         }
                         else if (!(txtCargo.Text.Length > 0))
                         {
-                            MessageBox.Show("Se requiere especificar cargo.", "Error");
+                            MessageBox.Show("Se requiere especificar cargo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             ok = true;
                         }
                     }

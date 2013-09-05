@@ -89,6 +89,9 @@
     <Compile Include="frmFamilia.xaml.cs">
       <DependentUpon>frmFamilia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmFamilias.xaml.cs">
+      <DependentUpon>frmFamilias.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmGrupoFamiliar.xaml.cs">
       <DependentUpon>frmGrupoFamiliar.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmFamilia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmFamilias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

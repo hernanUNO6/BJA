@@ -65,7 +65,7 @@ namespace Bja.Modelo
                                      FechaNacimiento = n.FechaNacimiento,
                                      Sexo = n.Sexo == "M" ? "Masculiano" : n.Sexo == "F" ? "Femenino" : "",
                                      Familia = fa.PrimerApellido + " " + fa.SegundoApellido,
-                                     Tipo = "Menor"
+                                     Tipo = n.Sexo == "M" ? "Niño" : n.Sexo == "F" ? "Niña" : ""
                                  }
                               ).ToList();
 
@@ -91,7 +91,7 @@ namespace Bja.Modelo
                                      FechaNacimiento = t.FechaNacimiento,
                                      Sexo = t.Sexo == "M" ? "Masculiano" : t.Sexo == "F" ? "Femenino" : "",
                                      Familia = fa.PrimerApellido + " " + fa.SegundoApellido,
-                                     Tipo = "Tutor"
+                                     Tipo = "Titular de Pago"
                                  }
                               ).ToList();
 

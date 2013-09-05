@@ -122,53 +122,64 @@ namespace Bja.Registro
             bool ok = false;
             if (!(txtPaterno.Text.Length > 0) && !(txtMaterno.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar apellidos de familia.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar apellidos de familia.", "Error");
             }
             else if (!(Convert.ToInt64(cboDepartamento.SelectedValue) >= 0))
             {
+                MessageBox.Show("Se requiere especificar departamento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar departamento.", "Error");
             }
             else if (!(Convert.ToInt64(cboProvincia.SelectedValue) >= 0))
             {
+                MessageBox.Show("Se requiere especificar provincia.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
             else if (!(Convert.ToInt64(cboMunicipio.SelectedValue) >= 0))
             {
+                MessageBox.Show("Se requiere especificar municipio.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar municipio.", "Error");
             }
             else if (!(txtLugar.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar lugar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar lugar.", "Error");
             }
 
             if (ok == false)
             {
-                ModeloFamilia modelofamilia = new ModeloFamilia();
+                switch (MessageBox.Show("¿Desea guardar los datos correspondiente a este familia?", "Consulta", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+                {
+                    case MessageBoxResult.Yes:
+                        ModeloFamilia modelofamilia = new ModeloFamilia();
 
-                _familia.IdEstablecimientoSalud = 1;
-                _familia.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
-                _familia.PrimerApellido = txtPaterno.Text;
-                _familia.SegundoApellido = txtMaterno.Text;
-                _familia.Observaciones = "";
-                _familia.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
-                _familia.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
-                _familia.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _familia.Localidad = txtLugar.Text;
+                        _familia.IdEstablecimientoSalud = 1;
+                        _familia.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
+                        _familia.PrimerApellido = txtPaterno.Text;
+                        _familia.SegundoApellido = txtMaterno.Text;
+                        _familia.Observaciones = "";
+                        _familia.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
+                        _familia.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
+                        _familia.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
+                        _familia.Localidad = txtLugar.Text;
 
-                if (IdSeleccionado > 0)
-                    modelofamilia.Editar(IdSeleccionado, _familia);
-                else
-                    modelofamilia.Crear(_familia);
+                        if (IdSeleccionado > 0)
+                            modelofamilia.Editar(IdSeleccionado, _familia);
+                        else
+                            modelofamilia.Crear(_familia);
 
-                Id = _familia.Id;
-                Resultado = true;
+                        Id = _familia.Id;
+                        Resultado = true;
 
-                this.Close();
+                        this.Close();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        Id = 0;
+                        Resultado = false;
+                        this.Close();
+                        break;
+                }
+
             }
         }
 

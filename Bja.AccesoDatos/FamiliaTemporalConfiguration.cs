@@ -24,13 +24,13 @@ namespace Bja.AccesoDatos
             Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(m => m.IdEstablecimientoSalud).IsRequired();
-            Property(m => m.PrimerApellido).IsRequired().HasMaxLength(100);
-            Property(m => m.SegundoApellido).IsRequired().HasMaxLength(100);
+            Property(m => m.PrimerApellido).IsRequired().HasMaxLength(50);
+            Property(m => m.SegundoApellido).IsRequired().HasMaxLength(50);
             Property(m => m.FechaInscripcion).IsRequired();
             Property(m => m.IdDepartamento).IsRequired();
             Property(m => m.IdProvincia).IsRequired();
             Property(m => m.IdMunicipio).IsRequired();
-            Property(m => m.Localidad).IsRequired().HasMaxLength(100);
+            Property(m => m.Localidad).IsRequired().HasMaxLength(250);
             Property(m => m.Observaciones).IsOptional().HasMaxLength(1024);
         }
     }

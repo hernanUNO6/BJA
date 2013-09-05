@@ -51,7 +51,7 @@ namespace Bja.Registro
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
         {
             if (!(Convert.ToInt64(this.cboNuevo.SelectedValue) >= 0))
-                MessageBox.Show("Se requiere especificar establecimiento de salud.", "Error");
+                MessageBox.Show("Se requiere especificar establecimiento de salud.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 ModeloAsignacionMedico modeloasignacionmedico = new ModeloAsignacionMedico();

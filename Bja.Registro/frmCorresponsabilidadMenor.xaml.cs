@@ -228,7 +228,7 @@ namespace Bja.Registro
             {
                 if (!(txtCodigoFormulario.Text.Length > 0))
                 {
-                    MessageBox.Show("Se requiere especificar número de formulario.", "Error");
+                    MessageBox.Show("Se requiere especificar número de formulario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     ok = true;
                 }
             }

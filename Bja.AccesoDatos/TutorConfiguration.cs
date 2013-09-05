@@ -21,14 +21,14 @@ namespace Bja.AccesoDatos
             Property(m => m.DescripcionEstadoSincronizacion).IsRequired().HasMaxLength(512);
 
             Property(t => t.Nombres).IsRequired().HasMaxLength(100);
-            Property(t => t.PrimerApellido).IsRequired().HasMaxLength(100);
-            Property(t => t.SegundoApellido).HasMaxLength(100);
-            Property(t => t.TercerApellido).HasMaxLength(100);
-            Property(m => m.NombreCompleto).IsRequired().HasMaxLength(100);
-            Property(t => t.DocumentoIdentidad).IsRequired().HasMaxLength(15);
+            Property(t => t.PrimerApellido).IsRequired().HasMaxLength(50);
+            Property(t => t.SegundoApellido).HasMaxLength(50);
+            Property(t => t.TercerApellido).HasMaxLength(50);
+            Property(m => m.NombreCompleto).IsRequired().HasMaxLength(250);
+            Property(t => t.DocumentoIdentidad).IsRequired().HasMaxLength(20);
             Property(t => t.TipoDocumentoIdentidad).IsRequired();
             Property(t => t.FechaNacimiento).IsRequired();
-            Property(t => t.LocalidadNacimiento).IsRequired();
+            Property(t => t.LocalidadNacimiento).IsRequired().HasMaxLength(250);
             Property(m => m.IdDepartamento).IsRequired();
             Property(m => m.IdProvincia).IsRequired();
             Property(m => m.IdMunicipio).IsRequired();
