@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorConfiguracion.cs" />
+    <Compile Include="Distancia.cs" />
     <Compile Include="IdentifierGenerator.cs" />
     <Compile Include="InitializationBD.cs" />
     <Compile Include="ModeloAsignacionMedico.cs" />
@@ -60,12 +61,14 @@
     <Compile Include="ModeloFamilia.cs" />
     <Compile Include="ModeloGrupoFamiliar.cs" />
     <Compile Include="ModeloMadre.cs" />
+    <Compile Include="ModeloMadreTemporal.cs" />
     <Compile Include="ModeloMedico.cs" />
     <Compile Include="ModeloMenor.cs" />
     <Compile Include="ModeloMunicipio.cs" />
     <Compile Include="ModeloProvincia.cs" />
     <Compile Include="ModeloReclamo.cs" />
     <Compile Include="ModeloRedSalud.cs" />
+    <Compile Include="ModeloRevisionManual.cs" />
     <Compile Include="ModeloTipoParentesco.cs" />
     <Compile Include="ModeloTutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
