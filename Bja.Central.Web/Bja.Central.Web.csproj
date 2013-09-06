@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\ReclamosController.cs" />
     <Compile Include="Controllers\RedesSaludController.cs" />
+    <Compile Include="Controllers\RevisionMadresController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -344,6 +345,12 @@
     <Content Include="Views\AsignacionesMedico\Details.cshtml" />
     <Content Include="Views\AsignacionesMedico\Edit.cshtml" />
     <Content Include="Views\AsignacionesMedico\Index.cshtml" />
+    <Content Include="Views\RevisionMadres\Index.cshtml" />
+    <Content Include="Views\RevisionMadres\Details.cshtml" />
+    <Content Include="Views\RevisionMadres\Create.cshtml" />
+    <Content Include="Views\RevisionMadres\Edit.cshtml" />
+    <Content Include="Views\RevisionMadres\Delete.cshtml" />
+    <Content Include="Views\RevisionMadres\Temporal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

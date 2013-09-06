@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -77,7 +78,7 @@ namespace Bja.Central.Web.Controllers
                     provincia.Descripcion += provincia.Codigo;
                     modProvincia.Crear(provincia);
 
-                    
+
                     for (int k = 1; k <= 5; k++)
                     {
                         Municipio municipio = new Municipio();
@@ -116,5 +117,125 @@ namespace Bja.Central.Web.Controllers
             return "OK";
         }
 
+        public string Madres()
+        {
+            ModeloRevisionManual mrm = new ModeloRevisionManual();
+            mrm.EliminarTodoMadre();
+
+            string connectionString = "Data Source=HERNAN-PC04;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
+            string queryString = @"select 
+	                                Nombres, 
+	                                PrimerApellido, 
+	                                SegundoApellido, 
+	                                Nombres+PrimerApellido+SegundoApellido AS 'NombreCompleto',
+	                                DocumentoIdentidad,
+	                                0 AS 'TipoDocumentoIdentidad',
+	                                FechaNacimiento	
+                                from SECC_1A
+                                where idS1_A < 1000 and S1_02 = 2 and FechaNacimiento is not null";
+
+            string resultado = "";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Madre madre = new Madre();
+
+                    madre.Id = IdentifierGenerator.NewId();
+                    madre.IdSesion = 1;
+                    madre.FechaUltimaTransaccion = DateTime.Now;
+                    madre.FechaRegistro = DateTime.Now;
+                    madre.DescripcionEstadoSincronizacion = "";
+
+                    madre.Nombres = reader[0].ToString();
+                    madre.PrimerApellido = reader[1].ToString();
+                    madre.SegundoApellido = reader[2].ToString();
+                    madre.TercerApellido = "";
+                    madre.NombreCompleto = madre.Nombres + madre.PrimerApellido + madre.SegundoApellido + madre.TercerApellido;
+                    madre.DocumentoIdentidad = reader[4].ToString();
+                    madre.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                    madre.FechaNacimiento = Convert.ToDateTime(reader[6].ToString());
+
+                    //madre.IdDepartamento = 69;
+                    //madre.IdProvincia = 540;
+                    //madre.IdMunicipio = 2254;
+                    madre.IdDepartamento = 1;
+                    madre.IdProvincia = 1;
+                    madre.IdMunicipio = 1;
+                    madre.LocalidadNacimiento = "";
+                    madre.Defuncion = false;
+
+                    mrm.Crear(madre);
+                }
+                reader.Close();
+            }
+            return "OK: " + resultado;
+        }
+
+        public string MadresTemporal()
+        {
+            ModeloRevisionManual mrm = new ModeloRevisionManual();
+            mrm.EliminarTodoMadreTempo();
+
+            string connectionString = "Data Source=HERNAN-PC04;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
+            string queryString = @"select 
+	                                Nombres, 
+	                                PrimerApellido, 
+	                                SegundoApellido, 
+	                                Nombres+PrimerApellido+SegundoApellido AS 'NombreCompleto',
+	                                DocumentoIdentidad,
+	                                0 AS 'TipoDocumentoIdentidad',
+	                                FechaNacimiento	
+                                from SECC_1A
+                                where idS1_A < 100 and S1_02 = 2 and FechaNacimiento is not null";
+
+            string resultado = "";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    MadreTemporal madreTempo = new MadreTemporal();
+
+                    madreTempo.Id = IdentifierGenerator.NewId();
+                    madreTempo.IdSesion = 1;
+                    madreTempo.FechaUltimaTransaccion = DateTime.Now;
+                    madreTempo.FechaRegistro = DateTime.Now;
+                    madreTempo.DescripcionEstadoSincronizacion = "";
+
+                    madreTempo.Nombres = reader[0].ToString();
+                    madreTempo.PrimerApellido = reader[1].ToString();
+                    madreTempo.SegundoApellido = reader[2].ToString();
+                    madreTempo.TercerApellido = "";
+                    madreTempo.NombreCompleto = madreTempo.Nombres + madreTempo.PrimerApellido + madreTempo.SegundoApellido + madreTempo.TercerApellido;
+                    madreTempo.DocumentoIdentidad = reader[4].ToString();
+                    madreTempo.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                    madreTempo.FechaNacimiento = Convert.ToDateTime(reader[6].ToString());
+
+                    //madreTempo.IdDepartamento = 69;
+                    //madreTempo.IdProvincia = 540;
+                    //madreTempo.IdMunicipio = 2254;
+                    madreTempo.IdDepartamento = 1;
+                    madreTempo.IdProvincia = 1;
+                    madreTempo.IdMunicipio = 1;
+
+                    madreTempo.LocalidadNacimiento = "";
+                    madreTempo.Defuncion = false;
+
+                    mrm.Crear(madreTempo);
+                }
+                reader.Close();
+            }
+            return "OK: " + resultado;
+        }
     }
 }

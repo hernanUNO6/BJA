@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Bja.Entidades.Madre>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Madres</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimerApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SegundoApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TercerApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentoIdentidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalidadNacimiento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimerApellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SegundoApellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TercerApellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
+        </td>
+        <td>
+            @item.FechaNacimiento.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalidadNacimiento)
+        </td>
+        <td>
+            @{ string nombreControlador = "RevisionMadres"; }
+            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Buscar"><img src="@Url.Content("~/Images/find16.png")" style="border:none" /></a>
+            @*<a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>*@
+        </td>
+    </tr>
+}
+
+</table>

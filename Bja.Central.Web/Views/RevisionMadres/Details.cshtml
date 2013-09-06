@@ -1,0 +1,135 @@
+﻿@model Bja.Entidades.Madre
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Madre</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdSesion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdSesion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaUltimaTransaccion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaUltimaTransaccion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaRegistro)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaRegistro)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DescripcionEstadoSincronizacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DescripcionEstadoSincronizacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nombres)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nombres)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PrimerApellido)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PrimerApellido)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SegundoApellido)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SegundoApellido)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TercerApellido)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TercerApellido)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NombreCompleto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NombreCompleto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentoIdentidad)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentoIdentidad)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaNacimiento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaNacimiento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Departamento.DescripcionEstadoSincronizacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Departamento.DescripcionEstadoSincronizacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Provincia.DescripcionEstadoSincronizacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Provincia.DescripcionEstadoSincronizacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Municipio.DescripcionEstadoSincronizacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Municipio.DescripcionEstadoSincronizacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LocalidadNacimiento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LocalidadNacimiento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Defuncion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Defuncion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Observaciones)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Observaciones)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
