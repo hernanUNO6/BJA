@@ -16,7 +16,7 @@ namespace Bja.Modelo
         public void Crear(GrupoFamiliar grupofamiliar)
         {
             grupofamiliar.Id = IdentifierGenerator.NewId();
-            grupofamiliar.IdSesion = SessionManager.getCurrentSession().Id;
+            grupofamiliar.IdSesion = SessionManager.getSessionIdentifier();
             grupofamiliar.FechaUltimaTransaccion = DateTime.Now;
             grupofamiliar.FechaRegistro = DateTime.Now;
             grupofamiliar.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -36,7 +36,7 @@ namespace Bja.Modelo
                         where gf.Id == Id
                         select gf).FirstOrDefault();
 
-            _grupofamiliar.IdSesion = SessionManager.getCurrentSession().Id;
+            _grupofamiliar.IdSesion = SessionManager.getSessionIdentifier();
             _grupofamiliar.FechaUltimaTransaccion = DateTime.Now;
             _grupofamiliar.FechaRegistro = DateTime.Now;
             _grupofamiliar.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -61,7 +61,7 @@ namespace Bja.Modelo
                        where gf.Id == Id
                        select gf).FirstOrDefault();
 
-            grupofamiliar.IdSesion = SessionManager.getCurrentSession().Id;
+            grupofamiliar.IdSesion = SessionManager.getSessionIdentifier();
             grupofamiliar.FechaUltimaTransaccion = DateTime.Now;
             grupofamiliar.FechaRegistro = DateTime.Now;
             grupofamiliar.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;
@@ -217,7 +217,7 @@ namespace Bja.Modelo
                                     gf.Id == IdGrupoFamiliar
                                  select gf).FirstOrDefault();
 
-            _grupofamiliar.IdSesion = SessionManager.getCurrentSession().Id;
+            _grupofamiliar.IdSesion = SessionManager.getSessionIdentifier();
             _grupofamiliar.FechaUltimaTransaccion = DateTime.Now;
             _grupofamiliar.FechaRegistro = DateTime.Now;
             _grupofamiliar.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;

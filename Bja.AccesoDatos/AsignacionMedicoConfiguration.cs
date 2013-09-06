@@ -15,7 +15,7 @@ namespace Bja.AccesoDatos
         {
             ToTable("AsignacionesMedico");
             HasKey(am => am.Id);
-            Property(am => am.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            //Property(am => am.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             Property(am => am.IdSesion).IsRequired();
             Property(am => am.FechaRegistro).IsRequired();

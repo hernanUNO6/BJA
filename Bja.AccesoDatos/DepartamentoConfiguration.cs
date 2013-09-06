@@ -15,7 +15,7 @@ namespace Bja.AccesoDatos
         {
             ToTable("Departamentos");
             HasKey(d => d.Id);
-            Property(d => d.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            //Property(d => d.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             Property(d => d.IdSesion).IsRequired();
             Property(d => d.FechaRegistro).IsRequired();

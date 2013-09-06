@@ -15,7 +15,7 @@ namespace Bja.Modelo
         public void Crear(ControlMadre controlmadre)
         {
             controlmadre.Id = IdentifierGenerator.NewId();
-            controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
+            controlmadre.IdSesion = SessionManager.getSessionIdentifier();
             controlmadre.FechaUltimaTransaccion = DateTime.Now;
             controlmadre.FechaRegistro = DateTime.Now;
             controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -35,7 +35,7 @@ namespace Bja.Modelo
                              where mc.Id == Id
                              select mc).FirstOrDefault();
 
-            _controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
+            _controlmadre.IdSesion = SessionManager.getSessionIdentifier();
             _controlmadre.FechaUltimaTransaccion = DateTime.Now;
             _controlmadre.FechaRegistro = DateTime.Now;
             _controlmadre.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -67,7 +67,7 @@ namespace Bja.Modelo
                             where mc.Id == Id
                             select mc).FirstOrDefault();
 
-            controlmadre.IdSesion = SessionManager.getCurrentSession().Id;
+            controlmadre.IdSesion = SessionManager.getSessionIdentifier();
             controlmadre.FechaUltimaTransaccion = DateTime.Now;
             controlmadre.FechaRegistro = DateTime.Now;
             controlmadre.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

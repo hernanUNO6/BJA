@@ -63,7 +63,7 @@ namespace Bja.Modelo
             Configuracion configuracion = new Configuracion();
 
             configuracion.Id = IdentifierGenerator.NewId();
-            configuracion.IdSesion = 1;//SessionManager.getCurrentSession().Id;
+            configuracion.IdSesion = 1;//SessionManager.getSessionIdentifier();
             configuracion.Nombre = nombre;
             configuracion.Clase = clase;
             configuracion.Valor = valor;

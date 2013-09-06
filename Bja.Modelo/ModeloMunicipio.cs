@@ -22,6 +22,14 @@ namespace Bja.Modelo
 
         public void Crear(Municipio municipio)
         {
+            municipio.Id = IdentifierGenerator.NewId();
+            municipio.IdSesion = SessionManager.getSessionIdentifier();
+            municipio.FechaUltimaTransaccion = DateTime.Now;
+            municipio.FechaRegistro = DateTime.Now;
+            municipio.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            municipio.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            municipio.DescripcionEstadoSincronizacion = "";
+
             db.Municipios.Add(municipio);
             db.SaveChanges();
         }

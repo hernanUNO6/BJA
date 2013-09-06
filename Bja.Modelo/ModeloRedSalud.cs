@@ -22,6 +22,14 @@ namespace Bja.Modelo
 
         public void Crear(RedSalud redSalud)
         {
+            redSalud.Id = IdentifierGenerator.NewId();
+            redSalud.IdSesion = SessionManager.getSessionIdentifier();
+            redSalud.FechaUltimaTransaccion = DateTime.Now;
+            redSalud.FechaRegistro = DateTime.Now;
+            redSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            redSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            redSalud.DescripcionEstadoSincronizacion = "";
+
             db.RedesSalud.Add(redSalud);
             db.SaveChanges();
         }
