@@ -46,7 +46,7 @@ namespace Bja.Central.Web.Controllers
             ModeloMadreTemporal modMadreTemp = new ModeloMadreTemporal();
 
             List<Madre> Datos = modMadreTemp.BuscarSemejantes(id);
-            var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido });
+            var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido, d.NombreCompleto });
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
 
