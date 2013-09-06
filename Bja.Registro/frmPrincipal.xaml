@@ -10,7 +10,10 @@
                 <MenuItem Header="Salir" x:Name="menSalir" Click="menSalir_Click"/>
             </MenuItem>
             <MenuItem Header="_Familia" x:Name="menFamilia">
+                <MenuItem Header="Relación" x:Name="menRelFam" Click="menRelFam_Click"/>
+                <Separator/>
                 <MenuItem Header="Buscar" x:Name="menBusFam" Click="menBusFam_Click"/>
+                <Separator/>
                 <MenuItem Header="Nueva" x:Name="menNueFam" Click="menNueFam_Click" />
             </MenuItem>
             <MenuItem Header="_Datos" x:Name="menDatos">

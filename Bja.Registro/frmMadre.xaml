@@ -4,19 +4,19 @@
         Title="Madre" ShowInTaskbar="False" Height="575" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Name="RegistroMadre">
         <Label x:Name="lblDocIde" Content="Documento de Identidad" HorizontalAlignment="Left" Margin="25,141,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtDocumentoIdentidad" HorizontalAlignment="Left" Height="23" Margin="173,141,0,0" VerticalAlignment="Top" Width="114"/>
+        <TextBox x:Name="txtDocumentoIdentidad" HorizontalAlignment="Left" Height="23" Margin="173,141,0,0" VerticalAlignment="Top" Width="114" CharacterCasing="Upper" MaxLength="20"/>
         <Label x:Name="lblTipoDocIde" Content="Tipo de Doc. Identidad" HorizontalAlignment="Left" Margin="37,165,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboTipoDocumentoIdentidad"  HorizontalAlignment="Left" Margin="173,169,0,0" VerticalAlignment="Top" Width="158"/>
         <Label x:Name="lblPaterno" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="70,193,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" Margin="173,196,0,0" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" Margin="173,196,0,0" VerticalAlignment="Top" Width="158" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblMaterno" Content="Apellido Materno" HorizontalAlignment="Left" Margin="70,221,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" Margin="173,224,0,0" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" Margin="173,224,0,0" VerticalAlignment="Top" Width="158" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblConyuge" Content="Apellido de Conyuge" HorizontalAlignment="Left" Margin="47,249,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtConyuge" HorizontalAlignment="Left" Height="23" Margin="173,252,0,0" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="txtConyuge" HorizontalAlignment="Left" Height="23" Margin="173,252,0,0" VerticalAlignment="Top" Width="158" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblNombres" Content="Nombres" HorizontalAlignment="Left" Margin="109,275,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNombres" HorizontalAlignment="Left" Height="23" Margin="173,280,0,0" VerticalAlignment="Top" Width="285"/>
+        <TextBox x:Name="txtNombres" HorizontalAlignment="Left" Height="23" Margin="173,280,0,0" VerticalAlignment="Top" Width="285" CharacterCasing="Upper" MaxLength="100"/>
         <Label x:Name="lblNombreCompleto" Content="Nombre Completo" HorizontalAlignment="Left" Margin="59,305,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNombreCompleto" HorizontalAlignment="Left" Height="23" Margin="173,308,0,0" VerticalAlignment="Top" Width="486"/>
+        <TextBox x:Name="txtNombreCompleto" HorizontalAlignment="Left" Height="23" Margin="173,308,0,0" VerticalAlignment="Top" Width="486" MaxLength="250"/>
         <Label x:Name="lblFechaNacimiento" Content="Fecha de Nacimiento" HorizontalAlignment="Left" Margin="47,334,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dtpFechaNacimiento" HorizontalAlignment="Left" Margin="173,336,0,0" VerticalAlignment="Top" Width="100"/>
         <CheckBox x:Name="chkDefuncion" Content="Fallecida" HorizontalAlignment="Left" Margin="173,365,0,0" VerticalAlignment="Top" IsEnabled="False"/>
@@ -27,14 +27,14 @@
         <Label x:Name="lblMunicipio" Content="Municipio" HorizontalAlignment="Left" Margin="105,435,0,-40" VerticalAlignment="Top"/>
         <ComboBox x:Name="cboMunicipio" HorizontalAlignment="Left" Margin="173,439,0,-40" VerticalAlignment="Top" Width="486"/>
         <Label x:Name="lblLugarNacimiento" Content="Lugar de Nacimiento" HorizontalAlignment="Left" Margin="47,463,0,-68" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtLugarNacimiento" HorizontalAlignment="Left" Height="23" Margin="173,466,0,-68" VerticalAlignment="Top" Width="486"/>
-        <Button x:Name="cmdAceptar" IsDefault="True" Content="Aceptar" HorizontalAlignment="Left" Margin="487,505,0,-104" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
-        <Button x:Name="cmdCancelar" IsCancel="True" Content="Cancelar" HorizontalAlignment="Left" Margin="584,505,0,-104" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
+        <TextBox x:Name="txtLugarNacimiento" HorizontalAlignment="Left" Height="23" Margin="173,466,0,-68" VerticalAlignment="Top" Width="486" MaxLength="250"/>
+        <Button x:Name="cmdAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="487,505,0,-104" VerticalAlignment="Top" Width="75" Click="cmdAceptar_Click"/>
+        <Button x:Name="cmdCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="584,505,0,-104" VerticalAlignment="Top" Width="75" Click="cmdCancelar_Click"/>
         <Label x:Name="lblFamilia" Content="Datos Generales de Familia" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" />
         <Label x:Name="lblPaternoFamilia" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="70,41,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtPaternoFamilia" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="173,44,0,0" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="txtPaternoFamilia" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="173,44,0,0" VerticalAlignment="Top" Width="158" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblMaternoFamilia" Content="Apellido Paterno" HorizontalAlignment="Left" Margin="70,69,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="txtMaternoFamilia" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="173,72,0,0" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="txtMaternoFamilia" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="173,72,0,0" VerticalAlignment="Top" Width="158" CharacterCasing="Upper" MaxLength="50"/>
         <Label x:Name="lblMadre" Content="Datos Generales de la Madre" Height="28" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" FontWeight="Bold" />
     </Grid>
 </Window>

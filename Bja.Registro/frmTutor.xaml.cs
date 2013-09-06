@@ -140,6 +140,7 @@ namespace Bja.Registro
 
         private void cmdCancelar_Click(object sender, RoutedEventArgs e)
         {
+            IdSeleccionado = 0;
             Resultado = false;
 
             this.Close();
@@ -150,115 +151,125 @@ namespace Bja.Registro
             bool ok = false;
             if ((Convert.ToInt64(cboTipoParentesco.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar tipo de parentesco.", "Error");
             }
             else if (!(txtDocumentoIdentidad.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar documento de identidad.", "Error");
             }
             else if ((Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error");
             }
             else if (!(txtPaterno.Text.Length > 0) && !(txtMaterno.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar apellidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar apellidos.", "Error");
             }
             else if (!(txtNombres.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar nombre.", "Error");
             }
             else if (!(txtNombreCompleto.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar nombre completo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar nombre completo.", "Error");
             }
             else if ((Convert.ToInt64(cboDepartamento.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar departamento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar departamento.", "Error");
             }
             else if ((Convert.ToInt64(cboProvincia.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar provincia.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
             else if ((Convert.ToInt64(cboMunicipio.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar municipio.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar municipio.", "Error");
             }
             else if (!(txtLugarNacimiento.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error");
             }
 
             if (ok == false)
             {
-                ModeloTutor modelotutor = new ModeloTutor();
-                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
-
-                _tutor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                switch (MessageBox.Show("¿Desea guardar los datos correspondiente a este titular de pago?", "Consulta", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
                 {
-                    case 0:
-                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                    case MessageBoxResult.Yes:
+                        ModeloTutor modelotutor = new ModeloTutor();
+                        ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+
+                        _tutor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
+                        switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                        {
+                            case 0:
+                                _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                                break;
+                            case 1:
+                                _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                                break;
+                            case 2:
+                                _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                                break;
+                        }
+                        _tutor.PrimerApellido = txtPaterno.Text;
+                        _tutor.SegundoApellido = txtMaterno.Text;
+                        _tutor.TercerApellido = txtConyuge.Text;
+                        _tutor.Nombres = txtNombres.Text;
+                        _tutor.NombreCompleto = txtNombreCompleto.Text;
+                        _tutor.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
+                        _tutor.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
+                        _tutor.Observaciones = "";
+                        _tutor.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
+                        _tutor.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
+                        _tutor.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
+                        _tutor.LocalidadNacimiento = txtLugarNacimiento.Text;
+                        if (rdbFemenino.IsChecked == true)
+                            _tutor.Sexo = "F";
+                        else if (rdbFemenino.IsChecked == false)
+                            _tutor.Sexo = "M";
+                        else
+                            _tutor.Sexo = "-";
+
+                        _grupofamiliar.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue); 
+
+                        if (IdSeleccionado > 0)
+                        {
+                            modelotutor.Editar(IdSeleccionado, _tutor);
+
+                            modelogrupofamiliar.Editar(_grupofamiliar.Id, _grupofamiliar); 
+                        }
+                        else
+                        {
+                            modelotutor.Crear(_tutor);
+                            IdSeleccionado = _tutor.Id;
+
+                            _grupofamiliar.IdFamilia = IdFamilia;
+                            _grupofamiliar.IdTutor = _tutor.Id;
+                            _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
+
+                            modelogrupofamiliar.Crear(_grupofamiliar);
+                        }
+
+                        Resultado = true;
+
+                        this.Close();
                         break;
-                    case 1:
-                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
-                        break;
-                    case 2:
-                        _tutor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                    case MessageBoxResult.Cancel:
+                        IdSeleccionado = 0;
+                        Resultado = false;
+                        this.Close();
                         break;
                 }
-                _tutor.PrimerApellido = txtPaterno.Text;
-                _tutor.SegundoApellido = txtMaterno.Text;
-                _tutor.TercerApellido = txtConyuge.Text;
-                _tutor.Nombres = txtNombres.Text;
-                _tutor.NombreCompleto = txtNombreCompleto.Text;
-                _tutor.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
-                _tutor.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
-                _tutor.Observaciones = "";
-                _tutor.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
-                _tutor.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
-                _tutor.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _tutor.LocalidadNacimiento = txtLugarNacimiento.Text;
-                if (rdbFemenino.IsChecked == true)
-                    _tutor.Sexo = "F";
-                else if (rdbFemenino.IsChecked == false)
-                    _tutor.Sexo = "M";
-                else
-                    _tutor.Sexo = "-";
-
-                _grupofamiliar.IdTipoParentesco = Convert.ToInt64(cboTipoParentesco.SelectedValue); 
-
-                if (IdSeleccionado > 0)
-                {
-                    modelotutor.Editar(IdSeleccionado, _tutor);
-
-                    modelogrupofamiliar.Editar(_grupofamiliar.Id, _grupofamiliar); 
-                }
-                else
-                {
-                    modelotutor.Crear(_tutor);
-                    IdSeleccionado = _tutor.Id;
-
-                    _grupofamiliar.IdFamilia = IdFamilia;
-                    _grupofamiliar.IdTutor = _tutor.Id;
-                    _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Tutor;
-
-                    modelogrupofamiliar.Crear(_grupofamiliar);
-                }
-
-                Resultado = true;
-
-                this.Close();
             }
         }
 

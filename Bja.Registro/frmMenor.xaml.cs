@@ -136,68 +136,87 @@ namespace Bja.Registro
         private void cmdAceptar_Click(object sender, RoutedEventArgs e)
         {
             bool ok = false;
+            string s = "-";
+            string ss = "";
+
+            if (rdbFemenino.IsChecked == true)
+            {
+                s = "F";
+                ss = "¿Desea guardar los datos correspondiente a esta niña?";
+            }
+            else if (rdbFemenino.IsChecked == false)
+            {
+                s = "M";
+                ss = "¿Desea guardar los datos correspondiente a esta niño?";
+            }
+
             if (!(txtDocumentoIdentidad.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar documento de identidad.", "Error");
             }
             else if ((Convert.ToInt64(cboTipoDocumentoIdentidad.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar tipo de documento de identidad.", "Error");
             }
             else if (Convert.ToInt32(cboTipoDocumentoIdentidad.SelectedValue) == Convert.ToInt32(TipoDocumentoIdentidad.CertificadoNacimiento))
             {
                 if (!(txtOficialia.Text.Length > 0))
                 {
+                    MessageBox.Show("Se requiere especificar oficialía.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     ok = true;
-                    MessageBox.Show("Se requiere especificar oficialía.", "Error");
                 }
                 else if (!(txtLibro.Text.Length > 0))
                 {
+                    MessageBox.Show("Se requiere especificar libro.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     ok = true;
-                    MessageBox.Show("Se requiere especificar libro.", "Error");
                 }
                 else if (!(txtPartida.Text.Length > 0))
                 {
+                    MessageBox.Show("Se requiere especificar partida.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     ok = true;
-                    MessageBox.Show("Se requiere especificar partida.", "Error");
                 }
                 else if (!(txtFolio.Text.Length > 0))
                 {
+                    MessageBox.Show("Se requiere especificar folio.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     ok = true;
-                    MessageBox.Show("Se requiere especificar folio.", "Error");
                 }
             }
             else if (!(txtPaterno.Text.Length > 0) && !(txtMaterno.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar apellidos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar apellidos.", "Error");
             }
             else if (!(txtNombres.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar nombre.", "Error");
+            }
+            else if (s == "-")
+            {
+                MessageBox.Show("Se requiere especificar sexo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ok = true;
             }
             else if ((Convert.ToInt64(cboDepartamento.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar departamento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar departamento.", "Error");
             }
             else if ((Convert.ToInt64(cboProvincia.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar provincia.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar provincia.", "Error");
             }
             else if ((Convert.ToInt64(cboMunicipio.SelectedIndex) < 0))
             {
+                MessageBox.Show("Se requiere especificar municipio.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar municipio.", "Error");
             }
             else if (!(txtLugarNacimiento.Text.Length > 0))
             {
+                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ok = true;
-                MessageBox.Show("Se requiere especificar lugar de nacimiento.", "Error");
             }
 
             if (ok == false)
@@ -211,60 +230,66 @@ namespace Bja.Registro
 
             if (ok == false)
             {
-                ModeloMenor modelomenor = new ModeloMenor();
-                ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
-
-                _menor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
-                switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                switch (MessageBox.Show(ss, "Consulta", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
                 {
-                    case 0:
-                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                    case MessageBoxResult.Yes:
+                        ModeloMenor modelomenor = new ModeloMenor();
+                        ModeloGrupoFamiliar modelogrupofamiliar = new ModeloGrupoFamiliar();
+
+                        _menor.DocumentoIdentidad = txtDocumentoIdentidad.Text;
+                        switch (cboTipoDocumentoIdentidad.SelectedIndex)
+                        {
+                            case 0:
+                                _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CarnetIdentidad;
+                                break;
+                            case 1:
+                                _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
+                                break;
+                            case 2:
+                                _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                                break;
+                        }
+                        _menor.Oficialia = txtOficialia.Text;
+                        _menor.Libro = txtLibro.Text;
+                        _menor.Partida = txtPartida.Text;
+                        _menor.Folio = txtFolio.Text;
+                        _menor.PrimerApellido = txtPaterno.Text;
+                        _menor.SegundoApellido = txtMaterno.Text;
+                        _menor.Nombres = txtNombres.Text;
+                        _menor.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
+                        _menor.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
+                        _menor.Observaciones = "";
+                        _menor.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
+                        _menor.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
+                        _menor.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
+                        _menor.LocalidadNacimiento = txtLugarNacimiento.Text;
+                        _menor.Sexo = s;
+
+                        if (IdSeleccionado > 0)
+                            modelomenor.Editar(IdSeleccionado, _menor);
+                        else
+                        {
+                            modelomenor.Crear(_menor);
+                            IdSeleccionado = _menor.Id;
+
+                            _grupofamiliar.IdFamilia = IdFamilia;
+                            _grupofamiliar.IdMenor = _menor.Id;
+                            _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
+
+                            modelogrupofamiliar.Crear(_grupofamiliar);
+                        }
+
+                        Resultado = true;
+
+                        this.Close();
                         break;
-                    case 1:
-                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.CertificadoNacimiento;
-                        break;
-                    case 2:
-                        _menor.TipoDocumentoIdentidad = TipoDocumentoIdentidad.Pasaporte;
+                    case MessageBoxResult.Cancel:
+                        IdSeleccionado = 0;
+                        Resultado = false;
+                        this.Close();
                         break;
                 }
-                _menor.Oficialia = txtOficialia.Text;
-                _menor.Libro = txtLibro.Text;
-                _menor.Partida = txtPartida.Text;
-                _menor.Folio = txtFolio.Text;
-                _menor.PrimerApellido = txtPaterno.Text;
-                _menor.SegundoApellido = txtMaterno.Text;
-                _menor.Nombres = txtNombres.Text;
-                _menor.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
-                _menor.Defuncion = (chkDefuncion.IsChecked == true) ? true : false;
-                _menor.Observaciones = "";
-                _menor.IdDepartamento = Convert.ToInt64(cboDepartamento.SelectedValue);
-                _menor.IdProvincia = Convert.ToInt64(cboProvincia.SelectedValue);
-                _menor.IdMunicipio = Convert.ToInt64(cboMunicipio.SelectedValue);
-                _menor.LocalidadNacimiento = txtLugarNacimiento.Text;
-                if (rdbFemenino.IsChecked == true)
-                    _menor.Sexo = "F";
-                else if (rdbFemenino.IsChecked == false)
-                    _menor.Sexo = "M";
-                else
-                    _menor.Sexo = "-";
 
-                if (IdSeleccionado > 0)
-                    modelomenor.Editar(IdSeleccionado, _menor);
-                else
-                {
-                    modelomenor.Crear(_menor);
-                    IdSeleccionado = _menor.Id;
-
-                    _grupofamiliar.IdFamilia = IdFamilia;
-                    _grupofamiliar.IdMenor = _menor.Id;
-                    _grupofamiliar.TipoGrupoFamiliar = TipoGrupoFamiliar.Menor;
-
-                    modelogrupofamiliar.Crear(_grupofamiliar);
-                }
-
-                Resultado = true;
-
-                this.Close();
             }
         }
 
@@ -309,6 +334,27 @@ namespace Bja.Registro
                 if (Convert.ToInt64(cboProvincia.SelectedValue) > 0)
                     RecuperarMunicipios(cboProvincia.SelectedValue.ToString());
                 cboMunicipio.SelectedIndex = -1;
+            }
+        }
+
+        private void cboTipoDocumentoIdentidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ControlPreliminar == true)
+            {
+                if (cboTipoDocumentoIdentidad.SelectedIndex == 1)
+                {
+                    this.txtOficialia.IsEnabled = true;
+                    this.txtLibro.IsEnabled = true;
+                    this.txtPartida.IsEnabled = true;
+                    this.txtFolio.IsEnabled = true;
+                }
+                else
+                {
+                    this.txtOficialia.IsEnabled = false;
+                    this.txtLibro.IsEnabled = false;
+                    this.txtPartida.IsEnabled = false;
+                    this.txtFolio.IsEnabled = false;
+                }
             }
         }
 

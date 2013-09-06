@@ -6,9 +6,9 @@
         <Label x:Name="lblFechaInscripcion" Content="F. Inscripción" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" />
         <DatePicker x:Name="dtpFechaInscripcion" IsEnabled="False" HorizontalAlignment="Left" Margin="94,10,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="lblApellidoPaterno" Content="A. Paterno" HorizontalAlignment="Left" Margin="211,10,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtPaterno" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,10,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="txtPaterno" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="281,10,0,0" VerticalAlignment="Top" Width="150"/>
         <Label x:Name="lblApellidoMaterno" Content="A. Materno" HorizontalAlignment="Left" Margin="446,7,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtMaterno" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="520,10,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="txtMaterno" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="520,10,0,0" VerticalAlignment="Top" Width="150"/>
         <Button x:Name="cmdModificar" Content="Modificar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="692,10,0,0" Click="cmdModificar_Click" />
         <Button x:Name="cmdCerrar" Content="Cerrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="692,615,0,0" Click="cmdCerrar_Click" />
         <Label x:Name="lblMadres" Content="Madres" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" FontWeight="Bold"/>
@@ -109,7 +109,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="cmdEstablecerTutor_Click" Tag="{Binding Id}" Content="Titular"/>
+                            <Button Click="cmdTitularTutor_Click" Tag="{Binding Id}" Content="Titular"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

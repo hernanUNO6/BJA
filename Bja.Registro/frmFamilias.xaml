@@ -1,0 +1,30 @@
+﻿<Window x:Class="Bja.Registro.frmFamilias"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Buscar Familias" ShowInTaskbar="False" Height="450" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
+    <Grid Name="BuscarFamilias">
+        <Label x:Name="lblPaterno" Content="Paterno" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,13,0,0"/>
+        <TextBox x:Name="txtPaterno" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Margin="164,16,0,0" TextChanged="txtPaterno_TextChanged" />
+        <Label x:Name="lblMaterno" Content="Materno" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,13,0,0"/>
+        <TextBox x:Name="txtMaterno" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Margin="380,16,0,0" TextChanged="txtMaterno_TextChanged" />
+        <Button x:Name="cmdBuscar" Content="Buscar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="550,16,0,0" Click="cmdBuscar_Click" />
+        <Label x:Name="lblFamilias" Content="Familias" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,45,0,0" FontWeight="Bold"/>
+        <DataGrid x:Name="grdFamilias" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="288" Margin="14,71,0,0" VerticalAlignment="Top" Width="710" SelectionChanged="grdFamilias_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Width="75" Header="F. Nac." Binding="{Binding FechaInscripcion, StringFormat=\{0:dd/MM/yyyy\}}" />
+                <DataGridTextColumn Width="100" Header="Paterno" Binding="{Binding Paterno}" />
+                <DataGridTextColumn Width="100" Header="Materno" Binding="{Binding Materno}" />
+                <DataGridTextColumn Width="300" Header="Titular de Pago" Binding="{Binding Titular}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="cmdSeleccionar_Click" Tag="{Binding Id}" Content="Seleccionar"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="cmdCerrar" Content="Cerrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="649,380,0,0" Click="cmdCerrar_Click" />
+    </Grid>
+</Window>

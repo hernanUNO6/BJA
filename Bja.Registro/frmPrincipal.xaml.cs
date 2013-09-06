@@ -272,5 +272,15 @@ namespace Bja.Registro
             objOperacionWindow = null;
         }
 
+        private void menRelFam_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+            frmFamilias objFamiliasWindow = new frmFamilias();
+            objFamiliasWindow.Owner = this;
+            objFamiliasWindow.ShowDialog();
+            objFamiliasWindow = null;
+            this.Cursor = Cursors.Arrow;
+        }
+
     }
 }
