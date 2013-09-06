@@ -15,7 +15,7 @@ namespace Bja.Modelo
         public void Crear(ControlMenor controlmenor)
         {
             controlmenor.Id = IdentifierGenerator.NewId();
-            controlmenor.IdSesion = SessionManager.getCurrentSession().Id;
+            controlmenor.IdSesion = SessionManager.getSessionIdentifier();
             controlmenor.FechaUltimaTransaccion = DateTime.Now;
             controlmenor.FechaRegistro = DateTime.Now;
             controlmenor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -35,7 +35,7 @@ namespace Bja.Modelo
                              where nc.Id == Id
                              select nc).FirstOrDefault();
 
-            _controlmenor.IdSesion = SessionManager.getCurrentSession().Id;
+            _controlmenor.IdSesion = SessionManager.getSessionIdentifier();
             _controlmenor.FechaUltimaTransaccion = DateTime.Now;
             _controlmenor.FechaRegistro = DateTime.Now;
             _controlmenor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -67,7 +67,7 @@ namespace Bja.Modelo
                             where nc.Id == Id
                             select nc).FirstOrDefault();
 
-            controlmenor.IdSesion = SessionManager.getCurrentSession().Id;
+            controlmenor.IdSesion = SessionManager.getSessionIdentifier();
             controlmenor.FechaUltimaTransaccion = DateTime.Now;
             controlmenor.FechaRegistro = DateTime.Now;
             controlmenor.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

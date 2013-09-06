@@ -20,6 +20,14 @@ namespace Bja.Modelo
 
         public void Crear(Departamento depto)
         {
+            depto.Id = IdentifierGenerator.NewId();
+            depto.IdSesion = SessionManager.getSessionIdentifier();
+            depto.FechaUltimaTransaccion = DateTime.Now;
+            depto.FechaRegistro = DateTime.Now;
+            depto.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            depto.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            depto.DescripcionEstadoSincronizacion = "";
+
             db.Departamentos.Add(depto);
             db.SaveChanges();
         }

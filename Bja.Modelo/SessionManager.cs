@@ -70,7 +70,12 @@ namespace Bja.Modelo
 
         public static long getSessionIdentifier()
         {
-            return session.Id;
+            long sessionId = 0;
+
+            if (session != null)
+                sessionId = session.Id; //session no iniciada, 0 por defecto.
+
+            return sessionId;
         }
 
 

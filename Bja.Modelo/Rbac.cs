@@ -37,13 +37,13 @@ namespace Bja.Modelo
 
         //}
 
-        public void insertUser(String userName, String completeName , String password, long userID, long? sessionId = null )
+        public void insertUser(String userName, String completeName , String password, long userID )
         {
 
             var newUser = new User();
 
             newUser.Id = (int)IdentifierGenerator.NewId();
-            newUser.IdSession = (sessionId == null)?SessionManager.getCurrentSession().Id:(long)sessionId;
+            newUser.IdSession = SessionManager.getSessionIdentifier();
             newUser.UserName = userName;
             newUser.CompleteName = completeName;
             newUser.Password = password.GetHashCode().ToString("x");

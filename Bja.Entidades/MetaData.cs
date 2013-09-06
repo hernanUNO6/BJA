@@ -140,7 +140,7 @@ namespace Bja.Entidades
     public class DepartamentoMetaData
     {
         [Required]
-        [StringLength(2)]
+        [StringLength(4)]
         public string Codigo { get; set; }
 
         [Required]
@@ -151,7 +151,7 @@ namespace Bja.Entidades
     public class ProvinciaMetaData
     {
         [Required]
-        [StringLength(2)]
+        [StringLength(4)]
         public string Codigo { get; set; }
 
         [Required]
@@ -166,7 +166,7 @@ namespace Bja.Entidades
     public class MunicipioMetaData
     {
         [Required]
-        [StringLength(2)]
+        [StringLength(4)]
         public string Codigo { get; set; }
 
         [Required]
@@ -181,7 +181,7 @@ namespace Bja.Entidades
     public class EstablecimientoSaludMetaData
     {
         [Required]
-        [StringLength(2)]
+        [StringLength(4)]
         public string Codigo { get; set; }
 
         [Required]

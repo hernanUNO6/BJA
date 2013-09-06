@@ -15,7 +15,7 @@ namespace Bja.Modelo
       public void Crear(CorresponsabilidadMadre corresponsabilidadmadre)
       {
           corresponsabilidadmadre.Id = IdentifierGenerator.NewId();
-          corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
+          corresponsabilidadmadre.IdSesion = SessionManager.getSessionIdentifier();
           corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           corresponsabilidadmadre.FechaRegistro = DateTime.Now;
           corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -35,7 +35,7 @@ namespace Bja.Modelo
                                       where cm.Id == Id
                                       select cm).FirstOrDefault();
 
-          _corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
+          _corresponsabilidadmadre.IdSesion = SessionManager.getSessionIdentifier();
           _corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           _corresponsabilidadmadre.FechaRegistro = DateTime.Now;
           _corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -69,7 +69,7 @@ namespace Bja.Modelo
                                      where cm.Id == Id
                                      select cm).FirstOrDefault();
 
-          corresponsabilidadmadre.IdSesion = SessionManager.getCurrentSession().Id;
+          corresponsabilidadmadre.IdSesion = SessionManager.getSessionIdentifier();
           corresponsabilidadmadre.FechaUltimaTransaccion = DateTime.Now;
           corresponsabilidadmadre.FechaRegistro = DateTime.Now;
           corresponsabilidadmadre.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

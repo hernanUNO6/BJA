@@ -16,7 +16,7 @@ namespace Bja.Modelo
     public void Crear(Tutor tutor)
     {
         tutor.Id = IdentifierGenerator.NewId();
-        tutor.IdSesion = SessionManager.getCurrentSession().Id;
+        tutor.IdSesion = SessionManager.getSessionIdentifier();
         tutor.FechaUltimaTransaccion = DateTime.Now;
         tutor.FechaRegistro = DateTime.Now;
         tutor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -36,7 +36,7 @@ namespace Bja.Modelo
                   where t.Id == Id
                   select t).FirstOrDefault();
 
-        _tutor.IdSesion = SessionManager.getCurrentSession().Id;
+        _tutor.IdSesion = SessionManager.getSessionIdentifier();
         _tutor.FechaUltimaTransaccion = DateTime.Now;
         _tutor.FechaRegistro = DateTime.Now;
         _tutor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -69,7 +69,7 @@ namespace Bja.Modelo
                   where m.Id == Id
                   select m).FirstOrDefault();
 
-        _tutor.IdSesion = SessionManager.getCurrentSession().Id;
+        _tutor.IdSesion = SessionManager.getSessionIdentifier();
         _tutor.FechaUltimaTransaccion = DateTime.Now;
         _tutor.FechaRegistro = DateTime.Now;
         _tutor.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

@@ -22,6 +22,14 @@ namespace Bja.Modelo
 
         public void Crear(AsignacionMedico asignacionMedico)
         {
+            asignacionMedico.Id = IdentifierGenerator.NewId();
+            asignacionMedico.IdSesion = SessionManager.getSessionIdentifier();
+            asignacionMedico.FechaUltimaTransaccion = DateTime.Now;
+            asignacionMedico.FechaRegistro = DateTime.Now;
+            asignacionMedico.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            asignacionMedico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            asignacionMedico.DescripcionEstadoSincronizacion = "";
+
             db.AsignacionesMedico.Add(asignacionMedico);
             db.SaveChanges();
         }
@@ -123,7 +131,7 @@ namespace Bja.Modelo
                                        (am.IdEstablecimientoSalud == IdEstablecimientoSalud)
                                  select am).FirstOrDefault();
 
-            _asignacionmedico.IdSesion = SessionManager.getCurrentSession().Id;
+            _asignacionmedico.IdSesion = SessionManager.getSessionIdentifier();
             _asignacionmedico.FechaUltimaTransaccion = DateTime.Now;
             _asignacionmedico.FechaRegistro = DateTime.Now;
             _asignacionmedico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;

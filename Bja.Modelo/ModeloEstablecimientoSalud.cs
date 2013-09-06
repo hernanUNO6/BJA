@@ -20,9 +20,17 @@ namespace Bja.Modelo
             return establecimientosSalud.ToList();
         }
 
-        public void Crear(EstablecimientoSalud estabSalud)
+        public void Crear(EstablecimientoSalud establecimientoSalud)
         {
-            db.EstablecimientosSalud.Add(estabSalud);
+            establecimientoSalud.Id = IdentifierGenerator.NewId();
+            establecimientoSalud.IdSesion = SessionManager.getSessionIdentifier();
+            establecimientoSalud.FechaUltimaTransaccion = DateTime.Now;
+            establecimientoSalud.FechaRegistro = DateTime.Now;
+            establecimientoSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            establecimientoSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            establecimientoSalud.DescripcionEstadoSincronizacion = "";
+
+            db.EstablecimientosSalud.Add(establecimientoSalud);
             db.SaveChanges();
         }
 

@@ -17,7 +17,7 @@ namespace Bja.Modelo
     public void Crear(Menor menor)
     {
       menor.Id = IdentifierGenerator.NewId();
-      menor.IdSesion = SessionManager.getCurrentSession().Id;
+      menor.IdSesion = SessionManager.getSessionIdentifier();
       menor.FechaUltimaTransaccion = DateTime.Now;
       menor.FechaRegistro = DateTime.Now;
       menor.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -37,7 +37,7 @@ namespace Bja.Modelo
                 where n.Id == Id
                 select n).FirstOrDefault();
 
-      _menor.IdSesion = SessionManager.getCurrentSession().Id;
+      _menor.IdSesion = SessionManager.getSessionIdentifier();
       _menor.FechaUltimaTransaccion = DateTime.Now;
       _menor.FechaRegistro = DateTime.Now;
       _menor.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -72,7 +72,7 @@ namespace Bja.Modelo
                   where n.Id == Id
                   select n).FirstOrDefault();
 
-        menor.IdSesion = SessionManager.getCurrentSession().Id;
+        menor.IdSesion = SessionManager.getSessionIdentifier();
         menor.FechaUltimaTransaccion = DateTime.Now;
         menor.FechaRegistro = DateTime.Now;
         menor.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

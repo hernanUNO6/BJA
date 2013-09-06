@@ -16,7 +16,7 @@ namespace Bja.Modelo
         public void Crear(Familia familia)
         {
             familia.Id = IdentifierGenerator.NewId();
-            familia.IdSesion = SessionManager.getCurrentSession().Id;
+            familia.IdSesion = SessionManager.getSessionIdentifier();
             familia.FechaUltimaTransaccion = DateTime.Now;
             familia.FechaRegistro = DateTime.Now;
             familia.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
@@ -36,7 +36,7 @@ namespace Bja.Modelo
                         where f.Id == Id
                         select f).FirstOrDefault();
 
-            _familia.IdSesion = SessionManager.getCurrentSession().Id;
+            _familia.IdSesion = SessionManager.getSessionIdentifier();
             _familia.FechaUltimaTransaccion = DateTime.Now;
             _familia.FechaRegistro = DateTime.Now;
             _familia.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
@@ -63,7 +63,7 @@ namespace Bja.Modelo
                        where f.Id == Id
                        select f).FirstOrDefault();
 
-            familia.IdSesion = SessionManager.getCurrentSession().Id;
+            familia.IdSesion = SessionManager.getSessionIdentifier();
             familia.FechaUltimaTransaccion = DateTime.Now;
             familia.FechaRegistro = DateTime.Now;
             familia.EstadoRegistro = TipoEstadoRegistro.BorradoLogico;

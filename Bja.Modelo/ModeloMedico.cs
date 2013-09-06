@@ -70,6 +70,14 @@ namespace Bja.Modelo
 
         public void Crear(Medico medico)
         {
+            medico.Id = IdentifierGenerator.NewId();
+            medico.IdSesion = SessionManager.getSessionIdentifier();
+            medico.FechaUltimaTransaccion = DateTime.Now;
+            medico.FechaRegistro = DateTime.Now;
+            medico.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            medico.DescripcionEstadoSincronizacion = "";
+
             db.Medicos.Add(medico);
             db.SaveChanges();
         }
