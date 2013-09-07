@@ -33,7 +33,9 @@
                 function (myData) {
                     $(updateId).empty();
                     $.each(myData, function (i, item) {
-                        $(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido + "<br>");
+                        //$(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido + "<br>");
+                        $(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido +">"+ item.NombreCompleto +"<br>");
+                        //$(updateId).append(" " + item.NombreCompleto + "<br>");
                     })
                 });
         }

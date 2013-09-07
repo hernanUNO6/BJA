@@ -56,10 +56,11 @@ namespace Bja.Modelo
             //foreach (Madre ma in madre.Listar())
             foreach (Madre ma in db.Madres.ToList())
             {
-                if (madresCandidatas.Count <= 10)
+                distanciaCalculada = Distancia.Levenshtein(madreTemp.NombreCompleto, ma.NombreCompleto);
+                if (madresCandidatas.Count < 10)
                 {
-                    //madresCandidatas.Add(ma);
-                    distanciaCalculada = Distancia.Levenshtein(madreTemp.NombreCompleto, ma.NombreCompleto);
+                    ma.IdMunicipio = distanciaCalculada;    //**
+                    madresCandidatas.Add(ma);
                     if (distanciaCalculada > peorDistancia)
                     {
                         peorDistancia = distanciaCalculada;
@@ -68,13 +69,29 @@ namespace Bja.Modelo
                 }
                 else
                 {
-                    break;
+                    if (distanciaCalculada < peorDistancia)
+                    {
+                        ma.IdMunicipio = distanciaCalculada;    //**
+                        madresCandidatas.Remove(peorSemejanza);
+                        madresCandidatas.Add(ma);
+
+                        // Peor distancia entre los 10
+                        peorDistancia = -1;
+                        foreach (var item in madresCandidatas)
+                        {
+                            distanciaCalculada = Distancia.Levenshtein(madreTemp.NombreCompleto, item.NombreCompleto);
+                            if (distanciaCalculada > peorDistancia)
+                            {
+                                peorDistancia = distanciaCalculada;
+                                peorSemejanza = item;
+                            }
+                        }
+                    }
                 }
             }
+            //madresCandidatas.Add(peorSemejanza);
 
-            madresCandidatas.Add(peorSemejanza);
-
-            return madresCandidatas;
+            return madresCandidatas.OrderBy(m => m.IdMunicipio).ToList();
         }
     }
 }
