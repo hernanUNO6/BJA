@@ -62,7 +62,7 @@ namespace Bja.Modelo
 
             //asignación medico
             AsignacionMedico asignacionMedico = new AsignacionMedico() { IdEstablecimientoSalud = establecimientoSalud.Id, IdMedico = medico.Id,
-             FechaInicio = DateTime.Now, FechaFin = DateTime.Now};
+             FechaInicio = DateTime.Now, FechaFin = DateTime.Today};
             ModeloAsignacionMedico modeloAsignacionMedico = new ModeloAsignacionMedico();
             modeloAsignacionMedico.Crear(asignacionMedico);
 
