@@ -34,7 +34,7 @@ namespace Bja.Registro
         {
             ModeloAsignacionMedico modeloasignacionmedico = new ModeloAsignacionMedico();
 
-            this.cboActual.ItemsSource = modeloasignacionmedico.ListarEstablecimientoDeSaludHabilitado(1); //Sel 1 como médico
+            this.cboActual.ItemsSource = modeloasignacionmedico.ListarEstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation); //Sel 1 como médico
             this.cboActual.DisplayMemberPath = "Descripcion";
             this.cboActual.SelectedValuePath = "Id";
             if (this.cboActual.ItemsSource == null)
@@ -42,7 +42,7 @@ namespace Bja.Registro
             else
                 this.cboActual.SelectedIndex = 0;
 
-            this.cboNuevo.ItemsSource = modeloasignacionmedico.ListarEstablecimientoDeSaludConfigurado(1); //Sel 1 como médico
+            this.cboNuevo.ItemsSource = modeloasignacionmedico.ListarEstablecimientoDeSaludConfigurado(SessionManager.getCurrentSession().User.IdUserRelation); //Sel 1 como médico
             this.cboNuevo.DisplayMemberPath = "Descripcion";
             this.cboNuevo.SelectedValuePath = "Id";
             this.cboNuevo.SelectedIndex = -1;
@@ -57,7 +57,7 @@ namespace Bja.Registro
                 ModeloAsignacionMedico modeloasignacionmedico = new ModeloAsignacionMedico();
                 AsignacionMedico asignacionmedico = new AsignacionMedico();
 
-                modeloasignacionmedico.EstablecerEstablecimientoDeSaludComoVigenteParaUnMedico(1, Convert.ToInt64(this.cboNuevo.SelectedValue)); 
+                modeloasignacionmedico.EstablecerEstablecimientoDeSaludComoVigenteParaUnMedico(SessionManager.getCurrentSession().User.IdUserRelation, Convert.ToInt64(this.cboNuevo.SelectedValue)); 
                 Resultado = true;
 
                 this.Close();

@@ -25,7 +25,6 @@ namespace Bja.Registro
     {
       this.Cursor = Cursors.Wait;
       InitializeComponent();
-      InicializacionBD.inicializarBD();
       this.Cursor = Cursors.Arrow;
     }
 

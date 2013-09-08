@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorConfiguracion.cs" />
+    <Compile Include="BjaContextInitializer.cs" />
     <Compile Include="Distancia.cs" />
     <Compile Include="IdentifierGenerator.cs" />
     <Compile Include="InitializationBD.cs" />

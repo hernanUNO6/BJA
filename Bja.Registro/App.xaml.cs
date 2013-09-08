@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bja.Modelo;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,13 @@ namespace Bja.Registro
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            InicializacionBD.inicializarBD();
+
+            //new MyClassIWantToInstantiate();
+        }
     }
 }

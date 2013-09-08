@@ -153,7 +153,9 @@ namespace Bja.Registro
                     case MessageBoxResult.Yes:
                         ModeloFamilia modelofamilia = new ModeloFamilia();
 
-                        _familia.IdEstablecimientoSalud = 1;
+                        ModeloAsignacionMedico modeloAsignacionMedico = new ModeloAsignacionMedico();
+
+                        _familia.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
                         _familia.FechaInscripcion = dtpFechaInscripcion.SelectedDate.Value;
                         _familia.PrimerApellido = txtPaterno.Text;
                         _familia.SegundoApellido = txtMaterno.Text;

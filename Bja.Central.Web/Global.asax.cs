@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bja.Modelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,8 @@ namespace Bja.Central.Web
     {
         protected void Application_Start()
         {
+            InicializacionBD.inicializarBD();
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

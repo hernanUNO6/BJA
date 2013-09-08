@@ -33,6 +33,7 @@ namespace Bja.Modelo
                         session = new Session();
                         session.Id = IdentifierGenerator.NewId();
                         session.IdUser = user.Id;
+                        session.User = user;
                         session.UserName = user.UserName;
                         session.CompleteName = user.CompleteName;
                         session.InitDate = DateTime.Now;
