@@ -67,6 +67,7 @@
     <Compile Include="MetaData.cs" />
     <Compile Include="Municipio.cs" />
     <Compile Include="Pago.cs" />
+    <Compile Include="ParametrosBusqueda.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Recepcion.cs" />
     <Compile Include="Reclamo.cs" />

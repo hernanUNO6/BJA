@@ -18,14 +18,13 @@ namespace Bja.Central.Web.Controllers
 
         private BjaContext db = new BjaContext();
 
-
-        [ActionName("ProvinciasPorDepartamento")]
-        public ActionResult GetProvinciasPorDepartamento(string id)
+        [ActionName("BuscarSemejantes")]
+        public ActionResult GetBuscarSemejantes(ParametrosBusqueda parBusqueda)
         {
-            ModeloProvincia modProvincia = new ModeloProvincia();
+            ModeloMadreTemporal modMadreTemp = new ModeloMadreTemporal();
 
-            List<Provincia> Datos = modProvincia.GetProvinciasPorDepartamento(id);
-            var myData = (from d in Datos select new { d.Id, d.Descripcion });
+            List<Madre> Datos = modMadreTemp.BuscarSemejantes(parBusqueda);
+            var myData = (from d in Datos select new { llavePrimaria = d.Id, d.Nombres, d.PrimerApellido, d.SegundoApellido, d.TercerApellido, d.NombreCompleto, d.DocumentoIdentidad, d.FechaNacimiento, d.LocalidadNacimiento });
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
 
@@ -34,21 +33,10 @@ namespace Bja.Central.Web.Controllers
         //{
         //    ModeloMadreTemporal modMadreTemp = new ModeloMadreTemporal();
 
-        //    List<MadreTemporal> Datos = modMadreTemp.Espejo(id);
-        //    var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido });
+        //    List<Madre> Datos = modMadreTemp.BuscarSemejantes(id);
+        //    var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido, d.NombreCompleto });
         //    return Json(myData, JsonRequestBehavior.AllowGet);
         //}
-
-
-        [ActionName("BuscarSemejantes")]
-        public ActionResult GetBuscarSemejantes(string id)
-        {
-            ModeloMadreTemporal modMadreTemp = new ModeloMadreTemporal();
-
-            List<Madre> Datos = modMadreTemp.BuscarSemejantes(id);
-            var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido, d.NombreCompleto });
-            return Json(myData, JsonRequestBehavior.AllowGet);
-        }
 
         public string Prueba()
         {
