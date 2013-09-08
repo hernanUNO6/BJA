@@ -20,6 +20,7 @@ namespace Bja.Entidades
 
         [Display(Name = "Primer Apellido")]
         [StringLength(50)]
+        [Required]
         public String PrimerApellido { get; set; }
 
         [Display(Name = "Segundo Apellido")]
@@ -105,6 +106,7 @@ namespace Bja.Entidades
         public String Nombres { get; set; }
 
         [Display(Name = "Primer Apellido")]
+        [Required]
         public String PrimerApellido { get; set; }
 
         [Display(Name = "Segundo Apellido")]
@@ -114,7 +116,7 @@ namespace Bja.Entidades
         public String TercerApellido { get; set; }
 
         [Display(Name = "Documento de Identidad")]
-        [Required]
+        [Required, StringLength(15)]
         public String DocumentoIdentidad { get; set; }
 
         [Display(Name = "Tipo Documento de Identidad")]
@@ -129,6 +131,10 @@ namespace Bja.Entidades
         [StringLength(1)]
         [Required]
         public String Sexo { get; set; } //char(1)
+
+        [Display(Name = "Localidad de Nacimiento")]
+        [Required]
+        public String LocalidadNacimiento { get; set; }
 
         //ojo
         /*
@@ -181,11 +187,11 @@ namespace Bja.Entidades
     public class EstablecimientoSaludMetaData
     {
         [Required]
-        [StringLength(4)]
+        [StringLength(10)]
         public string Codigo { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Nombre { get; set; }
 
         [Required]
@@ -195,8 +201,6 @@ namespace Bja.Entidades
         //[Required]
         //public long IdMunicipio { get; set; }
     }
-
-
 
     public class AsignacionMedicoMetaData
     {
@@ -218,6 +222,4 @@ namespace Bja.Entidades
         [Required]
         public long IdEstablecimientoSalud { get; set; }
     }
-
-    
 }

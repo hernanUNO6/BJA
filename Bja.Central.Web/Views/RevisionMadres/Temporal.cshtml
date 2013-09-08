@@ -5,62 +5,166 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@section PageCSS{
+    <style type="text/css">
+        table.table tr:first-child td
+        {
+            text-align : center;
+            padding: 0px;
+            margin: 0px;
+            border: 1px solid #ccf;
+            background-color: #eee;
+        }
+
+        table.table tr:first-child input
+        {
+            border: none;
+        }
+    </style>
+}
+
     <script type="text/javascript">
-        function HacerAlgo() {
-            $("#Semejantes").append("<hr>");
-            //alert("ddddd");
-        }
+        function BuscarSimilar(value) {
+            var pbus = ConstruirParametrosBusqueda(value);
 
-        function HacerAlgo2(value) {            
-            updateId = '#Semejantes';
-            urlPath = '@Url.Action("ProvinciasPorDepartamento")';
-            value = "69";
+            //alert(checkeados.Id);
+            //alert(checkeados.Nombres);
+            //alert(checkeados.PrimerApellido);
+            //alert(checkeados.SegundoApellido);
+            //alert(checkeados.TercerApellido);
+            //alert(checkeados.NombreCompleto);
+            //alert(checkeados.DocumentoIdentidad);
+            //alert(checkeados.FechaNacimiento);
+            //alert(checkeados.LocalidadNacimiento);
 
-            $.getJSON(urlPath + "/" + value, {},
-                function (myData) {
-                    $(updateId).empty();
-                    $.each(myData, function (i, item) {
-                        $(updateId).append(" " + item.Id + ">" + item.Descripcion + "<br>");
-                    })
-                });
-        }
-
-        function HacerAlgo3(value) {
             updateId = '#Semejantes';
             urlPath = '@Url.Action("BuscarSemejantes")';
 
-            $.getJSON(urlPath + "/" + value, {},
+            var str = "";
+            $.getJSON(urlPath, pbus,
                 function (myData) {
-                    $(updateId).empty();
+                    str += "<table class='table'>";
+                    str += "<tr>";
+                    str += "<th>ID</th>";
+                    str += "<th>Nombres</th>";
+                    str += "<th>PrimerApellido</th>";
+                    str += "<th>SegundoApellido</th>";
+                    str += "<th>TercerApellido</th>";
+                    str += "<th>NombreCompleto</th>";
+                    str += "<th>DocumentoIdentidad</th>";
+                    str += "<th>FechaNacimiento</th>";
+                    //str += "<th>LocalidadNacimiento</th>";
+                    str += "<th></th>";
+                    str += "</tr>";
+
+                    
                     $.each(myData, function (i, item) {
                         //$(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido + "<br>");
-                        $(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido +">"+ item.NombreCompleto +"<br>");
+                        //$(updateId).append("N " + item.Nombres + " >PA> " + item.PrimerApellido + " >SA> " + item.SegundoApellido + " >TA> " + item.TercerApellido + ">NC>" + item.NombreCompleto + " >DI> " + item.DocumentoIdentidad + " >FN> " + item.FechaNacimiento + " >LO> " + item.LocalidadNacimiento + "<br>");
                         //$(updateId).append(" " + item.NombreCompleto + "<br>");
+                        //$(updateId).append("N " + item.Nombres + " >PA> " + item.PrimerApellido + " >SA> " + item.SegundoApellido + " >TA> " + item.TercerApellido + ">NC>" + item.NombreCompleto + " >DI> " + item.DocumentoIdentidad + " >FN> " + item.FechaNacimiento + " >LO> " + item.LocalidadNacimiento + "<br>");
+                        //$(updateId).append("<tr><td>"+ item.Nombres +"</td> <td>"+ item.PrimerApellido +"</td><td>"+ item.SegundoApellido +"</td><td>"+ item.TercerApellido +"</td><td>"+ item.NombreCompleto +"</td><td>"+ item.DocumentoIdentidad +"</td><td>"+ item.FechaNacimiento +"</td><td>"+ item.LocalidadNacimiento +"</td><td></td></tr>");
+                        str += "<tr>";
+                        str += "<td>"+ item.llavePrimaria +"</td>";
+                        str += "<td>"+ item.Nombres +"</td>";
+                        str += "<td>"+ item.PrimerApellido +"</td>";
+                        str += "<td>"+ item.SegundoApellido +"</td>";
+                        str += "<td>"+ item.TercerApellido +"</td>";
+                        str += "<td>"+ item.NombreCompleto +"</td>";
+                        str += "<td>"+ item.DocumentoIdentidad +"</td>";
+                        str += "<td>"+ item.FechaNacimiento +"</td>";
+                        //str += "<td>"+ item.LocalidadNacimiento +"</td>";
+                        str += "<td></td>";
+                        str += "</tr>";
                     })
+                    str += "</table>";
+                    $(updateId).empty();
+                    $(updateId).append(str);
                 });
+
+            //$.getJSON(urlPath + "/" + value, {},
+            //    function (myData) {
+            //        $(updateId).empty();
+            //        $.each(myData, function (i, item) {
+            //            //$(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido + "<br>");
+            //            $(updateId).append(" " + item.Nombres + ">" + item.PrimerApellido +">"+ item.NombreCompleto +"<br>");
+            //            //$(updateId).append(" " + item.NombreCompleto + "<br>");
+            //        })
+            //    });
         }
-
     </script>
-       
-
 
 @section PageScripts{
 <script type="text/javascript">
-    $(document).ready(function () {
-        
+    $("#personCreate").click(function () {
+        $('.optBusqueda').each(function(){
+            var checkbox = $(this);
+            alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked')  );
+        });
     });
+
+    function ListarCheckeados01() {
+        $('.optBusqueda').each(function() {
+            var checkbox = $(this);
+            alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked'));
+        });
+    }
+
+    function ConstruirParametrosBusqueda(value) {
+        return {
+            Identificador : value,
+            Nombres : $("#Nombres").is(':checked'),
+            PrimerApellido : $("#PrimerApellido").is(':checked'),
+            SegundoApellido : $("#SegundoApellido").is(':checked'),
+            TercerApellido : $("#TercerApellido").is(':checked'),
+            NombreCompleto : $("#NombreCompleto").is(':checked'),
+            DocumentoIdentidad : $("#DocumentoIdentidad").is(':checked'),
+            FechaNacimiento : $("#FechaNacimiento").is(':checked'),
+            LocalidadNacimiento : $("#LocalidadNacimiento").is(':checked')
+        };
+    }
 </script>
 }
 
-
-<div id="Semejantes"></div>
-
 <h2>Madres Depuradas</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
+
+@*<input type="submit" value="Save" id="personCreate" />*@
+
+<div style="height: 300px; overflow-y: scroll;">
 <table class="table">
+    <tr>
+        <td>
+            @Html.CheckBox("Nombres", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("PrimerApellido", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("SegundoApellido", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("TercerApellido", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("NombreCompleto", true, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("DocumentoIdentidad", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("FechaNacimiento", false, new { @class = "optBusqueda" })
+        </td>
+        <td>
+            @Html.CheckBox("LocalidadNacimiento", false, new { @class = "optBusqueda" })
+        </td>
+        <td></td>
+    </tr>
+
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombres)
@@ -89,7 +193,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nombres)
@@ -117,13 +222,17 @@
         </td>
         <td>
             @*<a href="#" onclick="HacerAlgo()">Find</a>*@
-            <input type="button" value="B" class="find" onclick=HacerAlgo3('@item.Id') />
-            @{ string nombreControlador = "RevisionMadres"; }
-            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Buscar"><img src="@Url.Content("~/Images/find16.png")" style="border:none" /></a>
+            <input type="button" value="Buscar" class="btn" onclick="BuscarSimilar(@item.Id)" />
+
+@*            @{ string nombreControlador = "RevisionMadres"; }
+            <a href="@Url.Action("")" title="Buscar"><img src="@Url.Content("~/Images/find16.png")" style="border:none" onclick="HacerAlgo(@item.Id)" /></a>*@
+
             @*<a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
             <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>*@
         </td>
     </tr>
 }
-
 </table>
+</div>
+<h2>Madres Semejantes</h2>
+<div id="Semejantes"></div>
