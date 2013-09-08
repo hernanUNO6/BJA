@@ -15,7 +15,7 @@ namespace Bja.AccesoDatos
         {
             ToTable("Provincias");
             HasKey(p => p.Id);
-            Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             Property(p => p.IdSesion).IsRequired();
             Property(p => p.FechaRegistro).IsRequired();

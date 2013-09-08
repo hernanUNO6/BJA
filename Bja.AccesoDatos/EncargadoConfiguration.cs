@@ -1,6 +1,7 @@
 ﻿using Bja.Entidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Bja.AccesoDatos
         {
             ToTable("Encargados");
             HasKey(e => e.Id);
+            Property(m => m.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(e => e.IdSesion).IsRequired();
             Property(e => e.FechaRegistro).IsRequired();
             Property(e => e.FechaUltimaTransaccion).IsRequired();

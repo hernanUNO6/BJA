@@ -15,7 +15,7 @@ namespace Bja.AccesoDatos
         {
             ToTable("Municipios");
             HasKey(m => m.Id);
-            //Property(m => m.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(m => m.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             Property(m => m.IdSesion).IsRequired();
             Property(m => m.FechaRegistro).IsRequired();
