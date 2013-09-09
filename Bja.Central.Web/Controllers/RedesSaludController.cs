@@ -19,9 +19,40 @@ namespace Bja.Central.Web.Controllers
         //
         // GET: /RedesSalud/
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(modRedSalud.Listar());
+        //}
+
+        public ActionResult Index(string criterioBusqueda = null, int paginaActual = 1)
         {
-            return View(modRedSalud.Listar());
+            ViewBag.totalRegistros = modRedSalud.TotalRegistros(criterioBusqueda);
+            ViewBag.tamanioPagina = modRedSalud.TamanioPagina();
+            ViewBag.totalPaginas = (ViewBag.totalRegistros + ViewBag.tamanioPagina - 1) / ViewBag.tamanioPagina;
+
+            int totalPaginas = (ViewBag.totalRegistros + ViewBag.tamanioPagina - 1) / ViewBag.tamanioPagina;
+
+            if (totalPaginas > 0)
+            {
+                if (paginaActual <= 0)
+                {
+                    paginaActual = 1;
+                    ViewBag.paginaActual = 1;
+                }
+                else if (paginaActual > totalPaginas)
+                {
+                    paginaActual = totalPaginas;
+                    ViewBag.paginaActual = totalPaginas;
+                }
+                else
+                {
+                    ViewBag.paginaActual = paginaActual;
+                }
+            }
+
+            ViewBag.criterioBusqueda = criterioBusqueda;
+            var resp = modRedSalud.Listar(criterioBusqueda, paginaActual);
+            return View(resp);
         }
 
         //

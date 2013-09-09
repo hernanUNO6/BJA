@@ -13,11 +13,58 @@ namespace Bja.Modelo
     public class ModeloProvincia
     {
         private BjaContext db = new BjaContext();
+        const int TAMANIO_PAGINA = 10;
 
         public List<Provincia> Listar()
         {
             var provincias = db.Provincias.Include(p => p.Departamento);
             return provincias.ToList();   
+        }
+
+        public List<Provincia> Listar(string criterio)
+        {
+            return (from p in db.Provincias.Include(p => p.Departamento)
+                    where p.Codigo.Contains(criterio) ||
+                    p.Descripcion.Contains(criterio) ||
+                    p.Departamento.Descripcion.Contains(criterio)
+                    select p).ToList();
+        }
+
+        public List<Provincia> Listar(string criterio, int pagina)
+        {
+            if (criterio != null)
+            {
+                return (from p in db.Provincias.Include(p => p.Departamento)
+                        where p.Codigo.Contains(criterio) ||
+                        p.Descripcion.Contains(criterio) ||
+                        p.Departamento.Descripcion.Contains(criterio)
+                        select p).OrderBy(p => p.Departamento.Descripcion).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+            else
+            {
+                return db.Provincias.Include(p => p.Departamento).OrderBy(p => p.Id).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+        }
+
+        public int TotalRegistros(string criterio)
+        {
+            if (criterio != null)
+            {
+                return (from p in db.Provincias.Include(p => p.Departamento)
+                    where p.Codigo.Contains(criterio) ||
+                    p.Descripcion.Contains(criterio) ||
+                    p.Departamento.Descripcion.Contains(criterio)
+                    select p).ToList().Count();
+            }
+            else
+            {
+                return db.Provincias.Count();
+            }
+        }
+
+        public int TamanioPagina()
+        {
+            return TAMANIO_PAGINA;
         }
 
         public void Crear(Provincia provincia)

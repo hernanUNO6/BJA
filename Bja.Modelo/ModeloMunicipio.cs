@@ -13,11 +13,58 @@ namespace Bja.Modelo
     public class ModeloMunicipio
     {
         private BjaContext db = new BjaContext();
+        const int TAMANIO_PAGINA = 10;
 
         public List<Municipio> Listar()
         {
             var municipio = db.Municipios.Include(m => m.Provincia);
             return municipio.ToList();
+        }
+
+        public List<Municipio> Listar(string criterio)
+        {
+            return (from m in db.Municipios.Include(p => p.Provincia)
+                    where m.Codigo.Contains(criterio) ||
+                    m.Descripcion.Contains(criterio) ||
+                    m.Provincia.Descripcion.Contains(criterio)
+                    select m).ToList();
+        }
+
+        public List<Municipio> Listar(string criterio, int pagina)
+        {
+            if (criterio != null)
+            {
+                return (from m in db.Municipios.Include(p => p.Provincia)
+                    where m.Codigo.Contains(criterio) ||
+                    m.Descripcion.Contains(criterio) ||
+                    m.Provincia.Descripcion.Contains(criterio)
+                    select m).OrderBy(p => p.Provincia.Descripcion).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+            else
+            {
+                return db.Municipios.Include(p => p.Provincia).OrderBy(p => p.Id).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+        }
+
+        public int TotalRegistros(string criterio)
+        {
+            if (criterio != null)
+            {
+                return (from m in db.Municipios.Include(p => p.Provincia)
+                        where m.Codigo.Contains(criterio) ||
+                        m.Descripcion.Contains(criterio) ||
+                        m.Provincia.Descripcion.Contains(criterio)
+                        select m).ToList().Count();
+            }
+            else
+            {
+                return db.Provincias.Count();
+            }
+        }
+
+        public int TamanioPagina()
+        {
+            return TAMANIO_PAGINA;
         }
 
         public void Crear(Municipio municipio)

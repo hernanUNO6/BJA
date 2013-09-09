@@ -17,9 +17,40 @@ namespace Bja.Central.Web.Controllers
         //
         // GET: /Provincias/
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(modProvincia.Listar());
+        //}
+
+        public ActionResult Index(string criterioBusqueda = null, int paginaActual = 1)
         {
-            return View(modProvincia.Listar());
+            ViewBag.totalRegistros = modProvincia.TotalRegistros(criterioBusqueda);
+            ViewBag.tamanioPagina = modProvincia.TamanioPagina();
+            ViewBag.totalPaginas = (ViewBag.totalRegistros + ViewBag.tamanioPagina - 1) / ViewBag.tamanioPagina;
+
+            int totalPaginas = (ViewBag.totalRegistros + ViewBag.tamanioPagina - 1) / ViewBag.tamanioPagina;
+
+            if (totalPaginas > 0)
+            {
+                if (paginaActual <= 0)
+                {
+                    paginaActual = 1;
+                    ViewBag.paginaActual = 1;
+                }
+                else if (paginaActual > totalPaginas)
+                {
+                    paginaActual = totalPaginas;
+                    ViewBag.paginaActual = totalPaginas;
+                }
+                else
+                {
+                    ViewBag.paginaActual = paginaActual;
+                }
+            }
+
+            ViewBag.criterioBusqueda = criterioBusqueda;
+            var resp = modProvincia.Listar(criterioBusqueda, paginaActual);
+            return View(resp);
         }
 
         //

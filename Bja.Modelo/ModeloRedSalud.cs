@@ -13,11 +13,58 @@ namespace Bja.Modelo
     public class ModeloRedSalud
     {
         private BjaContext db = new BjaContext();
+        const int TAMANIO_PAGINA = 10;
 
         public List<RedSalud> Listar()
         {
             var redSalud = db.RedesSalud.Include(m => m.Municipio);
             return redSalud.ToList();
+        }
+
+        public List<RedSalud> Listar(string criterio)
+        {
+            return (from rs in db.RedesSalud.Include(p => p.Municipio)
+                    where rs.Codigo.Contains(criterio) ||
+                    rs.Nombre.Contains(criterio) ||
+                    rs.Municipio.Descripcion.Contains(criterio)
+                    select rs).ToList();
+        }
+
+        public List<RedSalud> Listar(string criterio, int pagina)
+        {
+            if (criterio != null)
+            {
+                return (from rs in db.RedesSalud.Include(p => p.Municipio)
+                        where rs.Codigo.Contains(criterio) ||
+                        rs.Nombre.Contains(criterio) ||
+                        rs.Municipio.Descripcion.Contains(criterio)
+                        select rs).OrderBy(p => p.Municipio.Descripcion).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+            else
+            {
+                return db.RedesSalud.Include(p => p.Municipio).OrderBy(p => p.Id).Skip((pagina - 1) * TAMANIO_PAGINA).Take(TAMANIO_PAGINA).ToList();
+            }
+        }
+
+        public int TotalRegistros(string criterio)
+        {
+            if (criterio != null)
+            {
+                return (from rs in db.RedesSalud.Include(p => p.Municipio)
+                        where rs.Codigo.Contains(criterio) ||
+                        rs.Nombre.Contains(criterio) ||
+                        rs.Municipio.Descripcion.Contains(criterio)
+                        select rs).ToList().Count();
+            }
+            else
+            {
+                return db.RedesSalud.Count();
+            }
+        }
+
+        public int TamanioPagina()
+        {
+            return TAMANIO_PAGINA;
         }
 
         public void Crear(RedSalud redSalud)
