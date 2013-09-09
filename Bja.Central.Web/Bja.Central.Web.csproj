@@ -182,6 +182,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\superfish.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -196,6 +197,10 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Images\delete16.png" />
+    <Content Include="Images\detail16.png" />
+    <Content Include="Images\edit16.png" />
+    <Content Include="Images\find16.png" />
     <Content Include="Images\logobja.jpg" />
     <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Content\themes\base\jquery.ui.accordion.css" />
@@ -258,6 +263,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\superfish.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

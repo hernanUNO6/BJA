@@ -18,6 +18,53 @@ body {
   padding: 0;
 }
 
+#info {
+	background: #eee;
+	background: #cddbee;
+    background-color: #eee;
+	height: 20px;
+	font-size: small;
+	border-top: 1px solid #9cf;
+
+    margin: 90px 0px 0px;
+    /*max-width: 1000px;
+    margin-left: 200px;*/
+}
+
+.bxdate {
+	padding: 1px 15px;
+	font-style: italic;
+}
+
+.bxuser {
+	padding: 1px 15px;
+}
+
+.nav_ {
+	background: #036;
+	background: #93B5E7;
+    background-color: #ddd;
+	height: 26px;
+	border-top: 1px solid #9cf;
+}
+
+/* ~~ clases float/clear varias ~~ */
+.fltrt {  
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { 
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { 
+	clear: both;
+	height: 0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+
 /* line 18, ../sass/Site.scss */
 a {
   color: #333;
@@ -118,7 +165,7 @@ h5 a:link, h5 a:visited, h5 a:active {
 #body {
   background-color: #efeeef;
   background-color: #f8f8f8;
-  clear: both;
+  /*clear: both;*/
   padding-bottom: 35px;
 }
 
@@ -268,6 +315,14 @@ ul#menu li a:hover {
 
 /* page titles */
 /* line 243, ../sass/Site.scss */
+
+hgroup.titleMaster {
+  margin-bottom: 10px;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: -50px;
+}
+
 hgroup.title {
   margin-bottom: 10px;
 }

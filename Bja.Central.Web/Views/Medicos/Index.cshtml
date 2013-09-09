@@ -5,6 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section PageScripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Buscar").click(function () {
+            if ($("#criterioBusqueda").attr('Value').trim() == "")
+            {
+                $("#criterioBusqueda").val("");
+                $("#criterioBusqueda").focus();
+                return false;
+            }
+        });
+    });
+</script>    
+}
+
 <h2>Médicos Resgistrados</h2>
 
 <p>
@@ -12,7 +27,7 @@
 </p>
 
 <form method="get">
-    <input type="text" name="criterioBusqueda" />
+    <input type="text" name="criterioBusqueda" id="criterioBusqueda" />
     <input type="submit" value="Buscar" id="Buscar" class="btn btn-primary" />
 </form>
 <br />
