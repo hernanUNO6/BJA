@@ -86,14 +86,6 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(RedSalud redSalud)
         {
-            redSalud.Id = IdentifierGenerator.NewId();
-            redSalud.IdSesion = 1;
-            redSalud.FechaUltimaTransaccion = DateTime.Now;
-            redSalud.FechaRegistro = DateTime.Now;
-            redSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
-            redSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-            redSalud.DescripcionEstadoSincronizacion = "";
-
             if (ModelState.IsValid)
             {
                 modRedSalud.Crear(redSalud);

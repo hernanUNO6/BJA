@@ -170,13 +170,6 @@ namespace Bja.Central.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                asignacionMedico.IdSesion = 1;
-                asignacionMedico.FechaUltimaTransaccion = DateTime.Now;
-                asignacionMedico.FechaRegistro = DateTime.Now;
-                asignacionMedico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
-                asignacionMedico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-                asignacionMedico.DescripcionEstadoSincronizacion = "";
-
                 modAsignacionMedico.Editar(asignacionMedico);
                 return RedirectToAction("Index");
             }

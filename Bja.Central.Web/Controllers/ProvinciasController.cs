@@ -86,14 +86,6 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Provincia provincia)
         {
-            provincia.Id = IdentifierGenerator.NewId();
-            provincia.IdSesion = 1;
-            provincia.FechaUltimaTransaccion = DateTime.Now;
-            provincia.FechaRegistro = DateTime.Now;
-            provincia.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
-            provincia.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-            provincia.DescripcionEstadoSincronizacion = "";
-
             ModeloDepartamento modDepto = new ModeloDepartamento();
 
             if (ModelState.IsValid)

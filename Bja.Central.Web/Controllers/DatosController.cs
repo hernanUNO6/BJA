@@ -122,7 +122,7 @@ namespace Bja.Central.Web.Controllers
             ModeloRevisionManual mrm = new ModeloRevisionManual();
             mrm.EliminarTodoMadre();
 
-            string connectionString = "Data Source=HERBERTLAPTOP;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
+            string connectionString = "Data Source=HERNAN-PC04;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
             string queryString = @"select 
 	                                Nombres, 
 	                                PrimerApellido, 
@@ -164,9 +164,10 @@ namespace Bja.Central.Web.Controllers
                     //madre.IdDepartamento = 69;
                     //madre.IdProvincia = 540;
                     //madre.IdMunicipio = 2254;
-                    madre.IdDepartamento = 1640759134194000000;
-                    madre.IdProvincia = 1640759134243000000;
-                    madre.IdMunicipio = 1640759134295000000;
+
+                    madre.IdDepartamento = 1640861101374000000;
+                    madre.IdProvincia = 1640861101405000000;
+                    madre.IdMunicipio = 1640861101436000000;
                     madre.LocalidadNacimiento = "";
                     madre.Defuncion = false;
 
@@ -182,7 +183,7 @@ namespace Bja.Central.Web.Controllers
             ModeloRevisionManual mrm = new ModeloRevisionManual();
             mrm.EliminarTodoMadreTempo();
 
-            string connectionString = "Data Source=HERBERTLAPTOP;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
+            string connectionString = "Data Source=HERNAN-PC04;Initial Catalog=BDPersonas_new;User ID=sa; password=123456";
             string queryString = @"select 
 	                                Nombres, 
 	                                PrimerApellido, 
@@ -224,9 +225,9 @@ namespace Bja.Central.Web.Controllers
                     //madreTempo.IdDepartamento = 69;
                     //madreTempo.IdProvincia = 540;
                     //madreTempo.IdMunicipio = 2254;
-                    madreTempo.IdDepartamento = 1640759134194000000;
-                    madreTempo.IdProvincia = 1640759134243000000;
-                    madreTempo.IdMunicipio = 1640759134295000000;
+                    madreTempo.IdDepartamento = 1640861101374000000;
+                    madreTempo.IdProvincia = 1640861101405000000;
+                    madreTempo.IdMunicipio = 1640861101436000000;
 
                     madreTempo.LocalidadNacimiento = "";
                     madreTempo.Defuncion = false;

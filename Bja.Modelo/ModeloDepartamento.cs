@@ -44,6 +44,13 @@ namespace Bja.Modelo
 
         public void Editar(Departamento depto)
         {
+            depto.IdSesion = SessionManager.getSessionIdentifier();
+            depto.FechaUltimaTransaccion = DateTime.Now;
+            depto.FechaRegistro = DateTime.Now;
+            depto.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            depto.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            depto.DescripcionEstadoSincronizacion = "";
+
             db.Entry(depto).State = EntityState.Modified;
             db.SaveChanges();
         }

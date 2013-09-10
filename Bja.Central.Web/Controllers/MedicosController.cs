@@ -78,14 +78,6 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Medico medico)
         {
-            medico.Id = IdentifierGenerator.NewId();
-            medico.IdSesion = 1;
-            medico.FechaUltimaTransaccion = DateTime.Now;
-            medico.FechaRegistro = DateTime.Now;
-            medico.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
-            medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-            medico.DescripcionEstadoSincronizacion = "";
-
             if (ModelState.IsValid)
             {
                 modMedico.Crear(medico);
@@ -122,13 +114,6 @@ namespace Bja.Central.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                medico.IdSesion = 1;
-                medico.FechaUltimaTransaccion = DateTime.Now;
-                medico.FechaRegistro = DateTime.Now;
-                medico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
-                medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-                medico.DescripcionEstadoSincronizacion = "";
-
                 modMedico.Editar(medico);
                 return RedirectToAction("Index");
             }

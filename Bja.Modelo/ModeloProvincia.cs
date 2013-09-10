@@ -93,6 +93,13 @@ namespace Bja.Modelo
 
         public void Editar(Provincia provincia)
         {
+            provincia.IdSesion = SessionManager.getSessionIdentifier();
+            provincia.FechaUltimaTransaccion = DateTime.Now;
+            provincia.FechaRegistro = DateTime.Now;
+            provincia.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            provincia.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            provincia.DescripcionEstadoSincronizacion = "";
+
             db.Entry(provincia).State = EntityState.Modified;
             db.SaveChanges();
         }
