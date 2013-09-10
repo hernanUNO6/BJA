@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Bja.Entidades
 {
@@ -37,7 +38,9 @@ namespace Bja.Entidades
         public String AutorizadoPor { get; set; }
         public String CargoAutorizador { get; set; }
 
+        [XmlIgnore]
         public List<ControlMadre> ControlesMadre { get; set; }
+        [XmlIgnore]
         public List<Envio> Envios { get; set; }
     }
 }

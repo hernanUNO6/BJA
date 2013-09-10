@@ -21,6 +21,8 @@ namespace Bja.Registro
     /// </summary>
     public partial class frmCorresponsabilidadMadre : Window
     {
+        
+
         public long IdFamilia { get; set; }
         public long IdSeleccionado { get; set; }
         private GrupoFamiliar _grupofamiliar = new GrupoFamiliar();
@@ -245,6 +247,7 @@ namespace Bja.Registro
         {
                 ModeloCorresponsabilidadMadre modelocorresponsabilidadmadre = new ModeloCorresponsabilidadMadre();
                 CorresponsabilidadMadre corresponsabilidadmadre = new CorresponsabilidadMadre();
+                ModeloAsignacionMedico modeloAsignacionMedico = new ModeloAsignacionMedico();
 
                 bool ok = false;
 
@@ -283,7 +286,7 @@ namespace Bja.Registro
                 {
                     if (IdCorresponsabilidadMadre == 0)
                     {
-                        corresponsabilidadmadre.IdEstablecimientoSalud = 1;
+                        corresponsabilidadmadre.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
                         if (rdbNueva.IsChecked == true)
                             corresponsabilidadmadre.TipoInscripcionMadre = TipoInscripcion.Nueva;
                         else if (rdbTransferencia.IsChecked == true)
@@ -323,8 +326,8 @@ namespace Bja.Registro
                             ControlMadre controlmadre = new ControlMadre();
 
                             controlmadre.IdCorresponsabilidadMadre = IdCorresponsabilidadMadre;
-                            controlmadre.IdEstablecimientoSalud = 1;
-                            controlmadre.IdMedico = 1;
+                            controlmadre.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
+                            controlmadre.IdMedico = SessionManager.getCurrentSession().User.IdUserRelation;
                             controlmadre.IdMadre = IdSeleccionado;
 
                             if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)
@@ -357,8 +360,8 @@ namespace Bja.Registro
                             ControlMadre controlmadre = new ControlMadre();
 
                             controlmadre.IdCorresponsabilidadMadre = IdCorresponsabilidadMadre;
-                            controlmadre.IdEstablecimientoSalud = 1;
-                            controlmadre.IdMedico = 1;
+                            controlmadre.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
+                            controlmadre.IdMedico = SessionManager.getCurrentSession().User.IdUserRelation;
                             controlmadre.IdMadre = IdSeleccionado;
 
                             if (_grupofamiliar.TipoGrupoFamiliar == TipoGrupoFamiliar.Tutor)

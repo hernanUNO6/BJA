@@ -12,6 +12,7 @@ namespace Bja.Modelo
     {
         public static Envio generarEnvio()
         {
+            ModeloAsignacionMedico modeloAsignacionMedico = new ModeloAsignacionMedico();
             BjaContext context = new BjaContext();
 
             var nuevoEnvio = new Envio();
@@ -21,16 +22,19 @@ namespace Bja.Modelo
             nuevoEnvio.FechaUltimaTransaccion = DateTime.Now;
             nuevoEnvio.FechaRegistro = DateTime.Now;
             nuevoEnvio.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            nuevoEnvio.DescripcionEstadoSincronizacion = "";
 
-            nuevoEnvio.IdEstablecimientoSalud = AdministradorConfiguracion.LeerConfiguracionEnteroLargo("general.idEstablecimientoSalud");
-            nuevoEnvio.IdMedico = AdministradorConfiguracion.LeerConfiguracionEnteroLargo("general.idMedicoAsignado");
+            nuevoEnvio.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
+            nuevoEnvio.IdMedico = SessionManager.getCurrentSession().User.IdUserRelation;
             nuevoEnvio.FechaEnvio = DateTime.Now;
             nuevoEnvio.CodigoVerificacion = "";
 
             //buscar registros de madres nuevas, modificadas, borradas
             nuevoEnvio.Madres = (from m in context.Madres
                                      where m.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
-                                     select m).ToList();
+                                     select new Madre(){ Id = m.Id }).ToList();
+
+            /*
             nuevoEnvio.Tutores = (from t in context.Tutores
                                   where t.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                        select t).ToList();
@@ -49,53 +53,65 @@ namespace Bja.Modelo
             nuevoEnvio.ControlMenores = (from t in context.ControlesMenor
                                          where t.EstadoSincronizacion == TipoEstadoSincronizacion.Pendiente
                                         select t).ToList();
+             */
+
+            context.SaveChanges();
 
             return nuevoEnvio;
         }
 
         public static void generarArchivoEnvio(String path)
         {
-            BjaContext context = new BjaContext();
-
-            Envio datosEnvio = generarEnvio();
-
-            context.Envios.Add(datosEnvio);
-
-            Serializer.serializar(datosEnvio, path);
-
-            //cambiar estados de registros a generados
-            datosEnvio.Madres.ForEach(delegate(Madre madre)
+            try
             {
-                madre.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
+                //BjaContext context = new BjaContext();
 
-            datosEnvio.Tutores.ForEach(delegate(Tutor registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
+                Envio datosEnvio = generarEnvio();
 
-            datosEnvio.Menores.ForEach(delegate(Menor registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
-            datosEnvio.CorresponsabilidadMadres.ForEach(delegate(CorresponsabilidadMadre registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
-            datosEnvio.ControlMadres.ForEach(delegate(ControlMadre registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
-            datosEnvio.CorresponsabilidadMenores.ForEach(delegate(CorresponsabilidadMenor registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
-            datosEnvio.ControlMenores.ForEach(delegate(ControlMenor registro)
-            {
-                registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
-            });
+                //context.Envios.Add(datosEnvio);
 
-            context.SaveChanges();
+                Serializer.serializar(datosEnvio, path);
+
+                /*
+                //cambiar estados de registros a generados
+                datosEnvio.Madres.ForEach(delegate(Madre madre)
+                {
+                    madre.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+
+                datosEnvio.Tutores.ForEach(delegate(Tutor registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+
+                datosEnvio.Menores.ForEach(delegate(Menor registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+                datosEnvio.CorresponsabilidadMadres.ForEach(delegate(CorresponsabilidadMadre registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+                datosEnvio.ControlMadres.ForEach(delegate(ControlMadre registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+                datosEnvio.CorresponsabilidadMenores.ForEach(delegate(CorresponsabilidadMenor registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+                datosEnvio.ControlMenores.ForEach(delegate(ControlMenor registro)
+                {
+                    registro.EstadoSincronizacion = TipoEstadoSincronizacion.Generado;
+                });
+
+                context.SaveChanges();*/
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error serializacion");
+                //((System.Data.Entity.Validation.DbEntityValidationException)ex).EntityValidationErrors
+            }
         }
 
     }

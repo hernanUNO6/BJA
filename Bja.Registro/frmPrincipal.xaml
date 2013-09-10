@@ -29,6 +29,7 @@
             </MenuItem>
             <MenuItem Header="_Utiles" x:Name="menUtiles">
                 <MenuItem Header="Cambiar contraseña" x:Name="menCamCon" Click="menCamCon_Click"/>
+                <MenuItem Header="Generar Archivo Envio" x:Name="menGenerarArchivoEnvio" Click="menGenerarArchivoEnvio_Click"/>
             </MenuItem>
         </Menu>
     </Grid>

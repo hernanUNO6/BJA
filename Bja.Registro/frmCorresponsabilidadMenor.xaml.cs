@@ -221,6 +221,7 @@ namespace Bja.Registro
         {
             ModeloCorresponsabilidadMenor modelocorresponsabilidadmenor = new ModeloCorresponsabilidadMenor();
             CorresponsabilidadMenor corresponsabilidadmenor = new CorresponsabilidadMenor();
+            ModeloAsignacionMedico modeloAsignacionMedico = new ModeloAsignacionMedico();
 
             bool ok = false;
 
@@ -237,7 +238,7 @@ namespace Bja.Registro
             {
                 if (IdCorresponsabilidadMenor == 0)
                 {
-                    corresponsabilidadmenor.IdEstablecimientoSalud = 1;
+                    corresponsabilidadmenor.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud;
                     if (rdbNueva.IsChecked == true)
                         corresponsabilidadmenor.TipoInscripcionMenor = TipoInscripcion.Nueva;
                     else if (rdbTransferencia.IsChecked == true)
@@ -278,9 +279,9 @@ namespace Bja.Registro
                         ControlMenor controlmenor = new ControlMenor();
 
                         controlmenor.IdCorresponsabilidadMenor = IdCorresponsabilidadMenor;
-                        controlmenor.IdEstablecimientoSalud = 1;
+                        controlmenor.IdEstablecimientoSalud = modeloAsignacionMedico.EstablecimientoDeSaludHabilitado(SessionManager.getCurrentSession().User.IdUserRelation).IdEstablecimientoSalud; 
                         controlmenor.IdMenor = IdSeleccionado;
-                        controlmenor.IdMedico = 1;
+                        controlmenor.IdMedico = SessionManager.getCurrentSession().User.IdUserRelation;
 
                         if (_grupofamiliarmadre != null)
                             controlmenor.IdMadre = _grupofamiliarmadre.IdMadre.Value;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Bja.Entidades
 {
@@ -39,6 +40,7 @@ namespace Bja.Entidades
         public TipoEstadoPago EstadoPago { get; set; }
         public TipoBeneficiario TipoBeneficiario { get; set; }
 
+        [XmlIgnore]
         public List<Envio> Envios { get; set; }
     }
 }

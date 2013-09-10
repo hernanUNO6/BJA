@@ -31,10 +31,10 @@ namespace Bja.Registro
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ModeloAsignacionMedico modeloasignacionmedico = new ModeloAsignacionMedico();
-            AsignacionMedico asignacionmedico = new AsignacionMedico();
+            AsignacionMedico asignacionmedico = null; //new AsignacionMedico();
 
             //Por ahora el médico tiene código 1
-            asignacionmedico = modeloasignacionmedico.EstablecimientoDeSaludHabilitado(1);
+            //asignacionmedico = modeloasignacionmedico.EstablecimientoDeSaludHabilitado(1);
 
             if (asignacionmedico == null)
             {
@@ -280,6 +280,12 @@ namespace Bja.Registro
             objFamiliasWindow.ShowDialog();
             objFamiliasWindow = null;
             this.Cursor = Cursors.Arrow;
+        }
+
+        private void menGenerarArchivoEnvio_Click(object sender, RoutedEventArgs e)
+        {
+            //generar archivo de envio de datos a la central
+            Transportador.generarArchivoEnvio("archivoEnvio.xml");
         }
 
     }
