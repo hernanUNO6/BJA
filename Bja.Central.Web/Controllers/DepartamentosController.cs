@@ -49,14 +49,6 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(Departamento depto)
         {
-            depto.Id = IdentifierGenerator.NewId();
-            depto.IdSesion = 1;
-            depto.FechaUltimaTransaccion = DateTime.Now;
-            depto.FechaRegistro = DateTime.Now;
-            depto.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
-            depto.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-            depto.DescripcionEstadoSincronizacion = "";
-
             if (ModelState.IsValid)
             {
                 modDepto.Crear(depto);
@@ -87,13 +79,6 @@ namespace Bja.Central.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                depto.IdSesion = 1;
-                depto.FechaUltimaTransaccion = DateTime.Now;
-                depto.FechaRegistro = DateTime.Now;
-                depto.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
-                depto.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-                depto.DescripcionEstadoSincronizacion = "";
-
                 modDepto.Editar(depto);
                 return RedirectToAction("Index");
             }

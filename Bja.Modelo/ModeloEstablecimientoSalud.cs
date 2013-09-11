@@ -44,9 +44,16 @@ namespace Bja.Modelo
             return estabSalud;
         }
 
-        public void Editar(EstablecimientoSalud estabSalud)
+        public void Editar(EstablecimientoSalud establecimientoSalud)
         {
-            db.Entry(estabSalud).State = EntityState.Modified;
+            establecimientoSalud.IdSesion = SessionManager.getSessionIdentifier();
+            establecimientoSalud.FechaUltimaTransaccion = DateTime.Now;
+            establecimientoSalud.FechaRegistro = DateTime.Now;
+            establecimientoSalud.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            establecimientoSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            establecimientoSalud.DescripcionEstadoSincronizacion = "";
+
+            db.Entry(establecimientoSalud).State = EntityState.Modified;
             db.SaveChanges();
         }
 

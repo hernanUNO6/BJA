@@ -93,6 +93,13 @@ namespace Bja.Modelo
 
         public void Editar(RedSalud redSalud)
         {
+            redSalud.IdSesion = SessionManager.getSessionIdentifier();
+            redSalud.FechaUltimaTransaccion = DateTime.Now;
+            redSalud.FechaRegistro = DateTime.Now;
+            redSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            redSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            redSalud.DescripcionEstadoSincronizacion = "";
+
             db.Entry(redSalud).State = EntityState.Modified;
             db.SaveChanges();
         }

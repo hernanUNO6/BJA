@@ -59,14 +59,6 @@ namespace Bja.Central.Web.Controllers
         [HttpPost]
         public ActionResult Create(EstablecimientoSalud estableSalud)
         {
-            estableSalud.Id = IdentifierGenerator.NewId();
-            estableSalud.IdSesion = 1;
-            estableSalud.FechaUltimaTransaccion = DateTime.Now;
-            estableSalud.FechaRegistro = DateTime.Now;
-            estableSalud.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
-            estableSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-            estableSalud.DescripcionEstadoSincronizacion = "";
-
             if (ModelState.IsValid)
             {
                 modEstableSalud.Crear(estableSalud);
@@ -114,13 +106,6 @@ namespace Bja.Central.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                estableSalud.IdSesion = 1;
-                estableSalud.FechaUltimaTransaccion = DateTime.Now;
-                estableSalud.FechaRegistro = DateTime.Now;
-                estableSalud.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
-                estableSalud.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
-                estableSalud.DescripcionEstadoSincronizacion = "";
-
                 modEstableSalud.Editar(estableSalud);
                 return RedirectToAction("Index");
             }

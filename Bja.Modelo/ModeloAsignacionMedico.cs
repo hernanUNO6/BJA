@@ -46,6 +46,13 @@ namespace Bja.Modelo
 
         public void Editar(AsignacionMedico asignacionMedico)
         {
+            asignacionMedico.IdSesion = SessionManager.getSessionIdentifier();
+            asignacionMedico.FechaUltimaTransaccion = DateTime.Now;
+            asignacionMedico.FechaRegistro = DateTime.Now;
+            asignacionMedico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            asignacionMedico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            asignacionMedico.DescripcionEstadoSincronizacion = "";
+
             db.Entry(asignacionMedico).State = EntityState.Modified;
             db.SaveChanges();
         }

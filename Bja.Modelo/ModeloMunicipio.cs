@@ -93,6 +93,13 @@ namespace Bja.Modelo
 
         public void Editar(Municipio municipio)
         {
+            municipio.IdSesion = SessionManager.getSessionIdentifier();
+            municipio.FechaUltimaTransaccion = DateTime.Now;
+            municipio.FechaRegistro = DateTime.Now;
+            municipio.EstadoRegistro = TipoEstadoRegistro.VigenteNuevoRegistro;
+            municipio.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            municipio.DescripcionEstadoSincronizacion = "";
+
             db.Entry(municipio).State = EntityState.Modified;
             db.SaveChanges();
         }

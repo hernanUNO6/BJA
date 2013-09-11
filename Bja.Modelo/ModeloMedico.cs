@@ -94,6 +94,13 @@ namespace Bja.Modelo
 
         public void Editar(Medico medico)
         {
+            medico.IdSesion = 1;
+            medico.FechaUltimaTransaccion = DateTime.Now;
+            medico.FechaRegistro = DateTime.Now;
+            medico.EstadoRegistro = TipoEstadoRegistro.VigenteRegistroModificado;
+            medico.EstadoSincronizacion = TipoEstadoSincronizacion.Pendiente;
+            medico.DescripcionEstadoSincronizacion = "";
+
             db.Entry(medico).State = EntityState.Modified;
             db.SaveChanges();
         }
