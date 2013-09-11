@@ -144,7 +144,6 @@ namespace Bja.Modelo
             return madresCandidatas.OrderBy(m => m.IdMunicipio).ToList();
         }
 
-
         /// <summary>
         /// Función encargada de devolver un tipo de elemento en concreto de un objeto en un conjunto
         /// de pares clave - valor.

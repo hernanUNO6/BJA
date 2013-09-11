@@ -1,9 +1,121 @@
-﻿HERNAN
+﻿@*<script type="text/javascript">
 
-<form method="get">
-    <input type="text" name="criterioBusqueda" id="criterioBusqueda" />
-    <input type="button" value="Buscar" id="Buscar" class="btn btn-primary" />
-</form>
+    var urlPath = '@Url.Action("MedicosPorCriterioBusqueda")';
+    var value = $("#criterioBusqueda").val();
+
+    var str = "";
+    $.getJSON(urlPath + "?criterioBusqueda=" + value, {},
+        function (myData) {
+            str = "";
+            str += '<table id="medicosEncontrados" class="table">';
+            str += "<tr>";
+            str += "<th>Nombres</th>";
+            str += "<th>PrimerApellido</th>";
+            str += "<th>SegundoApellido</th>";
+            str += "<th>TercerApellido</th>";
+            str += "<th>DocumentoIdentidad</th>";
+            str += "<th></th>";
+            str += "</tr>";
+            str += "<tbody>";
+            var nombreCompleto = "";
+            $.each(myData, function (i, item) {
+                //$("#mitabla").append("" + item.Nombres + "");
+                str += "<tr>";
+                //alert(item.Nombres);
+                str += "<td>" + item.Nombres + "</td>";
+                str += "<td>" + item.PrimerApellido + "</td>";
+                str += "<td>" + item.SegundoApellido + "</td>";
+                if (item.TercerApellido != null) str += "<td>" + item.TercerApellido + "</td>";
+                else str += "<td></td>";
+                nombreCompleto = "";
+                nombreCompleto += item.Nombres != null ? item.Nombres : ""
+                nombreCompleto += "&nbsp;";
+                nombreCompleto += item.PrimerApellido != null ? item.PrimerApellido : "";
+                nombreCompleto += "&nbsp;";
+                nombreCompleto += item.SegundoApellido != null ? item.SegundoApellido : "";
+                nombreCompleto += "&nbsp;";
+                nombreCompleto += item.TercerApellido != null ? item.TercerApellido : "";
+                //nombreCompleto += " ";
+                //nombreCompleto += item.SegundoApellido;
+                str += "<td>" + item.DocumentoIdentidad + "</td>";
+                //str += "<td><a href'#' id='asd'>" + item.Id + "</a></td>";
+                //str += "<td><input type='submit' value='Seleccionar' class='btn' onclick='asigarMedico(" + item.Id + ")' ></td>";
+                str += "<td><input type='submit' value='Seleccionar' class='btn' onclick=asigarMedico(" + item.Id + ",'" + nombreCompleto + "') ></td>";
+                str += "</tr>";
+            })
+            str += "</tbody>";
+            $("#mitabla").empty();
+            $("#mitabla").append(str);
+        });
+
+
+    alert('@Url.Action("MadreDepurada")' + "/" + $("#IdMadreDepurada").val());
+
+    $.getJSON('@Url.Action("MadreDepurada")' + "/" + $("#IdMadreDepurada").val(), {},
+        function (myData) {
+            $("#mitabla").empty();
+            //$("#mitabla").append("<option value=''>... Seleccione Provincia ...</option>");
+            
+            $.each(myData, function (i, item) {
+                //alert(item.Descripcion);
+                $("#mitabla").append("-- " + item.Nombres + "'>" + item.PrimerApellido + "<br>");
+            })
+        });
+
+    $.getJSON('@Url.Action("MadreConsolidada")' + "/" + $("#IdMadreDepurada").val(), {},
+        function (myData) {
+            $("#mitabla").empty();
+            //$("#mitabla").append("<option value=''>... Seleccione Provincia ...</option>");
+
+            $.each(myData, function (i, item) {
+                //alert(item.Descripcion);
+                $("#mitabla").append("-- " + item.Nombres + "'>" + item.PrimerApellido + "<br>");
+            })
+        });
+
+
+    $("#mitabla").append(strMadre);
+
+</script>*@
+
+
+<table class="table" border="1">
+    <tr>
+        <th>Nombre Campo</th>
+        <th>Madre Depurada</th>
+        <th>Madre Consolidada</th>
+    </tr>
+    <tr>
+        <td>Nombre</td>
+        <td>Irene</td>
+        <td>Irene</td>
+    </tr>
+    <tr>
+        <td>Primer Apellido</td>
+        <td style="background-color:yellow">Moyobiri</td>
+        <td  style="background-color:yellow"></td>
+    </tr>
+    <tr>
+        <td>Segundo Apellido</td>
+        <td style="background-color:yellow"></td>
+        <td style="background-color:yellow">Moyobiri</td>
+    </tr>
+    <tr>
+        <td>Tercer Apellido</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Documento de Identidad</td>
+        <td style="background-color:yellow">810981023102 </td>
+        <td style="background-color:yellow">611950048102</td>
+    </tr>
+    <tr>
+        <td>Fecha de NAcimiento</td>
+        <td style="background-color:yellow">10/11/1985</td>
+        <td style="background-color:yellow">19/12/1988</td>
+    </tr>
+</table>
 <br />
 
 <div id="mitabla"></div>

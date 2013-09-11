@@ -5,40 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @section PageCSS{
-    <style type="text/css">
-        table.table tr:first-child td
-        {
-            text-align : center;
-            padding: 0px;
-            margin: 0px;
-            border: 1px solid #ccf;
-            background-color: #eee;
-        }
+<style type="text/css">
+    table.table tr:first-child td
+    {
+        text-align : center;
+        padding: 0px;
+        margin: 0px;
+        border: 1px solid #ccf;
+        background-color: #eee;
+    }
 
-        table.table tr:first-child input
-        {
-            border: none;
-        }
+    table.table tr:first-child input
+    {
+        border: none;
+    }
 
-        thead.fixedHeader th {
-            background: none repeat scroll 0% 0% rgb(204, 153, 102);
-            border-left: 1px solid rgb(238, 187, 136);
-            border-right: 1px solid rgb(187, 119, 68);
-            border-top: 1px solid rgb(238, 187, 136);
-            font-weight: normal;
-            padding: 4px 3px;
-            text-align: left;
-        }
+    thead.fixedHeader th {
+        background: none repeat scroll 0% 0% rgb(204, 153, 102);
+        border-left: 1px solid rgb(238, 187, 136);
+        border-right: 1px solid rgb(187, 119, 68);
+        border-top: 1px solid rgb(238, 187, 136);
+        font-weight: normal;
+        padding: 4px 3px;
+        text-align: left;
+    }
 
-        html > body thead.fixedHeader th {
-            width: 200px;
-        }
-    </style>
+    html > body thead.fixedHeader th {
+        width: 200px;
+    }
+</style>
 }
 
     <script type="text/javascript">
+
+        function Alguna(xx) {
+            $("#IdMadre").val(xx);
+            var strMadre = "<h1>"+ xx +"<h1>";
+        }
+
         function BuscarSimilar(value) {
             $("#IdMadreDepurada").val(value);
             var pbus = ConstruirParametrosBusqueda(value);
@@ -82,7 +87,8 @@
                         str += "<tr>";
                         // <a class="openDialog btn" href="/AsignacionesMedico/BuscarMedico" data-dialog-title="Ingrese criterio de busqueda" data-dialog-id="emailDialog">
                         // str += "<td><a href='#'>"+ item.llavePrimaria +"</a></td>";
-                        str += "<td><a class='openDialog btn' href='/RevisionMadres/CompararMadres' data-dialog-title='Comparar Madres' data-dialog-id='emailDialog'>"+ item.llavePrimaria +"</a></td>";
+                        
+                        str += "<td><a onclick='Alguna("+ item.llavePrimaria +")' class='openDialog btn' href='/RevisionMadres/CompararMadres' data-dialog-title='Comparar Madres' data-dialog-id='emailDialog'>"+ item.llavePrimaria +"</a></td>";
                         //str += "<td><a class='openDialog btn' href='/AsignacionesMedico/BuscarMedico' data-dialog-title='Ingrese criterio de busqueda' data-dialog-id='emailDialog'>"+ item.llavePrimaria +"</a></td>";
                         str += "<td>"+ item.Nombres +"</td>";
                         str += "<td>"+ item.PrimerApellido +"</td>";
@@ -146,13 +152,6 @@
             alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked')  );
         });
     });
-
-    function ListarCheckeados01() {
-        $('.optBusqueda').each(function() {
-            var checkbox = $(this);
-            alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked'));
-        });
-    }
 
     function ConstruirParametrosBusqueda(value) {
         return {
@@ -237,7 +236,7 @@
                 //define method for sending data to controller
                 type: "POST",
                 //define controller URL
-                url: "/AsignacionesMedico/BuscarMedico",
+                url: "/RevisionMadres/CompararMadres",
                 //define data to send to controller
                 //if you remember our controller accepts
                 //3 parameters name, email and message
@@ -272,10 +271,7 @@
                     $(this).closest(".dialog").dialog("close");
                 }
             });
-
         });
-
-
     });
 </script>
 
@@ -290,10 +286,10 @@
 @*<input type="submit" value="Save" id="personCreate" />*@
 
 @Html.TextBox("IdMadreDepurada", null, new {style="width: 200px; display: none" })
+@Html.TextBox("IdMadre", null, new {style="width: 200px; display: none" })
 
-@Html.ActionLink("Buscar Médico","BuscarMedico","AsignacionesMedico",null,
-            new {@class="openDialog btn",data_dialog_id="emailDialog",data_dialog_title="Ingrese criterio de busqueda"})
-
+@*@Html.ActionLink("Buscar Médico","BuscarMedico","AsignacionesMedico",null,
+            new {@class="openDialog btn",data_dialog_id="emailDialog",data_dialog_title="Ingrese criterio de busqueda"})*@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
