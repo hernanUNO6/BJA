@@ -223,6 +223,5 @@ namespace Bja.Modelo
           }
           return madre;
       }
-
     }
 }

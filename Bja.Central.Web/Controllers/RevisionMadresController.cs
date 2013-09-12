@@ -42,16 +42,21 @@ namespace Bja.Central.Web.Controllers
         public ActionResult GetMadreDepurada(string id)
         {
             ModeloMadreTemporal modMadreTemporal = new ModeloMadreTemporal();
-            MadreTemporal myData = modMadreTemporal.Buscar(Convert.ToInt64(id));
-            return Json(myData, JsonRequestBehavior.AllowGet);
+            MadreTemporal myDataMT = modMadreTemporal.Buscar(Convert.ToInt64(id));
+            ////MadreTemporal myData = modMadreTemporal.Buscar(1640864267289000000);            
+
+            //ModeloMadre mod = new ModeloMadre();
+            //Madre ma = mod.Buscar(1640864248051000000);
+
+            return Json(myDataMT, JsonRequestBehavior.AllowGet);
         }
 
         [ActionName("MadreConsolidada")]
         public ActionResult GeMadreConsolidada(string id)
         {
             ModeloMadre modMadre = new ModeloMadre();
-            Madre myData = modMadre.Buscar(Convert.ToInt64(id));
-            return Json(myData, JsonRequestBehavior.AllowGet);
+            Madre myDataM = modMadre.Buscar(Convert.ToInt64(id));
+            return Json(myDataM, JsonRequestBehavior.AllowGet);
         }
 
         public string Prueba()

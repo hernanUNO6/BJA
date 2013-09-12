@@ -27,12 +27,14 @@ namespace Bja.Modelo
 
         public MadreTemporal Buscar(long id = 0)
         {
-            MadreTemporal madreTemp = db.MadresTemporal.Find(id);
-            if (madreTemp == null)
+            MadreTemporal madreTemporal = (from mt in db.MadresTemporal
+                                           where mt.Id == id
+                                           select mt).FirstOrDefault();
+            if (madreTemporal == null)
             {
                 return null;
             }
-            return madreTemp;
+            return madreTemporal;
         }
 
         public List<MadreTemporal> Espejo(string id)

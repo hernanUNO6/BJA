@@ -6,60 +6,71 @@
 }
 
 @section PageCSS{
-<style type="text/css">
-    table.table tr:first-child td
-    {
-        text-align : center;
-        padding: 0px;
-        margin: 0px;
-        border: 1px solid #ccf;
-        background-color: #eee;
-    }
-
-    table.table tr:first-child input
-    {
-        border: none;
-    }
-
-    thead.fixedHeader th {
-        background: none repeat scroll 0% 0% rgb(204, 153, 102);
-        border-left: 1px solid rgb(238, 187, 136);
-        border-right: 1px solid rgb(187, 119, 68);
-        border-top: 1px solid rgb(238, 187, 136);
-        font-weight: normal;
-        padding: 4px 3px;
-        text-align: left;
-    }
-
-    html > body thead.fixedHeader th {
-        width: 200px;
-    }
-</style>
-}
-
-    <script type="text/javascript">
-
-        function Alguna(xx) {
-            $("#IdMadre").val(xx);
-            var strMadre = "<h1>"+ xx +"<h1>";
+    <style type="text/css">
+        table.table tr:first-child td
+        {
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            border: 1px solid #ccf;
+            background-color: #eee;
         }
 
-        function BuscarSimilar(value) {
-            $("#IdMadreDepurada").val(value);
-            var pbus = ConstruirParametrosBusqueda(value);
+        table.table tr:first-child input
+        {
+            border: none;
+        }
 
-            //alert(checkeados.Id);
-            //alert(checkeados.Nombres);
-            //alert(checkeados.PrimerApellido);
-            //alert(checkeados.SegundoApellido);
-            //alert(checkeados.TercerApellido);
-            //alert(checkeados.NombreCompleto);
-            //alert(checkeados.DocumentoIdentidad);
-            //alert(checkeados.FechaNacimiento);
-            //alert(checkeados.LocalidadNacimiento);
+        thead.fixedHeader th
+        {
+            background: none repeat scroll 0% 0% rgb(204, 153, 102);
+            border-left: 1px solid rgb(238, 187, 136);
+            border-right: 1px solid rgb(187, 119, 68);
+            border-top: 1px solid rgb(238, 187, 136);
+            font-weight: normal;
+            padding: 4px 3px;
+            text-align: left;
+        }
 
-            updateId = '#Semejantes';
-            urlPath = '@Url.Action("BuscarSemejantes")';
+        html > body thead.fixedHeader th
+        {
+            width: 200px;
+        }
+
+        .fijo
+        {
+            height: 30px;
+        }
+    </style>
+}
+
+<script type="text/javascript">
+
+    var strMadre;
+    var madreDepurada = new Object();
+
+    function Alguna(xx) {
+        $("#IdMadreCompara").val(xx);
+        strMadre = "<h1>"+ xx +"<h1>";
+        //strMadre = "<h1>"+ madreDepurada.Nombres +"<h1>";
+    }
+
+    function BuscarSimilar(value) {
+        $("#IdMadreDepurada").val(value);
+        var pbus = ConstruirParametrosBusqueda(value);
+
+        //alert(checkeados.Id);
+        //alert(checkeados.Nombres);
+        //alert(checkeados.PrimerApellido);
+        //alert(checkeados.SegundoApellido);
+        //alert(checkeados.TercerApellido);
+        //alert(checkeados.NombreCompleto);
+        //alert(checkeados.DocumentoIdentidad);
+        //alert(checkeados.FechaNacimiento);
+        //alert(checkeados.LocalidadNacimiento);
+
+        updateId = '#Semejantes';
+        urlPath = '@Url.Action("BuscarSemejantes")';
 
             var str = "";
             $.getJSON(urlPath, pbus,
@@ -100,6 +111,13 @@
                         //str += "<td>"+ item.LocalidadNacimiento +"</td>";
                         str += "<td></td>";
                         str += "</tr>";
+                        
+                        madreDepurada.Nombres = item.Nombres;;
+                        madreDepurada.PrimerApellido = item.PrimerApellido;
+                        madreDepurada.SegundoApellido = item.SegundoApellido;
+                        madreDepurada.TercerApellido = item.TercerApellido;
+                        madreDepurada.NombreCompleto = item.NombreCompleto;
+                        madreDepurada.DocumentoIdentidad = item.DocumentoIdentidad;
                     })
                     str += "</table>";
                     $(updateId).empty();
@@ -135,7 +153,7 @@
         }
         //Fecha(new Date(parseInt(data.FechaFolio.substr(6))));
 
-    </script>
+</script>
 
 @section PageScripts{
     <script src="@Url.Content("~/Scripts/jquery-1.7.1.js")" type="text/javascript"></script>
@@ -145,135 +163,135 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $("#personCreate").click(function () {
-        $('.optBusqueda').each(function(){
-            var checkbox = $(this);
-            alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked')  );
-        });
-    });
-
-    function ConstruirParametrosBusqueda(value) {
-        return {
-            Identificador : value,
-            Nombres : $("#Nombres").is(':checked'),
-            PrimerApellido : $("#PrimerApellido").is(':checked'),
-            SegundoApellido : $("#SegundoApellido").is(':checked'),
-            TercerApellido : $("#TercerApellido").is(':checked'),
-            NombreCompleto : $("#NombreCompleto").is(':checked'),
-            DocumentoIdentidad : $("#DocumentoIdentidad").is(':checked'),
-            FechaNacimiento : $("#FechaNacimiento").is(':checked'),
-            LocalidadNacimiento : $("#LocalidadNacimiento").is(':checked')
-        };
-    }
-</script>
-
-
-<script type="text/javascript">
-    //Below code will clear cache
-    $.ajaxSetup({ cache: false });
-    //Below code will run the JQuery when document is ready. 
-    $(document).ready(function () {
-        //Below code will append a click event to the class openDialog 
-        //which we assigned to the anchor previously
-        $(".openDialog").live("click", function (e) {
-            //Below code will prevent default action from occuring
-            //when openDialog anchor is clicked
-            e.preventDefault();
-            //This is the actual implementation of the dailog
-            $("<div></div>")
-            //To the div created for dialog we will add class named dialog
-            //this is done so that we can refer to the dialog later
-            //we will see this in a short while why it is important
-            .addClass("dialog")
-            //add attribute add id attribute
-            //note id attribute is assigned the same value as data-dialog-id
-            //attribute in openDialog anchor
-            .attr("id", $(this).attr("data-dialog-id"))
-            //below code appends this div to body
-            .appendTo("body")
-            //below code describes the attribute for the dialog
-            .dialog({
-                //below code assigns title to the dialog
-                //here we use same title as data-dialog-title attribute
-                //in openDialog anchor tag
-                title: $(this).attr("data-dialog-title"),
-                //this will append code to close the dialog
-                //and also put close cross(x) in dialog
-                //we press ESC key in keyboard will also close dialog
-                close: function () { $(this).remove() },
-                //below code defines that the dialog is modal dialog
-                modal: true,
-                width: 700
-            })
-            //below code says take href from openDialog anchor
-            //which is /Home/ContactUs and load it to the modal dialog
-            .load(this.href);
-        });
-
-
-
-
-        //if you see that code in the partial view our submit button
-        //is defined as .close class, so below code says on document ready
-        //append click event to this button
-        $(".close").live("click", function (e) {
-            //prevent default action on the button click
-            e.preventDefault();
-            //get value of name textbox id=Namecontact
-            //put in variable name
-            var name = $("#Namecontact").val();
-            //get value of email textbox id=emailcontact
-            //put in variable email
-            var email = $("#emailcontact").val();
-            //get value of message textarea id=messagecontact
-            //put it in variable message
-            //note since messagecontact is a textarea
-            //we need to use .text() rather than .val()
-            var message = $("#messagecontact").text();
-            //Start ajax call
-            $.ajax({
-                //define method for sending data to controller
-                type: "POST",
-                //define controller URL
-                url: "/RevisionMadres/CompararMadres",
-                //define data to send to controller
-                //if you remember our controller accepts
-                //3 parameters name, email and message
-                data: { "name": name, "email": email, "message": message },
-                //create a success function
-                //this method is executed if controller
-                //defined by the URL is found
-                //and it accepts the data sent
-                //control comes to this point if the controller
-                //is executed. So data in function(data)
-                //contains the Json data we sent
-                //from the controller
-                success: function (data) {
-                    //Now in the div with id result defined in
-                    //index page previously we will put in the
-                    //data. As you can see Json data is very 
-                    //easy way of returning to ajax call because
-                    //now you can simply say data(dot)variable sent
-                    //and you will get the returned value.
-                    $("#result").html("<ul><li>Name: " + data.nameret + "</li><li>Email: " + data.emailret + "</li><li>Message: " + data.messageret + "</li></ul>");
-                    //now close the modal dialog we opened
-                    $(".dialog").dialog("close");
-                },
-                //control comes to this function if ajax doesn't
-                //find the controller or controller doesn't accepts
-                //the data sent or controller throws exception
-
-                error: function (data) {
-                    //If it happens alert user of the error
-                    alert("There was error processing this");
-                    //close the modal dialog
-                    $(this).closest(".dialog").dialog("close");
-                }
+    <script type="text/javascript">
+        $("#personCreate").click(function () {
+            $('.optBusqueda').each(function(){
+                var checkbox = $(this);
+                alert('El checkbox ' + checkbox.attr('name') + ' está checkeado? ' + checkbox.is(':checked')  );
             });
         });
-    });
-</script>
+
+        function ConstruirParametrosBusqueda(value) {
+            return {
+                Identificador : value,
+                Nombres : $("#Nombres").is(':checked'),
+                PrimerApellido : $("#PrimerApellido").is(':checked'),
+                SegundoApellido : $("#SegundoApellido").is(':checked'),
+                TercerApellido : $("#TercerApellido").is(':checked'),
+                NombreCompleto : $("#NombreCompleto").is(':checked'),
+                DocumentoIdentidad : $("#DocumentoIdentidad").is(':checked'),
+                FechaNacimiento : $("#FechaNacimiento").is(':checked'),
+                LocalidadNacimiento : $("#LocalidadNacimiento").is(':checked')
+            };
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        //Below code will clear cache
+        $.ajaxSetup({ cache: false });
+        //Below code will run the JQuery when document is ready. 
+        $(document).ready(function () {
+            //Below code will append a click event to the class openDialog 
+            //which we assigned to the anchor previously
+            $(".openDialog").live("click", function (e) {
+                //Below code will prevent default action from occuring
+                //when openDialog anchor is clicked
+                e.preventDefault();
+                //This is the actual implementation of the dailog
+                $("<div></div>")
+                //To the div created for dialog we will add class named dialog
+                //this is done so that we can refer to the dialog later
+                //we will see this in a short while why it is important
+                .addClass("dialog")
+                //add attribute add id attribute
+                //note id attribute is assigned the same value as data-dialog-id
+                //attribute in openDialog anchor
+                .attr("id", $(this).attr("data-dialog-id"))
+                //below code appends this div to body
+                .appendTo("body")
+                //below code describes the attribute for the dialog
+                .dialog({
+                    //below code assigns title to the dialog
+                    //here we use same title as data-dialog-title attribute
+                    //in openDialog anchor tag
+                    title: $(this).attr("data-dialog-title"),
+                    //this will append code to close the dialog
+                    //and also put close cross(x) in dialog
+                    //we press ESC key in keyboard will also close dialog
+                    close: function () { $(this).remove() },
+                    //below code defines that the dialog is modal dialog
+                    modal: true,
+                    width: 700
+                })
+                //below code says take href from openDialog anchor
+                //which is /Home/ContactUs and load it to the modal dialog
+                .load(this.href);
+            });
+
+
+
+
+            //if you see that code in the partial view our submit button
+            //is defined as .close class, so below code says on document ready
+            //append click event to this button
+            $(".close").live("click", function (e) {
+                //prevent default action on the button click
+                e.preventDefault();
+                //get value of name textbox id=Namecontact
+                //put in variable name
+                var name = $("#Namecontact").val();
+                //get value of email textbox id=emailcontact
+                //put in variable email
+                var email = $("#emailcontact").val();
+                //get value of message textarea id=messagecontact
+                //put it in variable message
+                //note since messagecontact is a textarea
+                //we need to use .text() rather than .val()
+                var message = $("#messagecontact").text();
+                //Start ajax call
+                $.ajax({
+                    //define method for sending data to controller
+                    type: "POST",
+                    //define controller URL
+                    url: "/RevisionMadres/CompararMadres",
+                    //define data to send to controller
+                    //if you remember our controller accepts
+                    //3 parameters name, email and message
+                    data: { "name": name, "email": email, "message": message },
+                    //create a success function
+                    //this method is executed if controller
+                    //defined by the URL is found
+                    //and it accepts the data sent
+                    //control comes to this point if the controller
+                    //is executed. So data in function(data)
+                    //contains the Json data we sent
+                    //from the controller
+                    success: function (data) {
+                        //Now in the div with id result defined in
+                        //index page previously we will put in the
+                        //data. As you can see Json data is very 
+                        //easy way of returning to ajax call because
+                        //now you can simply say data(dot)variable sent
+                        //and you will get the returned value.
+                        $("#result").html("<ul><li>Name: " + data.nameret + "</li><li>Email: " + data.emailret + "</li><li>Message: " + data.messageret + "</li></ul>");
+                        //now close the modal dialog we opened
+                        $(".dialog").dialog("close");
+                    },
+                    //control comes to this function if ajax doesn't
+                    //find the controller or controller doesn't accepts
+                    //the data sent or controller throws exception
+
+                    error: function (data) {
+                        //If it happens alert user of the error
+                        alert("There was error processing this");
+                        //close the modal dialog
+                        $(this).closest(".dialog").dialog("close");
+                    }
+                });
+            });
+        });
+    </script>
 
 }
 
@@ -285,116 +303,117 @@
 
 @*<input type="submit" value="Save" id="personCreate" />*@
 
-@Html.TextBox("IdMadreDepurada", null, new {style="width: 200px; display: none" })
-@Html.TextBox("IdMadre", null, new {style="width: 200px; display: none" })
+@Html.TextBox("IdMadreDepurada", null, new { style = "width: 200px; display: none0" })
+@Html.TextBox("IdMadreCompara", null, new { style = "width: 200px; display: none0" })
 
 @*@Html.ActionLink("Buscar Médico","BuscarMedico","AsignacionesMedico",null,
             new {@class="openDialog btn",data_dialog_id="emailDialog",data_dialog_title="Ingrese criterio de busqueda"})*@
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-<div style="height: 250px; overflow-y: scroll;">
-<table class="table">
-    <tr>
-        <td>
-            @Html.CheckBox("Nombres", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("PrimerApellido", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("SegundoApellido", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("TercerApellido", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("NombreCompleto", true, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("DocumentoIdentidad", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("FechaNacimiento", false, new { @class = "optBusqueda" })
-        </td>
-        <td>
-            @Html.CheckBox("LocalidadNacimiento", false, new { @class = "optBusqueda" })
-        </td>
-        <td></td>
-    </tr>
+    <div style="height: 250px; overflow-y: scroll;">
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.CheckBox("Nombres", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("PrimerApellido", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("SegundoApellido", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("TercerApellido", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("NombreCompleto", true, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("DocumentoIdentidad", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("FechaNacimiento", false, new { @class = "optBusqueda" })
+                </td>
+                <td>
+                    @Html.CheckBox("LocalidadNacimiento", false, new { @class = "optBusqueda" })
+                </td>
+                <td></td>
+            </tr>
 
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimerApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SegundoApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TercerApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DocumentoIdentidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaNacimiento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocalidadNacimiento)
-        </th>
-        <th></th>
-    </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrimerApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SegundoApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TercerApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCompleto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DocumentoIdentidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaNacimiento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocalidadNacimiento)
+                </th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimerApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SegundoApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TercerApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
-        </td>
-        <td>
-            @item.FechaNacimiento.ToString("dd/MM/yyyy")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocalidadNacimiento)
-        </td>
-        <td>
-            @*<a href="#" onclick="HacerAlgo()">Find</a>*@
-            <input type="button" value="Buscar" class="btn" onclick="BuscarSimilar(@item.Id)" />
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrimerApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SegundoApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TercerApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
+                    </td>
+                    <td>
+                        @item.FechaNacimiento.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocalidadNacimiento)
+                    </td>
+                    <td>
+                        @*<a href="#" onclick="HacerAlgo()">Find</a>*@
+                        <input type="button" value="Buscar" class="btn" onclick="BuscarSimilar(@item.Id)" />
 
-@*            @{ string nombreControlador = "RevisionMadres"; }
+                        @*            @{ string nombreControlador = "RevisionMadres"; }
             <a href="@Url.Action("")" title="Buscar"><img src="@Url.Content("~/Images/find16.png")" style="border:none" onclick="HacerAlgo(@item.Id)" /></a>*@
 
-            @*<a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+                        @*<a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
             <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>*@
-        </td>
-    </tr>
-}
-</table>
-</div>
-<h2>Madres Semejantes</h2>
-<div id="Semejantes"></div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <h2>Madres Semejantes</h2>
+    <div id="Semejantes"></div>
     
 }
 
