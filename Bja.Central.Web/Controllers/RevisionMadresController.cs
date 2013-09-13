@@ -28,26 +28,11 @@ namespace Bja.Central.Web.Controllers
             return Json(myData, JsonRequestBehavior.AllowGet);
         }
 
-        //[ActionName("BuscarSemejantes")]
-        //public ActionResult GetBuscarSemejantes(string id)
-        //{
-        //    ModeloMadreTemporal modMadreTemp = new ModeloMadreTemporal();
-
-        //    List<Madre> Datos = modMadreTemp.BuscarSemejantes(id);
-        //    var myData = (from d in Datos select new { d.Nombres, d.PrimerApellido, d.NombreCompleto });
-        //    return Json(myData, JsonRequestBehavior.AllowGet);
-        //}
-
         [ActionName("MadreDepurada")]
         public ActionResult GetMadreDepurada(string id)
         {
             ModeloMadreTemporal modMadreTemporal = new ModeloMadreTemporal();
             MadreTemporal myDataMT = modMadreTemporal.Buscar(Convert.ToInt64(id));
-            ////MadreTemporal myData = modMadreTemporal.Buscar(1640864267289000000);            
-
-            //ModeloMadre mod = new ModeloMadre();
-            //Madre ma = mod.Buscar(1640864248051000000);
-
             return Json(myDataMT, JsonRequestBehavior.AllowGet);
         }
 
