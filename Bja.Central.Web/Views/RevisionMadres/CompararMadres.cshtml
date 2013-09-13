@@ -1,0 +1,68 @@
+﻿<script type="text/javascript">
+
+    
+    var str1 = "";
+    var str2 = "";
+    var strX = "";
+    
+    $("#mitabla").empty();
+    $("#mitabla").append("<table class='resultado' border='1'>")
+    $.getJSON('@Url.Action("MadreDepurada")' + "/" + $("#IdMadreDepurada").val(), {},
+        function (myDataMT) {
+            
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.Nombres + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.PrimerApellido + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.SegundoApellido + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.TercerApellido + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.NombreCompleto + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.DocumentoIdentidad + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + Fecha(new Date(parseInt(myDataMT.FechaNacimiento.substr(6)))) + "</td></tr>");
+            $("#mitabla").append("<tr><td class='fijo'>" + myDataMT.LocalidadNacimiento + "</td></tr>");
+        });
+    $("#mitabla").append("</table>")
+
+    $("#mitabla2").empty();
+    $("#mitabla2").append("<table class='resultado' border='1'>")
+    $.getJSON('@Url.Action("MadreConsolidada")' + "/" + $("#IdMadreCompara").val(), {},
+        function (myDataM) {
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.Nombres + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.PrimerApellido + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.SegundoApellido + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.TercerApellido + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.NombreCompleto + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.DocumentoIdentidad + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + Fecha(new Date(parseInt(myDataM.FechaNacimiento.substr(6)))) + "</td></tr>");
+            $("#mitabla2").append("<tr><td class='fijo'>" + myDataM.LocalidadNacimiento + "</td></tr>");
+        });
+    $("#mitabla2").append("</table>")
+
+    $("#mitabla0").empty();
+    $("#mitabla0").append("<table class='resultado' border='1'>")
+    $.getJSON('@Url.Action("MadreConsolidada")' + "/" + $("#IdMadreCompara").val(), {},
+        function (myDataM) {
+            $("#mitabla0").append("<tr><td class='fijo'>Nombres</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>PrimerApellido</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>SegundoApellid</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>TercerApellido</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>NombreCompleto</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>DocumentoIdentidad</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>FechaNacimiento</td></tr>");
+            $("#mitabla0").append("<tr><td class='fijo'>LocalidadNacimiento</td></tr>");
+        });
+    $("#mitabla").append("</table>")
+
+
+    $("tabla.resultado").addClass("alguna");
+
+</script>
+
+
+<table>
+    <tr>
+        <td><div id="mitabla0"></div></td>
+        <td><div id="mitabla"></div></td>
+        <td><div id="mitabla2"></div></td>
+    </tr>
+</table>
+
+

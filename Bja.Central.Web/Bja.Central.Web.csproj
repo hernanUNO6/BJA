@@ -357,6 +357,7 @@
     <Content Include="Views\RevisionMadres\Edit.cshtml" />
     <Content Include="Views\RevisionMadres\Delete.cshtml" />
     <Content Include="Views\RevisionMadres\Temporal.cshtml" />
+    <Content Include="Views\RevisionMadres\CompararMadres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

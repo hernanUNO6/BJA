@@ -213,5 +213,15 @@ namespace Bja.Modelo
           return context.Madres.Count(); 
       }
 
+      // Adicionado por Hernán
+      public Madre Buscar(long id = 0)
+      {
+          Madre madre = context.Madres.Find(id);
+          if (madre == null)
+          {
+              return null;
+          }
+          return madre;
+      }
     }
 }

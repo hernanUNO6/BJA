@@ -14,7 +14,7 @@ namespace Bja.Central.Web.Controllers
 {
     public class RevisionMadresController : Controller
     {
-        private ModeloRevisionManual modReclamo = new ModeloRevisionManual();
+        private ModeloRevisionManual modRevisionManual = new ModeloRevisionManual();
 
         private BjaContext db = new BjaContext();
 
@@ -38,6 +38,27 @@ namespace Bja.Central.Web.Controllers
         //    return Json(myData, JsonRequestBehavior.AllowGet);
         //}
 
+        [ActionName("MadreDepurada")]
+        public ActionResult GetMadreDepurada(string id)
+        {
+            ModeloMadreTemporal modMadreTemporal = new ModeloMadreTemporal();
+            MadreTemporal myDataMT = modMadreTemporal.Buscar(Convert.ToInt64(id));
+            ////MadreTemporal myData = modMadreTemporal.Buscar(1640864267289000000);            
+
+            //ModeloMadre mod = new ModeloMadre();
+            //Madre ma = mod.Buscar(1640864248051000000);
+
+            return Json(myDataMT, JsonRequestBehavior.AllowGet);
+        }
+
+        [ActionName("MadreConsolidada")]
+        public ActionResult GeMadreConsolidada(string id)
+        {
+            ModeloMadre modMadre = new ModeloMadre();
+            Madre myDataM = modMadre.Buscar(Convert.ToInt64(id));
+            return Json(myDataM, JsonRequestBehavior.AllowGet);
+        }
+
         public string Prueba()
         {
             return "Hay algo";
@@ -48,12 +69,20 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(modReclamo.Listar());
+            return View(modRevisionManual.Listar());
         }
 
         public ActionResult Temporal()
         {
-            return View(modReclamo.ListarTempo());
+            return View(modRevisionManual.ListarTempo());
+        }
+
+        public ActionResult CompararMadres()
+        {
+            //ModeloMedico med = new ModeloMedico();
+            //return PartialView("CompararMadres", med.Listar());
+
+            return PartialView("CompararMadres");            
         }
 
         //
@@ -61,7 +90,7 @@ namespace Bja.Central.Web.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            Madre madre = modReclamo.Buscar(id);
+            Madre madre = modRevisionManual.Buscar(id);
             if (madre == null)
             {
                 return HttpNotFound();
@@ -160,8 +189,7 @@ namespace Bja.Central.Web.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
-            base.Dispose(disposing);
+            
         }
     }
 }
