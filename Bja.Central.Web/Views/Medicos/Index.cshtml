@@ -32,7 +32,7 @@
 </form>
 <br />
 
-<table class="table">
+<table class="table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombres)
@@ -130,11 +130,11 @@
         ViewBag.criterioBusqueda = "";
     }
     
-    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Primero" })
-    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Anterior" })
+    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn btn-small btn-inverse", @title="Primero", @Style="margin:5px" })
+    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn btn-small btn-inverse", @title="Anterior" })
     @Html.Name(" Página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name(" ")
-    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Siguiente" })
-    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Último" })
+    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn btn-small btn-inverse", @title="Siguiente" })
+    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn btn-small btn-inverse", @title="Último", @Style="margin:5px" })
     @Html.Name("Total registros : ") @ViewBag.totalRegistros
 }
         </td>

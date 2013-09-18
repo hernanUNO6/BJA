@@ -53,7 +53,7 @@
         </div>
         <div class="editor-field">
             @Html.DropDownList("cboTipoEncargado", "--Seleccione tipo encargado--")
-            @Html.TextBoxFor(model => model.IdTipoEncargado, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.IdTipoEncargado, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.IdTipoEncargado)
         </div>
 
@@ -102,7 +102,7 @@
         </div>
         <div class="editor-field">
             @Html.DropDownList("cboTipoDI", "--Seleccione tipo de documento--")
-            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.TipoDocumentoIdentidad)
             @*@Html.ListBox("cboTipoDI")*@
         </div>

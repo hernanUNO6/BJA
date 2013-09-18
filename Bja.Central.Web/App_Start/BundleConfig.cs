@@ -25,7 +25,9 @@ namespace Bja.Central.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
-                "~/Content/superfish.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-responsive.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

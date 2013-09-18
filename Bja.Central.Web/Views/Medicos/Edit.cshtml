@@ -91,7 +91,7 @@
             @Html.DropDownList("cboTipoDI", "... Seleccione Tipo de Documento ...")
             @*@Html.DropDownList("cboTipoDI", "CertificadoNacimiento")*@
 
-            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width:10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width:10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.TipoDocumentoIdentidad)
         </div>
 

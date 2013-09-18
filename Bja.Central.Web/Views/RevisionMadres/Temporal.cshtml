@@ -85,7 +85,7 @@
             var str = "";
             $.getJSON(urlPath, pbus,
                 function (myData) {
-                    str += "<table class='table'>";
+                    str += "<table class='table-striped'>";
                     str += "<tr>";
                     str += "<th>ID</th>";
                     str += "<th>Nombres</th>";
@@ -298,7 +298,7 @@
     @Html.ValidationSummary(true)
 
     <div style="height: 250px; overflow-y: scroll;">
-        <table class="table">
+        <table class="table-striped">
             <tr>
                 <td>
                     @Html.CheckBox("Nombres", false, new { @class = "optBusqueda" })

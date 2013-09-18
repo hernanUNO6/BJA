@@ -81,7 +81,7 @@
             @*@Html.DropDownList("cboTipoDI","--Seleccione tipo de documento--")*@
             @*@Html.DropDownList("cboTipoDI", null, new{style="width:180px; height:25px"})*@
             @Html.DropDownList("cboTipoDI", "--Seleccione tipo de documento--")
-            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.TipoDocumentoIdentidad, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.TipoDocumentoIdentidad)
         </div>
 

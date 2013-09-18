@@ -23,7 +23,7 @@
 <h2>Municipios Resgistrados</h2>
 
 <p>
-    @Html.ActionLink("Registrar Municipio", "Create", null, new {@class="btn btn-primary"})
+    @Html.ActionLink("Registrar Municipio", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
 <form method="get">
@@ -32,7 +32,7 @@
 </form>
 <br />
 
-<table class="table">
+<table class="table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Codigo)
@@ -47,7 +47,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Codigo)
@@ -60,9 +61,9 @@
         </td>
         <td>
             @{ string nombreControlador = "Municipios"; }
-            <a href="@Url.Action("Edit/"+ item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
-            <a href="@Url.Action("Details/"+ item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
-            <a href="@Url.Action("Delete/"+ item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Edit/" + item.Id, nombreControlador)" title="Editar"><img src="@Url.Content("~/Images/edit16.png")" style="border:none" /></a>
+            <a href="@Url.Action("Details/" + item.Id, nombreControlador)" title="Detalles"><img src="@Url.Content("~/Images/detail16.png")"  style="border:none" /></a>
+            <a href="@Url.Action("Delete/" + item.Id, nombreControlador)" title="Eliminar"><img src="@Url.Content("~/Images/delete16.png")"  style="border:none" /></a>
         </td>
     </tr>
 }
@@ -73,17 +74,17 @@
     {
         ViewBag.paginaActual = 1;
     }
-    
+
     if (ViewBag.criterioBusqueda == null)
     {
         ViewBag.criterioBusqueda = "";
     }
     
-    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Primero" })
-    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Anterior" })
+    @Html.ActionLink("<<", "index", new { paginaActual = 1, criterioBusqueda = ViewBag.criterioBusqueda }, new { @class = "btn btn-small btn-inverse", @title = "Primero", @Style = "margin:5px" })
+    @Html.ActionLink("<", "index", new { paginaActual = (ViewBag.paginaActual - 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class = "btn btn-small btn-inverse", @title = "Anterior" })
     @Html.Name(" Página ") @ViewBag.paginaActual @Html.Name(" de ") @ViewBag.totalPaginas @Html.Name(" ")
-    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Siguiente" })
-    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class="btn", @title="Último" })
+    @Html.ActionLink(">", "index", new { paginaActual = (ViewBag.paginaActual + 1), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class = "btn btn-small btn-inverse", @title = "Siguiente" })
+    @Html.ActionLink(">>", "index", new { paginaActual = (ViewBag.totalPaginas), criterioBusqueda = ViewBag.criterioBusqueda }, new { @class = "btn btn-small btn-inverse", @title = "Último", @Style = "margin:5px" })
     @Html.Name("Total registros : ") @ViewBag.totalRegistros
 }
         </td>

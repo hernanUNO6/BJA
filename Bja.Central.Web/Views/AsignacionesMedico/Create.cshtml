@@ -212,7 +212,7 @@
         <div class="editor-field">
             @*@Html.DropDownList("IdEstablecimientoSalud", String.Empty)*@
             <select id="cboIdEstablecimientoSalud"><option>... Seleccione Establecimiento de Salud ...</option></select>
-            @Html.TextBoxFor(model => model.IdEstablecimientoSalud, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.IdEstablecimientoSalud, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.IdEstablecimientoSalud)
         </div>
 
@@ -224,7 +224,7 @@
             @Html.TextBox("txtIdMedico", null, new {style="width: 500px"})
             @Html.ActionLink("Buscar Médico","BuscarMedico","AsignacionesMedico",null,
             new {@class="openDialog btn",data_dialog_id="emailDialog",data_dialog_title="Ingrese criterio de busqueda"})
-            @Html.TextBoxFor(model => model.IdMedico, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.IdMedico, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.IdMedico)
         </div>
 

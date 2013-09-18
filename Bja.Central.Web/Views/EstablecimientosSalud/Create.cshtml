@@ -74,7 +74,7 @@
         </div>
         <div class="editor-field">
             <select id="cboIdMunicipio"><option>... Seleccione Municipio ...</option></select>
-            @Html.TextBoxFor(model => model.IdMunicipio, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.IdMunicipio, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.IdMunicipio)
         </div>
         *@
@@ -87,7 +87,7 @@
         <div class="editor-field">
             @*@Html.DropDownList("IdMunicipio", String.Empty)*@
             <select id="cboIdRedSalud"><option>... Seleccione Red de Salud ...</option></select>
-            @Html.TextBoxFor(model => model.IdRedSalud, new {style="width: 10px; visibility:hidden0" })
+            @Html.TextBoxFor(model => model.IdRedSalud, new {style="width: 10px; visibility:hidden" })
             @Html.ValidationMessageFor(model => model.IdRedSalud)
         </div>
 
